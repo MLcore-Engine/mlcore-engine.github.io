@@ -1,6 +1,6 @@
 +++
 date = '2025-04-03T13:50:45+08:00'
-draft = true
+draft = false
 title = 'Linux Common'
 +++
 
