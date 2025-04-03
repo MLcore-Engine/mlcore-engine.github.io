@@ -1,11 +1,45 @@
-baseURL = 'https://mlcore-engine.github.io/'
-languageCode = 'zh-cn'
-title = 'adam gao site'
+baseURL = "http://localhost:1313"
+languageCode = "zh-cn"
+DefaultContentLanguage = "zh-cn"
+title = "My Documentation"
 theme = "techdoc"
 
+hasCJKLanguage = true
+metaDataFormat = "yaml"
+
 [params]
-  description = "个人网站和博客"
-  author = "高新"
+    # Documentation Menu section
+    # Menu style settings
+    menu_style = "slide-menu" # "open-menu" or "slide-menu"
+    
+    # Theme settings section
+    # Theme color
+    custom_font_color = ""
+    custom_background_color = ""
+
+    # Documentation Menu section
+    # Menu style settings
+    dateformat = "" # default "2 Jan 2006"
+
+    # path name excluded from documentation menu
+    menu_exclusion = [
+        "archives",
+        "archive",
+        "blog",
+        "entry",
+        "post",
+        "posts",
+    ]
+
+# Markup configure section
+[markup]
+    defaultMarkdownHandler = "goldmark"
+    [markup.goldmark.renderer]
+        unsafe = true
+    [markup.tableOfContents]
+        startLevel = 2
+        endLevel = 6
+        ordered = false
 
 [build]
   writeStats = true
