@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313"
+baseURL = "https://mlcore-engine.github.io/"
 languageCode = "zh-cn"
 DefaultContentLanguage = "zh-cn"
 title = "My Documentation"
