@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>英语学习 on 高新 | AI平台开发工程师</title>
-    <link>http://localhost:1313/2learn-english/</link>
-    <description>Recent content in 英语学习 on 高新 | AI平台开发工程师</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate></lastBuildDate>
-    <atom:link href="http://localhost:1313/2learn-english/index.xml" rel="self" type="application/rss+xml" />
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>英语学习 on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/2learn-english/</link><description>Recent content in 英语学习 on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate/><atom:link href="https://mlcore-engine.github.io/2learn-english/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
