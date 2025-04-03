@@ -1,13 +1,23 @@
 baseURL = "https://mlcore-engine.github.io/"
 languageCode = "zh-cn"
 DefaultContentLanguage = "zh-cn"
-title = "My Documentation"
+title = "高新 | 云平台开发工程师"
 theme = "techdoc"
 
 hasCJKLanguage = true
 metaDataFormat = "yaml"
 
 [params]
+    # 网站描述
+    description = "高新的个人网站 - AI平台开发"
+    author = "高新"
+    
+    # 版本信息
+    version = "1.0.0"
+    
+    # 文档仓库
+    github_repository = "https://gitee.com/mlcore-engine/mlcore-engine"
+    
     # Documentation Menu section
     # Menu style settings
     menu_style = "slide-menu" # "open-menu" or "slide-menu"
@@ -15,11 +25,15 @@ metaDataFormat = "yaml"
     # Theme settings section
     # Theme color
     custom_font_color = ""
-    custom_background_color = ""
+    custom_background_color = "#f7f7f7"  # 浅灰色背景，让页面更清爽
 
     # Documentation Menu section
     # Menu style settings
-    dateformat = "" # default "2 Jan 2006"
+    dateformat = "2006-01-02" # 使用中文习惯的日期格式
+
+    # Open Graph settings
+    title = "高新 | AI平台开发工程师" 
+    images = ["home/me.png"] # Open graph images
 
     # path name excluded from documentation menu
     menu_exclusion = [
