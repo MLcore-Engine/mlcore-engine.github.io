@@ -25,3 +25,5 @@ description: "自学计算机科学的推荐路径"
 <img src="/book/code.png" alt="Computer Foundation" width="200" style="margin-left: 50px;" />
 
 
+#### 基础课
+刚开始学习一定要看最基础的书，各种图解...。我在大二非常的想学编程，于是我拿起了学校发的那本C/C++编程书，学了半个暑假放弃了。这一放弃就是4年的时间，当我再次想起学习编程这件事，已经是研二了......。
