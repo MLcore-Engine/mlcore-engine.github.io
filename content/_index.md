@@ -4,7 +4,7 @@ date: 2025-04-03
 description: "个人简介 - AI平台开发工程师"
 ---
 
-<h3 style="text-align:center;">欢迎来到我的个人网站</h3>
+<h4 style="text-align:center;">欢迎来到我的个人网站</h4>
 
 <div style="text-align:center; margin:15px 0;">
   <img src="/home/me.png" alt="高新" style="max-width:200px; border-radius:50%;">
@@ -12,14 +12,14 @@ description: "个人简介 - AI平台开发工程师"
 
 <div style="text-align:center;"> 一名AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验。</div>
 
-### 专业领域
+#### 专业领域
 
 - **云原生平台开发** - Kubernetes、Docker
 - **AI平台工程** - 模型部署、推理服务、资源调度、模型微调
 - **golang、python** - web开发、AI平台开发
 - **Kubernetes** - 集群部署、接口开发
 
-### 工作经历
+#### 工作经历
 
 <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;">
   <div style="flex:1; min-width:270px; border-left:4px solid #3498db; padding-left:15px; margin-bottom:15px;">
@@ -51,7 +51,7 @@ description: "个人简介 - AI平台开发工程师"
   </div>
 </div>
 
-### 项目介绍
+#### 项目介绍
 
 <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;">
   <div style="flex:1; min-width:300px; background:#f8f9fa; border-radius:6px; padding:15px; margin-bottom:15px;">
@@ -73,20 +73,20 @@ description: "个人简介 - AI平台开发工程师"
   </div>
 </div>
 
-### 教育背景
+#### 教育背景
 
 - **硕士学位** | 哈尔滨工程大学 | 机械工程 | 2015.09 - 2018.07
 - **学士学位** | 哈尔滨理工大学 | 机械工程 | 2011.09 - 2015.06
 
 
-### 联系方式
+#### 联系方式
 
 - **邮箱**: [gxin0426@126.com](mailto:gxin0426@126.com)
 - **微信号**: <span style="font-family:monospace; background-color:#f5f5f5; padding:2px 6px; border-radius:3px;">MLcore-Engine</span>
 - **GitHub**: [github.com/MLcore-Engine](https://github.com/MLcore-Engine)
 - **Gitee**: [gitee.com/MLcore-Engine](https://gitee.com/MLcore-Engine)
 
-### 网站导航
+#### 网站导航
 
 - [**Self-Learning CS Path**](/1learn-cs/) - 自学CS路线推荐
 - [**Learn English**](/2learn-english/) - 一直坚持但没有做好
