@@ -1,20 +1,13 @@
 baseURL = "https://mlcore-engine.github.io/"
 languageCode = "zh-cn"
 DefaultContentLanguage = "zh-cn"
-title = "高新 | 云平台开发工程师"
+title = "高新 | AI平台开发工程师"
 theme = "techdoc"
 
 hasCJKLanguage = true
 metaDataFormat = "yaml"
 
 [params]
-    # 网站描述
-    description = "高新的个人网站 - AI平台开发"
-    author = "高新"
-    
-    # 版本信息
-    version = "1.0.0"
-    
     # 文档仓库
     github_repository = "https://github.com/mlcore-engine/mlcore-engine"
     
@@ -24,8 +17,8 @@ metaDataFormat = "yaml"
     
     # Theme settings section
     # Theme color
-    custom_font_color = ""
-    custom_background_color = "#f7f7f7"  # 浅灰色背景，让页面更清爽
+    custom_font_color = "#ffffff"  # 白色字体
+    custom_background_color = "#1a365d"  # 深蓝色背景
 
     # Documentation Menu section
     # Menu style settings
