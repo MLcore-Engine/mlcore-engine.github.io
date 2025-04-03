@@ -1,0 +1,51 @@
+{
+  "htmlElements": {
+    "tags": [
+      "a",
+      "body",
+      "br",
+      "div",
+      "footer",
+      "h1",
+      "h2",
+      "head",
+      "header",
+      "html",
+      "i",
+      "li",
+      "link",
+      "main",
+      "meta",
+      "nav",
+      "p",
+      "script",
+      "span",
+      "style",
+      "title",
+      "ul"
+    ],
+    "classes": [
+      "backtothetop",
+      "container",
+      "content-container",
+      "description",
+      "edit-meta",
+      "fa-arrow-circle-up",
+      "fa-circle",
+      "fa-fw",
+      "fa-layers",
+      "fas",
+      "pagination",
+      "powered",
+      "sidebar",
+      "sidebar-footer"
+    ],
+    "ids": [
+      "backtothetop-fixed",
+      "专业技能",
+      "你好我是-你的名字",
+      "联系方式",
+      "项目经验"
+    ]
+  }
+}

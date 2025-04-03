@@ -1,0 +1,11 @@
+baseURL = 'https://mlcore-engine.github.io/'
+languageCode = 'zh-cn'
+title = 'adam gao site'
+theme = "techdoc"
+
+[params]
+  description = "个人网站和博客"
+  author = "高新"
+
+[build]
+  writeStats = true
