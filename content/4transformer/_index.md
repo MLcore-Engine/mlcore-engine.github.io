@@ -1,9 +1,94 @@
 ---
-title: "Chapter 4 (unlimited levels)"
-weight: 6
-description: "Fourth chapter showing unlimited menu levels"
+title: "Transformer架构解析"
+date: 2024-04-03
+weight: 4
+description: "大型语言模型的基础：Transformer架构的深入理解"
 ---
 
-# Chapter 4 (unlimited levels)
+# Transformer架构解析
 
-This chapter demonstrates unlimited menu levels. 
+Transformer是现代大型语言模型(LLM)的核心架构，自2017年在论文"Attention is All You Need"中提出以来，已经彻底改变了自然语言处理领域。本文将深入剖析Transformer的结构及其工作原理。
+
+## Transformer的重要性
+
+- **NLP革命**: 催生了BERT、GPT系列等强大模型
+- **多模态能力**: 扩展到图像、视频等多种模态
+- **可扩展性**: 通过增加参数量可持续提升性能
+- **迁移学习**: 预训练-微调范式的基础架构
+- **灵活性**: 适用于多种任务（分类、生成、翻译等）
+
+## 核心组件
+
+### Self-Attention机制
+
+- **定义**: 允许模型关注输入序列中的不同位置
+- **优势**: 捕捉长距离依赖，解决RNN的局限性
+- **计算过程**: Query、Key、Value矩阵的交互
+- **多头注意力**: 并行学习不同表示空间的信息
+
+### 位置编码
+
+- **目的**: 注入序列中词汇位置信息
+- **实现**: 正弦和余弦函数生成的固定编码
+- **变体**: 学习型位置编码、相对位置编码
+
+### 前馈神经网络
+
+- **结构**: 两层全连接网络，通常采用GELU激活函数
+- **功能**: 对每个位置独立处理，引入非线性变换
+
+### 层归一化和残差连接
+
+- **层归一化**: 稳定训练，加速收敛
+- **残差连接**: 缓解梯度消失，使模型能够更深
+
+## 完整架构
+
+### 编码器
+
+- 由N个相同层堆叠组成
+- 每层包含：多头自注意力 + 前馈神经网络
+- 层归一化和残差连接贯穿其中
+
+### 解码器
+
+- 由N个相同层堆叠组成
+- 每层包含：
+  - 掩码多头自注意力（防止看到未来信息）
+  - 编码器-解码器注意力
+  - 前馈神经网络
+- 自回归生成过程
+
+## Transformer变种
+
+### 编码器类模型
+
+- **BERT**: 双向编码表示，擅长理解任务
+- **RoBERTa**: BERT的优化版本
+- **ALBERT**: 轻量级BERT，参数共享
+
+### 解码器类模型
+
+- **GPT系列**: 单向自回归生成
+- **LLaMA**: Meta的开源大语言模型
+
+### 编码器-解码器模型
+
+- **T5**: 将所有NLP任务转化为文本到文本格式
+- **BART**: 序列到序列预训练模型
+
+## 技术挑战与优化
+
+- **计算效率**: FlashAttention等高效注意力实现
+- **上下文长度**: 位置编码改进、长文本训练技巧
+- **内存消耗**: 梯度检查点、混合精度训练
+- **训练稳定性**: 学习率调度、权重初始化策略
+
+## 资源推荐
+
+- **入门教程**: "The Illustrated Transformer" by Jay Alammar
+- **论文**: "Attention is All You Need" (Vaswani et al., 2017)
+- **代码实现**: Hugging Face Transformers库
+- **进阶课程**: Stanford CS224n, Andrej Karpathy的nanoGPT
+
+了解Transformer架构是理解现代NLP和大型语言模型的关键一步，本目录将深入探讨其各个组件和变种的工作原理。 

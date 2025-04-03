@@ -3,8 +3,8 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>联系我 - 高新 | AI平台开发工程师</title>
-<meta name="description" content="与我取得联系的方式">
+<title>Kubernetes实践指南 - 高新 | AI平台开发工程师</title>
+<meta name="description" content="容器编排与云原生应用部署技术">
 <meta name="generator" content="Hugo 0.145.0">
 <link href="https://mlcore-engine.github.io//index.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="https://mlcore-engine.github.io/5kubernetes/">
@@ -19,22 +19,22 @@
 </style>
 <meta property="og:url" content="https://mlcore-engine.github.io/5kubernetes/">
   <meta property="og:site_name" content="高新 | AI平台开发工程师">
-  <meta property="og:title" content="联系我">
-  <meta property="og:description" content="与我取得联系的方式">
+  <meta property="og:title" content="Kubernetes实践指南">
+  <meta property="og:description" content="容器编排与云原生应用部署技术">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="website">
     <meta property="og:image" content="https://mlcore-engine.github.io/home/me.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://mlcore-engine.github.io/home/me.png">
-  <meta name="twitter:title" content="联系我">
-  <meta name="twitter:description" content="与我取得联系的方式">
+  <meta name="twitter:title" content="Kubernetes实践指南">
+  <meta name="twitter:description" content="容器编排与云原生应用部署技术">
 
-  <meta itemprop="name" content="联系我">
-  <meta itemprop="description" content="与我取得联系的方式">
+  <meta itemprop="name" content="Kubernetes实践指南">
+  <meta itemprop="description" content="容器编排与云原生应用部署技术">
   <meta itemprop="datePublished" content="2024-04-03T00:00:00+00:00">
   <meta itemprop="dateModified" content="2024-04-03T00:00:00+00:00">
-  <meta itemprop="wordCount" content="314">
+  <meta itemprop="wordCount" content="970">
   <meta itemprop="image" content="https://mlcore-engine.github.io/home/me.png"></head>
 <body><div class="container"><header>
 <h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
@@ -42,44 +42,111 @@
 
 
 <div class="content-container">
-<main><h1>联系我</h1><h1 id="联系我">联系我</h1>
-<p>非常感谢您对我的个人网站感兴趣。如果您有任何问题、合作意向或者技术交流，欢迎通过以下方式与我联系。</p>
-<h2 id="联系方式">联系方式</h2>
+<main><h1>Kubernetes实践指南</h1><h1 id="kubernetes实践指南">Kubernetes实践指南</h1>
+<p>Kubernetes (K8s) 是业界领先的容器编排平台，用于自动化部署、扩展和管理容器化应用程序。本指南涵盖从基础概念到高级应用的K8s知识。</p>
+<h2 id="为什么选择kubernetes">为什么选择Kubernetes</h2>
 <ul>
-<li><strong>电子邮件</strong>: <a href="mailto:gxin0426@126.com">gxin0426@126.com</a></li>
-<li><strong>手机</strong>: +86 18846081074</li>
-<li><strong>GitHub</strong>: <a href="https://github.com/MLcore-Engine/MLcore-Engine">github.com/MLcore-Engine</a></li>
-<li><strong>Gitee</strong>: <a href="https://gitee.com/oldthree260/mlcore-engine">gitee.com/oldthree260/mlcore-engine</a></li>
+<li><strong>容器编排标准</strong>: 业界公认的容器编排解决方案</li>
+<li><strong>高可用性</strong>: 自动处理容器故障和节点故障</li>
+<li><strong>可扩展性</strong>: 轻松水平扩展应用程序</li>
+<li><strong>声明式配置</strong>: 基于YAML的声明式API</li>
+<li><strong>强大的社区</strong>: 由CNCF(云原生计算基金会)维护，拥有庞大生态系统</li>
 </ul>
-<h2 id="社交媒体">社交媒体</h2>
-<p>我也活跃在一些技术社区和社交媒体平台上：</p>
+<h2 id="核心概念">核心概念</h2>
+<h3 id="基础架构">基础架构</h3>
 <ul>
-<li><strong>技术博客</strong>: [即将上线]</li>
-<li><strong>知乎</strong>: [即将上线]</li>
-<li><strong>掘金</strong>: [即将上线]</li>
+<li><strong>Node</strong>: 运行容器的工作机器</li>
+<li><strong>Pod</strong>: 最小部署单元，一组容器的集合</li>
+<li><strong>Service</strong>: 定义一组Pod和访问策略</li>
+<li><strong>Namespace</strong>: 虚拟集群，资源隔离</li>
+<li><strong>Label &amp; Selector</strong>: 资源组织和查询机制</li>
 </ul>
-<h2 id="合作与交流">合作与交流</h2>
-<p>我对以下领域的合作与交流特别感兴趣：</p>
+<h3 id="工作负载资源">工作负载资源</h3>
 <ul>
-<li>Kubernetes和云原生技术</li>
-<li>GPU资源优化与管理</li>
-<li>AI模型部署与服务化</li>
-<li>开源项目贡献</li>
-<li>技术分享与演讲</li>
+<li><strong>Deployment</strong>: 管理无状态应用</li>
+<li><strong>StatefulSet</strong>: 管理有状态应用</li>
+<li><strong>DaemonSet</strong>: 确保所有节点运行特定Pod</li>
+<li><strong>Job &amp; CronJob</strong>: 一次性和定时任务</li>
 </ul>
-<h2 id="工作机会">工作机会</h2>
-<p>如果您的团队正在寻找具有云原生和AI平台开发经验的工程师，我很乐意了解更多信息。请通过电子邮件发送职位描述和要求。</p>
-<h2 id="响应时间">响应时间</h2>
-<p>我通常会在24小时内回复电子邮件和其他联系方式。如有紧急事项，建议通过手机直接联系我。</p>
-<p>非常期待与您的交流！</p>
+<h3 id="配置与存储">配置与存储</h3>
+<ul>
+<li><strong>ConfigMap</strong>: 非敏感配置数据</li>
+<li><strong>Secret</strong>: 敏感信息存储</li>
+<li><strong>Volume</strong>: 存储抽象</li>
+<li><strong>PersistentVolume &amp; PersistentVolumeClaim</strong>: 持久化存储</li>
+</ul>
+<h2 id="搭建kubernetes环境">搭建Kubernetes环境</h2>
+<h3 id="本地开发环境">本地开发环境</h3>
+<ul>
+<li><strong>Minikube</strong>: 单节点K8s集群</li>
+<li><strong>Kind</strong>: 基于Docker的Kubernetes集群</li>
+<li><strong>Docker Desktop</strong>: 内置K8s支持</li>
+<li><strong>K3s/K3d</strong>: 轻量级Kubernetes发行版</li>
+</ul>
+<h3 id="生产环境">生产环境</h3>
+<ul>
+<li><strong>自建集群</strong>: kubeadm工具</li>
+<li><strong>云服务商</strong>: EKS(AWS)、GKE(Google)、AKS(Azure)</li>
+<li><strong>专业发行版</strong>: OpenShift、Rancher</li>
+</ul>
+<h2 id="应用部署流程">应用部署流程</h2>
+<ol>
+<li><strong>容器化应用</strong>: Dockerfile编写</li>
+<li><strong>创建Kubernetes清单</strong>: YAML定义</li>
+<li><strong>应用部署</strong>: kubectl apply</li>
+<li><strong>服务暴露</strong>: Service/Ingress配置</li>
+<li><strong>监控与维护</strong>: 资源监控和日志收集</li>
+</ol>
+<h2 id="高级主题">高级主题</h2>
+<h3 id="网络">网络</h3>
+<ul>
+<li><strong>网络模型</strong>: CNI插件 (Calico, Flannel, Cilium)</li>
+<li><strong>服务发现</strong>: DNS和Service</li>
+<li><strong>负载均衡</strong>: Service类型和Ingress控制器</li>
+</ul>
+<h3 id="安全">安全</h3>
+<ul>
+<li><strong>认证与授权</strong>: RBAC, ServiceAccount</li>
+<li><strong>网络策略</strong>: 限制Pod间通信</li>
+<li><strong>镜像安全</strong>: 私有仓库和镜像扫描</li>
+<li><strong>运行时安全</strong>: Pod安全策略</li>
+</ul>
+<h3 id="可观测性">可观测性</h3>
+<ul>
+<li><strong>监控</strong>: Prometheus, Grafana</li>
+<li><strong>日志</strong>: EFK/ELK Stack</li>
+<li><strong>追踪</strong>: Jaeger, Zipkin</li>
+</ul>
+<h3 id="gitops与cicd">GitOps与CI/CD</h3>
+<ul>
+<li><strong>ArgoCD/Flux</strong>: GitOps工具</li>
+<li><strong>Tekton/Jenkins X</strong>: Kubernetes原生CI/CD</li>
+<li><strong>Helm</strong>: Kubernetes应用包管理工具</li>
+</ul>
+<h2 id="最佳实践">最佳实践</h2>
+<ul>
+<li><strong>资源规划</strong>: 合理设置资源请求和限制</li>
+<li><strong>高可用部署</strong>: 多副本和反亲和性策略</li>
+<li><strong>自动伸缩</strong>: HPA和集群自动扩缩</li>
+<li><strong>灰度发布</strong>: 使用Deployment策略</li>
+<li><strong>故障恢复</strong>: 备份与恢复策略</li>
+</ul>
+<h2 id="学习资源">学习资源</h2>
+<ul>
+<li><strong>官方文档</strong>: Kubernetes.io文档</li>
+<li><strong>实践平台</strong>: Katacoda交互式学习</li>
+<li><strong>认证</strong>: CKA, CKAD, CKS认证</li>
+<li><strong>社区</strong>: CNCF项目、GitHub、Stack Overflow</li>
+</ul>
+<p>Kubernetes生态系统庞大且不断发展，本目录将定期更新以反映最新的最佳实践和工具。</p>
 <div class="edit-meta">
 Last updated on 2024-04-03
 
 
 <br>
 Published on 2024-04-03
-<br></div><nav class="pagination"><a class="nav nav-prev" href="https://mlcore-engine.github.io/6linux-foundation/" title="教育背景"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - 教育背景</a>
-<a class="nav nav-next" href="https://mlcore-engine.github.io/4transformer/" title="Chapter 4 (unlimited levels)">Next - Chapter 4 (unlimited levels) <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+<br></div><nav class="pagination"><a class="nav nav-prev" href="https://mlcore-engine.github.io/4transformer/attention-mechanism/" title="注意力机制详解"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - 注意力机制详解</a>
+<a class="nav nav-next" href="https://mlcore-engine.github.io/5kubernetes/kubernetes-basics/" title="Kubernetes入门基础">Next - Kubernetes入门基础 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main>
@@ -89,15 +156,53 @@ Published on 2024-04-03
 <ul>
 <li class=""><a href="https://mlcore-engine.github.io/">Home</a></li>
 
-<li class=""><a href="https://mlcore-engine.github.io/6linux-foundation/">教育背景</a>
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/1learn-cs/">自学CS学习路线图<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/1learn-cs/python-basics/">Python基础入门</a></li>
+<li class=""><a href="https://mlcore-engine.github.io/1learn-cs/algorithms/">算法与数据结构</a></li>
+</ul>
   
 </li>
 
-<li class=" active"><a href="https://mlcore-engine.github.io/5kubernetes/">联系我</a>
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/2learn-english/">英语学习<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/2learn-english/reading-skills/">英语阅读技能提升</a></li>
+<li class=""><a href="https://mlcore-engine.github.io/2learn-english/listening-skills/">英语听力技能提升</a></li>
+</ul>
   
 </li>
 
-<li class=""><a href="https://mlcore-engine.github.io/4transformer/">Chapter 4 (unlimited levels)</a>
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/3math-foundation/">数学基础学习<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/3math-foundation/linear-algebra/">线性代数基础</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/4transformer/">Transformer架构解析<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/4transformer/attention-mechanism/">注意力机制详解</a></li>
+</ul>
+  
+</li>
+
+<li class=" active has-sub-menu"><a href="https://mlcore-engine.github.io/5kubernetes/">Kubernetes实践指南<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/5kubernetes/kubernetes-basics/">Kubernetes入门基础</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/6linux-foundation/">Linux基础知识<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/6linux-foundation/linux-commands/">50个常用Linux命令</a></li>
+</ul>
   
 </li>
 </ul>

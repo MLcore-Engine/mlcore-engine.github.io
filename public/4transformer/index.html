@@ -3,8 +3,8 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Chapter 4 (unlimited levels) - 高新 | AI平台开发工程师</title>
-<meta name="description" content="Fourth chapter showing unlimited menu levels">
+<title>Transformer架构解析 - 高新 | AI平台开发工程师</title>
+<meta name="description" content="大型语言模型的基础：Transformer架构的深入理解">
 <meta name="generator" content="Hugo 0.145.0">
 <link href="https://mlcore-engine.github.io//index.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="https://mlcore-engine.github.io/4transformer/">
@@ -19,20 +19,22 @@
 </style>
 <meta property="og:url" content="https://mlcore-engine.github.io/4transformer/">
   <meta property="og:site_name" content="高新 | AI平台开发工程师">
-  <meta property="og:title" content="Chapter 4 (unlimited levels)">
-  <meta property="og:description" content="Fourth chapter showing unlimited menu levels">
+  <meta property="og:title" content="Transformer架构解析">
+  <meta property="og:description" content="大型语言模型的基础：Transformer架构的深入理解">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="website">
     <meta property="og:image" content="https://mlcore-engine.github.io/home/me.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://mlcore-engine.github.io/home/me.png">
-  <meta name="twitter:title" content="Chapter 4 (unlimited levels)">
-  <meta name="twitter:description" content="Fourth chapter showing unlimited menu levels">
+  <meta name="twitter:title" content="Transformer架构解析">
+  <meta name="twitter:description" content="大型语言模型的基础：Transformer架构的深入理解">
 
-  <meta itemprop="name" content="Chapter 4 (unlimited levels)">
-  <meta itemprop="description" content="Fourth chapter showing unlimited menu levels">
-  <meta itemprop="wordCount" content="10">
+  <meta itemprop="name" content="Transformer架构解析">
+  <meta itemprop="description" content="大型语言模型的基础：Transformer架构的深入理解">
+  <meta itemprop="datePublished" content="2024-04-03T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-04-03T00:00:00+00:00">
+  <meta itemprop="wordCount" content="949">
   <meta itemprop="image" content="https://mlcore-engine.github.io/home/me.png"></head>
 <body><div class="container"><header>
 <h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
@@ -40,12 +42,99 @@
 
 
 <div class="content-container">
-<main><h1>Chapter 4 (unlimited levels)</h1><h1 id="chapter-4-unlimited-levels">Chapter 4 (unlimited levels)</h1>
-<p>This chapter demonstrates unlimited menu levels.</p>
+<main><h1>Transformer架构解析</h1><h1 id="transformer架构解析">Transformer架构解析</h1>
+<p>Transformer是现代大型语言模型(LLM)的核心架构，自2017年在论文&quot;Attention is All You Need&quot;中提出以来，已经彻底改变了自然语言处理领域。本文将深入剖析Transformer的结构及其工作原理。</p>
+<h2 id="transformer的重要性">Transformer的重要性</h2>
+<ul>
+<li><strong>NLP革命</strong>: 催生了BERT、GPT系列等强大模型</li>
+<li><strong>多模态能力</strong>: 扩展到图像、视频等多种模态</li>
+<li><strong>可扩展性</strong>: 通过增加参数量可持续提升性能</li>
+<li><strong>迁移学习</strong>: 预训练-微调范式的基础架构</li>
+<li><strong>灵活性</strong>: 适用于多种任务（分类、生成、翻译等）</li>
+</ul>
+<h2 id="核心组件">核心组件</h2>
+<h3 id="self-attention机制">Self-Attention机制</h3>
+<ul>
+<li><strong>定义</strong>: 允许模型关注输入序列中的不同位置</li>
+<li><strong>优势</strong>: 捕捉长距离依赖，解决RNN的局限性</li>
+<li><strong>计算过程</strong>: Query、Key、Value矩阵的交互</li>
+<li><strong>多头注意力</strong>: 并行学习不同表示空间的信息</li>
+</ul>
+<h3 id="位置编码">位置编码</h3>
+<ul>
+<li><strong>目的</strong>: 注入序列中词汇位置信息</li>
+<li><strong>实现</strong>: 正弦和余弦函数生成的固定编码</li>
+<li><strong>变体</strong>: 学习型位置编码、相对位置编码</li>
+</ul>
+<h3 id="前馈神经网络">前馈神经网络</h3>
+<ul>
+<li><strong>结构</strong>: 两层全连接网络，通常采用GELU激活函数</li>
+<li><strong>功能</strong>: 对每个位置独立处理，引入非线性变换</li>
+</ul>
+<h3 id="层归一化和残差连接">层归一化和残差连接</h3>
+<ul>
+<li><strong>层归一化</strong>: 稳定训练，加速收敛</li>
+<li><strong>残差连接</strong>: 缓解梯度消失，使模型能够更深</li>
+</ul>
+<h2 id="完整架构">完整架构</h2>
+<h3 id="编码器">编码器</h3>
+<ul>
+<li>由N个相同层堆叠组成</li>
+<li>每层包含：多头自注意力 + 前馈神经网络</li>
+<li>层归一化和残差连接贯穿其中</li>
+</ul>
+<h3 id="解码器">解码器</h3>
+<ul>
+<li>由N个相同层堆叠组成</li>
+<li>每层包含：
+<ul>
+<li>掩码多头自注意力（防止看到未来信息）</li>
+<li>编码器-解码器注意力</li>
+<li>前馈神经网络</li>
+</ul>
+</li>
+<li>自回归生成过程</li>
+</ul>
+<h2 id="transformer变种">Transformer变种</h2>
+<h3 id="编码器类模型">编码器类模型</h3>
+<ul>
+<li><strong>BERT</strong>: 双向编码表示，擅长理解任务</li>
+<li><strong>RoBERTa</strong>: BERT的优化版本</li>
+<li><strong>ALBERT</strong>: 轻量级BERT，参数共享</li>
+</ul>
+<h3 id="解码器类模型">解码器类模型</h3>
+<ul>
+<li><strong>GPT系列</strong>: 单向自回归生成</li>
+<li><strong>LLaMA</strong>: Meta的开源大语言模型</li>
+</ul>
+<h3 id="编码器-解码器模型">编码器-解码器模型</h3>
+<ul>
+<li><strong>T5</strong>: 将所有NLP任务转化为文本到文本格式</li>
+<li><strong>BART</strong>: 序列到序列预训练模型</li>
+</ul>
+<h2 id="技术挑战与优化">技术挑战与优化</h2>
+<ul>
+<li><strong>计算效率</strong>: FlashAttention等高效注意力实现</li>
+<li><strong>上下文长度</strong>: 位置编码改进、长文本训练技巧</li>
+<li><strong>内存消耗</strong>: 梯度检查点、混合精度训练</li>
+<li><strong>训练稳定性</strong>: 学习率调度、权重初始化策略</li>
+</ul>
+<h2 id="资源推荐">资源推荐</h2>
+<ul>
+<li><strong>入门教程</strong>: &ldquo;The Illustrated Transformer&rdquo; by Jay Alammar</li>
+<li><strong>论文</strong>: &ldquo;Attention is All You Need&rdquo; (Vaswani et al., 2017)</li>
+<li><strong>代码实现</strong>: Hugging Face Transformers库</li>
+<li><strong>进阶课程</strong>: Stanford CS224n, Andrej Karpathy的nanoGPT</li>
+</ul>
+<p>了解Transformer架构是理解现代NLP和大型语言模型的关键一步，本目录将深入探讨其各个组件和变种的工作原理。</p>
 <div class="edit-meta">
+Last updated on 2024-04-03
 
-<br></div><nav class="pagination"><a class="nav nav-prev" href="https://mlcore-engine.github.io/5kubernetes/" title="联系我"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - 联系我</a>
-<a class="nav nav-next" href="https://mlcore-engine.github.io/6linux-foundation/" title="教育背景">Next - 教育背景 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+
+<br>
+Published on 2024-04-03
+<br></div><nav class="pagination"><a class="nav nav-prev" href="https://mlcore-engine.github.io/3math-foundation/linear-algebra/" title="线性代数基础"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - 线性代数基础</a>
+<a class="nav nav-next" href="https://mlcore-engine.github.io/4transformer/attention-mechanism/" title="注意力机制详解">Next - 注意力机制详解 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main>
@@ -55,15 +144,53 @@
 <ul>
 <li class=""><a href="https://mlcore-engine.github.io/">Home</a></li>
 
-<li class=""><a href="https://mlcore-engine.github.io/6linux-foundation/">教育背景</a>
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/1learn-cs/">自学CS学习路线图<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/1learn-cs/python-basics/">Python基础入门</a></li>
+<li class=""><a href="https://mlcore-engine.github.io/1learn-cs/algorithms/">算法与数据结构</a></li>
+</ul>
   
 </li>
 
-<li class=""><a href="https://mlcore-engine.github.io/5kubernetes/">联系我</a>
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/2learn-english/">英语学习<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/2learn-english/reading-skills/">英语阅读技能提升</a></li>
+<li class=""><a href="https://mlcore-engine.github.io/2learn-english/listening-skills/">英语听力技能提升</a></li>
+</ul>
   
 </li>
 
-<li class=" active"><a href="https://mlcore-engine.github.io/4transformer/">Chapter 4 (unlimited levels)</a>
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/3math-foundation/">数学基础学习<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/3math-foundation/linear-algebra/">线性代数基础</a></li>
+</ul>
+  
+</li>
+
+<li class=" active has-sub-menu"><a href="https://mlcore-engine.github.io/4transformer/">Transformer架构解析<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/4transformer/attention-mechanism/">注意力机制详解</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/5kubernetes/">Kubernetes实践指南<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/5kubernetes/kubernetes-basics/">Kubernetes入门基础</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/6linux-foundation/">Linux基础知识<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="https://mlcore-engine.github.io/6linux-foundation/linux-commands/">50个常用Linux命令</a></li>
+</ul>
   
 </li>
 </ul>
