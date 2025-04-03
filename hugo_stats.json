@@ -3,7 +3,6 @@
     "tags": [
       "a",
       "body",
-      "br",
       "code",
       "control-alt-delete",
       "div",
@@ -46,7 +45,6 @@
       "closed",
       "container",
       "content-container",
-      "edit-meta",
       "fa-arrow-circle-up",
       "fa-arrow-left",
       "fa-arrow-right",
