@@ -6,14 +6,7 @@
     <description>Recent content in Kubernetes实践指南 on 高新 | AI平台开发工程师</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 03 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate></lastBuildDate>
     <atom:link href="https://mlcore-engine.github.io/5kubernetes/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Kubernetes入门基础</title>
-      <link>https://mlcore-engine.github.io/5kubernetes/kubernetes-basics/</link>
-      <pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>https://mlcore-engine.github.io/5kubernetes/kubernetes-basics/</guid>
-      <description>&lt;h1 id=&#34;kubernetes入门基础&#34;&gt;Kubernetes入门基础&lt;/h1&gt;&#xA;&lt;p&gt;Kubernetes (K8s) 已成为容器编排的事实标准，本文将介绍K8s的核心概念、架构和基本操作，帮助初学者建立扎实的基础知识。&lt;/p&gt;&#xA;&lt;h2 id=&#34;kubernetes架构&#34;&gt;Kubernetes架构&lt;/h2&gt;&#xA;&lt;p&gt;Kubernetes采用主从架构设计，主要分为控制平面(Control Plane)和计算节点(Worker Nodes)：&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>
