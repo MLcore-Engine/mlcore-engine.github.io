@@ -14,9 +14,19 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
 <script src="http://localhost:1313/js/bundle.js"></script><style>
-:root {--custom-font-color: #ffffff;--custom-background-color: #1a365d;}
-</style>
-<meta property="og:url" content="http://localhost:1313/7golang/base/">
+ 
+@media screen and (min-width: 480px) {
+  .sidebar {
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+  }
+  
+  main {
+    flex: 0 0 80% !important;
+    max-width: 80% !important;
+  }
+}
+</style> <meta property="og:url" content="http://localhost:1313/7golang/base/">
   <meta property="og:site_name" content="高新 | AI平台开发工程师">
   <meta property="og:title" content="Base">
   <meta property="og:locale" content="zh_cn">
@@ -33,7 +43,16 @@
   <meta itemprop="name" content="Base">
   <meta itemprop="datePublished" content="2025-04-03T15:32:23+08:00">
   <meta itemprop="dateModified" content="2025-04-03T15:32:23+08:00">
-  <meta itemprop="image" content="http://localhost:1313/home/me.png"></head>
+  <meta itemprop="image" content="http://localhost:1313/home/me.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff"> </head>
 <body>
 
 <div class="container"><header>
@@ -43,12 +62,9 @@
 
 <div class="content-container">
 <main><h1>Base</h1>
- <nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/7golang/" title="golang"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - golang</a>
+<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/7golang/foundation/" title="Foundation"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - Foundation</a>
 <a class="nav nav-next" href="http://localhost:1313/6linux-foundation/" title="Linux基础知识">Next - Linux基础知识 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-</nav><footer>
-
-
- </footer>
+</nav><footer> </footer>
 </main>
 <div class="sidebar">
 
@@ -83,6 +99,7 @@
 <li class="parent has-sub-menu"><a href="http://localhost:1313/7golang/">golang<span class="mark opened">-</span></a>
   
 <ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/7golang/foundation/">Foundation</a></li>
 <li class="active"><a href="http://localhost:1313/7golang/base/">Base</a></li>
 </ul>
   
