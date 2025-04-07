@@ -4,17 +4,17 @@ draft = false
 title = '使用 Hugo 和 GitHub Pages 创建个人网站'
 +++
 
-## 前提条件
+#### 前提条件
 
 本指南假设你已经有 GitHub 账户。
 
-## 步骤1：创建 GitHub 仓库
+#### 步骤1：创建 GitHub 仓库
 
 在 GitHub 创建一个新仓库，仓库名必须是 `用户名.github.io`
 
 例如，如果你的 GitHub 用户名是 `mlcore-engine`，则创建的仓库名应为 `mlcore-engine.github.io`
 
-## 步骤2：安装 Hugo
+#### 步骤2：安装 Hugo
 
 使用 Homebrew 安装 Hugo：
 
@@ -22,7 +22,7 @@ title = '使用 Hugo 和 GitHub Pages 创建个人网站'
 brew install hugo
 ```
 
-## 步骤3：创建 Hugo 站点
+#### 步骤3：创建 Hugo 站点
 
 创建一个新的 Hugo 站点：
 
@@ -31,7 +31,7 @@ hugo new site my-site
 cd my-site
 ```
 
-## 步骤4：选择并安装主题
+#### 步骤4：选择并安装主题
 
 在 [Hugo Themes](https://themes.gohugo.io) 选择一个主题，然后安装：
 
@@ -43,7 +43,7 @@ mkdir -p themes
 git clone https://github.com/thingsym/hugo-theme-techdoc themes/techdoc
 ```
 
-## 步骤5：配置主题
+#### 步骤5：配置主题
 
 编辑 `hugo.toml` 文件，配置主题：
 
@@ -51,7 +51,7 @@ git clone https://github.com/thingsym/hugo-theme-techdoc themes/techdoc
 theme = "techdoc"
 ```
 
-## 步骤6：创建内容
+#### 步骤6：创建内容
 
 创建新文章：
 
@@ -59,7 +59,7 @@ theme = "techdoc"
 hugo new content/posts/my-first-post.md
 ```
 
-## 步骤7：本地预览
+#### 步骤7：本地预览
 
 启动 Hugo 服务器预览网站（包括草稿内容）：
 
@@ -67,7 +67,7 @@ hugo new content/posts/my-first-post.md
 hugo server -D
 ```
 
-## 步骤8：构建站点
+#### 步骤8：构建站点
 
 编辑完文章后，生成静态网站文件：
 
@@ -75,7 +75,7 @@ hugo server -D
 hugo --minify
 ```
 
-## 步骤9：设置 Git 仓库
+#### 步骤9：设置 Git 仓库
 
 初始化 Git 仓库并连接到 GitHub：
 
@@ -86,7 +86,7 @@ git init
 git remote add origin git@github.com:你的用户名/你的用户名.github.io.git
 ```
 
-## 步骤10：配置 GitHub Actions
+#### 步骤10：配置 GitHub Actions
 
 创建 GitHub Actions 工作流配置文件：
 
@@ -170,7 +170,7 @@ jobs:
         uses: actions/deploy-pages@v4 
 ```
 
-## 步骤11：提交并推送到 GitHub
+#### 步骤11：提交并推送到 GitHub
 
 提交所有更改并推送到 GitHub：
 

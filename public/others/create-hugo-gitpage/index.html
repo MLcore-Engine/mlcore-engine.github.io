@@ -89,44 +89,44 @@
 
 <div class="content-container">
 <main><h1>使用 Hugo 和 GitHub Pages 创建个人网站</h1>
-<h2 id="前提条件">前提条件</h2>
+<h4 id="前提条件">前提条件</h4>
 <p>本指南假设你已经有 GitHub 账户。</p>
-<h2 id="步骤1创建-github-仓库">步骤1：创建 GitHub 仓库</h2>
+<h4 id="步骤1创建-github-仓库">步骤1：创建 GitHub 仓库</h4>
 <p>在 GitHub 创建一个新仓库，仓库名必须是 <code>用户名.github.io</code></p>
 <p>例如，如果你的 GitHub 用户名是 <code>mlcore-engine</code>，则创建的仓库名应为 <code>mlcore-engine.github.io</code></p>
-<h2 id="步骤2安装-hugo">步骤2：安装 Hugo</h2>
+<h4 id="步骤2安装-hugo">步骤2：安装 Hugo</h4>
 <p>使用 Homebrew 安装 Hugo：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install hugo
-</span></span></code></pre></div><h2 id="步骤3创建-hugo-站点">步骤3：创建 Hugo 站点</h2>
+</span></span></code></pre></div><h4 id="步骤3创建-hugo-站点">步骤3：创建 Hugo 站点</h4>
 <p>创建一个新的 Hugo 站点：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo new site my-site
 </span></span><span style="display:flex;"><span>cd my-site
-</span></span></code></pre></div><h2 id="步骤4选择并安装主题">步骤4：选择并安装主题</h2>
+</span></span></code></pre></div><h4 id="步骤4选择并安装主题">步骤4：选择并安装主题</h4>
 <p>在 <a href="https://themes.gohugo.io">Hugo Themes</a> 选择一个主题，然后安装：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 创建主题目录</span>
 </span></span><span style="display:flex;"><span>mkdir -p themes
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 克隆主题 (示例使用 techdoc 主题)</span>
 </span></span><span style="display:flex;"><span>git clone https://github.com/thingsym/hugo-theme-techdoc themes/techdoc
-</span></span></code></pre></div><h2 id="步骤5配置主题">步骤5：配置主题</h2>
+</span></span></code></pre></div><h4 id="步骤5配置主题">步骤5：配置主题</h4>
 <p>编辑 <code>hugo.toml</code> 文件，配置主题：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">theme</span> = <span style="color:#e6db74">&#34;techdoc&#34;</span>
-</span></span></code></pre></div><h2 id="步骤6创建内容">步骤6：创建内容</h2>
+</span></span></code></pre></div><h4 id="步骤6创建内容">步骤6：创建内容</h4>
 <p>创建新文章：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo new content/posts/my-first-post.md
-</span></span></code></pre></div><h2 id="步骤7本地预览">步骤7：本地预览</h2>
+</span></span></code></pre></div><h4 id="步骤7本地预览">步骤7：本地预览</h4>
 <p>启动 Hugo 服务器预览网站（包括草稿内容）：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo server -D
-</span></span></code></pre></div><h2 id="步骤8构建站点">步骤8：构建站点</h2>
+</span></span></code></pre></div><h4 id="步骤8构建站点">步骤8：构建站点</h4>
 <p>编辑完文章后，生成静态网站文件：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo --minify
-</span></span></code></pre></div><h2 id="步骤9设置-git-仓库">步骤9：设置 Git 仓库</h2>
+</span></span></code></pre></div><h4 id="步骤9设置-git-仓库">步骤9：设置 Git 仓库</h4>
 <p>初始化 Git 仓库并连接到 GitHub：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~/my-site
 </span></span><span style="display:flex;"><span>git init
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 注意：使用前需配置 SSH 密钥</span>
 </span></span><span style="display:flex;"><span>git remote add origin git@github.com:你的用户名/你的用户名.github.io.git
-</span></span></code></pre></div><h2 id="步骤10配置-github-actions">步骤10：配置 GitHub Actions</h2>
+</span></span></code></pre></div><h4 id="步骤10配置-github-actions">步骤10：配置 GitHub Actions</h4>
 <p>创建 GitHub Actions 工作流配置文件：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p .github/workflows
 </span></span><span style="display:flex;"><span>touch .github/workflows/hugo.yml
@@ -201,7 +201,7 @@
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy to GitHub Pages</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">deployment</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/deploy-pages@v4 </span>
-</span></span></code></pre></div><h2 id="步骤11提交并推送到-github">步骤11：提交并推送到 GitHub</h2>
+</span></span></code></pre></div><h4 id="步骤11提交并推送到-github">步骤11：提交并推送到 GitHub</h4>
 <p>提交所有更改并推送到 GitHub：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add .
 </span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;初始化 Hugo 网站&#34;</span>
