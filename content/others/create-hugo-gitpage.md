@@ -38,10 +38,9 @@ cd my-site
 ```bash
 # 创建主题目录
 mkdir -p themes
-cd themes
 
 # 克隆主题 (示例使用 techdoc 主题)
-git clone https://github.com/thingsym/hugo-theme-techdoc .
+git clone https://github.com/thingsym/hugo-theme-techdoc themes/techdoc
 ```
 
 ## 步骤5：配置主题
@@ -51,8 +50,6 @@ git clone https://github.com/thingsym/hugo-theme-techdoc .
 ```toml
 theme = "techdoc"
 ```
-
-**注意**：确保使用你实际安装的主题名称。示例中的 "tranquilpeak" 与前面克隆的 "techdoc" 不一致。
 
 ## 步骤6：创建内容
 
