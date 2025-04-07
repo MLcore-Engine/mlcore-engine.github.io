@@ -9,11 +9,11 @@
     <lastBuildDate>Thu, 03 Apr 2025 15:35:22 +0800</lastBuildDate>
     <atom:link href="https://mlcore-engine.github.io/others/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>hugo和gitPage制作个人网页</title>
+      <title>使用 Hugo 和 GitHub Pages 创建个人网站</title>
       <link>https://mlcore-engine.github.io/others/create-hugo-gitpage/</link>
       <pubDate>Thu, 03 Apr 2025 15:35:22 +0800</pubDate>
       <guid>https://mlcore-engine.github.io/others/create-hugo-gitpage/</guid>
-      <description></description>
+      <description>&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;&#xA;&lt;p&gt;本指南假设你已经有 GitHub 账户。&lt;/p&gt;&#xA;&lt;h2 id=&#34;步骤1创建-github-仓库&#34;&gt;步骤1：创建 GitHub 仓库&lt;/h2&gt;&#xA;&lt;p&gt;在 GitHub 创建一个新仓库，仓库名必须是 &lt;code&gt;用户名.github.io&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;例如，如果你的 GitHub 用户名是 &lt;code&gt;mlcore-engine&lt;/code&gt;，则创建的仓库名应为 &lt;code&gt;mlcore-engine.github.io&lt;/code&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
