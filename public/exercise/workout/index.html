@@ -52,7 +52,27 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff"> </head>
+<meta name="theme-color" content="#ffffff"> 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "\\[", right: "\\]", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ],
+            throwOnError: false
+        });
+    });
+</script> </head>
 <body><div class="container"><header>
 <h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
 </header>
@@ -126,67 +146,7 @@
 <li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/others/">Others<span class="mark closed">+</span></a>
   
 <ul class="sub-menu">
-
-<li class=""><a href="https://mlcore-engine.github.io/1learn-cs/">自学CS学习路线图</a>
-  
-</li>
-
-<li class=""><a href="https://mlcore-engine.github.io/2learn-english/">英语学习</a>
-  
-</li>
-
-<li class=""><a href="https://mlcore-engine.github.io/3math-foundation/">矩阵的5种变换</a>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/4transformer/">Transformer<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="https://mlcore-engine.github.io/4transformer/entropy/">Entropy</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/5kubernetes/">Kubernetes<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="https://mlcore-engine.github.io/5kubernetes/installation/">Installation</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/7golang/">golang<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="https://mlcore-engine.github.io/7golang/foundation/">Foundation</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/6linux-foundation/">Linux基础知识<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="https://mlcore-engine.github.io/6linux-foundation/linux-commands/">50个常用Linux命令</a></li>
-<li class=""><a href="https://mlcore-engine.github.io/6linux-foundation/linux-common/">Linux Common</a></li>
-</ul>
-  
-</li>
-
-<li class="parent has-sub-menu"><a href="https://mlcore-engine.github.io/exercise/">Exercises<span class="mark opened">-</span></a>
-  
-<ul class="sub-menu">
-<li class="active"><a href="https://mlcore-engine.github.io/exercise/workout/">Workout</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="https://mlcore-engine.github.io/others/">Others<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
 <li class=""><a href="https://mlcore-engine.github.io/others/create-hugo-gitpage/">hugo和gitPage制作个人网页</a></li>
-</ul>
-  
-</li>
 </ul>
   
 </li>
