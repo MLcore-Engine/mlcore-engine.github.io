@@ -1,0 +1,126 @@
+/* KaTeX Math Rendering - Minimal CSS */
+.katex-math {
+  font-family: 'KaTeX_Main', 'Times New Roman', serif;
+  line-height: 1.2;
+  text-indent: 0;
+  text-rendering: auto;
+}
+
+/* Display math */
+.katex-math[style*="display: block"] {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+  font-size: 1.21em;
+}
+
+/* Inline math */
+.katex-math:not([style*="display: block"]) {
+  display: inline-block;
+  margin: 0 0.2em;
+  vertical-align: middle;
+}
+
+/* Math operators and symbols */
+.katex-processed .math-block,
+.katex-processed .math-inline {
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* Math blocks */
+.katex-processed .math-block {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+}
+
+/* Custom styling for specific math elements */
+[data-math-formula] {
+  font-style: italic;
+}
+
+/* Variable styling */
+[data-math-formula] .var {
+  font-style: italic;
+  color: #2e3436;
+}
+
+/* Operator styling */
+[data-math-formula] .op {
+  color: #000;
+}
+
+/* Basic math formatting */
+.katex-processed sub,
+.katex-processed sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.katex-processed sup {
+  top: -0.5em;
+}
+
+.katex-processed sub {
+  bottom: -0.25em;
+}
+
+/* Fractions */
+.katex-processed .frac-line {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  display: inline-block;
+  width: 100%;
+}
+
+.katex-processed .frac-line:after {
+  border-bottom-width: 1px;
+  content: "";
+  display: block;
+}
+
+/* Delimiters like parentheses */
+.katex-processed .delimsizing.size1 {
+  font-size: 1em;
+}
+
+.katex-processed .delimsizing.size2 {
+  font-size: 1.2em;
+}
+
+.katex-processed .delimsizing.size3 {
+  font-size: 1.4em;
+}
+
+.katex-processed .delimsizing.size4 {
+  font-size: 1.6em;
+}
+
+/* Greek letters common in math */
+[data-math-formula] .alpha:before { content: "α"; }
+[data-math-formula] .beta:before { content: "β"; }
+[data-math-formula] .gamma:before { content: "γ"; }
+[data-math-formula] .delta:before { content: "δ"; }
+[data-math-formula] .epsilon:before { content: "ε"; }
+[data-math-formula] .zeta:before { content: "ζ"; }
+[data-math-formula] .eta:before { content: "η"; }
+[data-math-formula] .theta:before { content: "θ"; }
+[data-math-formula] .iota:before { content: "ι"; }
+[data-math-formula] .kappa:before { content: "κ"; }
+[data-math-formula] .lambda:before { content: "λ"; }
+[data-math-formula] .mu:before { content: "μ"; }
+[data-math-formula] .nu:before { content: "ν"; }
+[data-math-formula] .xi:before { content: "ξ"; }
+[data-math-formula] .omicron:before { content: "ο"; }
+[data-math-formula] .pi:before { content: "π"; }
+[data-math-formula] .rho:before { content: "ρ"; }
+[data-math-formula] .sigma:before { content: "σ"; }
+[data-math-formula] .tau:before { content: "τ"; }
+[data-math-formula] .upsilon:before { content: "υ"; }
+[data-math-formula] .phi:before { content: "φ"; }
+[data-math-formula] .chi:before { content: "χ"; }
+[data-math-formula] .psi:before { content: "ψ"; }
+[data-math-formula] .omega:before { content: "ω"; } 

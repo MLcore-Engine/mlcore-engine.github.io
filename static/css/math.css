@@ -1,0 +1,120 @@
+/* 数学公式样式 */
+.math-display,
+.math-inline {
+  font-family: 'Times New Roman', serif;
+  line-height: 1.5;
+}
+
+/* 块级公式 */
+.math-display {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 0.5em 0;
+}
+
+/* 内联公式 */
+.math-inline {
+  display: inline;
+  margin: 0 0.2em;
+  font-style: italic;
+}
+
+/* 分数线 */
+.frac {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  letter-spacing: 0.001em;
+  text-align: center;
+}
+
+.frac-line {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.frac-num {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.1em;
+}
+
+.frac-den {
+  display: block;
+  text-align: center;
+  margin-top: 0.1em;
+}
+
+/* 希腊字母 */
+.alpha { font-family: serif; }
+.beta { font-family: serif; }
+.gamma { font-family: serif; }
+.delta { font-family: serif; }
+.epsilon { font-family: serif; }
+.zeta { font-family: serif; }
+.eta { font-family: serif; }
+.theta { font-family: serif; }
+.kappa { font-family: serif; }
+.lambda { font-family: serif; }
+.mu { font-family: serif; }
+.pi { font-family: serif; }
+.rho { font-family: serif; }
+.sigma { font-family: serif; }
+
+/* 数学符号 */
+.sum-symbol {
+  font-size: 1.5em;
+  font-weight: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.integral-symbol {
+  font-size: 1.5em;
+  font-weight: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 下标和上标 */
+sup, sub {
+  font-size: 0.8em;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* 矩阵样式 */
+.matrix {
+  display: inline-table;
+  border-collapse: collapse;
+  margin: 0 0.2em;
+  vertical-align: middle;
+}
+
+.matrix-bracket {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+.matrix-row {
+  display: table-row;
+}
+
+.matrix-cell {
+  display: table-cell;
+  padding: 0 0.3em;
+  text-align: center;
+} 

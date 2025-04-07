@@ -68,24 +68,23 @@ $H(X)$：表示随机变量 $X$ 的熵，也就是不确定性的度量。 $p(x_
 <meta name="theme-color" content="#ffffff"> 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/math.css">
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: "\\[", right: "\\]", display: true},
-                {left: "\\(", right: "\\)", display: false},
-                {left: "$$", right: "$$", display: true},
-                {left: "$", right: "$", display: false}
-            ],
-            throwOnError: false
-        });
-    });
-</script> </head>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script id="MathJax-script" async src="/js/mathjax/tex-svg.js"></script> </head>
 <body><div class="container"><header>
 <h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
 </header>
