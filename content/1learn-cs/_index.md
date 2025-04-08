@@ -39,7 +39,7 @@ description: "自学计算机科学的推荐路径"
 <p style="text-indent: 2em;">操作系统： </p>
 <img src="/book/qignhua-os.png" alt="Computer Foundation" width="200" style="margin-left: 50px;" />
 
-<p style="text-indent: 2em;">编译原理：对于编译相关技术我的经验是借助AI使用递归嵌套自己实现一个简单的编译器 </p>
+<p style="text-indent: 2em;">编译原理:  对于编译相关技术我的经验是借助AI使用递归嵌套自己实现一个简单的编译器 </p>
 
 #### leetcode贯穿职业生涯
 
