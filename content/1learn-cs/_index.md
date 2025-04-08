@@ -24,13 +24,22 @@ description: "自学计算机科学的推荐路径"
 
 <img src="/book/code.png" alt="Computer Foundation" width="200" style="margin-left: 50px;" />
 
-#### 基础课
-
-<p style="text-indent: 2em;">刚开始学习一定要看最基础的书，各种图解...。我在大二非常的想学编程，于是我拿起了学校发的那本C/C++编程书，学了半个暑假放弃了。这一放弃就是4年的时间，当我再次想起学习编程这件事，已经是研二了......</p>
 
 #### B站是世界上最好的学习平台(你英语不太好)
 
 <p style="text-indent: 2em;">找到黑马和尚硅谷的编程入门课， 完完整整的学习一套。记住，要把代码亲自敲一遍，不要只看。</p>
+
+#### 基础课
+
+<p style="text-indent: 2em;">刚开始学习一定要看最基础的书，各种图解...。我在大二非常的想学编程，于是我拿起了学校发的那本C/C++编程书，学了半个暑假放弃了。这一放弃就是4年的时间，当我再次想起学习编程这件事，已经是研二了......</p>
+
+<p style="text-indent: 2em;">图解网络： </p>
+<img src="/book/illustration-network.png" alt="Computer Foundation" width="200" style="margin-left: 50px;" />
+
+<p style="text-indent: 2em;">操作系统： </p>
+<img src="/book/qignhua-os.png" alt="Computer Foundation" width="200" style="margin-left: 50px;" />
+
+<p style="text-indent: 2em;">编译原理：对于编译相关技术我的经验是借助AI使用递归嵌套自己实现一个简单的编译器 </p>
 
 #### leetcode贯穿职业生涯
 
