@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithms on 高新 | AI平台开发工程师</title>
+    <link>https://mlcore-engine.github.io/algorithm/</link>
+    <description>Recent content in Algorithms on 高新 | AI平台开发工程师</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 10 Apr 2025 10:21:50 +0800</lastBuildDate>
+    <atom:link href="https://mlcore-engine.github.io/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dynamic Programming</title>
+      <link>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</link>
+      <pubDate>Thu, 10 Apr 2025 10:21:50 +0800</pubDate>
+      <guid>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</guid>
+      <description>&lt;h3 id=&#34;动态规划几个场景问题和理解&#34;&gt;动态规划几个场景问题和理解&lt;/h3&gt;&#xA;&lt;h4 id=&#34;动态规划问题的本质&#34;&gt;动态规划问题的本质&lt;/h4&gt;&#xA;&lt;p&gt;动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
