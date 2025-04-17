@@ -7,7 +7,7 @@
 &lt;hr>
 &lt;h4 id="背景语言模型的概率分布">&lt;strong>背景：语言模型的概率分布&lt;/strong>&lt;/h4>
 &lt;p>假设语言模型在预测下一个词时，面对一个包含 5 个词的词汇表：[&amp;ldquo;猫&amp;rdquo;, &amp;ldquo;狗&amp;rdquo;, &amp;ldquo;鸟&amp;rdquo;, &amp;ldquo;鱼&amp;rdquo;, &amp;ldquo;马&amp;rdquo;]。模型会为每个词分配一个概率，例如：&lt;/p></description></item><item><title>Entropy</title><link>https://mlcore-engine.github.io/transformer/entropy/</link><pubDate>Mon, 07 Apr 2025 10:57:56 +0800</pubDate><guid>https://mlcore-engine.github.io/transformer/entropy/</guid><description>&lt;h3 id="对于entropy的理解">对于Entropy的理解&lt;/h3>
-&lt;p>$$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$$&lt;/p>
+&lt;p>$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$&lt;/p>
 &lt;hr>
 &lt;h4 id="1-公式的直观解释">1. &lt;strong>公式的直观解释&lt;/strong>&lt;/h4>
 &lt;p>先来看看公式里每个部分的含义：&lt;/p>

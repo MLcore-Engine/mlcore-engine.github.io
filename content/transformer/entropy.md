@@ -7,7 +7,7 @@ title = 'Entropy'
 
 ### 对于Entropy的理解
 
-$$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$$
+$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$
 
 ---
 #### 1. **公式的直观解释**
@@ -43,11 +43,11 @@ $$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$$
 
 现在代入公式计算熵：
 
-$$H(X) = - \left[ p(H) \log_2 p(H) + p(T) \log_2 p(T) \right]$$
+$H(X) = - \left[ p(H) \log_2 p(H) + p(T) \log_2 p(T) \right]$
 
 代入数值：
 
-$$H(X) = - \left[ 0.5 \log_2 0.5 + 0.5 \log_2 0.5 \right]$$
+$H(X) = - \left[ 0.5 \log_2 0.5 + 0.5 \log_2 0.5 \right]$
 
 计算每项：
 
@@ -56,7 +56,7 @@ $$H(X) = - \left[ 0.5 \log_2 0.5 + 0.5 \log_2 0.5 \right]$$
 
 所以：
 
-$$H(X) = - \left[ -0.5 + (-0.5) \right] = - [-1] = 1$$
+$H(X) = - \left[ -0.5 + (-0.5) \right] = - [-1] = 1$
 
 **熵 $H(X) = 1$ 比特**。
 
@@ -72,7 +72,7 @@ $$H(X) = - \left[ -0.5 + (-0.5) \right] = - [-1] = 1$$
 
 代入公式：
 
-$$H(X) = - \left[ p(H) \log_2 p(H) + p(T) \log_2 p(T) \right]$$
+$H(X) = - \left[ p(H) \log_2 p(H) + p(T) \log_2 p(T) \right]$
 
 计算每项：
 
@@ -88,11 +88,11 @@ $$H(X) = - \left[ p(H) \log_2 p(H) + p(T) \log_2 p(T) \right]$$
 
 求和：
 
-$$-0.2575 + (-0.4644) = -0.7219$$
+$-0.2575 + (-0.4644) = -0.7219$
 
 取负：
 
-$$H(X) = - (-0.7219) \approx 0.7219$$
+$H(X) = - (-0.7219) \approx 0.7219$
 
 **熵 $H(X) \approx 0.7219$ 比特**。
 
@@ -108,14 +108,14 @@ $$H(X) = - (-0.7219) \approx 0.7219$$
 
 代入公式：
 
-$$H(X) = - \left[ 1 \times \log_2 1 + 0 \times \log_2 0 \right]$$
+$H(X) = - \left[ 1 \times \log_2 1 + 0 \times \log_2 0 \right]$
 
 - $\log_2 1 = 0$ （因为 $2^0 = 1$）
 - $0 \times \log_2 0$：虽然 $\log_2 0$ 是负无穷，但在数学约定中，$0 \times \text{无穷}$ 取 0。
 
 所以：
 
-$$H(X) = - [0 + 0] = 0$$
+$H(X) = - [0 + 0] = 0$
 
 **熵 $H(X) = 0$ 比特**。
 
