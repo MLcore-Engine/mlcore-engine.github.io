@@ -88,8 +88,8 @@ description: "个人简介 - AI平台开发工程师"
 
 #### 网站导航
 
-- [**Self-Learning CS Path**](/1learn-cs/) - 自学CS路线推荐
-- [**Learn English**](/2learn-english/) - 一直坚持但没有做好
-- [**Kubenetes**](/5kubernetes/) - 职业起点
-- [**transformer**](/4transformer/) - 跟随时代变化
+- [**Self-Learning CS Path**](/learn_cs/) - 自学CS路线推荐
+- [**Learn English**](/learn_english/) - 一直坚持但没有做好
+- [**Kubenetes**](/kubernetes/) - 职业起点
+- [**transformer**](/transformer/) - 跟随时代变化
 - [**exercise**](/exercise/) - 保持身体健康是一切的前提
