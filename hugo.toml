@@ -7,7 +7,16 @@ theme = "techdoc"
 hasCJKLanguage = true
 metaDataFormat = "yaml"
 
+# 启用网站地图
+enableRobotsTXT = true
+enableGitInfo = true  # 使用Git信息作为lastmod
+
 [params]
+    # 基本信息
+    description = "AI平台开发工程师，专注于机器学习、深度学习和人工智能技术，分享技术心得和研究成果。"
+    keywords = "AI, 机器学习, 深度学习, Python, 人工智能, 技术博客"
+    author = "高新"
+    
     # 文档仓库
     github_repository = "https://github.com/mlcore-engine/mlcore-engine"
     
@@ -37,6 +46,12 @@ metaDataFormat = "yaml"
         "post",
         "posts",
     ]
+
+# Sitemap配置
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
 
 # Markup configure section
 [markup]
