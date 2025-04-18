@@ -16,7 +16,7 @@
 body {
   background-color: #f8f5e6 !important; /* 浅米色背景，适合阅读 */
   font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; /* 楷体优先，后备无衬线字体 */
-  font-size: 16px !important;
+  font-size: 20px !important; /* 增大基础字体大小 */
   line-height: 1.8 !important; /* 增加行高，适合楷体阅读 */
 }
 
@@ -28,6 +28,7 @@ body {
 /* 保持侧边栏样式与主题一致 */
 .sidebar {
   background-color: inherit;
+  font-size: 16px !important; /* 侧边栏字体大小 */
 }
 
 /* 标题字体样式 */
@@ -37,10 +38,52 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.5 !important;
 }
 
+/* 增大标题字体 */
+h1 {
+  font-size: 2.4em !important;
+}
+
+h2 {
+  font-size: 2em !important;
+}
+
+h3 {
+  font-size: 1.7em !important;
+}
+
+h4 {
+  font-size: 1.5em !important;
+}
+
+h5 {
+  font-size: 1.3em !important;
+}
+
+h6 {
+  font-size: 1.2em !important;
+}
+
+/* 段落字体大小 */
+p {
+  font-size: 20px !important;
+  margin-bottom: 1.2em !important;
+}
+
+/* 列表元素 */
+li {
+  font-size: 20px !important;
+  margin-bottom: 0.5em !important;
+}
+
+/* 正文内容增强 */
+article, .content, .post-content, main p, main li, main td, main th, blockquote, .markdown {
+  font-size: 20px !important;
+}
+
 /* 代码字体 */
 pre, code {
   font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
-  font-size: 0.9em !important;
+  font-size: 1.1em !important; /* 增大代码字体 */
 }
 
 /* 链接样式优化 */
@@ -51,5 +94,10 @@ a {
 
 a:hover {
   text-decoration: underline !important;
+}
+
+/* 表格字体 */
+table {
+  font-size: 20px !important;
 }
 </style> 

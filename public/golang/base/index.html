@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Base - 高新 | AI平台开发工程师</title>
-<meta name="description" content="AI平台开发工程师，专注于机器学习、深度学习和人工智能技术，分享技术心得和研究成果。">
+<meta name="description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
 <meta name="generator" content="Hugo 0.145.0">
 <link href="http://localhost:1313//index.xml" rel="alternate" type="application/rss+xml">
 <link rel="canonical" href="http://localhost:1313/golang/base/">
@@ -32,7 +32,7 @@
 body {
   background-color: #f8f5e6 !important;  
   font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;  
-  font-size: 16px !important;
+  font-size: 20px !important;  
   line-height: 1.8 !important;  
 }
 
@@ -44,6 +44,7 @@ body {
  
 .sidebar {
   background-color: inherit;
+  font-size: 16px !important;  
 }
 
  
@@ -54,9 +55,51 @@ h1, h2, h3, h4, h5, h6 {
 }
 
  
+h1 {
+  font-size: 2.4em !important;
+}
+
+h2 {
+  font-size: 2em !important;
+}
+
+h3 {
+  font-size: 1.7em !important;
+}
+
+h4 {
+  font-size: 1.5em !important;
+}
+
+h5 {
+  font-size: 1.3em !important;
+}
+
+h6 {
+  font-size: 1.2em !important;
+}
+
+ 
+p {
+  font-size: 20px !important;
+  margin-bottom: 1.2em !important;
+}
+
+ 
+li {
+  font-size: 20px !important;
+  margin-bottom: 0.5em !important;
+}
+
+ 
+article, .content, .post-content, main p, main li, main td, main th, blockquote, .markdown {
+  font-size: 20px !important;
+}
+
+ 
 pre, code {
   font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
-  font-size: 0.9em !important;
+  font-size: 1.1em !important;  
 }
 
  
@@ -68,10 +111,15 @@ a {
 a:hover {
   text-decoration: underline !important;
 }
+
+ 
+table {
+  font-size: 20px !important;
+}
 </style> <meta property="og:url" content="http://localhost:1313/golang/base/">
   <meta property="og:site_name" content="高新 | AI平台开发工程师">
   <meta property="og:title" content="Base">
-  <meta property="og:description" content="AI平台开发工程师，专注于机器学习、深度学习和人工智能技术，分享技术心得和研究成果。">
+  <meta property="og:description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="golang">
@@ -82,10 +130,10 @@ a:hover {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/home/me.png">
   <meta name="twitter:title" content="Base">
-  <meta name="twitter:description" content="AI平台开发工程师，专注于机器学习、深度学习和人工智能技术，分享技术心得和研究成果。">
+  <meta name="twitter:description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
 
   <meta itemprop="name" content="Base">
-  <meta itemprop="description" content="AI平台开发工程师，专注于机器学习、深度学习和人工智能技术，分享技术心得和研究成果。">
+  <meta itemprop="description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
   <meta itemprop="datePublished" content="2025-04-03T15:32:23+08:00">
   <meta itemprop="dateModified" content="2025-04-17T13:08:49+08:00">
   <meta itemprop="image" content="http://localhost:1313/home/me.png">
@@ -101,7 +149,7 @@ a:hover {
 
 
 <meta name="description" content="">
-<meta name="keywords" content="AI, 机器学习, 深度学习, Python, 人工智能, 技术博客">
+<meta name="keywords" content="AI, 机器学习, golang, kubernetes, 技术博客">
 <meta name="author" content="高新">
 
 
@@ -143,7 +191,7 @@ a:hover {
 
 <div class="container"><header>
 <h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
-<p class="description">AI平台开发工程师，专注于机器学习、深度学习和人工智能技术，分享技术心得和研究成果。</p>
+<p class="description">AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p>
 
 </header>
 
@@ -171,6 +219,7 @@ a:hover {
 <li class=" has-sub-menu"><a href="http://localhost:1313/math_foundation/">机器学习中的数学<span class="mark closed">+</span></a>
   
 <ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/math_foundation/information/">信息量</a></li>
 <li class=""><a href="http://localhost:1313/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/">似然函数_交叉熵</a></li>
 <li class=""><a href="http://localhost:1313/math_foundation/kl%E6%95%A3%E5%BA%A6%E4%B8%8Edpo%E7%AE%97%E6%B3%95/">Kl散度与dpo算法</a></li>
 </ul>
@@ -216,7 +265,6 @@ a:hover {
 <li class=" has-sub-menu"><a href="http://localhost:1313/algorithm/">Algorithms<span class="mark closed">+</span></a>
   
 <ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/algorithm/dynamic-programmnig/">Dynamic Programming</a></li>
 </ul>
   
 </li>
