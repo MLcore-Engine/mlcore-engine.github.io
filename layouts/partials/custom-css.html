@@ -15,6 +15,9 @@
 /* 自定义阅读友好的背景色 */
 body {
   background-color: #f8f5e6 !important; /* 浅米色背景，适合阅读 */
+  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; /* 楷体优先，后备无衬线字体 */
+  font-size: 16px !important;
+  line-height: 1.8 !important; /* 增加行高，适合楷体阅读 */
 }
 
 /* 确保内容区域也使用相同背景色 */
@@ -25,5 +28,28 @@ body {
 /* 保持侧边栏样式与主题一致 */
 .sidebar {
   background-color: inherit;
+}
+
+/* 标题字体样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, 'Noto Serif', Georgia, serif !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+}
+
+/* 代码字体 */
+pre, code {
+  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+  font-size: 0.9em !important;
+}
+
+/* 链接样式优化 */
+a {
+  color: #0066cc !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: underline !important;
 }
 </style> 
