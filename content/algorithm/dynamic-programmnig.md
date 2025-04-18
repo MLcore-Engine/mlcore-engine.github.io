@@ -1,7 +1,7 @@
 +++
 date = '2025-04-10T10:21:50+08:00'
 draft = false
-title = 'Dynamic Programming'
+title = '动态规划问题'
 +++
 ### 动态规划几个场景问题和理解
 

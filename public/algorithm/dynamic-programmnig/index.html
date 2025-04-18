@@ -1,760 +1,160 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Dynamic Programming - 高新 | AI平台开发工程师</title>
-<meta name="description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
-<meta name="generator" content="Hugo 0.145.0">
-<link href="http://localhost:1313//index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://localhost:1313/algorithm/dynamic-programmnig/">
-<link rel="stylesheet" href="http://localhost:1313/css/theme.min.css">
-<link rel="stylesheet" href="http://localhost:1313/css/chroma.min.css">
-<script defer src="http://localhost:1313//js/fontawesome6/all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
-<script src="http://localhost:1313/js/bundle.js"></script><style>
- 
-@media screen and (min-width: 480px) {
-  .sidebar {
-    flex: 0 0 20% !important;
-    max-width: 20% !important;
-  }
-  
-  main {
-    flex: 0 0 80% !important;
-    max-width: 80% !important;
-  }
-}
-
- 
-body {
-  background-color: #f8f5e6 !important;  
-  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;  
-  font-size: 20px !important;  
-  line-height: 1.8 !important;  
-}
-
- 
-.container, .content-container, main {
-  background-color: #f8f5e6 !important;
-}
-
- 
-.sidebar {
-  background-color: inherit;
-  font-size: 16px !important;  
-}
-
- 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, 'Noto Serif', Georgia, serif !important;
-  font-weight: 600 !important;
-  line-height: 1.5 !important;
-}
-
- 
-h1 {
-  font-size: 2.4em !important;
-}
-
-h2 {
-  font-size: 2em !important;
-}
-
-h3 {
-  font-size: 1.7em !important;
-}
-
-h4 {
-  font-size: 1.5em !important;
-}
-
-h5 {
-  font-size: 1.3em !important;
-}
-
-h6 {
-  font-size: 1.2em !important;
-}
-
- 
-p {
-  font-size: 20px !important;
-  margin-bottom: 1.2em !important;
-}
-
- 
-li {
-  font-size: 20px !important;
-  margin-bottom: 0.5em !important;
-}
-
- 
-article, .content, .post-content, main p, main li, main td, main th, blockquote, .markdown {
-  font-size: 20px !important;
-}
-
- 
-pre, code {
-  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
-  font-size: 1.1em !important;  
-}
-
- 
-a {
-  color: #0066cc !important;
-  text-decoration: none !important;
-}
-
-a:hover {
-  text-decoration: underline !important;
-}
-
- 
-table {
-  font-size: 20px !important;
-}
-</style> <meta property="og:url" content="http://localhost:1313/algorithm/dynamic-programmnig/">
-  <meta property="og:site_name" content="高新 | AI平台开发工程师">
-  <meta property="og:title" content="Dynamic Programming">
-  <meta property="og:description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="algorithm">
-    <meta property="article:published_time" content="2025-04-10T10:21:50+08:00">
-    <meta property="article:modified_time" content="2025-04-10T11:32:36+08:00">
-    <meta property="og:image" content="http://localhost:1313/home/me.png">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/home/me.png">
-  <meta name="twitter:title" content="Dynamic Programming">
-  <meta name="twitter:description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。">
-
-  <meta itemprop="name" content="Dynamic Programming">
-  <meta itemprop="description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。">
-  <meta itemprop="datePublished" content="2025-04-10T10:21:50+08:00">
-  <meta itemprop="dateModified" content="2025-04-10T11:32:36+08:00">
-  <meta itemprop="wordCount" content="4833">
-  <meta itemprop="image" content="http://localhost:1313/home/me.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-<link rel="manifest" href="/favicon/site.webmanifest">
-<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="/favicon.ico">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff"> 
-
-
-<meta name="description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。
-">
-<meta name="keywords" content="AI, 机器学习, golang, kubernetes, 技术博客">
-<meta name="author" content="高新">
-
-
-<meta property="og:type" content="article">
-<meta property="og:url" content="http://localhost:1313/algorithm/dynamic-programmnig/">
-<meta property="og:title" content="Dynamic Programming | 高新 | AI平台开发工程师">
-<meta property="og:description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。
-">
-<meta property="og:image" content="http://localhost:1313/home/me.png">
-
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="http://localhost:1313/algorithm/dynamic-programmnig/">
-<meta name="twitter:title" content="Dynamic Programming | 高新 | AI平台开发工程师">
-<meta name="twitter:description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。
-">
-<meta name="twitter:image" content="http://localhost:1313/home/me.png">
-
-
-<link rel="canonical" href="http://localhost:1313/algorithm/dynamic-programmnig/">
-
-
-<link rel="stylesheet" href="/css/math.css">
-
-
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    svg: {
-      fontCache: 'global'
-    }
-  };
-</script>
-<script id="MathJax-script" async src="/js/mathjax/tex-svg.js"></script> </head>
-<body>
-
-<div class="container"><header>
-<h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
-<p class="description">AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p>
-
-</header>
-
-
-<div class="content-container">
-<main><h1>Dynamic Programming</h1>
-<h3 id="动态规划几个场景问题和理解">动态规划几个场景问题和理解</h3>
-<h4 id="动态规划问题的本质">动态规划问题的本质</h4>
-<p>动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。</p>
-<hr>
-<h4 id="动态规划的本质是什么"><strong>动态规划的本质是什么</strong></h4>
-<p>动态规划的本质在于<strong>通过存储子问题的解来避免重复计算</strong>，从而高效地解决复杂问题。它基于两个关键特性：</p>
-<ol>
-<li><strong>最优子结构</strong>：一个问题的最优解可以通过其子问题的最优解来构建。例如，要计算第 ( n ) 个斐波那契数，可以通过第 ( n-1 ) 和第 ( n-2 ) 个数的最优解（即它们的值）来得到。</li>
-<li><strong>重叠子问题</strong>：在求解过程中，相同的子问题会被多次用到。如果不存储这些子问题的解，而是每次都重新计算，会导致效率低下。动态规划通过存储这些解来优化性能。</li>
-</ol>
-<p>简单来说，动态规划的核心是利用内存换时间，通过记录子问题的结果，避免重复劳动，最终高效地解决原问题。</p>
-<hr>
-<h4 id="在计算机体系架构中动态规划是如何运行的"><strong>在计算机体系架构中，动态规划是如何运行的</strong></h4>
-<p>在计算机体系架构中，动态规划通常以一种结构化的方式运行，依赖内存和计算的结合。它的运行过程可以分为以下几个步骤：</p>
-<ol>
-<li>
-<p><strong>状态定义</strong><br>
-定义一个状态数组（或矩阵），其中每个元素代表一个子问题的解。例如，在斐波那契数列中，( dp[i] ) 表示第 ( i ) 个斐波那契数；在背包问题中，( dp[i][w] ) 表示前 ( i ) 个物品在容量 ( w ) 下的最大价值。</p>
-</li>
-<li>
-<p><strong>状态转移</strong><br>
-通过状态转移方程，从已知的子问题解逐步推导出更大的子问题解。状态转移方程描述了子问题之间的关系。例如，在斐波那契数列中，( dp[i] = dp[i-1] + dp[i-2] )。</p>
-</li>
-<li>
-<p><strong>边界条件</strong><br>
-设置初始状态，即最小的子问题的解。例如，斐波那契数列的 ( dp[1] = 1 )，( dp[2] = 1 )。</p>
-</li>
-<li>
-<p><strong>计算顺序</strong><br>
-按照一定的顺序（通常是自底向上）填充状态数组。自底向上的方法从最小子问题开始，逐步计算到最终问题，避免了递归的开销。</p>
-</li>
-<li>
-<p><strong>结果获取</strong><br>
-从状态数组中直接读取最终问题的解。例如，( dp[n] ) 就是第 ( n ) 个斐波那契数。</p>
-</li>
-</ol>
-<p>在计算机中，动态规划利用内存（如数组或哈希表）存储中间结果，CPU 按照状态转移方程逐步更新这些状态，最终得到答案。这种方法充分利用了计算机的存储和计算能力。</p>
-<hr>
-<h4 id="状态转移的过程本质是什么"><strong>状态转移的过程本质是什么</strong></h4>
-<p>状态转移的本质是<strong>描述子问题之间的关系</strong>，即如何从一个或多个已知子问题的解推导出另一个子问题的解。状态转移方程是动态规划的核心，它定义了从当前状态到下一状态的规则。</p>
-<ul>
-<li><strong>形式化表示</strong>：状态转移通常是一个数学公式或逻辑表达式。例如，( dp[i] = dp[i-1] + dp[i-2] ) 表示第 ( i ) 个状态依赖于前两个状态。</li>
-<li><strong>决策过程</strong>：在优化问题中，状态转移往往涉及选择。例如，在背包问题中，状态转移需要决定是否放入某个物品，取价值最大的一种情况。</li>
-</ul>
-<p>状态转移的意义在于，它将一个大问题分解为多个小问题，并通过递推的方式逐步解决，最终连接到原问题的解。</p>
-<hr>
-<h4 id="用具体例子理解动态规划"><strong>用具体例子理解动态规划</strong></h4>
-<p>以下通过两个经典例子详细说明动态规划的实现过程。</p>
-<h5 id="例子-1斐波那契数列"><strong>例子 1：斐波那契数列</strong></h5>
-<p><strong>问题描述</strong>：计算第 ( n ) 个斐波那契数。斐波那契数列的前两个数为 1，后续每个数是前两个数的和。即：</p>
-<ul>
-<li>( F(1) = 1 )</li>
-<li>( F(2) = 1 )</li>
-<li>( F(n) = F(n-1) + F(n-2) ) 对于 ( n &gt; 2 )</li>
-</ul>
-<p><strong>动态规划解法</strong>：</p>
-<ol>
-<li>
-<p><strong>状态定义</strong><br>
-定义 ( dp[i] ) 表示第 ( i ) 个斐波那契数。</p>
-</li>
-<li>
-<p><strong>状态转移方程</strong><br>
-( dp[i] = dp[i-1] + dp[i-2] )<br>
-即第 ( i ) 个数是前两个数的和。</p>
-</li>
-<li>
-<p><strong>边界条件</strong><br>
-( dp[1] = 1 )<br>
-( dp[2] = 1 )</p>
-</li>
-<li>
-<p><strong>计算顺序</strong><br>
-从 ( i = 3 ) 到 ( n )，依次计算每个 ( dp[i] )。<br>
-例如：</p>
-<ul>
-<li>( dp[3] = dp[2] + dp[1] = 1 + 1 = 2 )</li>
-<li>( dp[4] = dp[3] + dp[2] = 2 + 1 = 3 )</li>
-<li>( dp[5] = dp[4] + dp[3] = 3 + 2 = 5 )</li>
-</ul>
-</li>
-<li>
-<p><strong>结果获取</strong><br>
-( dp[n] ) 即为第 ( n ) 个斐波那契数。</p>
-</li>
-</ol>
-<p><strong>代码示例</strong>（Go）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">fibonacci</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">dp</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">dp</span>[<span style="color:#ae81ff">1</span>] = <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">dp</span>[<span style="color:#ae81ff">2</span>] = <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>] = <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">n</span>]
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h5 id="例子-20-1-背包问题"><strong>例子 2：0-1 背包问题</strong></h5>
-<p><strong>问题描述</strong>：<br>
-给定一个容量为 ( W ) 的背包和 ( n ) 个物品，每个物品有重量 ( w_i ) 和价值 ( v_i )。求解如何选择物品放入背包，使得总价值最大，且总重量不超过 ( W )。<br>
-例如：( W = 4 )，物品信息如下：</p>
-<ul>
-<li>物品 1：重量 ( w_1 = 2 )，价值 ( v_1 = 3 )</li>
-<li>物品 2：重量 ( w_2 = 3 )，价值 ( v_2 = 4 )</li>
-<li>物品 3：重量 ( w_3 = 1 )，价值 ( v_3 = 2 )</li>
-</ul>
-<p><strong>动态规划解法</strong>：</p>
-<ol>
-<li>
-<p><strong>状态定义</strong><br>
-( dp[i][w] ) 表示前 ( i ) 个物品在背包容量为 ( w ) 时的最大价值。</p>
-</li>
-<li>
-<p><strong>状态转移方程</strong><br>
-对于第 ( i ) 个物品：</p>
-<ul>
-<li>不放入背包：$dp[i][w] = dp[i-1][w]$</li>
-<li>放入背包（如果 $w \geq w_i$）：$dp[i][w] = dp[i-1][w - w_i] + v_i$<br>
-因此：<br>
-$dp[i][w] = \max(dp[i-1][w], dp[i-1][w - w_i] + v_i)$ 如果 $w \geq w_i$<br>
-$dp[i][w] = dp[i-1][w]$ 如果 $w &lt; w_i$</li>
-</ul>
-</li>
-<li>
-<p><strong>边界条件</strong></p>
-<ul>
-<li>$dp[0][w] = 0$（无物品时价值为 0）</li>
-<li>$dp[i][0] = 0$（容量为 0 时价值为 0）</li>
-</ul>
-</li>
-<li>
-<p><strong>计算顺序</strong><br>
-从 $i = 1$ 到 $n$，对于每个 $i$，从 $w = 0$ 到 $W$，填充 $dp$ 表。<br>
-示例计算（$n = 3, W = 4$）：</p>
-<ul>
-<li>$dp[1][4] = \max(dp[0][4], dp[0][4-2] + 3) = \max(0, 0 + 3) = 3$（放入物品 1）</li>
-<li>$dp[2][4] = \max(dp[1][4], dp[1][4-3] + 4) = \max(3, 0 + 4) = 4$（放入物品 2）</li>
-<li>$dp[3][4] = \max(dp[2][4], dp[2][4-1] + 2) = \max(4, 3 + 2) = 5$（放入物品 3）</li>
-</ul>
-</li>
-<li>
-<p><strong>结果获取</strong><br>
-$dp[3][4] = 5$ 是最终答案。</p>
-</li>
-</ol>
-<p><strong>代码示例</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">knapsack</span>(<span style="color:#a6e22e">W</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">weights</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">values</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
-</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">dp</span> <span style="color:#f92672">:=</span> make([][]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">dp</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>] = make([]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">W</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">w</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">w</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">W</span>; <span style="color:#a6e22e">w</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">w</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">weights</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] {
-</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">w</span>] = max(<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">w</span>], <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">w</span><span style="color:#f92672">-</span><span style="color:#a6e22e">weights</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]]<span style="color:#f92672">+</span><span style="color:#a6e22e">values</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>			} <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">w</span>] = <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">w</span>]
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">n</span>][<span style="color:#a6e22e">W</span>]
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h4 id="动态规划的底层原理"><strong>动态规划的底层原理</strong></h4>
-<p>动态规划的底层原理涉及几个关键概念：</p>
-<ol>
-<li>
-<p><strong>记忆化</strong><br>
-通过存储子问题的解（如数组或哈希表），避免重复计算。例如，在斐波那契数列中，如果不使用 ( dp ) 数组，递归方法会重复计算 ( F(n-1) ) 和 ( F(n-2) )，时间复杂度为指数级 ( O(2^n) )。而动态规划将其优化为 ( O(n) )。</p>
-</li>
-<li>
-<p><strong>递归与迭代</strong><br>
-动态规划有两种实现方式：</p>
-<ul>
-<li><strong>自顶向下</strong>：递归加记忆化，先分解问题，再计算子问题。</li>
-<li><strong>自底向上</strong>：迭代方式，从最小子问题开始递推到最终解。通常自底向上更高效，因为它避免了递归的栈开销。</li>
-</ul>
-</li>
-<li>
-<p><strong>空间优化</strong><br>
-在某些问题中，可以通过减少存储来优化空间。例如，在斐波那契数列中，只需保存前两个状态，而无需整个 ( dp ) 数组：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fibonacci_optimized</span>(n):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n
-</span></span><span style="display:flex;"><span>    a, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>, n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
-</span></span><span style="display:flex;"><span>        a, b <span style="color:#f92672">=</span> b, a <span style="color:#f92672">+</span> b
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> b
-</span></span></code></pre></div></li>
-<li>
-<p><strong>时间复杂度优化</strong><br>
-动态规划常将指数时间复杂度优化为多项式时间。例如，背包问题若用暴力枚举，复杂度为 ( O(2^n) )，而动态规划将其优化为 ( O(nW) )。</p>
-</li>
-</ol>
-<hr>
-<h4 id="总结"><strong>总结</strong></h4>
-<p>动态规划是一种通过分解问题为子问题并存储子问题解来避免重复计算的算法策略。其本质是利用<strong>最优子结构</strong>和<strong>重叠子问题</strong>，通过状态数组和状态转移方程在计算机中高效运行。状态转移描述了子问题之间的递推关系，是动态规划的核心。通过斐波那契数列和背包问题的例子，我们看到动态规划如何将复杂问题转化为简单的递推计算。从底层原理看，动态规划通过记忆化、迭代和空间优化，充分利用计算机的内存和计算能力，显著提升效率。</p>
-<h3 id="221-最大正方形">221. 最大正方形</h3>
-<h4 id="问题描述">问题描述</h4>
-<p>在一个由 &lsquo;0&rsquo; 和 &lsquo;1&rsquo; 组成的二维矩阵内，找到只包含 &lsquo;1&rsquo; 的最大正方形，并返回其面积。</p>
-<p><strong>示例输入：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">matrix</span> = [
-</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;0&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;0&#34;</span>,<span style="color:#e6db74">&#34;0&#34;</span>],
-</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;0&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>],
-</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>],
-</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;0&#34;</span>,<span style="color:#e6db74">&#34;0&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;0&#34;</span>]
-</span></span><span style="display:flex;"><span>]
-</span></span></code></pre></div><p><strong>示例输出：</strong> 4</p>
-<h5 id="解题思路">解题思路</h5>
-<p>这道题目要求在二维矩阵中找到只包含 &lsquo;1&rsquo; 的最大正方形，并返回其面积。使用动态规划（DP）来解决问题：</p>
-<h5 id="状态定义">状态定义</h5>
-<p>设 <code>dp[i][j]</code> 表示以位置 <code>(i, j)</code> 为右下角的、只包含 &lsquo;1&rsquo; 的最大正方形的边长。</p>
-<h5 id="状态转移方程">状态转移方程</h5>
-<ul>
-<li>如果 <code>matrix[i][j]</code> 为 &lsquo;1&rsquo;：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] = min(<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span></code></pre></div></li>
-<li>如果 <code>matrix[i][j]</code> 为 &lsquo;0&rsquo;，则 <code>dp[i][j] = 0</code></li>
-</ul>
-<h5 id="边界条件">边界条件</h5>
-<ul>
-<li>第一行和第一列由于没有上面或左边的元素，所以当 <code>matrix[i][j]</code> 为 &lsquo;1&rsquo; 时，<code>dp[i][j] = 1</code>，否则为 0。</li>
-</ul>
-<h5 id="结果计算">结果计算</h5>
-<p>在遍历过程中维护一个变量 <code>maxSide</code> 用来记录遇到的最大正方形边长，最后返回 <code>maxSide * maxSide</code> 作为面积。</p>
-<h4 id="举个例子">举个例子</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dp</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] = <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dp</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] = <span style="color:#ae81ff">1</span> <span style="color:#75715e">// 因为dp[0][1] = 0 </span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dp</span>[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>] = <span style="color:#ae81ff">2</span> <span style="color:#75715e">// dp[1][1] = 1 dp[2][1] = 1 dp[1][2] = 1</span>
-</span></span></code></pre></div><h4 id="代码实现">代码实现</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;fmt&#34;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">maximalSquare</span>(<span style="color:#a6e22e">matrix</span> [][]<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">int</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">matrix</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> len(<span style="color:#a6e22e">matrix</span>[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">m</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">matrix</span>), len(<span style="color:#a6e22e">matrix</span>[<span style="color:#ae81ff">0</span>])
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 创建dp二维数组，初始化为0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dp</span> <span style="color:#f92672">:=</span> make([][]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">m</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">dp</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>] = make([]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span>)
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">maxSide</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 遍历矩阵</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#a6e22e">m</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">j</span> &lt; <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">matrix</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span> {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
-</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] = <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] = min(<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] &gt; <span style="color:#a6e22e">maxSide</span> {
-</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">maxSide</span> = <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>]
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] = <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">maxSide</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">maxSide</span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="复杂度分析">复杂度分析</h4>
-<ul>
-<li><strong>时间复杂度：</strong> O(m * n)，需要遍历整个矩阵的每个元素</li>
-<li><strong>空间复杂度：</strong> O(m * n)，使用了一个大小为 m×n 的 dp 数组</li>
-</ul>
-<h3 id="72-编辑距离">72. 编辑距离</h3>
-<h4 id="解题思路-1"><strong>解题思路</strong></h4>
-<ol>
-<li>
-<p><strong>定义 DP 状态</strong></p>
-<ul>
-<li>设 <code>dp[i][j]</code> 表示将 <code>word1[0:i]</code> 变成 <code>word2[0:j]</code> 需要的最少操作数。</li>
-<li>其中 <code>word1[0:i]</code> 表示 <code>word1</code> 的前 <code>i</code> 个字符，<code>word2[0:j]</code> 表示 <code>word2</code> 的前 <code>j</code> 个字符。</li>
-</ul>
-</li>
-<li>
-<p><strong>状态转移方程</strong><br>
-对于 <code>word1[i-1]</code> 和 <code>word2[j-1]</code>，有三种情况：</p>
-<ul>
-<li><strong>如果 <code>word1[i-1] == word2[j-1]</code></strong>，则不需要操作：<br>
-[
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>动态规划问题 - 高新 | AI平台开发工程师</title>
+<meta name=description content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验"><meta name=generator content="Hugo 0.145.0"><link href=https://mlcore-engine.github.io//index.xml rel=alternate type=application/rss+xml><link rel=canonical href=https://mlcore-engine.github.io/algorithm/dynamic-programmnig/><link rel=stylesheet href=https://mlcore-engine.github.io/css/theme.min.css><link rel=stylesheet href=https://mlcore-engine.github.io/css/chroma.min.css><script defer src=https://mlcore-engine.github.io//js/fontawesome6/all.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script><script src=https://mlcore-engine.github.io/js/bundle.js></script><style>@media screen and (min-width:480px){.sidebar{flex:0 0 20%!important;max-width:20%!important}main{flex:0 0 80%!important;max-width:80%!important}}body{background-color:#f8f5e6!important;font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,sans-serif!important;font-size:20px!important;line-height:1.8!important}.container,.content-container,main{background-color:#f8f5e6!important}.sidebar{background-color:inherit;font-size:16px!important}h1,h2,h3,h4,h5,h6{font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,noto serif,Georgia,serif!important;font-weight:600!important;line-height:1.5!important}h1{font-size:2.4em!important}h2{font-size:2em!important}h3{font-size:1.7em!important}h4{font-size:1.5em!important}h5{font-size:1.3em!important}h6{font-size:1.2em!important}p{font-size:20px!important;margin-bottom:1.2em!important}li{font-size:20px!important;margin-bottom:.5em!important}article,.content,.post-content,main p,main li,main td,main th,blockquote,.markdown{font-size:20px!important}pre,code{font-family:jetbrains mono,Consolas,Monaco,andale mono,ubuntu mono,monospace!important;font-size:1.1em!important}a{color:#06c!important;text-decoration:none!important}a:hover{text-decoration:underline!important}table{font-size:20px!important}</style><meta property="og:url" content="https://mlcore-engine.github.io/algorithm/dynamic-programmnig/"><meta property="og:site_name" content="高新 | AI平台开发工程师"><meta property="og:title" content="动态规划问题"><meta property="og:description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="algorithm"><meta property="article:published_time" content="2025-04-10T10:21:50+08:00"><meta property="article:modified_time" content="2025-04-10T11:32:36+08:00"><meta property="og:image" content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:title content="动态规划问题"><meta name=twitter:description content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。"><meta itemprop=name content="动态规划问题"><meta itemprop=description content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。"><meta itemprop=datePublished content="2025-04-10T10:21:50+08:00"><meta itemprop=dateModified content="2025-04-10T11:32:36+08:00"><meta itemprop=wordCount content="4833"><meta itemprop=image content="https://mlcore-engine.github.io/home/me.png"><link rel=apple-touch-icon sizes=180x180 href=/favicon/favicon.png><link rel=icon type=image/png sizes=32x32 href=/favicon/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png><link rel=manifest href=/favicon/site.webmanifest><link rel=mask-icon href=/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/favicon.ico><meta name=msapplication-TileColor content="#da532c"><meta name=msapplication-config content="/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=description content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。
+"><meta name=keywords content="AI,机器学习,golang,kubernetes,技术博客"><meta name=author content="高新"><meta property="og:type" content="article"><meta property="og:url" content="https://mlcore-engine.github.io/algorithm/dynamic-programmnig/"><meta property="og:title" content="动态规划问题 | 高新 | AI平台开发工程师"><meta property="og:description" content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。
+"><meta property="og:image" content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:url content="https://mlcore-engine.github.io/algorithm/dynamic-programmnig/"><meta name=twitter:title content="动态规划问题 | 高新 | AI平台开发工程师"><meta name=twitter:description content="动态规划几个场景问题和理解 动态规划问题的本质 动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。
+"><meta name=twitter:image content="https://mlcore-engine.github.io/home/me.png"><link rel=canonical href=https://mlcore-engine.github.io/algorithm/dynamic-programmnig/><link rel=stylesheet href=/css/math.css><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},svg:{fontCache:"global"}}</script><script id=MathJax-script async src=/js/mathjax/tex-svg.js></script></head><body><div class=container><header><h1>高新 | AI平台开发工程师</h1><a href=https://github.com/mlcore-engine/mlcore-engine class=github><i class="fab fa-github"></i></a><p class=description>AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p></header><div class=content-container><main><h1>动态规划问题</h1><h3 id=动态规划几个场景问题和理解>动态规划几个场景问题和理解</h3><h4 id=动态规划问题的本质>动态规划问题的本质</h4><p>动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。</p><hr><h4 id=动态规划的本质是什么><strong>动态规划的本质是什么</strong></h4><p>动态规划的本质在于<strong>通过存储子问题的解来避免重复计算</strong>，从而高效地解决复杂问题。它基于两个关键特性：</p><ol><li><strong>最优子结构</strong>：一个问题的最优解可以通过其子问题的最优解来构建。例如，要计算第 ( n ) 个斐波那契数，可以通过第 ( n-1 ) 和第 ( n-2 ) 个数的最优解（即它们的值）来得到。</li><li><strong>重叠子问题</strong>：在求解过程中，相同的子问题会被多次用到。如果不存储这些子问题的解，而是每次都重新计算，会导致效率低下。动态规划通过存储这些解来优化性能。</li></ol><p>简单来说，动态规划的核心是利用内存换时间，通过记录子问题的结果，避免重复劳动，最终高效地解决原问题。</p><hr><h4 id=在计算机体系架构中动态规划是如何运行的><strong>在计算机体系架构中，动态规划是如何运行的</strong></h4><p>在计算机体系架构中，动态规划通常以一种结构化的方式运行，依赖内存和计算的结合。它的运行过程可以分为以下几个步骤：</p><ol><li><p><strong>状态定义</strong><br>定义一个状态数组（或矩阵），其中每个元素代表一个子问题的解。例如，在斐波那契数列中，( dp[i] ) 表示第 ( i ) 个斐波那契数；在背包问题中，( dp[i][w] ) 表示前 ( i ) 个物品在容量 ( w ) 下的最大价值。</p></li><li><p><strong>状态转移</strong><br>通过状态转移方程，从已知的子问题解逐步推导出更大的子问题解。状态转移方程描述了子问题之间的关系。例如，在斐波那契数列中，( dp[i] = dp[i-1] + dp[i-2] )。</p></li><li><p><strong>边界条件</strong><br>设置初始状态，即最小的子问题的解。例如，斐波那契数列的 ( dp[1] = 1 )，( dp[2] = 1 )。</p></li><li><p><strong>计算顺序</strong><br>按照一定的顺序（通常是自底向上）填充状态数组。自底向上的方法从最小子问题开始，逐步计算到最终问题，避免了递归的开销。</p></li><li><p><strong>结果获取</strong><br>从状态数组中直接读取最终问题的解。例如，( dp[n] ) 就是第 ( n ) 个斐波那契数。</p></li></ol><p>在计算机中，动态规划利用内存（如数组或哈希表）存储中间结果，CPU 按照状态转移方程逐步更新这些状态，最终得到答案。这种方法充分利用了计算机的存储和计算能力。</p><hr><h4 id=状态转移的过程本质是什么><strong>状态转移的过程本质是什么</strong></h4><p>状态转移的本质是<strong>描述子问题之间的关系</strong>，即如何从一个或多个已知子问题的解推导出另一个子问题的解。状态转移方程是动态规划的核心，它定义了从当前状态到下一状态的规则。</p><ul><li><strong>形式化表示</strong>：状态转移通常是一个数学公式或逻辑表达式。例如，( dp[i] = dp[i-1] + dp[i-2] ) 表示第 ( i ) 个状态依赖于前两个状态。</li><li><strong>决策过程</strong>：在优化问题中，状态转移往往涉及选择。例如，在背包问题中，状态转移需要决定是否放入某个物品，取价值最大的一种情况。</li></ul><p>状态转移的意义在于，它将一个大问题分解为多个小问题，并通过递推的方式逐步解决，最终连接到原问题的解。</p><hr><h4 id=用具体例子理解动态规划><strong>用具体例子理解动态规划</strong></h4><p>以下通过两个经典例子详细说明动态规划的实现过程。</p><h5 id=例子-1斐波那契数列><strong>例子 1：斐波那契数列</strong></h5><p><strong>问题描述</strong>：计算第 ( n ) 个斐波那契数。斐波那契数列的前两个数为 1，后续每个数是前两个数的和。即：</p><ul><li>( F(1) = 1 )</li><li>( F(2) = 1 )</li><li>( F(n) = F(n-1) + F(n-2) ) 对于 ( n > 2 )</li></ul><p><strong>动态规划解法</strong>：</p><ol><li><p><strong>状态定义</strong><br>定义 ( dp[i] ) 表示第 ( i ) 个斐波那契数。</p></li><li><p><strong>状态转移方程</strong><br>( dp[i] = dp[i-1] + dp[i-2] )<br>即第 ( i ) 个数是前两个数的和。</p></li><li><p><strong>边界条件</strong><br>( dp[1] = 1 )<br>( dp[2] = 1 )</p></li><li><p><strong>计算顺序</strong><br>从 ( i = 3 ) 到 ( n )，依次计算每个 ( dp[i] )。<br>例如：</p><ul><li>( dp[3] = dp[2] + dp[1] = 1 + 1 = 2 )</li><li>( dp[4] = dp[3] + dp[2] = 2 + 1 = 3 )</li><li>( dp[5] = dp[4] + dp[3] = 3 + 2 = 5 )</li></ul></li><li><p><strong>结果获取</strong><br>( dp[n] ) 即为第 ( n ) 个斐波那契数。</p></li></ol><p><strong>代码示例</strong>（Go）：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>fibonacci</span>(<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>n</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span> {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>dp</span> <span style=color:#f92672>:=</span> make([]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>dp</span>[<span style=color:#ae81ff>1</span>] = <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>dp</span>[<span style=color:#ae81ff>2</span>] = <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>	
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>3</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>n</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>] = <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>]
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>n</span>]
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h5 id=例子-20-1-背包问题><strong>例子 2：0-1 背包问题</strong></h5><p><strong>问题描述</strong>：<br>给定一个容量为 ( W ) 的背包和 ( n ) 个物品，每个物品有重量 ( w_i ) 和价值 ( v_i )。求解如何选择物品放入背包，使得总价值最大，且总重量不超过 ( W )。<br>例如：( W = 4 )，物品信息如下：</p><ul><li>物品 1：重量 ( w_1 = 2 )，价值 ( v_1 = 3 )</li><li>物品 2：重量 ( w_2 = 3 )，价值 ( v_2 = 4 )</li><li>物品 3：重量 ( w_3 = 1 )，价值 ( v_3 = 2 )</li></ul><p><strong>动态规划解法</strong>：</p><ol><li><p><strong>状态定义</strong><br>( dp[i][w] ) 表示前 ( i ) 个物品在背包容量为 ( w ) 时的最大价值。</p></li><li><p><strong>状态转移方程</strong><br>对于第 ( i ) 个物品：</p><ul><li>不放入背包：$dp[i][w] = dp[i-1][w]$</li><li>放入背包（如果 $w \geq w_i$）：$dp[i][w] = dp[i-1][w - w_i] + v_i$<br>因此：<br>$dp[i][w] = \max(dp[i-1][w], dp[i-1][w - w_i] + v_i)$ 如果 $w \geq w_i$<br>$dp[i][w] = dp[i-1][w]$ 如果 $w &lt; w_i$</li></ul></li><li><p><strong>边界条件</strong></p><ul><li>$dp[0][w] = 0$（无物品时价值为 0）</li><li>$dp[i][0] = 0$（容量为 0 时价值为 0）</li></ul></li><li><p><strong>计算顺序</strong><br>从 $i = 1$ 到 $n$，对于每个 $i$，从 $w = 0$ 到 $W$，填充 $dp$ 表。<br>示例计算（$n = 3, W = 4$）：</p><ul><li>$dp[1][4] = \max(dp[0][4], dp[0][4-2] + 3) = \max(0, 0 + 3) = 3$（放入物品 1）</li><li>$dp[2][4] = \max(dp[1][4], dp[1][4-3] + 4) = \max(3, 0 + 4) = 4$（放入物品 2）</li><li>$dp[3][4] = \max(dp[2][4], dp[2][4-1] + 2) = \max(4, 3 + 2) = 5$（放入物品 3）</li></ul></li><li><p><strong>结果获取</strong><br>$dp[3][4] = 5$ 是最终答案。</p></li></ol><p><strong>代码示例</strong>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-golang data-lang=golang><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>knapsack</span>(<span style=color:#a6e22e>W</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>weights</span> []<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>values</span> []<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>dp</span> <span style=color:#f92672>:=</span> make([][]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>dp</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>] = make([]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>W</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>1</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>n</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>w</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>w</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>W</span>; <span style=color:#a6e22e>w</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>w</span> <span style=color:#f92672>&gt;=</span> <span style=color:#a6e22e>weights</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] {
+</span></span><span style=display:flex><span>				<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>w</span>] = max(<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>w</span>], <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>w</span><span style=color:#f92672>-</span><span style=color:#a6e22e>weights</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]]<span style=color:#f92672>+</span><span style=color:#a6e22e>values</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])
+</span></span><span style=display:flex><span>			} <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>				<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>w</span>] = <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>w</span>]
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>n</span>][<span style=color:#a6e22e>W</span>]
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h4 id=动态规划的底层原理><strong>动态规划的底层原理</strong></h4><p>动态规划的底层原理涉及几个关键概念：</p><ol><li><p><strong>记忆化</strong><br>通过存储子问题的解（如数组或哈希表），避免重复计算。例如，在斐波那契数列中，如果不使用 ( dp ) 数组，递归方法会重复计算 ( F(n-1) ) 和 ( F(n-2) )，时间复杂度为指数级 ( O(2^n) )。而动态规划将其优化为 ( O(n) )。</p></li><li><p><strong>递归与迭代</strong><br>动态规划有两种实现方式：</p><ul><li><strong>自顶向下</strong>：递归加记忆化，先分解问题，再计算子问题。</li><li><strong>自底向上</strong>：迭代方式，从最小子问题开始递推到最终解。通常自底向上更高效，因为它避免了递归的栈开销。</li></ul></li><li><p><strong>空间优化</strong><br>在某些问题中，可以通过减少存储来优化空间。例如，在斐波那契数列中，只需保存前两个状态，而无需整个 ( dp ) 数组：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fibonacci_optimized</span>(n):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> n <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> n
+</span></span><span style=display:flex><span>    a, b <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>3</span>, n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        a, b <span style=color:#f92672>=</span> b, a <span style=color:#f92672>+</span> b
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> b
+</span></span></code></pre></div></li><li><p><strong>时间复杂度优化</strong><br>动态规划常将指数时间复杂度优化为多项式时间。例如，背包问题若用暴力枚举，复杂度为 ( O(2^n) )，而动态规划将其优化为 ( O(nW) )。</p></li></ol><hr><h4 id=总结><strong>总结</strong></h4><p>动态规划是一种通过分解问题为子问题并存储子问题解来避免重复计算的算法策略。其本质是利用<strong>最优子结构</strong>和<strong>重叠子问题</strong>，通过状态数组和状态转移方程在计算机中高效运行。状态转移描述了子问题之间的递推关系，是动态规划的核心。通过斐波那契数列和背包问题的例子，我们看到动态规划如何将复杂问题转化为简单的递推计算。从底层原理看，动态规划通过记忆化、迭代和空间优化，充分利用计算机的内存和计算能力，显著提升效率。</p><h3 id=221-最大正方形>221. 最大正方形</h3><h4 id=问题描述>问题描述</h4><p>在一个由 &lsquo;0&rsquo; 和 &lsquo;1&rsquo; 组成的二维矩阵内，找到只包含 &lsquo;1&rsquo; 的最大正方形，并返回其面积。</p><p><strong>示例输入：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>matrix</span> = [
+</span></span><span style=display:flex><span>    [<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;0&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;0&#34;</span>,<span style=color:#e6db74>&#34;0&#34;</span>],
+</span></span><span style=display:flex><span>    [<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;0&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>],
+</span></span><span style=display:flex><span>    [<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>],
+</span></span><span style=display:flex><span>    [<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;0&#34;</span>,<span style=color:#e6db74>&#34;0&#34;</span>,<span style=color:#e6db74>&#34;1&#34;</span>,<span style=color:#e6db74>&#34;0&#34;</span>]
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><p><strong>示例输出：</strong> 4</p><h5 id=解题思路>解题思路</h5><p>这道题目要求在二维矩阵中找到只包含 &lsquo;1&rsquo; 的最大正方形，并返回其面积。使用动态规划（DP）来解决问题：</p><h5 id=状态定义>状态定义</h5><p>设 <code>dp[i][j]</code> 表示以位置 <code>(i, j)</code> 为右下角的、只包含 &lsquo;1&rsquo; 的最大正方形的边长。</p><h5 id=状态转移方程>状态转移方程</h5><ul><li>如果 <code>matrix[i][j]</code> 为 &lsquo;1&rsquo;：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] = min(<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>j</span>], <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>], <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]) <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span></code></pre></div></li><li>如果 <code>matrix[i][j]</code> 为 &lsquo;0&rsquo;，则 <code>dp[i][j] = 0</code></li></ul><h5 id=边界条件>边界条件</h5><ul><li>第一行和第一列由于没有上面或左边的元素，所以当 <code>matrix[i][j]</code> 为 &lsquo;1&rsquo; 时，<code>dp[i][j] = 1</code>，否则为 0。</li></ul><h5 id=结果计算>结果计算</h5><p>在遍历过程中维护一个变量 <code>maxSide</code> 用来记录遇到的最大正方形边长，最后返回 <code>maxSide * maxSide</code> 作为面积。</p><h4 id=举个例子>举个例子</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>0</span>  <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>dp</span>[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>0</span>] = <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>dp</span>[<span style=color:#ae81ff>1</span>][<span style=color:#ae81ff>1</span>] = <span style=color:#ae81ff>1</span> <span style=color:#75715e>// 因为dp[0][1] = 0 </span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>dp</span>[<span style=color:#ae81ff>2</span>][<span style=color:#ae81ff>2</span>] = <span style=color:#ae81ff>2</span> <span style=color:#75715e>// dp[1][1] = 1 dp[2][1] = 1 dp[1][2] = 1</span>
+</span></span></code></pre></div><h4 id=代码实现>代码实现</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>maximalSquare</span>(<span style=color:#a6e22e>matrix</span> [][]<span style=color:#66d9ef>byte</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> len(<span style=color:#a6e22e>matrix</span>) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>||</span> len(<span style=color:#a6e22e>matrix</span>[<span style=color:#ae81ff>0</span>]) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>m</span>, <span style=color:#a6e22e>n</span> <span style=color:#f92672>:=</span> len(<span style=color:#a6e22e>matrix</span>), len(<span style=color:#a6e22e>matrix</span>[<span style=color:#ae81ff>0</span>])
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 创建dp二维数组，初始化为0</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>dp</span> <span style=color:#f92672>:=</span> make([][]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>m</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>dp</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>] = make([]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>maxSide</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 遍历矩阵</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> &lt; <span style=color:#a6e22e>m</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#a6e22e>j</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>j</span> &lt; <span style=color:#a6e22e>n</span>; <span style=color:#a6e22e>j</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>matrix</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;1&#39;</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>j</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> {
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] = <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>                } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] = min(<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>j</span>], <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>], <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]) <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] &gt; <span style=color:#a6e22e>maxSide</span> {
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>maxSide</span> = <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>]
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] = <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>maxSide</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>maxSide</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=复杂度分析>复杂度分析</h4><ul><li><strong>时间复杂度：</strong> O(m * n)，需要遍历整个矩阵的每个元素</li><li><strong>空间复杂度：</strong> O(m * n)，使用了一个大小为 m×n 的 dp 数组</li></ul><h3 id=72-编辑距离>72. 编辑距离</h3><h4 id=解题思路-1><strong>解题思路</strong></h4><ol><li><p><strong>定义 DP 状态</strong></p><ul><li>设 <code>dp[i][j]</code> 表示将 <code>word1[0:i]</code> 变成 <code>word2[0:j]</code> 需要的最少操作数。</li><li>其中 <code>word1[0:i]</code> 表示 <code>word1</code> 的前 <code>i</code> 个字符，<code>word2[0:j]</code> 表示 <code>word2</code> 的前 <code>j</code> 个字符。</li></ul></li><li><p><strong>状态转移方程</strong><br>对于 <code>word1[i-1]</code> 和 <code>word2[j-1]</code>，有三种情况：</p><ul><li><strong>如果 <code>word1[i-1] == word2[j-1]</code></strong>，则不需要操作：<br>[
 dp[i][j] = dp[i-1][j-1]
-]</li>
-<li><strong>否则，需要进行以下三种操作之一（取最小值）：</strong>
-<ul>
-<li><strong>插入一个字符</strong>（等价于 <code>word1[0:i]</code> 需要变成 <code>word2[0:j-1]</code>，然后再加上 <code>word2[j-1]</code>）：<br>
-[
+]</li><li><strong>否则，需要进行以下三种操作之一（取最小值）：</strong><ul><li><strong>插入一个字符</strong>（等价于 <code>word1[0:i]</code> 需要变成 <code>word2[0:j-1]</code>，然后再加上 <code>word2[j-1]</code>）：<br>[
 dp[i][j] = dp[i][j-1] + 1
-]</li>
-<li><strong>删除一个字符</strong>（等价于 <code>word1[0:i-1]</code> 需要变成 <code>word2[0:j]</code>，然后删除 <code>word1[i-1]</code>）：<br>
-[
+]</li><li><strong>删除一个字符</strong>（等价于 <code>word1[0:i-1]</code> 需要变成 <code>word2[0:j]</code>，然后删除 <code>word1[i-1]</code>）：<br>[
 dp[i][j] = dp[i-1][j] + 1
-]</li>
-<li><strong>替换一个字符</strong>（等价于 <code>word1[0:i-1]</code> 需要变成 <code>word2[0:j-1]</code>，然后把 <code>word1[i-1]</code> 替换成 <code>word2[j-1]</code>）：<br>
-[
+]</li><li><strong>替换一个字符</strong>（等价于 <code>word1[0:i-1]</code> 需要变成 <code>word2[0:j-1]</code>，然后把 <code>word1[i-1]</code> 替换成 <code>word2[j-1]</code>）：<br>[
 dp[i][j] = dp[i-1][j-1] + 1
-]</li>
-<li><strong>最终转移方程为：</strong>
+]</li><li><strong>最终转移方程为：</strong>
 [
 dp[i][j] = \min(dp[i-1][j-1] + 1, dp[i][j-1] + 1, dp[i-1][j] + 1)
-]</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>初始化</strong></p>
-<ul>
-<li><code>dp[0][j] = j</code>：如果 <code>word1</code> 为空，则需要插入 <code>j</code> 个字符。</li>
-<li><code>dp[i][0] = i</code>：如果 <code>word2</code> 为空，则需要删除 <code>i</code> 个字符。</li>
-</ul>
-</li>
-</ol>
-<h4 id="举个例子-1">举个例子</h4>
-<h5 id="1-插入操作">1. 插入操作</h5>
-<p><strong>场景描述：</strong><br>
-假设 word1 = &ldquo;a&rdquo;，word2 = &ldquo;ab&rdquo;。<br>
-目标：把 &ldquo;a&rdquo; 变成 &ldquo;ab&rdquo;。</p>
-<p><strong>思路：</strong></p>
-<ul>
-<li>考察 dp[1][2]，即将 word1 的前 1 个字符 (&ldquo;a&rdquo;) 转换为 word2 的前 2 个字符 (&ldquo;ab&rdquo;)。</li>
-<li>插入操作的含义是：如果我们已经把 &ldquo;a&rdquo; 变成了 &ldquo;a&rdquo;（即 dp[1][1]），那么再在末尾插入 word2 的第 2 个字符 &lsquo;b&rsquo;，总操作数就增加 1。</li>
-<li>因此：<br>
-[
+]</li></ul></li></ul></li><li><p><strong>初始化</strong></p><ul><li><code>dp[0][j] = j</code>：如果 <code>word1</code> 为空，则需要插入 <code>j</code> 个字符。</li><li><code>dp[i][0] = i</code>：如果 <code>word2</code> 为空，则需要删除 <code>i</code> 个字符。</li></ul></li></ol><h4 id=举个例子-1>举个例子</h4><h5 id=1-插入操作>1. 插入操作</h5><p><strong>场景描述：</strong><br>假设 word1 = &ldquo;a&rdquo;，word2 = &ldquo;ab&rdquo;。<br>目标：把 &ldquo;a&rdquo; 变成 &ldquo;ab&rdquo;。</p><p><strong>思路：</strong></p><ul><li>考察 dp[1][2]，即将 word1 的前 1 个字符 (&ldquo;a&rdquo;) 转换为 word2 的前 2 个字符 (&ldquo;ab&rdquo;)。</li><li>插入操作的含义是：如果我们已经把 &ldquo;a&rdquo; 变成了 &ldquo;a&rdquo;（即 dp[1][1]），那么再在末尾插入 word2 的第 2 个字符 &lsquo;b&rsquo;，总操作数就增加 1。</li><li>因此：<br>[
 dp[1][2] = dp[1][1] + 1
-]</li>
-</ul>
-<p><strong>具体过程：</strong></p>
-<ul>
-<li>dp[1][1] 表示 &ldquo;a&rdquo; → &ldquo;a&rdquo;，显然不需要操作，所以 dp[1][1] = 0。</li>
-<li>然后 dp[1][2] = 0 + 1 = 1。</li>
-</ul>
-<hr>
-<h5 id="2-删除操作">2. 删除操作</h5>
-<p><strong>场景描述：</strong><br>
-假设 word1 = &ldquo;ab&rdquo;，word2 = &ldquo;a&rdquo;。<br>
-目标：把 &ldquo;ab&rdquo; 变成 &ldquo;a&rdquo;。</p>
-<p><strong>思路：</strong></p>
-<ul>
-<li>考察 dp[2][1]，即将 word1 的前 2 个字符 (&ldquo;ab&rdquo;) 转换为 word2 的前 1 个字符 (&ldquo;a&rdquo;)。</li>
-<li>删除操作的含义是：如果我们已经把 &ldquo;a&rdquo;（word1 的前 1 个字符）转换为 &ldquo;a&rdquo;（word2 的前 1 个字符），那么在 word1 的 &ldquo;ab&rdquo; 中，多出来的那个字符 &lsquo;b&rsquo; 就需要删除，操作数加 1。</li>
-<li>因此：<br>
-[
+]</li></ul><p><strong>具体过程：</strong></p><ul><li>dp[1][1] 表示 &ldquo;a&rdquo; → &ldquo;a&rdquo;，显然不需要操作，所以 dp[1][1] = 0。</li><li>然后 dp[1][2] = 0 + 1 = 1。</li></ul><hr><h5 id=2-删除操作>2. 删除操作</h5><p><strong>场景描述：</strong><br>假设 word1 = &ldquo;ab&rdquo;，word2 = &ldquo;a&rdquo;。<br>目标：把 &ldquo;ab&rdquo; 变成 &ldquo;a&rdquo;。</p><p><strong>思路：</strong></p><ul><li>考察 dp[2][1]，即将 word1 的前 2 个字符 (&ldquo;ab&rdquo;) 转换为 word2 的前 1 个字符 (&ldquo;a&rdquo;)。</li><li>删除操作的含义是：如果我们已经把 &ldquo;a&rdquo;（word1 的前 1 个字符）转换为 &ldquo;a&rdquo;（word2 的前 1 个字符），那么在 word1 的 &ldquo;ab&rdquo; 中，多出来的那个字符 &lsquo;b&rsquo; 就需要删除，操作数加 1。</li><li>因此：<br>[
 dp[2][1] = dp[1][1] + 1
-]</li>
-</ul>
-<p><strong>具体过程：</strong></p>
-<ul>
-<li>dp[1][1] 表示 &ldquo;a&rdquo; → &ldquo;a&rdquo;，结果为 0。</li>
-<li>然后 dp[2][1] = 0 + 1 = 1。</li>
-</ul>
-<hr>
-<h5 id="3-替换操作">3. 替换操作</h5>
-<p><strong>场景描述：</strong><br>
-假设 word1 = &ldquo;cat&rdquo;，word2 = &ldquo;cut&rdquo;。<br>
-目标：把 &ldquo;cat&rdquo; 变成 &ldquo;cut&rdquo;。</p>
-<p><strong>思路：</strong></p>
-<ul>
-<li>对比两个字符串的每个位置：
-<ul>
-<li>第 1 个字符：&lsquo;c&rsquo; 与 &lsquo;c&rsquo; 相同，无需操作。</li>
-<li>第 2 个字符：&lsquo;a&rsquo; 与 &lsquo;u&rsquo; 不同，需要替换。</li>
-<li>第 3 个字符：&rsquo;t&rsquo; 与 &rsquo;t&rsquo; 相同，无需操作。</li>
-</ul>
-</li>
-<li>当我们考虑 dp[2][2] 时，代表将 word1 的前 2 个字符 (&ldquo;ca&rdquo;) 转换为 word2 的前 2 个字符 (&ldquo;cu&rdquo;)。</li>
-<li>因为 &lsquo;a&rsquo; 与 &lsquo;u&rsquo; 不同，我们可以选择用替换操作：<br>
-[
+]</li></ul><p><strong>具体过程：</strong></p><ul><li>dp[1][1] 表示 &ldquo;a&rdquo; → &ldquo;a&rdquo;，结果为 0。</li><li>然后 dp[2][1] = 0 + 1 = 1。</li></ul><hr><h5 id=3-替换操作>3. 替换操作</h5><p><strong>场景描述：</strong><br>假设 word1 = &ldquo;cat&rdquo;，word2 = &ldquo;cut&rdquo;。<br>目标：把 &ldquo;cat&rdquo; 变成 &ldquo;cut&rdquo;。</p><p><strong>思路：</strong></p><ul><li>对比两个字符串的每个位置：<ul><li>第 1 个字符：&lsquo;c&rsquo; 与 &lsquo;c&rsquo; 相同，无需操作。</li><li>第 2 个字符：&lsquo;a&rsquo; 与 &lsquo;u&rsquo; 不同，需要替换。</li><li>第 3 个字符：&rsquo;t&rsquo; 与 &rsquo;t&rsquo; 相同，无需操作。</li></ul></li><li>当我们考虑 dp[2][2] 时，代表将 word1 的前 2 个字符 (&ldquo;ca&rdquo;) 转换为 word2 的前 2 个字符 (&ldquo;cu&rdquo;)。</li><li>因为 &lsquo;a&rsquo; 与 &lsquo;u&rsquo; 不同，我们可以选择用替换操作：<br>[
 dp[2][2] = dp[1][1] + 1
 ]
-其中 dp[1][1] 表示 &ldquo;c&rdquo;→&ldquo;c&rdquo;（结果为 0），替换操作加 1，所以 dp[2][2] = 0 + 1 = 1。</li>
-<li>后续再处理第 3 个字符时，因为两者都是 &rsquo;t&rsquo;，所以 dp[3][3] 就等于 dp[2][2]，即 1。</li>
-</ul>
-<p><strong>具体过程：</strong></p>
-<ul>
-<li>dp[1][1] = 0 （&ldquo;c&rdquo;→&ldquo;c&rdquo;）</li>
-<li>dp[2][2] = 0 + 1 = 1 （将 &ldquo;ca&rdquo;→&ldquo;cu&rdquo;，这里替换了 &lsquo;a&rsquo; 为 &lsquo;u&rsquo;）</li>
-<li>dp[3][3] = dp[2][2] = 1 （&ldquo;cat&rdquo;→&ldquo;cut&rdquo;，第 3 个字符相同）</li>
-</ul>
-<h4 id="golang-代码"><strong>Golang 代码</strong></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
-</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// minDistance 计算最小编辑距离</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">minDistance</span>(<span style="color:#a6e22e">word1</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">word2</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span> {
-</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">m</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">word1</span>), len(<span style="color:#a6e22e">word2</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">dp</span> <span style="color:#f92672">:=</span> make([][]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">m</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化二维数组</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">dp</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>] = make([]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">n</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 初始化第一行和第一列</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">m</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#ae81ff">0</span>] = <span style="color:#a6e22e">i</span>
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">j</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">dp</span>[<span style="color:#ae81ff">0</span>][<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">j</span>
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 动态规划填表</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">m</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">j</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">n</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span> {
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">word1</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#a6e22e">word2</span>[<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] {
-</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#75715e">// 字符相同，不需要操作</span>
-</span></span><span style="display:flex;"><span>			} <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span>] = min(<span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span>][<span style="color:#a6e22e">j</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#a6e22e">j</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 返回最终结果</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dp</span>[<span style="color:#a6e22e">m</span>][<span style="color:#a6e22e">n</span>]
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h4 id="复杂度分析-1"><strong>复杂度分析</strong></h4>
-<ul>
-<li><strong>时间复杂度：O(m × n)</strong>，其中 <code>m</code> 和 <code>n</code> 分别是 <code>word1</code> 和 <code>word2</code> 的长度。我们需要遍历 <code>m × n</code> 个状态，每个状态的计算时间是 <code>O(1)</code>。</li>
-<li><strong>空间复杂度：O(m × n)</strong>，由于使用了 <code>m × n</code> 的二维 <code>dp</code> 数组。</li>
-</ul>
-<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/algorithm/" title="Algorithms"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - Algorithms</a>
-<a class="nav nav-next" href="http://localhost:1313/exercise/" title="Exercises">Next - Exercises <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-</nav><footer> </footer>
-</main>
-<div class="sidebar">
-
-<nav class="slide-menu">
-<ul>
-<li class=""><a href="http://localhost:1313/">About Me</a></li>
-
-<li class=""><a href="http://localhost:1313/learn_cs/">自学CS</a>
-  
-</li>
-
-<li class=""><a href="http://localhost:1313/learn_english/">英语学习</a>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/math_foundation/">机器学习中的数学<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/math_foundation/information/">信息量</a></li>
-<li class=""><a href="http://localhost:1313/math_foundation/likelihood_entropy/">似然函数_交叉熵</a></li>
-<li class=""><a href="http://localhost:1313/math_foundation/kl_dpo/">Kl散度与dpo算法</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/transformer/">transformer<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/transformer/do_sample_para/">Do_sample_para</a></li>
-<li class=""><a href="http://localhost:1313/transformer/nn_begin/">Nn Begin</a></li>
-<li class=""><a href="http://localhost:1313/transformer/entropy/">Entropy</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/kubernetes/">kubernetes<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/kubernetes/installation/">Installation</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/golang/">golang<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/golang/foundation/">Foundation</a></li>
-<li class=""><a href="http://localhost:1313/golang/base/">Base</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/linux_foundation/">Linux基础知识<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/linux_foundation/linux-commands/">50个常用Linux命令</a></li>
-<li class=""><a href="http://localhost:1313/linux_foundation/linux-common/">Linux Common</a></li>
-</ul>
-  
-</li>
-
-<li class="parent has-sub-menu"><a href="http://localhost:1313/algorithm/">Algorithms<span class="mark opened">-</span></a>
-  
-<ul class="sub-menu">
-<li class="active"><a href="http://localhost:1313/algorithm/dynamic-programmnig/">Dynamic Programming</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/exercise/">Exercises<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/exercise/workout/">Workout</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/others/">Others<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/others/create-hugo-gitpage/">使用 Hugo 和 GitHub Pages 创建个人网站</a></li>
-</ul>
-  
-</li>
-</ul>
-</nav>
-
- 
-<div class="sidebar-footer"></div>
-</div>
-
-</div><a href="#" id="backtothetop-fixed" class="backtothetop"
- data-backtothetop-duration="600"
- data-backtothetop-easing="easeOutQuart"
- data-backtothetop-fixed-fadeIn="1000"
- data-backtothetop-fixed-fadeOut="1000"
- data-backtothetop-fixed-bottom="10"
- data-backtothetop-fixed-right="20">
-<span class="fa-layers fa-fw">
-<i class="fas fa-circle"></i>
-<i class="fas fa-arrow-circle-up"></i>
-</span></a>
-</div>
-</body>
-</html>
+其中 dp[1][1] 表示 &ldquo;c&rdquo;→&ldquo;c&rdquo;（结果为 0），替换操作加 1，所以 dp[2][2] = 0 + 1 = 1。</li><li>后续再处理第 3 个字符时，因为两者都是 &rsquo;t&rsquo;，所以 dp[3][3] 就等于 dp[2][2]，即 1。</li></ul><p><strong>具体过程：</strong></p><ul><li>dp[1][1] = 0 （&ldquo;c&rdquo;→&ldquo;c&rdquo;）</li><li>dp[2][2] = 0 + 1 = 1 （将 &ldquo;ca&rdquo;→&ldquo;cu&rdquo;，这里替换了 &lsquo;a&rsquo; 为 &lsquo;u&rsquo;）</li><li>dp[3][3] = dp[2][2] = 1 （&ldquo;cat&rdquo;→&ldquo;cut&rdquo;，第 3 个字符相同）</li></ul><h4 id=golang-代码><strong>Golang 代码</strong></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// minDistance 计算最小编辑距离</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>minDistance</span>(<span style=color:#a6e22e>word1</span> <span style=color:#66d9ef>string</span>, <span style=color:#a6e22e>word2</span> <span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>int</span> {
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>m</span>, <span style=color:#a6e22e>n</span> <span style=color:#f92672>:=</span> len(<span style=color:#a6e22e>word1</span>), len(<span style=color:#a6e22e>word2</span>)
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>dp</span> <span style=color:#f92672>:=</span> make([][]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>m</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 初始化二维数组</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>dp</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>] = make([]<span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>n</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 初始化第一行和第一列</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>m</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#ae81ff>0</span>] = <span style=color:#a6e22e>i</span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>j</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>j</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>n</span>; <span style=color:#a6e22e>j</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>dp</span>[<span style=color:#ae81ff>0</span>][<span style=color:#a6e22e>j</span>] = <span style=color:#a6e22e>j</span>
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 动态规划填表</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>1</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>m</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>j</span> <span style=color:#f92672>:=</span> <span style=color:#ae81ff>1</span>; <span style=color:#a6e22e>j</span> <span style=color:#f92672>&lt;=</span> <span style=color:#a6e22e>n</span>; <span style=color:#a6e22e>j</span><span style=color:#f92672>++</span> {
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>word1</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>==</span> <span style=color:#a6e22e>word2</span>[<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] {
+</span></span><span style=display:flex><span>				<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] = <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#75715e>// 字符相同，不需要操作</span>
+</span></span><span style=display:flex><span>			} <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>				<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span>] = min(<span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span>][<span style=color:#a6e22e>j</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>i</span><span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>][<span style=color:#a6e22e>j</span>]<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// 返回最终结果</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>dp</span>[<span style=color:#a6e22e>m</span>][<span style=color:#a6e22e>n</span>]
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h4 id=复杂度分析-1><strong>复杂度分析</strong></h4><ul><li><strong>时间复杂度：O(m × n)</strong>，其中 <code>m</code> 和 <code>n</code> 分别是 <code>word1</code> 和 <code>word2</code> 的长度。我们需要遍历 <code>m × n</code> 个状态，每个状态的计算时间是 <code>O(1)</code>。</li><li><strong>空间复杂度：O(m × n)</strong>，由于使用了 <code>m × n</code> 的二维 <code>dp</code> 数组。</li></ul><div class=edit-meta><br></div><nav class=pagination><a class="nav nav-prev" href=https://mlcore-engine.github.io/algorithm/ title=日常算法题总结><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - 日常算法题总结</a>
+<a class="nav nav-next" href=https://mlcore-engine.github.io/math_foundation/ title=机器学习中的数学>Next - 机器学习中的数学 <i class="fas fa-arrow-right" aria-hidden=true></i></a></nav><footer></footer></main><div class=sidebar><nav class=slide-menu><ul><li><a href=https://mlcore-engine.github.io/>About Me</a></li><li><a href=https://mlcore-engine.github.io/learn_cs/>CS学习路线</a></li><li class="parent has-sub-menu"><a href=https://mlcore-engine.github.io/algorithm/>日常算法题总结<span class="mark opened">-</span></a><ul class=sub-menu><li class=active><a href=https://mlcore-engine.github.io/algorithm/dynamic-programmnig/>动态规划问题</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/math_foundation/>机器学习中的数学<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/math_foundation/information/>信息量</a></li><li><a href=https://mlcore-engine.github.io/math_foundation/likelihood_entropy/>似然函数_交叉熵</a></li><li><a href=https://mlcore-engine.github.io/math_foundation/kl_dpo/>Kl散度与dpo算法</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/transformer/>transformer<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/transformer/do_sample_para/>Do_sample_para</a></li><li><a href=https://mlcore-engine.github.io/transformer/entropy/>Entropy</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/kubernetes/>kubernetes<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/kubernetes/installation/>Installation</a></li></ul></li><li><a href=https://mlcore-engine.github.io/learn_english/>英语学习</a></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/golang/>golang<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/golang/foundation/>Foundation</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/linux_foundation/>Linux基础知识<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-commands/>50个常用Linux命令</a></li><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-common/>Linux Common</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/exercise/>锻炼身体心得<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/exercise/workout/>Workout</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/others/>Others<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/others/create-hugo-gitpage/>使用 Hugo 和 GitHub Pages 创建个人网站</a></li></ul></li></ul></nav><div class=sidebar-footer></div></div></div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20><span class="fa-layers fa-fw"><i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i></span></a></div></body></html>
