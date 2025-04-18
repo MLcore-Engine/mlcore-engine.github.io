@@ -1,199 +1,9 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>似然函数_交叉熵 - 高新 | AI平台开发工程师</title>
-<meta name="generator" content="Hugo 0.145.0">
-<link href="http://localhost:1313//index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://localhost:1313/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/">
-<link rel="stylesheet" href="http://localhost:1313/css/theme.min.css">
-<link rel="stylesheet" href="http://localhost:1313/css/chroma.min.css">
-<script defer src="http://localhost:1313//js/fontawesome6/all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
-<script src="http://localhost:1313/js/bundle.js"></script><style>
- 
-@media screen and (min-width: 480px) {
-  .sidebar {
-    flex: 0 0 20% !important;
-    max-width: 20% !important;
-  }
-  
-  main {
-    flex: 0 0 80% !important;
-    max-width: 80% !important;
-  }
-}
-
- 
-body {
-  background-color: #f8f5e6 !important;  
-  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;  
-  font-size: 16px !important;
-  line-height: 1.8 !important;  
-}
-
- 
-.container, .content-container, main {
-  background-color: #f8f5e6 !important;
-}
-
- 
-.sidebar {
-  background-color: inherit;
-}
-
- 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, 'Noto Serif', Georgia, serif !important;
-  font-weight: 600 !important;
-  line-height: 1.5 !important;
-}
-
- 
-pre, code {
-  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
-  font-size: 0.9em !important;
-}
-
- 
-a {
-  color: #0066cc !important;
-  text-decoration: none !important;
-}
-
-a:hover {
-  text-decoration: underline !important;
-}
-</style> <meta property="og:url" content="http://localhost:1313/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/">
-  <meta property="og:site_name" content="高新 | AI平台开发工程师">
-  <meta property="og:title" content="似然函数_交叉熵">
-  <meta property="og:description" content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="math_foundation">
-    <meta property="article:published_time" content="2025-04-18T11:51:21+08:00">
-    <meta property="article:modified_time" content="2025-04-18T11:51:21+08:00">
-    <meta property="og:image" content="http://localhost:1313/home/me.png">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/home/me.png">
-  <meta name="twitter:title" content="似然函数_交叉熵">
-  <meta name="twitter:description" content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。">
-
-  <meta itemprop="name" content="似然函数_交叉熵">
-  <meta itemprop="description" content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。">
-  <meta itemprop="datePublished" content="2025-04-18T11:51:21+08:00">
-  <meta itemprop="dateModified" content="2025-04-18T11:51:21+08:00">
-  <meta itemprop="wordCount" content="5949">
-  <meta itemprop="image" content="http://localhost:1313/home/me.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-<link rel="manifest" href="/favicon/site.webmanifest">
-<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="/favicon.ico">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff"> 
-
-
-<link rel="stylesheet" href="/css/math.css">
-
-
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    svg: {
-      fontCache: 'global'
-    }
-  };
-</script>
-<script id="MathJax-script" async src="/js/mathjax/tex-svg.js"></script> </head>
-<body>
-
-<div class="container"><header>
-<h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
-</header>
-
-
-<div class="content-container">
-<main><h1>似然函数_交叉熵</h1>
-<h3 id="最小二乘法-交叉熵-极大似然估计-推导过程">最小二乘法 交叉熵 极大似然估计 推导过程</h3>
-<p>在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。</p>
-<p>在神经网络的训练中，损失函数的求解是核心问题之一，它直接决定了模型能否有效地学习数据中的规律。针对这个问题，有三种基本的思路：<strong>最小二乘法</strong>、<strong>交叉熵</strong>、<strong>极大似然估计</strong>。下面通过具体的例子讲解这三种方法，同时深入探讨它们的原理和应用。</p>
-<hr>
-<h3 id="1-最小二乘法least-squares-method">1. 最小二乘法（Least Squares Method）</h3>
-<h4 id="11-什么是最小二乘法">1.1 什么是最小二乘法？</h4>
-<p>最小二乘法是一种优化方法，目标是通过让模型的预测值尽量靠近实际值来调整模型。简单来说，就是“把预测和真实的差距平方后加起来，然后尽量让这个总和变小”。它特别适合用来解决回归问题，也就是预测连续的数值，比如房价、温度等。</p>
-<h4 id="12-例子">1.2 例子</h4>
-<p>奶茶店想根据每天的温度预测奶茶销量。收集了5天的数据：</p>
-<table>
-  <thead>
-      <tr>
-          <th>温度 ($x$)</th>
-          <th>销量 ($y$)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>20</td>
-          <td>50</td>
-      </tr>
-      <tr>
-          <td>25</td>
-          <td>60</td>
-      </tr>
-      <tr>
-          <td>30</td>
-          <td>70</td>
-      </tr>
-      <tr>
-          <td>35</td>
-          <td>80</td>
-      </tr>
-      <tr>
-          <td>40</td>
-          <td>90</td>
-      </tr>
-  </tbody>
-</table>
-<p>假设销量和温度的关系是线性的，用公式 $\hat{y} = wx + b$ 表示，其中 $\hat{y}$ 是预测销量，$w$ 是斜率（温度对销量的影响），$b$ 是截距（基础销量）。现在的问题是：如何找到最好的 $w$ 和 $b$？</p>
-<p>最小二乘法的思路是：对于每一天，计算预测销量 $\hat{y}$ 和实际销量 $y$ 的差距，把这些差距平方后加起来，得到一个总的“误差”，然后调整 $w$ 和 $b$ 让这个误差最小。数学上，这个误差（即损失函数）是：
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>似然函数_交叉熵 - 高新 | AI平台开发工程师</title>
+<meta name=generator content="Hugo 0.145.0"><link href=https://mlcore-engine.github.io//index.xml rel=alternate type=application/rss+xml><link rel=canonical href=https://mlcore-engine.github.io/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/><link rel=stylesheet href=https://mlcore-engine.github.io/css/theme.min.css><link rel=stylesheet href=https://mlcore-engine.github.io/css/chroma.min.css><script defer src=https://mlcore-engine.github.io//js/fontawesome6/all.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script><script src=https://mlcore-engine.github.io/js/bundle.js></script><style>@media screen and (min-width:480px){.sidebar{flex:0 0 20%!important;max-width:20%!important}main{flex:0 0 80%!important;max-width:80%!important}}body{background-color:#f8f5e6!important;font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,sans-serif!important;font-size:16px!important;line-height:1.8!important}.container,.content-container,main{background-color:#f8f5e6!important}.sidebar{background-color:inherit}h1,h2,h3,h4,h5,h6{font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,noto serif,Georgia,serif!important;font-weight:600!important;line-height:1.5!important}pre,code{font-family:jetbrains mono,Consolas,Monaco,andale mono,ubuntu mono,monospace!important;font-size:.9em!important}a{color:#06c!important;text-decoration:none!important}a:hover{text-decoration:underline!important}</style><meta property="og:url" content="https://mlcore-engine.github.io/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/"><meta property="og:site_name" content="高新 | AI平台开发工程师"><meta property="og:title" content="似然函数_交叉熵"><meta property="og:description" content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="math_foundation"><meta property="article:published_time" content="2025-04-18T11:51:21+08:00"><meta property="article:modified_time" content="2025-04-18T11:51:21+08:00"><meta property="og:image" content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:title content="似然函数_交叉熵"><meta name=twitter:description content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。"><meta itemprop=name content="似然函数_交叉熵"><meta itemprop=description content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。"><meta itemprop=datePublished content="2025-04-18T11:51:21+08:00"><meta itemprop=dateModified content="2025-04-18T11:51:21+08:00"><meta itemprop=wordCount content="5949"><meta itemprop=image content="https://mlcore-engine.github.io/home/me.png"><link rel=apple-touch-icon sizes=180x180 href=/favicon/favicon.png><link rel=icon type=image/png sizes=32x32 href=/favicon/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png><link rel=manifest href=/favicon/site.webmanifest><link rel=mask-icon href=/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/favicon.ico><meta name=msapplication-TileColor content="#da532c"><meta name=msapplication-config content="/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><link rel=stylesheet href=/css/math.css><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},svg:{fontCache:"global"}}</script><script id=MathJax-script async src=/js/mathjax/tex-svg.js></script></head><body><div class=container><header><h1>高新 | AI平台开发工程师</h1><a href=https://github.com/mlcore-engine/mlcore-engine class=github><i class="fab fa-github"></i></a></header><div class=content-container><main><h1>似然函数_交叉熵</h1><h3 id=最小二乘法-交叉熵-极大似然估计-推导过程>最小二乘法 交叉熵 极大似然估计 推导过程</h3><p>在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。</p><p>在神经网络的训练中，损失函数的求解是核心问题之一，它直接决定了模型能否有效地学习数据中的规律。针对这个问题，有三种基本的思路：<strong>最小二乘法</strong>、<strong>交叉熵</strong>、<strong>极大似然估计</strong>。下面通过具体的例子讲解这三种方法，同时深入探讨它们的原理和应用。</p><hr><h3 id=1-最小二乘法least-squares-method>1. 最小二乘法（Least Squares Method）</h3><h4 id=11-什么是最小二乘法>1.1 什么是最小二乘法？</h4><p>最小二乘法是一种优化方法，目标是通过让模型的预测值尽量靠近实际值来调整模型。简单来说，就是“把预测和真实的差距平方后加起来，然后尽量让这个总和变小”。它特别适合用来解决回归问题，也就是预测连续的数值，比如房价、温度等。</p><h4 id=12-例子>1.2 例子</h4><p>奶茶店想根据每天的温度预测奶茶销量。收集了5天的数据：</p><table><thead><tr><th>温度 ($x$)</th><th>销量 ($y$)</th></tr></thead><tbody><tr><td>20</td><td>50</td></tr><tr><td>25</td><td>60</td></tr><tr><td>30</td><td>70</td></tr><tr><td>35</td><td>80</td></tr><tr><td>40</td><td>90</td></tr></tbody></table><p>假设销量和温度的关系是线性的，用公式 $\hat{y} = wx + b$ 表示，其中 $\hat{y}$ 是预测销量，$w$ 是斜率（温度对销量的影响），$b$ 是截距（基础销量）。现在的问题是：如何找到最好的 $w$ 和 $b$？</p><p>最小二乘法的思路是：对于每一天，计算预测销量 $\hat{y}$ 和实际销量 $y$ 的差距，把这些差距平方后加起来，得到一个总的“误差”，然后调整 $w$ 和 $b$ 让这个误差最小。数学上，这个误差（即损失函数）是：
 $$
 L = \frac{1}{5} \sum_{i=1}^{5} (y_i - \hat{y}_i)^2
 $$
-比如第一天，温度 $x_1 = 20$，实际销量 $y_1 = 50$。如果 $w = 2$，$b = 10$，预测销量 $\hat{y}_1 = 2 \times 20 + 10 = 50$，误差为 $(50 - 50)^2 = 0$。但其他天可能有误差，把所有天的误差平方加起来，再平均，就是我们要最小化的目标。</p>
-<h4 id="13-深入原理">1.3 深入原理</h4>
-<p>在神经网络中，最小二乘法假设预测误差服从正态分布。通过对 $L$ 关于 $w$ 和 $b$ 求偏导数并设为零，可以解出最优参数（解析解）。比如上面的例子，用数学方法可以算出 $w \approx 2$，$b \approx 10$（这里是简化假设，实际计算会更复杂）。</p>
-<h4 id="14-优缺点">1.4 优缺点</h4>
-<ul>
-<li><strong>优点</strong>：简单直接，计算方便，尤其在回归问题中有明确的解。</li>
-<li><strong>缺点</strong>：如果数据中有异常值（比如某天销量突然变成1000），平方会放大影响，导致结果不稳定。</li>
-</ul>
-<hr>
-<h3 id="2-交叉熵cross-entropy">2. 交叉熵（Cross-Entropy）</h3>
-<h4 id="21-什么是交叉熵">2.1 什么是交叉熵？</h4>
-<p>交叉熵是用来衡量模型预测的概率分布和实际分布差距的方法。它特别适合分类问题，比如判断一张图片是猫还是狗。简单来说，交叉熵会“惩罚”模型的错误预测：如果模型很确定地预测错了，损失就很大；如果预测对了，损失就很小。</p>
-<h4 id="22-通俗例子">2.2 通俗例子</h4>
-<p>假设你在玩一个“猜动物”的游戏。有一张图片，实际是“猫”（标签 $y = 1$），你用神经网络预测它是猫的概率 $p$。规则是：</p>
-<ul>
-<li>如果你猜对了（$p$ 接近1），损失很小。</li>
-<li>如果你猜错了（$p$ 接近0），损失很大。</li>
-</ul>
-<p>比如：</p>
-<ul>
-<li>模型预测“猫”的概率 $p = 0.9$，实际是猫 ($y = 1$)，损失是 $-\log(0.9) \approx 0.105$，很小。</li>
-<li>模型预测“猫”的概率 $p = 0.1$，实际是猫 ($y = 1$)，损失是 $-\log(0.1) \approx 2.3$，很大。</li>
-</ul>
-<p>数学上，二分类的交叉熵损失是：
+比如第一天，温度 $x_1 = 20$，实际销量 $y_1 = 50$。如果 $w = 2$，$b = 10$，预测销量 $\hat{y}_1 = 2 \times 20 + 10 = 50$，误差为 $(50 - 50)^2 = 0$。但其他天可能有误差，把所有天的误差平方加起来，再平均，就是我们要最小化的目标。</p><h4 id=13-深入原理>1.3 深入原理</h4><p>在神经网络中，最小二乘法假设预测误差服从正态分布。通过对 $L$ 关于 $w$ 和 $b$ 求偏导数并设为零，可以解出最优参数（解析解）。比如上面的例子，用数学方法可以算出 $w \approx 2$，$b \approx 10$（这里是简化假设，实际计算会更复杂）。</p><h4 id=14-优缺点>1.4 优缺点</h4><ul><li><strong>优点</strong>：简单直接，计算方便，尤其在回归问题中有明确的解。</li><li><strong>缺点</strong>：如果数据中有异常值（比如某天销量突然变成1000），平方会放大影响，导致结果不稳定。</li></ul><hr><h3 id=2-交叉熵cross-entropy>2. 交叉熵（Cross-Entropy）</h3><h4 id=21-什么是交叉熵>2.1 什么是交叉熵？</h4><p>交叉熵是用来衡量模型预测的概率分布和实际分布差距的方法。它特别适合分类问题，比如判断一张图片是猫还是狗。简单来说，交叉熵会“惩罚”模型的错误预测：如果模型很确定地预测错了，损失就很大；如果预测对了，损失就很小。</p><h4 id=22-通俗例子>2.2 通俗例子</h4><p>假设你在玩一个“猜动物”的游戏。有一张图片，实际是“猫”（标签 $y = 1$），你用神经网络预测它是猫的概率 $p$。规则是：</p><ul><li>如果你猜对了（$p$ 接近1），损失很小。</li><li>如果你猜错了（$p$ 接近0），损失很大。</li></ul><p>比如：</p><ul><li>模型预测“猫”的概率 $p = 0.9$，实际是猫 ($y = 1$)，损失是 $-\log(0.9) \approx 0.105$，很小。</li><li>模型预测“猫”的概率 $p = 0.1$，实际是猫 ($y = 1$)，损失是 $-\log(0.1) \approx 2.3$，很大。</li></ul><p>数学上，二分类的交叉熵损失是：
 $$
 L = - [y \log p + (1 - y) \log (1 - p)]
 $$
@@ -201,21 +11,7 @@ $$
 $$
 L = - \sum_{i=1}^{k} y_i \log p_i
 $$
-其中 $y_i$ 是实际类别（one-hot编码），$p_i$ 是预测概率。</p>
-<h4 id="23-深入原理">2.3 深入原理</h4>
-<p>交叉熵来源于信息论，表示两个分布之间的“距离”。在神经网络中，模型输出的是概率（通过softmax或sigmoid函数），交叉熵通过对数形式放大错误预测的惩罚，帮助模型更快学习正确的分类。</p>
-<h4 id="24-优缺点">2.4 优缺点</h4>
-<ul>
-<li><strong>优点</strong>：适合分类任务，能很好地处理概率输出，学习效果好。</li>
-<li><strong>缺点</strong>：如果数据类别不平衡（比如99%是猫，1%是狗），可能需要额外调整。</li>
-</ul>
-<hr>
-<h3 id="3-极大似然估计maximum-likelihood-estimation-mle">3. 极大似然估计（Maximum Likelihood Estimation, MLE）</h3>
-<h4 id="31-什么是极大似然估计">3.1 什么是极大似然估计？</h4>
-<p>极大似然估计是一种统计思路，目标是找到一组模型参数，让我们观测到的数据“最有可能”发生。通俗来说，就是让模型尽量“解释”数据。在神经网络中，它通常和损失函数挂钩，最小化损失其实就是在最大化数据的“可能性”。</p>
-<h4 id="32-通俗例子">3.2 通俗例子</h4>
-<p>假设你扔了10次硬币，得到的结果是：正面6次，反面4次。你怀疑这枚硬币不公平，正面概率不是0.5，而是某个值 $p$。极大似然估计的目标是：找到 $p$，让“6正4反”这个结果的概率最大。</p>
-<p>概率公式是：
+其中 $y_i$ 是实际类别（one-hot编码），$p_i$ 是预测概率。</p><h4 id=23-深入原理>2.3 深入原理</h4><p>交叉熵来源于信息论，表示两个分布之间的“距离”。在神经网络中，模型输出的是概率（通过softmax或sigmoid函数），交叉熵通过对数形式放大错误预测的惩罚，帮助模型更快学习正确的分类。</p><h4 id=24-优缺点>2.4 优缺点</h4><ul><li><strong>优点</strong>：适合分类任务，能很好地处理概率输出，学习效果好。</li><li><strong>缺点</strong>：如果数据类别不平衡（比如99%是猫，1%是狗），可能需要额外调整。</li></ul><hr><h3 id=3-极大似然估计maximum-likelihood-estimation-mle>3. 极大似然估计（Maximum Likelihood Estimation, MLE）</h3><h4 id=31-什么是极大似然估计>3.1 什么是极大似然估计？</h4><p>极大似然估计是一种统计思路，目标是找到一组模型参数，让我们观测到的数据“最有可能”发生。通俗来说，就是让模型尽量“解释”数据。在神经网络中，它通常和损失函数挂钩，最小化损失其实就是在最大化数据的“可能性”。</p><h4 id=32-通俗例子>3.2 通俗例子</h4><p>假设你扔了10次硬币，得到的结果是：正面6次，反面4次。你怀疑这枚硬币不公平，正面概率不是0.5，而是某个值 $p$。极大似然估计的目标是：找到 $p$，让“6正4反”这个结果的概率最大。</p><p>概率公式是：
 $$
 P(\text{6正4反}) = p^6 (1 - p)^4
 $$
@@ -223,28 +19,11 @@ $$
 $$
 \log P = 6 \log p + 4 \log (1 - p)
 $$
-通过求导（设导数为0），可以算出 $p = 0.6$ 时概率最大。这就是极大似然估计。</p>
-<p>在神经网络中，比如逻辑回归，假设模型预测“猫”的概率 $p(x) = \sigma(w^T x + b)$。对于一组数据，我们希望找到 $w$ 和 $b$，让所有样本的预测概率乘积（似然函数）最大。对数似然是：
+通过求导（设导数为0），可以算出 $p = 0.6$ 时概率最大。这就是极大似然估计。</p><p>在神经网络中，比如逻辑回归，假设模型预测“猫”的概率 $p(x) = \sigma(w^T x + b)$。对于一组数据，我们希望找到 $w$ 和 $b$，让所有样本的预测概率乘积（似然函数）最大。对数似然是：
 $$
 \log L = \sum_{i=1}^{n} [y_i \log p(x_i) + (1 - y_i) \log (1 - p(x_i))]
 $$
-最大化它，等于最小化 $- \log L$，而 $- \log L$ 就是交叉熵损失！</p>
-<h4 id="33-深入原理">3.3 深入原理</h4>
-<p>极大似然估计假设数据服从某种分布（比如伯努利分布、正态分布），通过最大化似然函数估计参数。它是交叉熵和最小二乘法的理论基础：最小二乘法是正态分布下的特例，交叉熵是分类分布下的特例。</p>
-<h4 id="34-优缺点">3.4 优缺点</h4>
-<ul>
-<li><strong>优点</strong>：理论基础强，适用范围广，能解释参数的统计意义。</li>
-<li><strong>缺点</strong>：有时没有直接解，需要用梯度下降等数值方法优化。</li>
-</ul>
-<hr>
-<h3 id="继续解释上文中提到的正态分布和伯努利分布">继续解释上文中提到的正态分布和伯努利分布</h3>
-<p>定义：“最小二乘法是正态分布下的特例，交叉熵是分类分布下的特例。”这句话的意思是，在极大似然估计（MLE）的框架下，不同的损失函数（如最小二乘法和交叉熵）实际上是由我们对数据分布的不同假设推导出来的。下面我会通过逐步推导，展示这两种损失函数是如何从MLE中得到的，并说明它们为什么分别是正态分布和分类分布的特例。</p>
-<hr>
-<h3 id="1-最小二乘法与正态分布">1. 最小二乘法与正态分布</h3>
-<h4 id="11-背景回归问题">1.1 背景：回归问题</h4>
-<p>假设我们有一个回归任务，比如根据房屋面积 $x$ 预测房价 $y$。数据集是 ${(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)}$。我们用一个模型 $\hat{y} = f(x; \theta)$，比如线性模型 $f(x; \theta) = w x + b$，来预测 $y$。目标是让预测值 $\hat{y}_i$ 尽可能接近真实值 $y_i$。</p>
-<h4 id="12-分布假设正态分布误差">1.2 分布假设：正态分布误差</h4>
-<p>在回归问题中，我们通常假设真实值 $y_i$ 和预测值 $\hat{y}_i$ 之间的误差 $\epsilon_i = y_i - \hat{y}_i$ 服从均值为 0、方差为 $\sigma^2$ 的正态分布，即：
+最大化它，等于最小化 $- \log L$，而 $- \log L$ 就是交叉熵损失！</p><h4 id=33-深入原理>3.3 深入原理</h4><p>极大似然估计假设数据服从某种分布（比如伯努利分布、正态分布），通过最大化似然函数估计参数。它是交叉熵和最小二乘法的理论基础：最小二乘法是正态分布下的特例，交叉熵是分类分布下的特例。</p><h4 id=34-优缺点>3.4 优缺点</h4><ul><li><strong>优点</strong>：理论基础强，适用范围广，能解释参数的统计意义。</li><li><strong>缺点</strong>：有时没有直接解，需要用梯度下降等数值方法优化。</li></ul><hr><h3 id=继续解释上文中提到的正态分布和伯努利分布>继续解释上文中提到的正态分布和伯努利分布</h3><p>定义：“最小二乘法是正态分布下的特例，交叉熵是分类分布下的特例。”这句话的意思是，在极大似然估计（MLE）的框架下，不同的损失函数（如最小二乘法和交叉熵）实际上是由我们对数据分布的不同假设推导出来的。下面我会通过逐步推导，展示这两种损失函数是如何从MLE中得到的，并说明它们为什么分别是正态分布和分类分布的特例。</p><hr><h3 id=1-最小二乘法与正态分布>1. 最小二乘法与正态分布</h3><h4 id=11-背景回归问题>1.1 背景：回归问题</h4><p>假设我们有一个回归任务，比如根据房屋面积 $x$ 预测房价 $y$。数据集是 ${(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)}$。我们用一个模型 $\hat{y} = f(x; \theta)$，比如线性模型 $f(x; \theta) = w x + b$，来预测 $y$。目标是让预测值 $\hat{y}_i$ 尽可能接近真实值 $y_i$。</p><h4 id=12-分布假设正态分布误差>1.2 分布假设：正态分布误差</h4><p>在回归问题中，我们通常假设真实值 $y_i$ 和预测值 $\hat{y}_i$ 之间的误差 $\epsilon_i = y_i - \hat{y}_i$ 服从均值为 0、方差为 $\sigma^2$ 的正态分布，即：
 $$
 \epsilon_i \sim \mathcal{N}(0, \sigma^2)
 $$
@@ -256,43 +35,23 @@ $$
 $$
 p(y_i | x_i; \theta) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(y_i - \hat{y}_i)^2}{2\sigma^2} \right)
 $$
-其中 $\hat{y}_i = f(x_i; \theta)$，$\sigma^2$ 是固定的方差。</p>
-<h4 id="13-极大似然估计mle">1.3 极大似然估计（MLE）</h4>
-<p>MLE 的目标是找到参数 $\theta$，使所有数据的联合似然最大。假设数据点之间是独立的，联合似然为：
+其中 $\hat{y}_i = f(x_i; \theta)$，$\sigma^2$ 是固定的方差。</p><h4 id=13-极大似然估计mle>1.3 极大似然估计（MLE）</h4><p>MLE 的目标是找到参数 $\theta$，使所有数据的联合似然最大。假设数据点之间是独立的，联合似然为：
 $$
 L(\theta) = \prod_{i=1}^n p(y_i | x_i; \theta) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(y_i - \hat{y}_i)^2}{2\sigma^2} \right)
-$$</p>
-<p>为了方便计算，我们取对数似然：</p>
-<p>$$
+$$</p><p>为了方便计算，我们取对数似然：</p><p>$$
 \log L(\theta) = \sum_{i=1}^n \left[ -\frac{1}{2} \log(2\pi\sigma^2) - \frac{(y_i - \hat{y}_i)^2}{2\sigma^2} \right]
-$$</p>
-<p>由于 $\log(2\pi\sigma^2)$ 是常数，不影响优化，最大化 $\log L(\theta)$ 等价于最大化：</p>
-<p>$$
+$$</p><p>由于 $\log(2\pi\sigma^2)$ 是常数，不影响优化，最大化 $\log L(\theta)$ 等价于最大化：</p><p>$$
 -\sum_{i=1}^n \frac{(y_i - \hat{y}_i)^2}{2\sigma^2}
-$$</p>
-<p>或者等价于最小化：</p>
-<p>$$
+$$</p><p>或者等价于最小化：</p><p>$$
 \sum_{i=1}^n (y_i - \hat{y}_i)^2
-$$</p>
-<p>这就是<strong>最小二乘法</strong>的损失函数，通常写作：</p>
-<p>$$
+$$</p><p>这就是<strong>最小二乘法</strong>的损失函数，通常写作：</p><p>$$
 J(\theta) = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
 $$
-（$\frac{1}{n}$ 是标准化因子，不影响优化结果）。</p>
-<h4 id="14-结论">1.4 结论</h4>
-<p>当我们假设数据误差服从正态分布时，极大似然估计导出的损失函数就是<strong>最小二乘法</strong>。因此，最小二乘法是正态分布下的特例。</p>
-<hr>
-<h3 id="2-交叉熵与分类分布">2. 交叉熵与分类分布</h3>
-<h4 id="21-背景二分类问题">2.1 背景：二分类问题</h4>
-<p>现在考虑一个二分类任务，比如判断一封邮件是“垃圾邮件”（$y_i = 1$）还是“正常邮件”（$y_i = 0$）。数据集仍是 ${(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)}$，其中 $y_i \in {0, 1}$。模型输出 $p(y_i = 1 | x_i; \theta)$，表示邮件是垃圾邮件的概率，通常用 sigmoid 函数计算。</p>
-<h4 id="22-分布假设伯努利分布">2.2 分布假设：伯努利分布</h4>
-<p>在二分类中，我们假设每个 $y_i$ 服从伯努利分布，其概率质量函数为：
+（$\frac{1}{n}$ 是标准化因子，不影响优化结果）。</p><h4 id=14-结论>1.4 结论</h4><p>当我们假设数据误差服从正态分布时，极大似然估计导出的损失函数就是<strong>最小二乘法</strong>。因此，最小二乘法是正态分布下的特例。</p><hr><h3 id=2-交叉熵与分类分布>2. 交叉熵与分类分布</h3><h4 id=21-背景二分类问题>2.1 背景：二分类问题</h4><p>现在考虑一个二分类任务，比如判断一封邮件是“垃圾邮件”（$y_i = 1$）还是“正常邮件”（$y_i = 0$）。数据集仍是 ${(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)}$，其中 $y_i \in {0, 1}$。模型输出 $p(y_i = 1 | x_i; \theta)$，表示邮件是垃圾邮件的概率，通常用 sigmoid 函数计算。</p><h4 id=22-分布假设伯努利分布>2.2 分布假设：伯努利分布</h4><p>在二分类中，我们假设每个 $y_i$ 服从伯努利分布，其概率质量函数为：
 $$
 p(y_i | x_i; \theta) = p(x_i; \theta)^{y_i} \cdot (1 - p(x_i; \theta))^{1 - y_i}
 $$
-其中 $p(x_i; \theta)$ 是模型预测 $y_i = 1$ 的概率，$1 - p(x_i; \theta)$ 是 $y_i = 0$ 的概率。</p>
-<h4 id="23-极大似然估计mle">2.3 极大似然估计（MLE）</h4>
-<p>联合似然为：
+其中 $p(x_i; \theta)$ 是模型预测 $y_i = 1$ 的概率，$1 - p(x_i; \theta)$ 是 $y_i = 0$ 的概率。</p><h4 id=23-极大似然估计mle>2.3 极大似然估计（MLE）</h4><p>联合似然为：
 $$
 L(\theta) = \prod_{i=1}^n p(y_i | x_i; \theta) = \prod_{i=1}^n p(x_i; \theta)^{y_i} \cdot (1 - p(x_i; \theta))^{1 - y_i}
 $$
@@ -307,9 +66,7 @@ $$
 这就是<strong>二分类交叉熵损失</strong>，通常写作：
 $$
 J(\theta) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \log p(x_i; \theta) + (1 - y_i) \log (1 - p(x_i; \theta)) \right]
-$$</p>
-<h4 id="24-推广到多分类问题">2.4 推广到多分类问题</h4>
-<p>对于多分类任务（有 $K$ 个类别），假设 $y_i$ 是 one-hot 编码向量（如 $[0, 1, 0]$），数据服从多项式分布。似然为：
+$$</p><h4 id=24-推广到多分类问题>2.4 推广到多分类问题</h4><p>对于多分类任务（有 $K$ 个类别），假设 $y_i$ 是 one-hot 编码向量（如 $[0, 1, 0]$），数据服从多项式分布。似然为：
 $$
 p(y_i | x_i; \theta) = \prod_{k=1}^K p_k(x_i; \theta)^{y_{ik}}
 $$
@@ -320,57 +77,14 @@ $$
 最小化其负值得到<strong>多分类交叉熵损失</strong>：
 $$
 J(\theta) = -\frac{1}{n} \sum_{i=1}^n \sum_{k=1}^K y_{ik} \log p_k(x_i; \theta)
-$$</p>
-<h4 id="25-结论">2.5 结论</h4>
-<p>当我们假设数据服从分类分布（伯努利分布或多项式分布）时，极大似然估计导出的损失函数是<strong>交叉熵</strong>。因此，交叉熵是分类分布下的特例。</p>
-<hr>
-<h3 id="信息论角度理解交叉熵">信息论角度理解交叉熵</h3>
-<p>熵是信息论中一个重要的概念，下面分别从信息论角度和极大似然估计角度分别推导交叉熵</p>
-<p>从<strong>极大似然估计（Maximum Likelihood Estimation, MLE）<strong>和</strong>信息论</strong>两个角度进行分析。这两个视角不仅能帮助我们理解交叉熵的来源，还能揭示其在神经网络中的理论基础。</p>
-<hr>
-<h4 id="1-从极大似然估计角度推导交叉熵">1. 从极大似然估计角度推导交叉熵</h4>
-<h5 id="11-背景与场景">1.1 背景与场景</h5>
-<p>极大似然估计的目标是找到一组模型参数，使得观测数据的概率（似然）最大。假设我们有一个二分类问题：判断一封邮件是“垃圾邮件”（1）还是“正常邮件”（0）。数据如下：</p>
-<table>
-  <thead>
-      <tr>
-          <th>邮件特征 ($x_i$)</th>
-          <th>标签 ($y_i$)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>包含“免费”</td>
-          <td>1 (垃圾)</td>
-      </tr>
-      <tr>
-          <td>包含“会议”</td>
-          <td>0 (正常)</td>
-      </tr>
-      <tr>
-          <td>包含“中奖”</td>
-          <td>1 (垃圾)</td>
-      </tr>
-  </tbody>
-</table>
-<p>我们用一个神经网络（逻辑回归）预测邮件是垃圾邮件的概率：$ p(x_i; \theta) = \sigma(w^T x_i + b) $，其中 $\sigma$ 是sigmoid函数，$\theta = {w, b}$ 是模型参数。目标是找到 $\theta$，让这些观测数据最有可能发生。</p>
-<h5 id="12-推导步骤">1.2 推导步骤</h5>
-<h6 id="步骤1定义似然函数">步骤1：定义似然函数</h6>
-<p>假设每个样本 $(x_i, y_i)$ 是独立同分布的。对于第 $i$ 个样本：</p>
-<ul>
-<li>如果 $y_i = 1$（垃圾邮件），概率是 $p(x_i; \theta)$；</li>
-<li>如果 $y_i = 0$（正常邮件），概率是 $1 - p(x_i; \theta)$。</li>
-</ul>
-<p>因此，第 $i$ 个样本的概率可以写为：
+$$</p><h4 id=25-结论>2.5 结论</h4><p>当我们假设数据服从分类分布（伯努利分布或多项式分布）时，极大似然估计导出的损失函数是<strong>交叉熵</strong>。因此，交叉熵是分类分布下的特例。</p><hr><h3 id=信息论角度理解交叉熵>信息论角度理解交叉熵</h3><p>熵是信息论中一个重要的概念，下面分别从信息论角度和极大似然估计角度分别推导交叉熵</p><p>从<strong>极大似然估计（Maximum Likelihood Estimation, MLE）<strong>和</strong>信息论</strong>两个角度进行分析。这两个视角不仅能帮助我们理解交叉熵的来源，还能揭示其在神经网络中的理论基础。</p><hr><h4 id=1-从极大似然估计角度推导交叉熵>1. 从极大似然估计角度推导交叉熵</h4><h5 id=11-背景与场景>1.1 背景与场景</h5><p>极大似然估计的目标是找到一组模型参数，使得观测数据的概率（似然）最大。假设我们有一个二分类问题：判断一封邮件是“垃圾邮件”（1）还是“正常邮件”（0）。数据如下：</p><table><thead><tr><th>邮件特征 ($x_i$)</th><th>标签 ($y_i$)</th></tr></thead><tbody><tr><td>包含“免费”</td><td>1 (垃圾)</td></tr><tr><td>包含“会议”</td><td>0 (正常)</td></tr><tr><td>包含“中奖”</td><td>1 (垃圾)</td></tr></tbody></table><p>我们用一个神经网络（逻辑回归）预测邮件是垃圾邮件的概率：$ p(x_i; \theta) = \sigma(w^T x_i + b) $，其中 $\sigma$ 是sigmoid函数，$\theta = {w, b}$ 是模型参数。目标是找到 $\theta$，让这些观测数据最有可能发生。</p><h5 id=12-推导步骤>1.2 推导步骤</h5><h6 id=步骤1定义似然函数>步骤1：定义似然函数</h6><p>假设每个样本 $(x_i, y_i)$ 是独立同分布的。对于第 $i$ 个样本：</p><ul><li>如果 $y_i = 1$（垃圾邮件），概率是 $p(x_i; \theta)$；</li><li>如果 $y_i = 0$（正常邮件），概率是 $1 - p(x_i; \theta)$。</li></ul><p>因此，第 $i$ 个样本的概率可以写为：
 $$
 P(y_i | x_i; \theta) = p(x_i; \theta)^{y_i} \cdot (1 - p(x_i; \theta))^{1 - y_i}
 $$
 对于所有 $n$ 个样本，似然函数是：
 $$
 L(\theta) = \prod_{i=1}^n P(y_i | x_i; \theta) = \prod_{i=1}^n p(x_i; \theta)^{y_i} \cdot (1 - p(x_i; \theta))^{1 - y_i}
-$$</p>
-<h6 id="步骤2取对数似然">步骤2：取对数似然</h6>
-<p>由于连乘计算复杂，且优化时更方便处理加法，我们取对数似然：
+$$</p><h6 id=步骤2取对数似然>步骤2：取对数似然</h6><p>由于连乘计算复杂，且优化时更方便处理加法，我们取对数似然：
 $$
 \log L(\theta) = \sum_{i=1}^n \log \left[ p(x_i; \theta)^{y_i} \cdot (1 - p(x_i; \theta))^{1 - y_i} \right]
 $$
@@ -378,9 +92,7 @@ $$
 $$
 \log L(\theta) = \sum_{i=1}^n \left[ y_i \log p(x_i; \theta) + (1 - y_i) \log (1 - p(x_i; \theta)) \right]
 $$
-目标是最大化 $\log L(\theta)$。</p>
-<h6 id="步骤3转化为损失函数">步骤3：转化为损失函数</h6>
-<p>在神经网络中，我们通常最小化损失函数。因此，取对数似然的负值，定义损失函数：
+目标是最大化 $\log L(\theta)$。</p><h6 id=步骤3转化为损失函数>步骤3：转化为损失函数</h6><p>在神经网络中，我们通常最小化损失函数。因此，取对数似然的负值，定义损失函数：
 $$
 J(\theta) = -\log L(\theta) = -\sum_{i=1}^n \left[ y_i \log p(x_i; \theta) + (1 - y_i) \log (1 - p(x_i; \theta)) \right]
 $$
@@ -388,232 +100,44 @@ $$
 $$
 J(\theta) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \log p(x_i; \theta) + (1 - y_i) \log (1 - p(x_i; \theta)) \right]
 $$
-这就是二分类问题的<strong>交叉熵损失</strong>。</p>
-<h6 id="步骤4推广到多分类">步骤4：推广到多分类</h6>
-<p>对于多分类问题（比如分类为猫、狗、鸟），假设有 $K$ 个类别，真实标签用 one-hot 编码表示（如 $y_i = [0, 1, 0]$ 表示狗），模型输出每个类别的概率 $p_k(x_i; \theta)$。对数似然为：
+这就是二分类问题的<strong>交叉熵损失</strong>。</p><h6 id=步骤4推广到多分类>步骤4：推广到多分类</h6><p>对于多分类问题（比如分类为猫、狗、鸟），假设有 $K$ 个类别，真实标签用 one-hot 编码表示（如 $y_i = [0, 1, 0]$ 表示狗），模型输出每个类别的概率 $p_k(x_i; \theta)$。对数似然为：
 $$
 \log L(\theta) = \sum_{i=1}^n \sum_{k=1}^K y_{ik} \log p_k(x_i; \theta)
 $$
 对应的交叉熵损失是：
 $$
 J(\theta) = -\frac{1}{n} \sum_{i=1}^n \sum_{k=1}^K y_{ik} \log p_k(x_i; \theta)
-$$</p>
-<h5 id="13-为什么是交叉熵">1.3 为什么是交叉熵？</h5>
-<p>从极大似然角度，交叉熵损失本质上是负对数似然。最小化交叉熵等价于最大化数据在模型下的似然概率。这解释了为什么交叉熵适合分类任务：它直接优化模型的概率输出，使其尽可能贴近真实标签。</p>
-<h5 id="14-例子验证">1.4 例子验证</h5>
-<p>回到邮件分类例子：</p>
-<ul>
-<li>对于第一封邮件（“免费”，$y_1 = 1$），假设模型预测 $p(x_1) = 0.8$：
-<ul>
-<li>贡献到对数似然：$1 \cdot \log(0.8) + (1-1) \cdot \log(1-0.8) = \log(0.8) \approx -0.223$。</li>
-</ul>
-</li>
-<li>对于第二封邮件（“会议”，$y_2 = 0$），假设 $p(x_2) = 0.3$：
-<ul>
-<li>贡献：$0 \cdot \log(0.3) + (1-0) \cdot \log(1-0.3) = \log(0.7) \approx -0.357$。</li>
-</ul>
-</li>
-</ul>
-<p>通过优化 $\theta$，使总对数似然最大，交叉熵损失最小。</p>
-<hr>
-<h4 id="2-从信息论角度推导交叉熵">2. 从信息论角度推导交叉熵</h4>
-<h5 id="21-背景与场景">2.1 背景与场景</h5>
-<p>信息论研究信息的量化和传输。交叉熵可以看作是衡量两个概率分布之间“差异”的度量。继续用邮件分类的例子，假设真实标签分布是确定的（比如 $y_i = 1$ 表示垃圾邮件，概率为1），模型预测一个概率分布（如 $p(x_i) = 0.8$）。我们希望模型的预测分布尽可能接近真实分布。</p>
-<h5 id="22-信息论基础概念">2.2 信息论基础概念</h5>
-<ul>
-<li><strong>自信息</strong>：一个事件 $x$ 的自信息量定义为 $I(x) = -\log P(x)$。概率越小，信息量越大。</li>
-<li><strong>熵（Entropy）</strong>：一个分布的平均信息量。对于离散分布 $P(y)$，熵是：
+$$</p><h5 id=13-为什么是交叉熵>1.3 为什么是交叉熵？</h5><p>从极大似然角度，交叉熵损失本质上是负对数似然。最小化交叉熵等价于最大化数据在模型下的似然概率。这解释了为什么交叉熵适合分类任务：它直接优化模型的概率输出，使其尽可能贴近真实标签。</p><h5 id=14-例子验证>1.4 例子验证</h5><p>回到邮件分类例子：</p><ul><li>对于第一封邮件（“免费”，$y_1 = 1$），假设模型预测 $p(x_1) = 0.8$：<ul><li>贡献到对数似然：$1 \cdot \log(0.8) + (1-1) \cdot \log(1-0.8) = \log(0.8) \approx -0.223$。</li></ul></li><li>对于第二封邮件（“会议”，$y_2 = 0$），假设 $p(x_2) = 0.3$：<ul><li>贡献：$0 \cdot \log(0.3) + (1-0) \cdot \log(1-0.3) = \log(0.7) \approx -0.357$。</li></ul></li></ul><p>通过优化 $\theta$，使总对数似然最大，交叉熵损失最小。</p><hr><h4 id=2-从信息论角度推导交叉熵>2. 从信息论角度推导交叉熵</h4><h5 id=21-背景与场景>2.1 背景与场景</h5><p>信息论研究信息的量化和传输。交叉熵可以看作是衡量两个概率分布之间“差异”的度量。继续用邮件分类的例子，假设真实标签分布是确定的（比如 $y_i = 1$ 表示垃圾邮件，概率为1），模型预测一个概率分布（如 $p(x_i) = 0.8$）。我们希望模型的预测分布尽可能接近真实分布。</p><h5 id=22-信息论基础概念>2.2 信息论基础概念</h5><ul><li><strong>自信息</strong>：一个事件 $x$ 的自信息量定义为 $I(x) = -\log P(x)$。概率越小，信息量越大。</li><li><strong>熵（Entropy）</strong>：一个分布的平均信息量。对于离散分布 $P(y)$，熵是：
 $$
 H(P) = -\sum_y P(y) \log P(y)
 $$
-熵衡量分布的不确定性，均匀分布熵最大，确定分布熵最小。</li>
-<li><strong>交叉熵（Cross-Entropy）</strong>：给定两个分布 $P$（真实分布）和 $Q$（预测分布），交叉熵是：
+熵衡量分布的不确定性，均匀分布熵最大，确定分布熵最小。</li><li><strong>交叉熵（Cross-Entropy）</strong>：给定两个分布 $P$（真实分布）和 $Q$（预测分布），交叉熵是：
 $$
 H(P, Q) = -\sum_y P(y) \log Q(y)
 $$
-它表示用 $Q$ 的编码方式描述 $P$ 的事件所需的平均信息量。</li>
-<li><strong>KL散度（Kullback-Leibler Divergence）</strong>：衡量 $P$ 和 $Q$ 的差异：
+它表示用 $Q$ 的编码方式描述 $P$ 的事件所需的平均信息量。</li><li><strong>KL散度（Kullback-Leibler Divergence）</strong>：衡量 $P$ 和 $Q$ 的差异：
 $$
 D_{KL}(P || Q) = \sum_y P(y) \log \frac{P(y)}{Q(y)} = H(P, Q) - H(P)
 $$
-最小化交叉熵等价于最小化 KL 散度，因为 $H(P)$ 是常数。(对KL散度不理解可以看另一篇文章)</li>
-</ul>
-<h5 id="23-推导步骤">2.3 推导步骤</h5>
-<h6 id="步骤1定义真实分布和预测分布">步骤1：定义真实分布和预测分布</h6>
-<p>在二分类邮件问题中：</p>
-<ul>
-<li>真实分布 $P(y_i | x_i)$：对于样本 $i$，如果 $y_i = 1$，则 $P(y_i = 1) = 1$，$P(y_i = 0) = 0$；如果 $y_i = 0$，则反之。</li>
-<li>预测分布 $Q(y_i | x_i; \theta)$：模型输出 $Q(y_i = 1) = p(x_i; \theta)$，$Q(y_i = 0) = 1 - p(x_i; \theta)$。</li>
-</ul>
-<h6 id="步骤2计算交叉熵">步骤2：计算交叉熵</h6>
-<p>对于单个样本 $i$，交叉熵是：
+最小化交叉熵等价于最小化 KL 散度，因为 $H(P)$ 是常数。(对KL散度不理解可以看另一篇文章)</li></ul><h5 id=23-推导步骤>2.3 推导步骤</h5><h6 id=步骤1定义真实分布和预测分布>步骤1：定义真实分布和预测分布</h6><p>在二分类邮件问题中：</p><ul><li>真实分布 $P(y_i | x_i)$：对于样本 $i$，如果 $y_i = 1$，则 $P(y_i = 1) = 1$，$P(y_i = 0) = 0$；如果 $y_i = 0$，则反之。</li><li>预测分布 $Q(y_i | x_i; \theta)$：模型输出 $Q(y_i = 1) = p(x_i; \theta)$，$Q(y_i = 0) = 1 - p(x_i; \theta)$。</li></ul><h6 id=步骤2计算交叉熵>步骤2：计算交叉熵</h6><p>对于单个样本 $i$，交叉熵是：
 $$
 H(P_i, Q_i) = -\sum_{y_i \in {0, 1}} P(y_i | x_i) \log Q(y_i | x_i; \theta)
-$$</p>
-<ul>
-<li>如果 $y_i = 1$，则 $P(y_i = 1) = 1$，$P(y_i = 0) = 0$，交叉熵为：
+$$</p><ul><li>如果 $y_i = 1$，则 $P(y_i = 1) = 1$，$P(y_i = 0) = 0$，交叉熵为：
 $$
 H(P_i, Q_i) = -[1 \cdot \log p(x_i; \theta) + 0 \cdot \log (1 - p(x_i; \theta))] = -\log p(x_i; \theta)
-$$</li>
-<li>如果 $y_i = 0$，则 $P(y_i = 0) = 1$，$P(y_i = 1) = 0$，交叉熵为：
+$$</li><li>如果 $y_i = 0$，则 $P(y_i = 0) = 1$，$P(y_i = 1) = 0$，交叉熵为：
 $$
 H(P_i, Q_i) = -[0 \cdot \log p(x_i; \theta) + 1 \cdot \log (1 - p(x_i; \theta))] = -\log (1 - p(x_i; \theta))
-$$</li>
-</ul>
-<p>综合起来，单个样本的交叉熵可以写为：
+$$</li></ul><p>综合起来，单个样本的交叉熵可以写为：
 $$
 H(P_i, Q_i) = - \left[ y_i \log p(x_i; \theta) + (1 - y_i) \log (1 - p(x_i; \theta)) \right]
-$$</p>
-<h6 id="步骤3总交叉熵损失">步骤3：总交叉熵损失</h6>
-<p>对所有样本求平均，得到交叉熵损失：
+$$</p><h6 id=步骤3总交叉熵损失>步骤3：总交叉熵损失</h6><p>对所有样本求平均，得到交叉熵损失：
 $$
 J(\theta) = \frac{1}{n} \sum_{i=1}^n H(P_i, Q_i) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \log p(x_i; \theta) + (1 - y_i) \log (1 - p(x_i; \theta)) \right]
 $$
-这与极大似然估计推导的损失函数完全一致！</p>
-<h6 id="步骤4推广到多分类-1">步骤4：推广到多分类</h6>
-<p>对于多分类，真实分布 $P$ 是 one-hot 向量，预测分布 $Q$ 是 softmax 输出。交叉熵为：
+这与极大似然估计推导的损失函数完全一致！</p><h6 id=步骤4推广到多分类-1>步骤4：推广到多分类</h6><p>对于多分类，真实分布 $P$ 是 one-hot 向量，预测分布 $Q$ 是 softmax 输出。交叉熵为：
 $$
 J(\theta) = -\frac{1}{n} \sum_{i=1}^n \sum_{k=1}^K y_{ik} \log p_k(x_i; \theta)
-$$</p>
-<h5 id="24-为什么是交叉熵">2.4 为什么是交叉熵？</h5>
-<p>从信息论角度，交叉熵表示用预测分布 $Q$ 编码真实分布 $P$ 的平均信息量。最小化交叉熵等价于使 $Q$ 尽可能接近 $P$，即让模型的预测分布接近真实分布。这解释了交叉熵在分类任务中的有效性：它惩罚偏离真实标签的预测。</p>
-<h5 id="25-例子验证">2.5 例子验证</h5>
-<p>继续用邮件分类：</p>
-<ul>
-<li>第一封邮件（$y_1 = 1$），模型预测 $p(x_1) = 0.8$：
-<ul>
-<li>交叉熵：$-[1 \cdot \log(0.8) + (1-1) \cdot \log(1-0.8)] = -\log(0.8) \approx 0.223$。</li>
-</ul>
-</li>
-<li>第二封邮件（$y_2 = 0$），模型预测 $p(x_2) = 0.3$：
-<ul>
-<li>交叉熵：$-[0 \cdot \log(0.3) + (1-0) \cdot \log(1-0.3)] = -\log(0.7) \approx 0.357$。</li>
-</ul>
-</li>
-</ul>
-<p>通过最小化交叉熵，模型的预测分布逐渐接近真实分布。</p>
-<hr>
-<h4 id="3-总结与对比">3. 总结与对比</h4>
-<ul>
-<li><strong>极大似然角度</strong>：交叉熵是负对数似然的平均值。最小化交叉熵等价于最大化观测数据的似然概率，适合优化模型参数以解释数据。</li>
-<li><strong>信息论角度</strong>：交叉熵是真实分布和预测分布之间的信息量差异。最小化交叉熵等价于最小化预测分布与真实分布的 KL 散度，使模型预测更准确。</li>
-</ul>
-<h5 id="联系与区别">联系与区别</h5>
-<ul>
-<li><strong>联系</strong>：两种推导都得出相同的交叉熵损失函数。极大似然从统计学角度解释为什么用交叉熵（最大化数据概率），信息论从分布差异角度解释其合理性（最小化分布距离）。</li>
-<li><strong>区别</strong>：极大似然强调数据的生成概率，信息论强调分布之间的编码效率。信息论视角更直观地解释了交叉熵的“惩罚”机制（预测越偏，信息量损失越大）。</li>
-</ul>
-<h5 id="实际意义">实际意义</h5>
-<p>在神经网络中，交叉熵损失被广泛用于分类任务（如邮件分类、图像分类），因为：</p>
-<ol>
-<li>它直接优化概率输出，适合 softmax 或 sigmoid 的模型。</li>
-<li>它的对数形式放大错误预测的惩罚，加速梯度下降收敛。</li>
-<li>它有坚实的统计（极大似然）和信息论（分布差异）基础。</li>
-</ol>
-<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/math_foundation/" title="机器学习中的数学"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - 机器学习中的数学</a>
-<a class="nav nav-next" href="http://localhost:1313/math_foundation/kl%E6%95%A3%E5%BA%A6%E4%B8%8Edpo%E7%AE%97%E6%B3%95/" title="Kl散度与dpo算法">Next - Kl散度与dpo算法 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-</nav><footer> </footer>
-</main>
-<div class="sidebar">
-
-<nav class="slide-menu">
-<ul>
-<li class=""><a href="http://localhost:1313/">About Me</a></li>
-
-<li class=""><a href="http://localhost:1313/learn_cs/">自学CS</a>
-  
-</li>
-
-<li class=""><a href="http://localhost:1313/learn_english/">英语学习</a>
-  
-</li>
-
-<li class="parent has-sub-menu"><a href="http://localhost:1313/math_foundation/">机器学习中的数学<span class="mark opened">-</span></a>
-  
-<ul class="sub-menu">
-<li class="active"><a href="http://localhost:1313/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/">似然函数_交叉熵</a></li>
-<li class=""><a href="http://localhost:1313/math_foundation/kl%E6%95%A3%E5%BA%A6%E4%B8%8Edpo%E7%AE%97%E6%B3%95/">Kl散度与dpo算法</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/transformer/">transformer<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/transformer/do_sample_para/">Do_sample_para</a></li>
-<li class=""><a href="http://localhost:1313/transformer/nn_begin/">Nn Begin</a></li>
-<li class=""><a href="http://localhost:1313/transformer/entropy/">Entropy</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/kubernetes/">kubernetes<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/kubernetes/installation/">Installation</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/golang/">golang<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/golang/foundation/">Foundation</a></li>
-<li class=""><a href="http://localhost:1313/golang/base/">Base</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/linux_foundation/">Linux基础知识<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/linux_foundation/linux-commands/">50个常用Linux命令</a></li>
-<li class=""><a href="http://localhost:1313/linux_foundation/linux-common/">Linux Common</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/algorithm/">Algorithms<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/algorithm/dynamic-programmnig/">Dynamic Programming</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/exercise/">Exercises<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/exercise/workout/">Workout</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/others/">Others<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/others/create-hugo-gitpage/">使用 Hugo 和 GitHub Pages 创建个人网站</a></li>
-</ul>
-  
-</li>
-</ul>
-</nav>
-
- 
-<div class="sidebar-footer"></div>
-</div>
-
-</div><a href="#" id="backtothetop-fixed" class="backtothetop"
- data-backtothetop-duration="600"
- data-backtothetop-easing="easeOutQuart"
- data-backtothetop-fixed-fadeIn="1000"
- data-backtothetop-fixed-fadeOut="1000"
- data-backtothetop-fixed-bottom="10"
- data-backtothetop-fixed-right="20">
-<span class="fa-layers fa-fw">
-<i class="fas fa-circle"></i>
-<i class="fas fa-arrow-circle-up"></i>
-</span></a>
-</div>
-</body>
-</html>
+$$</p><h5 id=24-为什么是交叉熵>2.4 为什么是交叉熵？</h5><p>从信息论角度，交叉熵表示用预测分布 $Q$ 编码真实分布 $P$ 的平均信息量。最小化交叉熵等价于使 $Q$ 尽可能接近 $P$，即让模型的预测分布接近真实分布。这解释了交叉熵在分类任务中的有效性：它惩罚偏离真实标签的预测。</p><h5 id=25-例子验证>2.5 例子验证</h5><p>继续用邮件分类：</p><ul><li>第一封邮件（$y_1 = 1$），模型预测 $p(x_1) = 0.8$：<ul><li>交叉熵：$-[1 \cdot \log(0.8) + (1-1) \cdot \log(1-0.8)] = -\log(0.8) \approx 0.223$。</li></ul></li><li>第二封邮件（$y_2 = 0$），模型预测 $p(x_2) = 0.3$：<ul><li>交叉熵：$-[0 \cdot \log(0.3) + (1-0) \cdot \log(1-0.3)] = -\log(0.7) \approx 0.357$。</li></ul></li></ul><p>通过最小化交叉熵，模型的预测分布逐渐接近真实分布。</p><hr><h4 id=3-总结与对比>3. 总结与对比</h4><ul><li><strong>极大似然角度</strong>：交叉熵是负对数似然的平均值。最小化交叉熵等价于最大化观测数据的似然概率，适合优化模型参数以解释数据。</li><li><strong>信息论角度</strong>：交叉熵是真实分布和预测分布之间的信息量差异。最小化交叉熵等价于最小化预测分布与真实分布的 KL 散度，使模型预测更准确。</li></ul><h5 id=联系与区别>联系与区别</h5><ul><li><strong>联系</strong>：两种推导都得出相同的交叉熵损失函数。极大似然从统计学角度解释为什么用交叉熵（最大化数据概率），信息论从分布差异角度解释其合理性（最小化分布距离）。</li><li><strong>区别</strong>：极大似然强调数据的生成概率，信息论强调分布之间的编码效率。信息论视角更直观地解释了交叉熵的“惩罚”机制（预测越偏，信息量损失越大）。</li></ul><h5 id=实际意义>实际意义</h5><p>在神经网络中，交叉熵损失被广泛用于分类任务（如邮件分类、图像分类），因为：</p><ol><li>它直接优化概率输出，适合 softmax 或 sigmoid 的模型。</li><li>它的对数形式放大错误预测的惩罚，加速梯度下降收敛。</li><li>它有坚实的统计（极大似然）和信息论（分布差异）基础。</li></ol><div class=edit-meta><br></div><nav class=pagination><a class="nav nav-prev" href=https://mlcore-engine.github.io/math_foundation/ title=机器学习中的数学><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - 机器学习中的数学</a>
+<a class="nav nav-next" href=https://mlcore-engine.github.io/transformer/ title=transformer>Next - transformer <i class="fas fa-arrow-right" aria-hidden=true></i></a></nav><footer></footer></main><div class=sidebar><nav class=slide-menu><ul><li><a href=https://mlcore-engine.github.io/>About Me</a></li><li><a href=https://mlcore-engine.github.io/learn_cs/>自学CS</a></li><li><a href=https://mlcore-engine.github.io/learn_english/>英语学习</a></li><li class="parent has-sub-menu"><a href=https://mlcore-engine.github.io/math_foundation/>机器学习中的数学<span class="mark opened">-</span></a><ul class=sub-menu><li class=active><a href=https://mlcore-engine.github.io/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/>似然函数_交叉熵</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/transformer/>transformer<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/transformer/do_sample_para/>Do_sample_para</a></li><li><a href=https://mlcore-engine.github.io/transformer/entropy/>Entropy</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/kubernetes/>kubernetes<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/kubernetes/installation/>Installation</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/golang/>golang<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/golang/foundation/>Foundation</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/linux_foundation/>Linux基础知识<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-commands/>50个常用Linux命令</a></li><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-common/>Linux Common</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/algorithm/>Algorithms<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/algorithm/dynamic-programmnig/>Dynamic Programming</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/exercise/>Exercises<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/exercise/workout/>Workout</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/others/>Others<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/others/create-hugo-gitpage/>使用 Hugo 和 GitHub Pages 创建个人网站</a></li></ul></li></ul></nav><div class=sidebar-footer></div></div></div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20><span class="fa-layers fa-fw"><i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i></span></a></div></body></html>

@@ -1,26 +1,202 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Linux基础知识 on 高新 | AI平台开发工程师</title>
-    <link>http://localhost:1313/linux_foundation/</link>
-    <description>Recent content in Linux基础知识 on 高新 | AI平台开发工程师</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 03 Apr 2025 13:50:45 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/linux_foundation/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>50个常用Linux命令</title>
-      <link>http://localhost:1313/linux_foundation/linux-commands/</link>
-      <pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/linux_foundation/linux-commands/</guid>
-      <description>&lt;h2 id=&#34;50-userful-linux-command&#34;&gt;50-userful-linux-command&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;1.dmesg&lt;/th&gt;&#xA;          &lt;th&gt;2.dd&lt;/th&gt;&#xA;          &lt;th&gt;3.tcpdump&lt;/th&gt;&#xA;          &lt;th&gt;4.ss&lt;/th&gt;&#xA;          &lt;th&gt;5.top&lt;/th&gt;&#xA;          &lt;th&gt;6.du&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;7.iperf&lt;/td&gt;&#xA;          &lt;td&gt;8.find&lt;/td&gt;&#xA;          &lt;td&gt;9.awk&lt;/td&gt;&#xA;          &lt;td&gt;10.sed&lt;/td&gt;&#xA;          &lt;td&gt;11.grep&lt;/td&gt;&#xA;          &lt;td&gt;12.route&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;13.ip&lt;/td&gt;&#xA;          &lt;td&gt;14.lsof/fuser&lt;/td&gt;&#xA;          &lt;td&gt;15.netstat&lt;/td&gt;&#xA;          &lt;td&gt;16.rpm&lt;/td&gt;&#xA;          &lt;td&gt;17.dpkg&lt;/td&gt;&#xA;          &lt;td&gt;18.diff&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;19.ps&lt;/td&gt;&#xA;          &lt;td&gt;20.kill&lt;/td&gt;&#xA;          &lt;td&gt;21.unset&lt;/td&gt;&#xA;          &lt;td&gt;22.EOF &amp;raquo;&lt;/td&gt;&#xA;          &lt;td&gt;23.特殊符号: % $ # &amp;amp;&lt;/td&gt;&#xA;          &lt;td&gt;24.until&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;25.cut&lt;/td&gt;&#xA;          &lt;td&gt;26.vmstat/mpstat&lt;/td&gt;&#xA;          &lt;td&gt;27.free&lt;/td&gt;&#xA;          &lt;td&gt;28.curl &amp;amp; wget&lt;/td&gt;&#xA;          &lt;td&gt;29.iptables&lt;/td&gt;&#xA;          &lt;td&gt;30.nmap&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;31.jq&lt;/td&gt;&#xA;          &lt;td&gt;32.sort&lt;/td&gt;&#xA;          &lt;td&gt;33.strace&lt;/td&gt;&#xA;          &lt;td&gt;34.uptime&lt;/td&gt;&#xA;          &lt;td&gt;35.iostat&lt;/td&gt;&#xA;          &lt;td&gt;36.sysctl/modelprobe&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;37.sar&lt;/td&gt;&#xA;          &lt;td&gt;38.brctl&lt;/td&gt;&#xA;          &lt;td&gt;39.bridge&lt;/td&gt;&#xA;          &lt;td&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h4 id=&#34;top50&#34;&gt;top50&lt;/h4&gt;&#xA;&lt;h5 id=&#34;1dmesg&#34;&gt;1.dmesg&lt;/h5&gt;&#xA;&lt;p&gt;命令用于显示开机信息&lt;/p&gt;&#xA;&lt;h5 id=&#34;2dd&#34;&gt;2.dd&lt;/h5&gt;&#xA;&lt;h5 id=&#34;3tcpdump&#34;&gt;3.tcpdump&lt;/h5&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#经过eth0  主机 192.168.0.22&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump -i eth0 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;src / dst&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; host 192.168.0.22&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#经过eth0 目的端口 1234&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump -i eth0 dst port &lt;span style=&#34;color:#ae81ff&#34;&gt;1234&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#经过eth0 所有udp协议的包&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump -i eth0 udp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#本地环路数据包&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump -i lo udp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#抓取所有经过1234端口的UDP网络数据&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump udp port &lt;span style=&#34;color:#ae81ff&#34;&gt;1234&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#抓取所有经过eth0 SYN类型数据包&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump -i eth0 &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;tcp[tcpflags]=tcp-syn&amp;#39;&lt;/span&gt; &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#所有经过eth0 的dns数据包&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump -i eth0 udp dst port &lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tcpdump tcp -i eth0 -t -s &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; -c &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; and dst port !22 and src net 192.168.1.0/24 -w /opt/tmp.cap&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#tcp: ip icmp arp rarp tcp udp icmp 这些参数都要放到第一个参数位置，用来过滤数据报的类型&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#-i: 指定网卡&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#-s: -s 0 可以抓到完整的数据包 默认抓取68字节&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#-c: -c 100  只抓取100个数据包&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#dst port !22: 不抓目标端口22&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#src net 192.168.1.0/24: 数据包源ip范围 &lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#-w: 保存成文件 方便wireshark分析&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;tcpdump -D 列出所有网卡&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Linux Common</title>
-      <link>http://localhost:1313/linux_foundation/linux-common/</link>
-      <pubDate>Thu, 03 Apr 2025 13:50:45 +0800</pubDate>
-      <guid>http://localhost:1313/linux_foundation/linux-common/</guid>
-      <description>&lt;h6 id=&#34;0配置阿里yum源&#34;&gt;0.配置阿里yum源&lt;/h6&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#配置阿里yum源命令&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#运行以下命令生成缓存&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum clean all&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum makecache&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;2查看系统版本&#34;&gt;2.查看系统版本&lt;/h6&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#查看系统发行版本&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lsb_release -a&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat /etc/redhat-release&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#查看linux内核版本&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;uname -a&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;3centos中的tmpfs&#34;&gt;3.centos中的tmpfs&lt;/h6&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#是一种临时文件系统，它将一部分系统内存用作虚拟文件系统，用于临时存储数据。tmpfs 的作用是提供一个基于内存的文件系统，可以用来存储临时文件、缓存数据、临时运行时文件等，从而在许多情况下提高性能和效率。&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/shm  &lt;span style=&#34;color:#75715e&#34;&gt;#包含共享内存分配&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/run   &lt;span style=&#34;color:#75715e&#34;&gt;#用于系统日志&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/sys/fs/cgroup &lt;span style=&#34;color:#75715e&#34;&gt;#用于cgroup 一个针对特定进程限制 管理和审计资源利用的内核特性&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#你可以使用systemctl命令在tmp目录启用tmpfs， 首先用下面的命令来检查这个特性是否可用：&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl is-enabled tmp.mount&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#这会显示当先的状态，（如果未启用，）你可以使用下面的命令来启用它：&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl enable tmp.mount&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#可以在/etc/fstab中添加下面这行，来手工在/tmp下挂载 tmpfs&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tmpfs /tmp tmpfs size&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;512m &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;4mount命令用法和问题&#34;&gt;4.mount命令用法和问题&lt;/h6&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;mount用法&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;挂载方法： mount Device MOUNT_POINT&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-t vsftype: 指定要挂载的设备上的文件系统类型 &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-r readonly : 只读挂载  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-w read and write: 读写挂载   &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-L :以卷标指定挂载设备 &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-U : 以uuid指定要挂载的设备&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;-B --bind : 绑定目录到另一个目录上&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#卸载命令umount&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;umount DEVICE&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;umount MOUNT_POINT&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#重新挂载命令&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mount -o remount /dev/shm&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#当加入一块新设备时 1.要对设备进行格式化（制作文件系统） 2. 将其挂载到指定目录&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#格式化&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkfs -t ext4 /dev/sdb&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#挂载&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mount /dev/sdb /xxx/&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#进阶版&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ mount&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sysfs on /sys type sysfs &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;rw,nosuid,nodev,noexec,relatime,seclabel&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#输出信息的格式和含义&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fs_spec on fs_file type fs_vfstype &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;fs_mntopts&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fs_spec:挂载的块设备或者远程文件系统&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fs_file:文件系统的挂载点&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fs_vfstype:文件系统的类型&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fs_mntopts:与文件系统的相关选项&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;第一行的含义:挂载的设备是sysfs 挂载点是/sys 文件系统的类型是sysfs 括号中rw代表可读写的方式挂载文件系统 noexec表示不能再该文件系统上直接运行程序&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;overlay&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir layer1 layer2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir ./rootfs/&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;merged,diff,work&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; -p&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mount -t overlay overlay -o lowerdir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;./layer1:./layer2,upperdir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;./rootfs/diff,workdir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;./rootfs/work ./rootfs/merged&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;merged:挂载点&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;diff: upper&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;work: work&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#问题描述&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#当创建一个新的进程并且挂载proc时，退出后在终端执行命令 mount 会出现下面的错误&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mount: failed to read mtab: No such file or directory&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#解决办法 执行下边的命令 就可以在终端执行mount命令了&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mount -t proc proc /proc&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;5几个常用的关机命令&#34;&gt;5.几个常用的关机命令&lt;/h6&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;halt: 关机但不关闭电源（加p参数关闭电源）不加参数时调用shutdown命令&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;halt -p 相当于poweroff&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;halt -f 强制关机&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;halt -i 关机或重启前关闭所有网络接口&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;shutdown实际上是调用init 0, init 0会cleanup一些工作然后调用halt或者poweroff。其实主要区别是halt和poweroff，在没有acpi的系统上，halt只是关闭了os，电源还在工作，你得手动取按一下那个按钮，而poweroff会发送一个关闭电源的信号给acpi。但在现在的系统上，他们实际上都一样了&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;6lsblk命令&#34;&gt;6.lsblk命令&lt;/h6&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lsblk可以列出所有可用块设备的信息。比如逻辑磁盘，而df -h 是查看文件系统级别的信息&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME: 块设备的名称。&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MAJ:MIN: 主设备号和次设备号，用于唯一标识设备。&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RM: 可移除性标志，0 表示设备不可移除，1 表示设备可移除。&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SIZE: 设备的总大小。&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RO: 只读标志，0 表示设备可读写，1 表示设备只读。&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;TYPE: 设备的类型，如 disk 表示硬盘，part 表示分区，rom 表示只读光盘等。&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MOUNTPOINT: 如果设备已挂载，显示挂载点；如果未挂载，该字段为空。&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;7快捷键&#34;&gt;7.快捷键&lt;/h6&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.ctrl+a &lt;span style=&#34;color:#75715e&#34;&gt;#光标回到行首&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2.ctrl+e &lt;span style=&#34;color:#75715e&#34;&gt;#光标回到行尾&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3.ctrl+w &lt;span style=&#34;color:#75715e&#34;&gt;#移除光标前的一个单词&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4.Ctrl+k &lt;span style=&#34;color:#75715e&#34;&gt;#删除光标处到行尾的字符&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5.Ctrl+y &lt;span style=&#34;color:#75715e&#34;&gt;#粘贴Ctrl+u，Ctrl+k，Ctrl+w删除的文本&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;6.Esc+b &lt;span style=&#34;color:#75715e&#34;&gt;#移动到当前单词的开头&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;7.Esc+f &lt;span style=&#34;color:#75715e&#34;&gt;#移动到当前单词的结尾&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8.Ctrl+d &lt;span style=&#34;color:#75715e&#34;&gt;#向行尾删除一个字符&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;8-snat-dnat-masquerade&#34;&gt;8. snat dnat MASQUERADE&lt;/h6&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/Dicky-Zhang/p/5934657.html&#34;&gt;https://www.cnblogs.com/Dicky-Zhang/p/5934657.html&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux基础知识 on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/linux_foundation/</link><description>Recent content in Linux基础知识 on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Thu, 03 Apr 2025 13:50:45 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/linux_foundation/index.xml" rel="self" type="application/rss+xml"/><item><title>50个常用Linux命令</title><link>https://mlcore-engine.github.io/linux_foundation/linux-commands/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://mlcore-engine.github.io/linux_foundation/linux-commands/</guid><description>&lt;h2 id="50-userful-linux-command">50-userful-linux-command&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>1.dmesg&lt;/th>
+ &lt;th>2.dd&lt;/th>
+ &lt;th>3.tcpdump&lt;/th>
+ &lt;th>4.ss&lt;/th>
+ &lt;th>5.top&lt;/th>
+ &lt;th>6.du&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>7.iperf&lt;/td>
+ &lt;td>8.find&lt;/td>
+ &lt;td>9.awk&lt;/td>
+ &lt;td>10.sed&lt;/td>
+ &lt;td>11.grep&lt;/td>
+ &lt;td>12.route&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>13.ip&lt;/td>
+ &lt;td>14.lsof/fuser&lt;/td>
+ &lt;td>15.netstat&lt;/td>
+ &lt;td>16.rpm&lt;/td>
+ &lt;td>17.dpkg&lt;/td>
+ &lt;td>18.diff&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>19.ps&lt;/td>
+ &lt;td>20.kill&lt;/td>
+ &lt;td>21.unset&lt;/td>
+ &lt;td>22.EOF &amp;raquo;&lt;/td>
+ &lt;td>23.特殊符号: % $ # &amp;amp;&lt;/td>
+ &lt;td>24.until&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>25.cut&lt;/td>
+ &lt;td>26.vmstat/mpstat&lt;/td>
+ &lt;td>27.free&lt;/td>
+ &lt;td>28.curl &amp;amp; wget&lt;/td>
+ &lt;td>29.iptables&lt;/td>
+ &lt;td>30.nmap&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>31.jq&lt;/td>
+ &lt;td>32.sort&lt;/td>
+ &lt;td>33.strace&lt;/td>
+ &lt;td>34.uptime&lt;/td>
+ &lt;td>35.iostat&lt;/td>
+ &lt;td>36.sysctl/modelprobe&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>37.sar&lt;/td>
+ &lt;td>38.brctl&lt;/td>
+ &lt;td>39.bridge&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h4 id="top50">top50&lt;/h4>
+&lt;h5 id="1dmesg">1.dmesg&lt;/h5>
+&lt;p>命令用于显示开机信息&lt;/p>
+&lt;h5 id="2dd">2.dd&lt;/h5>
+&lt;h5 id="3tcpdump">3.tcpdump&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#经过eth0 主机 192.168.0.22&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump -i eth0 &lt;span style="color:#f92672">(&lt;/span>src / dst&lt;span style="color:#f92672">)&lt;/span> host 192.168.0.22
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#经过eth0 目的端口 1234&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump -i eth0 dst port &lt;span style="color:#ae81ff">1234&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#经过eth0 所有udp协议的包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump -i eth0 udp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#本地环路数据包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump -i lo udp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#抓取所有经过1234端口的UDP网络数据&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump udp port &lt;span style="color:#ae81ff">1234&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#抓取所有经过eth0 SYN类型数据包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump -i eth0 &lt;span style="color:#e6db74">&amp;#39;tcp[tcpflags]=tcp-syn&amp;#39;&lt;/span> 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#所有经过eth0 的dns数据包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump -i eth0 udp dst port &lt;span style="color:#ae81ff">53&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpdump tcp -i eth0 -t -s &lt;span style="color:#ae81ff">0&lt;/span> -c &lt;span style="color:#ae81ff">100&lt;/span> and dst port !22 and src net 192.168.1.0/24 -w /opt/tmp.cap
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#tcp: ip icmp arp rarp tcp udp icmp 这些参数都要放到第一个参数位置，用来过滤数据报的类型&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#-i: 指定网卡&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#-s: -s 0 可以抓到完整的数据包 默认抓取68字节&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#-c: -c 100 只抓取100个数据包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#dst port !22: 不抓目标端口22&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#src net 192.168.1.0/24: 数据包源ip范围 &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#-w: 保存成文件 方便wireshark分析&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>tcpdump -D 列出所有网卡&lt;/p></description></item><item><title>Linux Common</title><link>https://mlcore-engine.github.io/linux_foundation/linux-common/</link><pubDate>Thu, 03 Apr 2025 13:50:45 +0800</pubDate><guid>https://mlcore-engine.github.io/linux_foundation/linux-common/</guid><description>&lt;h6 id="0配置阿里yum源">0.配置阿里yum源&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#配置阿里yum源命令&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#运行以下命令生成缓存&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum clean all
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum makecache
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="2查看系统版本">2.查看系统版本&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#查看系统发行版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lsb_release -a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat /etc/redhat-release
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#查看linux内核版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uname -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="3centos中的tmpfs">3.centos中的tmpfs&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#是一种临时文件系统，它将一部分系统内存用作虚拟文件系统，用于临时存储数据。tmpfs 的作用是提供一个基于内存的文件系统，可以用来存储临时文件、缓存数据、临时运行时文件等，从而在许多情况下提高性能和效率。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/dev/shm &lt;span style="color:#75715e">#包含共享内存分配&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/run &lt;span style="color:#75715e">#用于系统日志&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/sys/fs/cgroup &lt;span style="color:#75715e">#用于cgroup 一个针对特定进程限制 管理和审计资源利用的内核特性&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#你可以使用systemctl命令在tmp目录启用tmpfs， 首先用下面的命令来检查这个特性是否可用：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl is-enabled tmp.mount
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#这会显示当先的状态，（如果未启用，）你可以使用下面的命令来启用它：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable tmp.mount
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#可以在/etc/fstab中添加下面这行，来手工在/tmp下挂载 tmpfs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tmpfs /tmp tmpfs size&lt;span style="color:#f92672">=&lt;/span>512m &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="4mount命令用法和问题">4.mount命令用法和问题&lt;/h6>
+&lt;ul>
+&lt;li>mount用法&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>挂载方法： mount Device MOUNT_POINT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-t vsftype: 指定要挂载的设备上的文件系统类型 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-r readonly : 只读挂载 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-w read and write: 读写挂载 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-L :以卷标指定挂载设备 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-U : 以uuid指定要挂载的设备
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-B --bind : 绑定目录到另一个目录上
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#卸载命令umount&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>umount DEVICE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>umount MOUNT_POINT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#重新挂载命令&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mount -o remount /dev/shm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#当加入一块新设备时 1.要对设备进行格式化（制作文件系统） 2. 将其挂载到指定目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#格式化&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkfs -t ext4 /dev/sdb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#挂载&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mount /dev/sdb /xxx/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#进阶版&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ mount
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysfs on /sys type sysfs &lt;span style="color:#f92672">(&lt;/span>rw,nosuid,nodev,noexec,relatime,seclabel&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#输出信息的格式和含义&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fs_spec on fs_file type fs_vfstype &lt;span style="color:#f92672">(&lt;/span>fs_mntopts&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fs_spec:挂载的块设备或者远程文件系统
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fs_file:文件系统的挂载点
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fs_vfstype:文件系统的类型
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fs_mntopts:与文件系统的相关选项
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>第一行的含义:挂载的设备是sysfs 挂载点是/sys 文件系统的类型是sysfs 括号中rw代表可读写的方式挂载文件系统 noexec表示不能再该文件系统上直接运行程序
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>overlay&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mkdir layer1 layer2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir ./rootfs/&lt;span style="color:#f92672">{&lt;/span>merged,diff,work&lt;span style="color:#f92672">}&lt;/span> -p
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mount -t overlay overlay -o lowerdir&lt;span style="color:#f92672">=&lt;/span>./layer1:./layer2,upperdir&lt;span style="color:#f92672">=&lt;/span>./rootfs/diff,workdir&lt;span style="color:#f92672">=&lt;/span>./rootfs/work ./rootfs/merged
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>merged:挂载点
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>diff: upper
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>work: work
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#问题描述&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#当创建一个新的进程并且挂载proc时，退出后在终端执行命令 mount 会出现下面的错误&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mount: failed to read mtab: No such file or directory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#解决办法 执行下边的命令 就可以在终端执行mount命令了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mount -t proc proc /proc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="5几个常用的关机命令">5.几个常用的关机命令&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>halt: 关机但不关闭电源（加p参数关闭电源）不加参数时调用shutdown命令
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>halt -p 相当于poweroff
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>halt -f 强制关机
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>halt -i 关机或重启前关闭所有网络接口
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shutdown实际上是调用init 0, init 0会cleanup一些工作然后调用halt或者poweroff。其实主要区别是halt和poweroff，在没有acpi的系统上，halt只是关闭了os，电源还在工作，你得手动取按一下那个按钮，而poweroff会发送一个关闭电源的信号给acpi。但在现在的系统上，他们实际上都一样了
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="6lsblk命令">6.lsblk命令&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>lsblk可以列出所有可用块设备的信息。比如逻辑磁盘，而df -h 是查看文件系统级别的信息
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME: 块设备的名称。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MAJ:MIN: 主设备号和次设备号，用于唯一标识设备。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RM: 可移除性标志，0 表示设备不可移除，1 表示设备可移除。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SIZE: 设备的总大小。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RO: 只读标志，0 表示设备可读写，1 表示设备只读。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TYPE: 设备的类型，如 disk 表示硬盘，part 表示分区，rom 表示只读光盘等。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MOUNTPOINT: 如果设备已挂载，显示挂载点；如果未挂载，该字段为空。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="7快捷键">7.快捷键&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>1.ctrl+a &lt;span style="color:#75715e">#光标回到行首&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.ctrl+e &lt;span style="color:#75715e">#光标回到行尾&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3.ctrl+w &lt;span style="color:#75715e">#移除光标前的一个单词&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.Ctrl+k &lt;span style="color:#75715e">#删除光标处到行尾的字符&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5.Ctrl+y &lt;span style="color:#75715e">#粘贴Ctrl+u，Ctrl+k，Ctrl+w删除的文本&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6.Esc+b &lt;span style="color:#75715e">#移动到当前单词的开头&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7.Esc+f &lt;span style="color:#75715e">#移动到当前单词的结尾&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>8.Ctrl+d &lt;span style="color:#75715e">#向行尾删除一个字符&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="8-snat-dnat-masquerade">8. snat dnat MASQUERADE&lt;/h6>
+&lt;p>&lt;a href="https://www.cnblogs.com/Dicky-Zhang/p/5934657.html">https://www.cnblogs.com/Dicky-Zhang/p/5934657.html&lt;/a>&lt;/p></description></item></channel></rss>

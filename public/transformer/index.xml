@@ -1,33 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>transformer on 高新 | AI平台开发工程师</title>
-    <link>http://localhost:1313/transformer/</link>
-    <description>Recent content in transformer on 高新 | AI平台开发工程师</description>
-    <generator>Hugo</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Wed, 16 Apr 2025 17:11:57 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/transformer/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Do_sample_para</title>
-      <link>http://localhost:1313/transformer/do_sample_para/</link>
-      <pubDate>Wed, 16 Apr 2025 17:11:57 +0800</pubDate>
-      <guid>http://localhost:1313/transformer/do_sample_para/</guid>
-      <description>&lt;h5 id=&#34;在大语言模型微调和采样过程中有几个重要的采样参数需要懂得下面我将讲解三个特别重要的采样参数这3个参数的设置会直接影响模型的表现顺便再解释一下经常看到的一个重要概念logits&#34;&gt;在大语言模型微调和采样过程中有几个重要的采样参数需要懂得，下面我将讲解三个特别重要的采样参数，这3个参数的设置会直接影响模型的表现。顺便再解释一下经常看到的一个重要概念logits。&lt;/h5&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;top_k&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;top_p&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;temperature&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h4 id=&#34;背景语言模型的概率分布&#34;&gt;&lt;strong&gt;背景：语言模型的概率分布&lt;/strong&gt;&lt;/h4&gt;&#xA;&lt;p&gt;假设语言模型在预测下一个词时，面对一个包含 5 个词的词汇表：[&amp;ldquo;猫&amp;rdquo;, &amp;ldquo;狗&amp;rdquo;, &amp;ldquo;鸟&amp;rdquo;, &amp;ldquo;鱼&amp;rdquo;, &amp;ldquo;马&amp;rdquo;]。模型会为每个词分配一个概率，例如：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Nn Begin</title>
-      <link>http://localhost:1313/transformer/nn_begin/</link>
-      <pubDate>Tue, 15 Apr 2025 14:31:46 +0800</pubDate>
-      <guid>http://localhost:1313/transformer/nn_begin/</guid>
-      <description>&lt;p&gt;记不住NN的一些基本概念， 下面用一个例子让你能够快速的理解这些概念并且记住。主要解释输入层、隐藏层（传输层/全连接层）、输出层和池化层等概念，并展示计算过程，当你记不起一些概念的时候回想这个例子，你都能轻松回忆起神经网络的工作原理。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Entropy</title>
-      <link>http://localhost:1313/transformer/entropy/</link>
-      <pubDate>Mon, 07 Apr 2025 10:57:56 +0800</pubDate>
-      <guid>http://localhost:1313/transformer/entropy/</guid>
-      <description>&lt;h3 id=&#34;对于entropy的理解&#34;&gt;对于Entropy的理解&lt;/h3&gt;&#xA;&lt;p&gt;$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h4 id=&#34;1-公式的直观解释&#34;&gt;1. &lt;strong&gt;公式的直观解释&lt;/strong&gt;&lt;/h4&gt;&#xA;&lt;p&gt;先来看看公式里每个部分的含义：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;$H(X)$&lt;/strong&gt;：表示随机变量 $X$ 的熵，也就是不确定性的度量。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;$p(x_i)$&lt;/strong&gt;：第 $i$ 个可能结果的概率，介于 0 到 1 之间。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;$\log_2 p(x_i)$&lt;/strong&gt;：对概率取以 2 为底的对数。因为 $p(x_i)$ 是小于 1 的数，所以 $\log_2 p(x_i)$ 是负值。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;负号和求和&lt;/strong&gt;：对所有可能结果的 $p(x_i) \log_2 p(x_i)$ 求和，然后取负号，使熵变成正值。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;为什么用负号？&lt;/strong&gt;&lt;br&gt;&#xA;因为 $p(x_i)$ 小于 1 时，$\log_2 p(x_i)$ 是负数，$p(x_i) \log_2 p(x_i)$ 也是负数。加一个负号后，熵 $H(X)$ 变成正数，直观地反映不确定性的大小。&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>transformer on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/transformer/</link><description>Recent content in transformer on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 16 Apr 2025 17:11:57 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/transformer/index.xml" rel="self" type="application/rss+xml"/><item><title>Do_sample_para</title><link>https://mlcore-engine.github.io/transformer/do_sample_para/</link><pubDate>Wed, 16 Apr 2025 17:11:57 +0800</pubDate><guid>https://mlcore-engine.github.io/transformer/do_sample_para/</guid><description>&lt;h5 id="在大语言模型微调和采样过程中有几个重要的采样参数需要懂得下面我将讲解三个特别重要的采样参数这3个参数的设置会直接影响模型的表现顺便再解释一下经常看到的一个重要概念logits">在大语言模型微调和采样过程中有几个重要的采样参数需要懂得，下面我将讲解三个特别重要的采样参数，这3个参数的设置会直接影响模型的表现。顺便再解释一下经常看到的一个重要概念logits。&lt;/h5>
+&lt;ul>
+&lt;li>&lt;strong>top_k&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>top_p&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>temperature&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h4 id="背景语言模型的概率分布">&lt;strong>背景：语言模型的概率分布&lt;/strong>&lt;/h4>
+&lt;p>假设语言模型在预测下一个词时，面对一个包含 5 个词的词汇表：[&amp;ldquo;猫&amp;rdquo;, &amp;ldquo;狗&amp;rdquo;, &amp;ldquo;鸟&amp;rdquo;, &amp;ldquo;鱼&amp;rdquo;, &amp;ldquo;马&amp;rdquo;]。模型会为每个词分配一个概率，例如：&lt;/p></description></item><item><title>Entropy</title><link>https://mlcore-engine.github.io/transformer/entropy/</link><pubDate>Mon, 07 Apr 2025 10:57:56 +0800</pubDate><guid>https://mlcore-engine.github.io/transformer/entropy/</guid><description>&lt;h3 id="对于entropy的理解">对于Entropy的理解&lt;/h3>
+&lt;p>$H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i)$&lt;/p>
+&lt;hr>
+&lt;h4 id="1-公式的直观解释">1. &lt;strong>公式的直观解释&lt;/strong>&lt;/h4>
+&lt;p>先来看看公式里每个部分的含义：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>$H(X)$&lt;/strong>：表示随机变量 $X$ 的熵，也就是不确定性的度量。&lt;/li>
+&lt;li>&lt;strong>$p(x_i)$&lt;/strong>：第 $i$ 个可能结果的概率，介于 0 到 1 之间。&lt;/li>
+&lt;li>&lt;strong>$\log_2 p(x_i)$&lt;/strong>：对概率取以 2 为底的对数。因为 $p(x_i)$ 是小于 1 的数，所以 $\log_2 p(x_i)$ 是负值。&lt;/li>
+&lt;li>&lt;strong>负号和求和&lt;/strong>：对所有可能结果的 $p(x_i) \log_2 p(x_i)$ 求和，然后取负号，使熵变成正值。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>为什么用负号？&lt;/strong>&lt;br>
+因为 $p(x_i)$ 小于 1 时，$\log_2 p(x_i)$ 是负数，$p(x_i) \log_2 p(x_i)$ 也是负数。加一个负号后，熵 $H(X)$ 变成正数，直观地反映不确定性的大小。&lt;/p></description></item></channel></rss>
