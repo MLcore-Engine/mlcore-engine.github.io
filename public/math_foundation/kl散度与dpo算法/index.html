@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Kl散度与dpo算法 - 高新 | AI平台开发工程师</title>
+<meta name="generator" content="Hugo 0.145.0">
+<link href="http://localhost:1313//index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://localhost:1313/math_foundation/kl%E6%95%A3%E5%BA%A6%E4%B8%8Edpo%E7%AE%97%E6%B3%95/">
+<link rel="stylesheet" href="http://localhost:1313/css/theme.min.css">
+<link rel="stylesheet" href="http://localhost:1313/css/chroma.min.css">
+<script defer src="http://localhost:1313//js/fontawesome6/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
+<script src="http://localhost:1313/js/bundle.js"></script><style>
+ 
+@media screen and (min-width: 480px) {
+  .sidebar {
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+  }
+  
+  main {
+    flex: 0 0 80% !important;
+    max-width: 80% !important;
+  }
+}
+
+ 
+body {
+  background-color: #f8f5e6 !important;  
+}
+
+ 
+.container, .content-container, main {
+  background-color: #f8f5e6 !important;
+}
+
+ 
+.sidebar {
+  background-color: inherit;
+}
+</style> <meta property="og:url" content="http://localhost:1313/math_foundation/kl%E6%95%A3%E5%BA%A6%E4%B8%8Edpo%E7%AE%97%E6%B3%95/">
+  <meta property="og:site_name" content="高新 | AI平台开发工程师">
+  <meta property="og:title" content="Kl散度与dpo算法">
+  <meta property="og:description" content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="math_foundation">
+    <meta property="article:published_time" content="2025-04-17T16:51:04+08:00">
+    <meta property="article:modified_time" content="2025-04-17T16:51:04+08:00">
+    <meta property="og:image" content="http://localhost:1313/home/me.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/home/me.png">
+  <meta name="twitter:title" content="Kl散度与dpo算法">
+  <meta name="twitter:description" content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。">
+
+  <meta itemprop="name" content="Kl散度与dpo算法">
+  <meta itemprop="description" content="最小二乘法 交叉熵 极大似然估计 推导过程 在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。">
+  <meta itemprop="datePublished" content="2025-04-17T16:51:04+08:00">
+  <meta itemprop="dateModified" content="2025-04-17T16:51:04+08:00">
+  <meta itemprop="wordCount" content="2042">
+  <meta itemprop="image" content="http://localhost:1313/home/me.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff"> 
+
+
+<link rel="stylesheet" href="/css/math.css">
+
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script id="MathJax-script" async src="/js/mathjax/tex-svg.js"></script> </head>
+<body>
+
+<div class="container"><header>
+<h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
+</header>
+
+
+<div class="content-container">
+<main><h1>Kl散度与dpo算法</h1>
+<h3 id="最小二乘法-交叉熵-极大似然估计-推导过程">最小二乘法 交叉熵 极大似然估计 推导过程</h3>
+<p>在学习神经网络过程中，经常能听到 交叉熵损失和极大似然估计等概念， 下面讲解 最小二乘法、交叉熵、极大似然估计直接的联系和推导过程。</p>
+<p>在神经网络的训练中，损失函数的求解是核心问题之一，它直接决定了模型能否有效地学习数据中的规律。针对这个问题，有三种基本的思路：<strong>最小二乘法</strong>、<strong>交叉熵</strong>、<strong>极大似然估计</strong>。下面通过具体的例子讲解这三种方法，同时深入探讨它们的原理和应用。</p>
+<hr>
+<h3 id="1-最小二乘法least-squares-method">1. 最小二乘法（Least Squares Method）</h3>
+<h4 id="11-什么是最小二乘法">1.1 什么是最小二乘法？</h4>
+<p>最小二乘法是一种优化方法，目标是通过让模型的预测值尽量靠近实际值来调整模型。简单来说，就是“把预测和真实的差距平方后加起来，然后尽量让这个总和变小”。它特别适合用来解决回归问题，也就是预测连续的数值，比如房价、温度等。</p>
+<h4 id="12-例子">1.2 例子</h4>
+<p>奶茶店想根据每天的温度预测奶茶销量。收集了5天的数据：</p>
+<table>
+  <thead>
+      <tr>
+          <th>温度 ($x$)</th>
+          <th>销量 ($y$)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>20</td>
+          <td>50</td>
+      </tr>
+      <tr>
+          <td>25</td>
+          <td>60</td>
+      </tr>
+      <tr>
+          <td>30</td>
+          <td>70</td>
+      </tr>
+      <tr>
+          <td>35</td>
+          <td>80</td>
+      </tr>
+      <tr>
+          <td>40</td>
+          <td>90</td>
+      </tr>
+  </tbody>
+</table>
+<p>假设销量和温度的关系是线性的，用公式 $\hat{y} = wx + b$ 表示，其中 $\hat{y}$ 是预测销量，$w$ 是斜率（温度对销量的影响），$b$ 是截距（基础销量）。现在的问题是：如何找到最好的 $w$ 和 $b$？</p>
+<p>最小二乘法的思路是：对于每一天，计算预测销量 $\hat{y}$ 和实际销量 $y$ 的差距，把这些差距平方后加起来，得到一个总的“误差”，然后调整 $w$ 和 $b$ 让这个误差最小。数学上，这个误差（即损失函数）是：
+$
+L = \frac{1}{5} \sum_{i=1}^{5} (y_i - \hat{y}_i)^2
+$
+比如第一天，温度 $x_1 = 20$，实际销量 $y_1 = 50$。如果 $w = 2$，$b = 10$，预测销量 $\hat{y}_1 = 2 \times 20 + 10 = 50$，误差为 $(50 - 50)^2 = 0$。但其他天可能有误差，把所有天的误差平方加起来，再平均，就是我们要最小化的目标。</p>
+<h4 id="13-深入原理">1.3 深入原理</h4>
+<p>在神经网络中，最小二乘法假设预测误差服从正态分布。通过对 $L$ 关于 $w$ 和 $b$ 求偏导数并设为零，可以解出最优参数（解析解）。比如上面的例子，用数学方法可以算出 $w \approx 2$，$b \approx 10$（这里是简化假设，实际计算会更复杂）。</p>
+<h4 id="14-优缺点">1.4 优缺点</h4>
+<ul>
+<li><strong>优点</strong>：简单直接，计算方便，尤其在回归问题中有明确的解。</li>
+<li><strong>缺点</strong>：如果数据中有异常值（比如某天销量突然变成1000），平方会放大影响，导致结果不稳定。</li>
+</ul>
+<hr>
+<h3 id="2-交叉熵cross-entropy">2. 交叉熵（Cross-Entropy）</h3>
+<h4 id="21-什么是交叉熵">2.1 什么是交叉熵？</h4>
+<p>交叉熵是用来衡量模型预测的概率分布和实际分布差距的方法。它特别适合分类问题，比如判断一张图片是猫还是狗。简单来说，交叉熵会“惩罚”模型的错误预测：如果模型很确定地预测错了，损失就很大；如果预测对了，损失就很小。</p>
+<h4 id="22-通俗例子">2.2 通俗例子</h4>
+<p>假设你在玩一个“猜动物”的游戏。有一张图片，实际是“猫”（标签 $y = 1$），你用神经网络预测它是猫的概率 $p$。规则是：</p>
+<ul>
+<li>如果你猜对了（$p$ 接近1），损失很小。</li>
+<li>如果你猜错了（$p$ 接近0），损失很大。</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>模型预测“猫”的概率 $p = 0.9$，实际是猫 ($y = 1$)，损失是 $-\log(0.9) \approx 0.105$，很小。</li>
+<li>模型预测“猫”的概率 $p = 0.1$，实际是猫 ($y = 1$)，损失是 $-\log(0.1) \approx 2.3$，很大。</li>
+</ul>
+<p>数学上，二分类的交叉熵损失是：
+$
+L = - [y \log p + (1 - y) \log (1 - p)]
+$
+如果是多分类（比如猫、狗、鸟），损失变成：
+$
+L = - \sum_{i=1}^{k} y_i \log p_i
+$
+其中 $y_i$ 是实际类别（one-hot编码），$p_i$ 是预测概率。</p>
+<h4 id="23-深入原理">2.3 深入原理</h4>
+<p>交叉熵来源于信息论，表示两个分布之间的“距离”。在神经网络中，模型输出的是概率（通过softmax或sigmoid函数），交叉熵通过对数形式放大错误预测的惩罚，帮助模型更快学习正确的分类。</p>
+<h4 id="24-优缺点">2.4 优缺点</h4>
+<ul>
+<li><strong>优点</strong>：适合分类任务，能很好地处理概率输出，学习效果好。</li>
+<li><strong>缺点</strong>：如果数据类别不平衡（比如99%是猫，1%是狗），可能需要额外调整。</li>
+</ul>
+<hr>
+<h3 id="3-极大似然估计maximum-likelihood-estimation-mle">3. 极大似然估计（Maximum Likelihood Estimation, MLE）</h3>
+<h4 id="31-什么是极大似然估计">3.1 什么是极大似然估计？</h4>
+<p>极大似然估计是一种统计思路，目标是找到一组模型参数，让我们观测到的数据“最有可能”发生。通俗来说，就是让模型尽量“解释”数据。在神经网络中，它通常和损失函数挂钩，最小化损失其实就是在最大化数据的“可能性”。</p>
+<h4 id="32-通俗例子">3.2 通俗例子</h4>
+<p>假设你扔了10次硬币，得到的结果是：正面6次，反面4次。你怀疑这枚硬币不公平，正面概率不是0.5，而是某个值 $p$。极大似然估计的目标是：找到 $p$，让“6正4反”这个结果的概率最大。</p>
+<p>概率公式是：
+$
+P(\text{6正4反}) = p^6 (1 - p)^4
+$
+为了方便计算，取对数：
+$
+\log P = 6 \log p + 4 \log (1 - p)
+$
+通过求导（设导数为0），可以算出 $p = 0.6$ 时概率最大。这就是极大似然估计。</p>
+<p>在神经网络中，比如逻辑回归，假设模型预测“猫”的概率 $p(x) = \sigma(w^T x + b)$。对于一组数据，我们希望找到 $w$ 和 $b$，让所有样本的预测概率乘积（似然函数）最大。对数似然是：
+$
+\log L = \sum_{i=1}^{n} [y_i \log p(x_i) + (1 - y_i) \log (1 - p(x_i))]
+$
+最大化它，等于最小化 $- \log L$，而 $- \log L$ 就是交叉熵损失！</p>
+<h4 id="33-深入原理">3.3 深入原理</h4>
+<p>极大似然估计假设数据服从某种分布（比如伯努利分布、正态分布），通过最大化似然函数估计参数。它是交叉熵和最小二乘法的理论基础：最小二乘法是正态分布下的特例，交叉熵是分类分布下的特例。</p>
+<h4 id="34-优缺点">3.4 优缺点</h4>
+<ul>
+<li><strong>优点</strong>：理论基础强，适用范围广，能解释参数的统计意义。</li>
+<li><strong>缺点</strong>：有时没有直接解，需要用梯度下降等数值方法优化。</li>
+</ul>
+<hr>
+<h3 id="继续解释上文中提到的正态分布和伯努利分布">继续解释上文中提到的正态分布和伯努利分布</h3>
+<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/" title="似然函数_交叉熵"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - 似然函数_交叉熵</a>
+<a class="nav nav-next" href="http://localhost:1313/transformer/" title="transformer">Next - transformer <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer> </footer>
+</main>
+<div class="sidebar">
+
+<nav class="slide-menu">
+<ul>
+<li class=""><a href="http://localhost:1313/">About Me</a></li>
+
+<li class=""><a href="http://localhost:1313/learn_cs/">自学CS</a>
+  
+</li>
+
+<li class=""><a href="http://localhost:1313/learn_english/">英语学习</a>
+  
+</li>
+
+<li class="parent has-sub-menu"><a href="http://localhost:1313/math_foundation/">机器学习中的数学<span class="mark opened">-</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/math_foundation/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0_%E4%BA%A4%E5%8F%89%E7%86%B5/">似然函数_交叉熵</a></li>
+<li class="active"><a href="http://localhost:1313/math_foundation/kl%E6%95%A3%E5%BA%A6%E4%B8%8Edpo%E7%AE%97%E6%B3%95/">Kl散度与dpo算法</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/transformer/">transformer<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/transformer/do_sample_para/">Do_sample_para</a></li>
+<li class=""><a href="http://localhost:1313/transformer/nn_begin/">Nn Begin</a></li>
+<li class=""><a href="http://localhost:1313/transformer/entropy/">Entropy</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/kubernetes/">kubernetes<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/kubernetes/installation/">Installation</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/golang/">golang<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/golang/foundation/">Foundation</a></li>
+<li class=""><a href="http://localhost:1313/golang/base/">Base</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/linux_foundation/">Linux基础知识<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/linux_foundation/linux-commands/">50个常用Linux命令</a></li>
+<li class=""><a href="http://localhost:1313/linux_foundation/linux-common/">Linux Common</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/algorithm/">Algorithms<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/algorithm/dynamic-programmnig/">Dynamic Programming</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/exercise/">Exercises<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/exercise/workout/">Workout</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/others/">Others<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/others/create-hugo-gitpage/">使用 Hugo 和 GitHub Pages 创建个人网站</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+ 
+<div class="sidebar-footer"></div>
+</div>
+
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>
