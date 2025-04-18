@@ -13,8 +13,8 @@ enableGitInfo = true  # 使用Git信息作为lastmod
 
 [params]
     # 基本信息
-    description = "AI平台开发工程师，专注于机器学习、深度学习和人工智能技术，分享技术心得和研究成果。"
-    keywords = "AI, 机器学习, 深度学习, Python, 人工智能, 技术博客"
+    description = "AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验"
+    keywords = "AI, 机器学习, golang, kubernetes, 技术博客"
     author = "高新"
     
     # 文档仓库
