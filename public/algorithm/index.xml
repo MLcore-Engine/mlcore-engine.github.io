@@ -1,3 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法题 on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/algorithm/</link><description>Recent content in 算法题 on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Fri, 18 Apr 2025 17:31:07 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>动态规划问题</title><link>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</link><pubDate>Thu, 10 Apr 2025 10:21:50 +0800</pubDate><guid>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</guid><description>&lt;h3 id="动态规划几个场景问题和理解">动态规划几个场景问题和理解&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法题 on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/algorithm/</link><description>Recent content in 算法题 on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sat, 19 Apr 2025 12:00:43 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>Strings</title><link>https://mlcore-engine.github.io/algorithm/strings/</link><pubDate>Sat, 19 Apr 2025 12:00:43 +0800</pubDate><guid>https://mlcore-engine.github.io/algorithm/strings/</guid><description>&lt;h2 id="-go语言实现字符串题目的知识点图谱">🧠 Go语言实现字符串题目的「知识点图谱」&lt;/h2>
+&lt;pre tabindex="0">&lt;code>字符串处理
+│
+├── 1. 基础操作类
+│ ├── 去空格 / 提取单词
+│ │ ├── 58. Length of Last Word ✔️
+│ │ └── 151. Reverse Words in a String ✔️
+│ ├── 字符串比较 / 判断
+│ │ └── 125. Valid Palindrome ✔️
+│ └── 前缀/后缀处理
+│ └── 14. Longest Common Prefix ✔️
+│
+├── 2. 字符统计类
+│ ├── 242. Valid Anagram
+│ ├── 387. First Unique Character in a String
+│ └── 3. Longest Substring Without Repeating Characters
+│
+├── 3. 反转与重构类
+│ ├── 344. Reverse String
+│ ├── 541. Reverse String II
+│ ├── 151. Reverse Words in a String ✔️
+│ └── 917. Reverse Only Letters
+│
+├── 4. 双指针应用类
+│ ├── 680. Valid Palindrome II
+│ ├── 11. Container With Most Water (类比)
+│ └── 876. Middle of the Linked List (思路相似)
+│
+├── 5. 模拟类 / 字符串构造
+│ ├── 6. ZigZag Conversion
+│ ├── 43. Multiply Strings
+│ └── 67. Add Binary
+│
+└── 6. 高级类（KMP、Rabin-Karp、Trie）
+ ├── 28. Implement strStr()
+ ├── 686. Repeated String Match
+ └── 336. Palindrome Pairs
+&lt;/code>&lt;/pre>&lt;hr>
+&lt;h2 id="-每类代表题目详解">🧩 每类代表题目详解&lt;/h2>
+&lt;h3 id="-1-基础操作类">✅ 1. 【基础操作类】&lt;/h3>
+&lt;p>&lt;strong>58. Length of Last Word&lt;/strong>&lt;/p></description></item><item><title>动态规划问题</title><link>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</link><pubDate>Thu, 10 Apr 2025 10:21:50 +0800</pubDate><guid>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</guid><description>&lt;h3 id="动态规划几个场景问题和理解">动态规划几个场景问题和理解&lt;/h3>
 &lt;h4 id="动态规划问题的本质">动态规划问题的本质&lt;/h4>
 &lt;p>动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。&lt;/p></description></item></channel></rss>
