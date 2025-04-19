@@ -1,5 +1,5 @@
 ---
-title: "Linux基础知识"
+title: "Linux基础"
 date: 2024-04-03
 weight: 6
 description: "Linux操作系统基础与常用命令"

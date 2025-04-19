@@ -1,5 +1,5 @@
 ---
-title: "CS学习路线"
+title: "cs基础"
 date: 2024-04-03
 weight: 1
 description: "自学计算机科学的推荐路径"
