@@ -1,1 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>golang on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/golang/</link><description>Recent content in golang on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Thu, 17 Apr 2025 13:08:49 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>Foundation</title><link>https://mlcore-engine.github.io/golang/foundation/</link><pubDate>Fri, 04 Apr 2025 19:24:42 +0800</pubDate><guid>https://mlcore-engine.github.io/golang/foundation/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on 高新 | AI平台开发工程师</title>
+    <link>http://localhost:1313/golang/</link>
+    <description>Recent content in golang on 高新 | AI平台开发工程师</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 21 Apr 2025 11:37:26 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sort包用法</title>
+      <link>http://localhost:1313/golang/sort/</link>
+      <pubDate>Mon, 21 Apr 2025 11:37:26 +0800</pubDate>
+      <guid>http://localhost:1313/golang/sort/</guid>
+      <description>&lt;h3 id=&#34;一sort-包&#34;&gt;一、&lt;code&gt;sort&lt;/code&gt; 包&lt;/h3&gt;&#xA;&lt;p&gt;Go 的 &lt;code&gt;sort&lt;/code&gt; 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 &lt;code&gt;sort.Interface&lt;/code&gt;，可以用于对任何自定义数据结构进行排序。核心功能包括：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>foundation</title>
+      <link>http://localhost:1313/golang/foundation/</link>
+      <pubDate>Fri, 04 Apr 2025 19:24:42 +0800</pubDate>
+      <guid>http://localhost:1313/golang/foundation/</guid>
+      <description>&lt;h2 id=&#34;-1go-代理&#34;&gt;-1.go 代理&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;env&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;GOPROXY&lt;/span&gt;=&lt;span style=&#34;color:#a6e22e&#34;&gt;https&lt;/span&gt;:&lt;span style=&#34;color:#75715e&#34;&gt;//goproxy.cn,direct&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;env&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;GOPROXY&lt;/span&gt;=&lt;span style=&#34;color:#a6e22e&#34;&gt;https&lt;/span&gt;:&lt;span style=&#34;color:#75715e&#34;&gt;//gocenter.io,direct&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;0变量的声明方式&#34;&gt;0.变量的声明方式&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;string&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;s&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;s&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;s&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;s&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;1goprintf&#34;&gt;1.go.Printf&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;%v &lt;/code&gt;默认方式打印变量的值&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;%+d&lt;/code&gt; 带符号的整型，&lt;code&gt;fmt.Printf(&amp;quot;%+d&amp;quot;, 255)&lt;/code&gt;输出&lt;code&gt;+255&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Base</title>
+      <link>http://localhost:1313/golang/base/</link>
+      <pubDate>Thu, 03 Apr 2025 15:32:23 +0800</pubDate>
+      <guid>http://localhost:1313/golang/base/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

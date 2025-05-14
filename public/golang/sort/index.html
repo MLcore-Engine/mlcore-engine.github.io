@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>sort包用法 - 高新 | AI平台开发工程师</title>
+<meta name="description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
+<meta name="generator" content="Hugo 0.145.0">
+<link href="http://localhost:1313//index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://localhost:1313/golang/sort/">
+<link rel="stylesheet" href="http://localhost:1313/css/theme.min.css">
+<link rel="stylesheet" href="http://localhost:1313/css/chroma.min.css">
+<script defer src="http://localhost:1313//js/fontawesome6/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
+<script src="http://localhost:1313/js/bundle.js"></script><style>
+ 
+@media screen and (min-width: 480px) {
+  .sidebar {
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+  }
+  
+  main {
+    flex: 0 0 80% !important;
+    max-width: 80% !important;
+  }
+}
+
+ 
+body {
+  background-color: #f8f5e6 !important;  
+  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;  
+  font-size: 20px !important;  
+  line-height: 1.8 !important;  
+}
+
+ 
+.container, .content-container, main {
+  background-color: #f8f5e6 !important;
+}
+
+ 
+.sidebar {
+  background-color: inherit;
+  font-size: 16px !important;  
+}
+
+ 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, 'Noto Serif', Georgia, serif !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+}
+
+ 
+h1 {
+  font-size: 2.4em !important;
+}
+
+h2 {
+  font-size: 2em !important;
+}
+
+h3 {
+  font-size: 1.7em !important;
+}
+
+h4 {
+  font-size: 1.5em !important;
+}
+
+h5 {
+  font-size: 1.3em !important;
+}
+
+h6 {
+  font-size: 1.2em !important;
+}
+
+ 
+p {
+  font-size: 20px !important;
+  margin-bottom: 1.2em !important;
+}
+
+ 
+li {
+  font-size: 20px !important;
+  margin-bottom: 0.5em !important;
+}
+
+ 
+article, .content, .post-content, main p, main li, main td, main th, blockquote, .markdown {
+  font-size: 20px !important;
+}
+
+ 
+pre, code {
+  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+  font-size: 1.1em !important;  
+}
+
+ 
+a {
+  color: #0066cc !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+ 
+table {
+  font-size: 20px !important;
+}
+</style> <meta property="og:url" content="http://localhost:1313/golang/sort/">
+  <meta property="og:site_name" content="高新 | AI平台开发工程师">
+  <meta property="og:title" content="sort包用法">
+  <meta property="og:description" content="一、sort 包 Go 的 sort 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 sort.Interface，可以用于对任何自定义数据结构进行排序。核心功能包括：">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="golang">
+    <meta property="article:published_time" content="2025-04-21T11:37:26+08:00">
+    <meta property="article:modified_time" content="2025-04-21T11:37:26+08:00">
+    <meta property="og:image" content="http://localhost:1313/home/me.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/home/me.png">
+  <meta name="twitter:title" content="sort包用法">
+  <meta name="twitter:description" content="一、sort 包 Go 的 sort 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 sort.Interface，可以用于对任何自定义数据结构进行排序。核心功能包括：">
+
+  <meta itemprop="name" content="sort包用法">
+  <meta itemprop="description" content="一、sort 包 Go 的 sort 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 sort.Interface，可以用于对任何自定义数据结构进行排序。核心功能包括：">
+  <meta itemprop="datePublished" content="2025-04-21T11:37:26+08:00">
+  <meta itemprop="dateModified" content="2025-04-21T11:37:26+08:00">
+  <meta itemprop="wordCount" content="1949">
+  <meta itemprop="image" content="http://localhost:1313/home/me.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff"> 
+
+
+<meta name="description" content="一、sort 包 Go 的 sort 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 sort.Interface，可以用于对任何自定义数据结构进行排序。核心功能包括：
+">
+<meta name="keywords" content="AI, 机器学习, golang, kubernetes, 技术博客">
+<meta name="author" content="高新">
+
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/golang/sort/">
+<meta property="og:title" content="sort包用法 | 高新 | AI平台开发工程师">
+<meta property="og:description" content="一、sort 包 Go 的 sort 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 sort.Interface，可以用于对任何自定义数据结构进行排序。核心功能包括：
+">
+<meta property="og:image" content="http://localhost:1313/home/me.png">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="http://localhost:1313/golang/sort/">
+<meta name="twitter:title" content="sort包用法 | 高新 | AI平台开发工程师">
+<meta name="twitter:description" content="一、sort 包 Go 的 sort 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 sort.Interface，可以用于对任何自定义数据结构进行排序。核心功能包括：
+">
+<meta name="twitter:image" content="http://localhost:1313/home/me.png">
+
+
+<link rel="canonical" href="http://localhost:1313/golang/sort/">
+
+
+<link rel="stylesheet" href="/css/math.css">
+
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script id="MathJax-script" async src="/js/mathjax/tex-svg.js"></script> </head>
+<body>
+
+<div class="container"><header>
+<h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
+<p class="description">AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p>
+
+</header>
+
+
+<div class="content-container">
+<main><h1>sort包用法</h1>
+<h3 id="一sort-包">一、<code>sort</code> 包</h3>
+<p>Go 的 <code>sort</code> 包提供了一组对切片（slice）排序和搜索的函数，以及一个灵活的接口 <code>sort.Interface</code>，可以用于对任何自定义数据结构进行排序。核心功能包括：</p>
+<ul>
+<li><strong>基础类型快速排序</strong>：<code>sort.Ints</code>、<code>sort.Strings</code>、<code>sort.Float64s</code></li>
+<li><strong>通用切片排序</strong>：<code>sort.Slice</code>、<code>sort.SliceStable</code></li>
+<li><strong>稳定排序</strong>：<code>sort.Stable</code></li>
+<li><strong>反向排序</strong>：<code>sort.Reverse</code></li>
+<li><strong>二分查找</strong>：<code>sort.Search</code> 及其类型专用变体</li>
+<li><strong>自定义排序接口</strong>：<code>sort.Interface</code></li>
+</ul>
+<hr>
+<h3 id="二基础类型快速排序">二、基础类型快速排序</h3>
+<h4 id="1-sortints">1. <code>sort.Ints</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Ints</span>(<span style="color:#a6e22e">a</span> []<span style="color:#66d9ef">int</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：对 <code>[]int</code> 原地升序排序，采用快速排序算法（平均 O(n log n)、最坏 O(n²)）。</p>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">nums</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Ints</span>(<span style="color:#a6e22e">nums</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>) <span style="color:#75715e">// [1 2 3 5 8]</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>场景</strong>：对纯整型数据排序时最简便；常见于统计、排行榜、频率计算等。</p>
+</li>
+</ul>
+<h4 id="2-sortstrings">2. <code>sort.Strings</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Strings</span>(<span style="color:#a6e22e">a</span> []<span style="color:#66d9ef">string</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：对 <code>[]string</code> 原地升序排序，字符串按字典序比较（平均 O(n log n)）。</p>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">names</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;Bob&#34;</span>, <span style="color:#e6db74">&#34;Alice&#34;</span>, <span style="color:#e6db74">&#34;David&#34;</span>, <span style="color:#e6db74">&#34;Charlie&#34;</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Strings</span>(<span style="color:#a6e22e">names</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">names</span>) <span style="color:#75715e">// [Alice Bob Charlie David]</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>场景</strong>：对一组名称、关键字、标签等需要字典排序时。</p>
+</li>
+</ul>
+<h4 id="3-sortfloat64s">3. <code>sort.Float64s</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Float64s</span>(<span style="color:#a6e22e">a</span> []<span style="color:#66d9ef">float64</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：对 <code>[]float64</code> 原地升序排序。相同算法。</p>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">float64</span>{<span style="color:#ae81ff">3.14</span>, <span style="color:#ae81ff">2.71</span>, <span style="color:#ae81ff">1.41</span>, <span style="color:#ae81ff">0.577</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Float64s</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">data</span>) <span style="color:#75715e">// [0.577 1.41 2.71 3.14]</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="三通用切片排序">三、通用切片排序</h3>
+<p>基础类型函数虽然方便，但在对结构体切片或需要自定义排序规则时就无能为力了。此时可使用：</p>
+<h4 id="1-sortslice">1. <code>sort.Slice</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Slice</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">less</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：对任意切片 <code>x</code> 排序，调用 <code>less(i,j)</code> 决定元素 i 是否应排在元素 j 前面。采用快速排序（非稳定）。</p>
+</li>
+<li>
+<p><strong>示例</strong>：对结构体切片按字段排序</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> { <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>; <span style="color:#a6e22e">Age</span> <span style="color:#66d9ef">int</span> }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">users</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">User</span>{
+</span></span><span style="display:flex;"><span>  {<span style="color:#e6db74">&#34;Bob&#34;</span>, <span style="color:#ae81ff">30</span>}, {<span style="color:#e6db74">&#34;Alice&#34;</span>, <span style="color:#ae81ff">25</span>}, {<span style="color:#e6db74">&#34;Charlie&#34;</span>, <span style="color:#ae81ff">28</span>},
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Slice</span>(<span style="color:#a6e22e">users</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">users</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">Age</span> &lt; <span style="color:#a6e22e">users</span>[<span style="color:#a6e22e">j</span>].<span style="color:#a6e22e">Age</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// users: [{Alice 25} {Charlie 28} {Bob 30}]</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>技巧</strong>：</p>
+<ul>
+<li><strong>闭包捕获</strong>：<code>less</code> 闭包中可捕获外部变量，用于多条件排序（先按年龄，再按名字）。</li>
+<li><strong>性能考虑</strong>：对大型切片多次调用 <code>less</code>，要确保比较逻辑尽量轻量；必要时预先提取字段到临时切片。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-sortslicestable">2. <code>sort.SliceStable</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SliceStable</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">less</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：与 <code>Slice</code> 类似，但保证相等元素的相对顺序不变（稳定排序）。内部采取归并排序，时间复杂度 O(n log n) 且需要 O(n) 额外空间。</p>
+</li>
+<li>
+<p><strong>示例</strong>：先按城市排序，再按姓名排序，且同城市内保留先后顺序</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">struct</span> { <span style="color:#a6e22e">Name</span>, <span style="color:#a6e22e">City</span> <span style="color:#66d9ef">string</span> }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">people</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Person</span>{
+</span></span><span style="display:flex;"><span>  {<span style="color:#e6db74">&#34;Bob&#34;</span>, <span style="color:#e6db74">&#34;NY&#34;</span>}, {<span style="color:#e6db74">&#34;Alice&#34;</span>, <span style="color:#e6db74">&#34;LA&#34;</span>}, {<span style="color:#e6db74">&#34;Charlie&#34;</span>, <span style="color:#e6db74">&#34;NY&#34;</span>}, {<span style="color:#e6db74">&#34;David&#34;</span>, <span style="color:#e6db74">&#34;LA&#34;</span>},
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 稳定地先按 City 排序</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">SliceStable</span>(<span style="color:#a6e22e">people</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">people</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">City</span> &lt; <span style="color:#a6e22e">people</span>[<span style="color:#a6e22e">j</span>].<span style="color:#a6e22e">City</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 结果：[{Alice LA}, {David LA}, {Bob NY}, {Charlie NY}]</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>场景</strong>：多轮排序中需要保留前次排序结果。</p>
+</li>
+</ul>
+<hr>
+<h3 id="四稳定排序与反向排序">四、稳定排序与反向排序</h3>
+<h4 id="1-sortstable">1. <code>sort.Stable</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Stable</span>(<span style="color:#a6e22e">data</span> <span style="color:#a6e22e">Interface</span>)
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：对实现了 <code>sort.Interface</code> 接口的 <code>data</code> 进行稳定排序（归并排序）。</p>
+</li>
+<li>
+<p><strong>示例</strong>：对自定义结构体切片</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Record</span> <span style="color:#66d9ef">struct</span> { <span style="color:#a6e22e">Key</span>, <span style="color:#a6e22e">Value</span> <span style="color:#66d9ef">int</span> }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">records</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Record</span>{{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>}, {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">200</span>}, {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">150</span>}}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 按 Key 升序，且同 Key 保留原顺序</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Stable</span>(<span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Reverse</span>(<span style="color:#a6e22e">sortByKey</span>(<span style="color:#a6e22e">records</span>)))
+</span></span></code></pre></div><p>其中 <code>sortByKey</code> 返回一个实现了 Interface 的包装类型，详见下文。</p>
+</li>
+</ul>
+<h4 id="2-sortreverse">2. <code>sort.Reverse</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Reverse</span>(<span style="color:#a6e22e">data</span> <span style="color:#a6e22e">Interface</span>) <span style="color:#a6e22e">Interface</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：将任意实现了 <code>sort.Interface</code> 的排序顺序反转，常用于降序排序。</p>
+</li>
+<li>
+<p><strong>示例</strong>：对 <code>[]int</code> 降序</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">nums</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Reverse</span>(<span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">IntSlice</span>(<span style="color:#a6e22e">nums</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>) <span style="color:#75715e">// [4 3 2 1]</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="五自定义排序sortinterface">五、自定义排序：<code>sort.Interface</code></h3>
+<p>若既不想用 <code>Slice</code>，又想用更底层的能力，可直接实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interface</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="1-内置类型实现">1. 内置类型实现</h4>
+<ul>
+<li><code>sort.IntSlice</code>、<code>sort.StringSlice</code>、<code>sort.Float64Slice</code>，均实现了 <code>Interface</code>，可用于 <code>sort.Sort</code>、<code>sort.Stable</code>、<code>sort.Reverse</code>。</li>
+</ul>
+<h4 id="2-自定义类型示例">2. 自定义类型示例</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">struct</span> { <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>; <span style="color:#a6e22e">Age</span> <span style="color:#66d9ef">int</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 定义一个 PersonSlice，实现 Interface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ByAge</span> []<span style="color:#a6e22e">Person</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">ByAge</span>) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>           { <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">p</span>) }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">ByAge</span>) <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">Age</span> &lt; <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">j</span>].<span style="color:#a6e22e">Age</span> }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">ByAge</span>) <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)      { <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>] }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 调用</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">people</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Person</span>{{<span style="color:#e6db74">&#34;Bob&#34;</span>,<span style="color:#ae81ff">30</span>}, {<span style="color:#e6db74">&#34;Alice&#34;</span>,<span style="color:#ae81ff">25</span>}, {<span style="color:#e6db74">&#34;Charlie&#34;</span>,<span style="color:#ae81ff">28</span>}}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">ByAge</span>(<span style="color:#a6e22e">people</span>))
+</span></span></code></pre></div><ul>
+<li><strong>技巧</strong>：
+<ul>
+<li>将多字段排序逻辑写在 <code>Less</code> 中；必要时可构建多字段比较函数链。</li>
+<li>对极端性能场景，可在切片外部维护关键字段数组，减少 <code>Less</code> 中结构体访问成本。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="六二分查找">六、二分查找</h3>
+<p><code>sort</code> 包也提供了高效的二分查找函数，前提是切片已排好序。</p>
+<h4 id="1-通用查找sortsearch">1. 通用查找：<code>sort.Search</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Search</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">int</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>作用</strong>：在 <code>[0,n)</code> 范围内查找最小的 <code>i</code> 使得 <code>f(i)==true</code>，否则返回 <code>n</code>。适合查找“第一个满足条件”的场景。</p>
+</li>
+<li>
+<p><strong>示例</strong>：在递增数组中找第一个 ≥ target 的下标</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">a</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">target</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Search</span>(len(<span style="color:#a6e22e">a</span>), <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">target</span> })
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// i == 3，对应 a[3]=7</span>
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="2-类型专用查找">2. 类型专用查找</h4>
+<ul>
+<li><code>SearchInts(a []int, x int) int</code></li>
+<li><code>SearchStrings(a []string, x string) int</code></li>
+<li><code>SearchFloat64s(a []float64, x float64) int</code></li>
+</ul>
+<p>它们内部直接在排序好的切片上执行二分查找，返回下标。</p>
+<hr>
+<h3 id="七实战技巧汇总">七、实战技巧汇总</h3>
+<ol>
+<li><strong>避免中途修改切片</strong>：排序前后切片底层指针不变，如需保持原序列，可先 <code>dup := append([]T(nil), src...)</code> 复制一份再排。</li>
+<li><strong>稳定 vs 非稳定</strong>：若要多关键字排序，优先用 <code>SliceStable</code> 或 <code>sort.Stable</code>，分多轮从最次要到最重要字段排序，保证稳定性。</li>
+<li><strong>自定义类型排序</strong>：结构体较大时，提前提取排序关键字段到并行小切片，减少 <code>Less</code> 中内存访问开销。</li>
+<li><strong>反向排序</strong>：对基础切片用包装类型（如 <code>sort.IntSlice</code>）配合 <code>sort.Reverse</code>，对通用 <code>Slice</code> 可将比较函数取反 <code>less := func(i,j){ return a[i]&gt;a[j] }</code>。</li>
+<li><strong>查找边界</strong>：利用 <code>Search</code> 函数快速定位区间上下界（lower/upper bound），可简化区间计数等操作。</li>
+<li><strong>接口 vs 函数式</strong>：在代码简洁性和性能之间权衡：小切片可优先用 <code>sort.Slice</code>，大规模、多次排序则自定义 <code>Interface</code> 并内联 <code>Less</code>，更易编译器优化。</li>
+<li><strong>并行排序</strong>（Go 1.21+）：可考虑第三方库（如 <code>golang.org/x/exp/slices</code>），或自行分块并发排序后归并，但需注意内存和锁开销。</li>
+</ol>
+<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/golang/" title="golang"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - golang</a>
+<a class="nav nav-next" href="http://localhost:1313/golang/foundation/" title="foundation">Next - foundation <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer> </footer>
+</main>
+<div class="sidebar">
+
+<nav class="slide-menu">
+<ul>
+<li class=""><a href="http://localhost:1313/">about me</a></li>
+
+<li class=""><a href="http://localhost:1313/learn_cs/">cs基础</a>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/algorithm/">算法题<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/algorithm/double_point/">双指针</a></li>
+<li class=""><a href="http://localhost:1313/algorithm/strings/">string类题目</a></li>
+<li class=""><a href="http://localhost:1313/algorithm/dynamic-programmnig/">动态规划问题</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/math_foundation/">ML中的数学<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/math_foundation/information/">信息量</a></li>
+<li class=""><a href="http://localhost:1313/math_foundation/likelihood_entropy/">似然函数_交叉熵</a></li>
+<li class=""><a href="http://localhost:1313/math_foundation/kl_dpo/">Kl散度与dpo算法</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/transformer/">ML基础<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/transformer/do_sample_para/">Do_sample_para</a></li>
+<li class=""><a href="http://localhost:1313/transformer/nn_begin/">Nn Begin</a></li>
+<li class=""><a href="http://localhost:1313/transformer/entropy/">Entropy</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/kubernetes/">kubernetes<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/kubernetes/installation/">Installation</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="http://localhost:1313/learn_english/">英语学习</a>
+  
+</li>
+
+<li class="parent has-sub-menu"><a href="http://localhost:1313/golang/">golang<span class="mark opened">-</span></a>
+  
+<ul class="sub-menu">
+<li class="active"><a href="http://localhost:1313/golang/sort/">sort包用法</a></li>
+<li class=""><a href="http://localhost:1313/golang/foundation/">foundation</a></li>
+<li class=""><a href="http://localhost:1313/golang/base/">Base</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/linux_foundation/">Linux基础<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/linux_foundation/linux-commands/">50个常用Linux命令</a></li>
+<li class=""><a href="http://localhost:1313/linux_foundation/cs_foundation/">计算机基础知识</a></li>
+<li class=""><a href="http://localhost:1313/linux_foundation/linux-common/">Linux Common</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/exercise/">workout<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/exercise/workout/">Workout</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/others/">others<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/others/create-hugo-gitpage/">使用 Hugo 和 GitHub Pages 创建个人网站</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+ 
+<div class="sidebar-footer"></div>
+</div>
+
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

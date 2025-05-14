@@ -1,5 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>others on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/others/</link><description>Recent content in others on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Mon, 07 Apr 2025 15:50:56 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/others/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Hugo 和 GitHub Pages 创建个人网站</title><link>https://mlcore-engine.github.io/others/create-hugo-gitpage/</link><pubDate>Thu, 03 Apr 2025 15:35:22 +0800</pubDate><guid>https://mlcore-engine.github.io/others/create-hugo-gitpage/</guid><description>&lt;h4 id="前提条件">前提条件&lt;/h4>
-&lt;p>本指南假设你已经有 GitHub 账户。&lt;/p>
-&lt;h4 id="步骤1创建-github-仓库">步骤1：创建 GitHub 仓库&lt;/h4>
-&lt;p>在 GitHub 创建一个新仓库，仓库名必须是 &lt;code>用户名.github.io&lt;/code>&lt;/p>
-&lt;p>例如，如果你的 GitHub 用户名是 &lt;code>mlcore-engine&lt;/code>，则创建的仓库名应为 &lt;code>mlcore-engine.github.io&lt;/code>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>others on 高新 | AI平台开发工程师</title>
+    <link>http://localhost:1313/others/</link>
+    <description>Recent content in others on 高新 | AI平台开发工程师</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 07 Apr 2025 15:50:56 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/others/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Hugo 和 GitHub Pages 创建个人网站</title>
+      <link>http://localhost:1313/others/create-hugo-gitpage/</link>
+      <pubDate>Thu, 03 Apr 2025 15:35:22 +0800</pubDate>
+      <guid>http://localhost:1313/others/create-hugo-gitpage/</guid>
+      <description>&lt;h4 id=&#34;前提条件&#34;&gt;前提条件&lt;/h4&gt;&#xA;&lt;p&gt;本指南假设你已经有 GitHub 账户。&lt;/p&gt;&#xA;&lt;h4 id=&#34;步骤1创建-github-仓库&#34;&gt;步骤1：创建 GitHub 仓库&lt;/h4&gt;&#xA;&lt;p&gt;在 GitHub 创建一个新仓库，仓库名必须是 &lt;code&gt;用户名.github.io&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;例如，如果你的 GitHub 用户名是 &lt;code&gt;mlcore-engine&lt;/code&gt;，则创建的仓库名应为 &lt;code&gt;mlcore-engine.github.io&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

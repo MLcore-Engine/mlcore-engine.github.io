@@ -1,43 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法题 on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/algorithm/</link><description>Recent content in 算法题 on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sat, 19 Apr 2025 12:04:53 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>string类题目</title><link>https://mlcore-engine.github.io/algorithm/strings/</link><pubDate>Sat, 19 Apr 2025 12:00:43 +0800</pubDate><guid>https://mlcore-engine.github.io/algorithm/strings/</guid><description>&lt;h2 id="-go语言实现字符串题目的知识点图谱">🧠 Go语言实现字符串题目的「知识点图谱」&lt;/h2>
-&lt;pre tabindex="0">&lt;code>字符串处理
-│
-├── 1. 基础操作类
-│ ├── 去空格 / 提取单词
-│ │ ├── 58. Length of Last Word ✔️
-│ │ └── 151. Reverse Words in a String ✔️
-│ ├── 字符串比较 / 判断
-│ │ └── 125. Valid Palindrome ✔️
-│ └── 前缀/后缀处理
-│ └── 14. Longest Common Prefix ✔️
-│
-├── 2. 字符统计类
-│ ├── 242. Valid Anagram
-│ ├── 387. First Unique Character in a String
-│ └── 3. Longest Substring Without Repeating Characters
-│
-├── 3. 反转与重构类
-│ ├── 344. Reverse String
-│ ├── 541. Reverse String II
-│ ├── 151. Reverse Words in a String ✔️
-│ └── 917. Reverse Only Letters
-│
-├── 4. 双指针应用类
-│ ├── 680. Valid Palindrome II
-│ ├── 11. Container With Most Water (类比)
-│ └── 876. Middle of the Linked List (思路相似)
-│
-├── 5. 模拟类 / 字符串构造
-│ ├── 6. ZigZag Conversion
-│ ├── 43. Multiply Strings
-│ └── 67. Add Binary
-│
-└── 6. 高级类（KMP、Rabin-Karp、Trie）
- ├── 28. Implement strStr()
- ├── 686. Repeated String Match
- └── 336. Palindrome Pairs
-&lt;/code>&lt;/pre>&lt;hr>
-&lt;h2 id="-每类代表题目详解">🧩 每类代表题目详解&lt;/h2>
-&lt;h3 id="-1-基础操作类">✅ 1. 【基础操作类】&lt;/h3>
-&lt;p>&lt;strong>58. Length of Last Word&lt;/strong>&lt;/p></description></item><item><title>动态规划问题</title><link>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</link><pubDate>Thu, 10 Apr 2025 10:21:50 +0800</pubDate><guid>https://mlcore-engine.github.io/algorithm/dynamic-programmnig/</guid><description>&lt;h3 id="动态规划几个场景问题和理解">动态规划几个场景问题和理解&lt;/h3>
-&lt;h4 id="动态规划问题的本质">动态规划问题的本质&lt;/h4>
-&lt;p>动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法题 on 高新 | AI平台开发工程师</title>
+    <link>http://localhost:1313/algorithm/</link>
+    <description>Recent content in 算法题 on 高新 | AI平台开发工程师</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 21 Apr 2025 11:22:37 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>双指针</title>
+      <link>http://localhost:1313/algorithm/double_point/</link>
+      <pubDate>Mon, 21 Apr 2025 11:22:37 +0800</pubDate>
+      <guid>http://localhost:1313/algorithm/double_point/</guid>
+      <description>&lt;p&gt;双指针是一种常见的算法技巧，广泛应用于数组和链表相关问题中，能够在许多情况下以 O(n) 的时间复杂度解决问题。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;(125. Valid Palindrome)&lt;/li&gt;&#xA;&lt;li&gt;(392. Is Subsequence)&lt;/li&gt;&#xA;&lt;li&gt;(167. Two Sum II)&lt;/li&gt;&#xA;&lt;li&gt;(11. Container With Most Water)&lt;/li&gt;&#xA;&lt;li&gt;(5. 3Sum)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;1-125-valid-palindrome有效的回文&#34;&gt;1. 125. Valid Palindrome（有效的回文）&lt;/h3&gt;&#xA;&lt;h4 id=&#34;问题描述&#34;&gt;问题描述&lt;/h4&gt;&#xA;&lt;p&gt;给定一个字符串，判断它是否是回文串。需要忽略非字母和数字的字符，且不区分大小写。例如，输入 &lt;code&gt;&amp;quot;A man, a plan, a canal: Panama&amp;quot;&lt;/code&gt;，输出 &lt;code&gt;true&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>string类题目</title>
+      <link>http://localhost:1313/algorithm/strings/</link>
+      <pubDate>Sat, 19 Apr 2025 12:00:43 +0800</pubDate>
+      <guid>http://localhost:1313/algorithm/strings/</guid>
+      <description>&lt;h2 id=&#34;-go语言实现字符串题目的知识点图谱&#34;&gt;🧠 Go语言实现字符串题目的「知识点图谱」&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;字符串处理&#xA;│&#xA;├── 1. 基础操作类&#xA;│   ├── 去空格 / 提取单词&#xA;│   │   ├── 58. Length of Last Word ✔️&#xA;│   │   └── 151. Reverse Words in a String ✔️&#xA;│   ├── 字符串比较 / 判断&#xA;│   │   └── 125. Valid Palindrome ✔️&#xA;│   └── 前缀/后缀处理&#xA;│       └── 14. Longest Common Prefix ✔️&#xA;│&#xA;├── 2. 字符统计类&#xA;│   ├── 242. Valid Anagram&#xA;│   ├── 387. First Unique Character in a String&#xA;│   └── 3. Longest Substring Without Repeating Characters&#xA;│&#xA;├── 3. 反转与重构类&#xA;│   ├── 344. Reverse String&#xA;│   ├── 541. Reverse String II&#xA;│   ├── 151. Reverse Words in a String ✔️&#xA;│   └── 917. Reverse Only Letters&#xA;│&#xA;├── 4. 双指针应用类&#xA;│   ├── 680. Valid Palindrome II&#xA;│   ├── 11. Container With Most Water (类比)&#xA;│   └── 876. Middle of the Linked List (思路相似)&#xA;│&#xA;├── 5. 模拟类 / 字符串构造&#xA;│   ├── 6. ZigZag Conversion&#xA;│   ├── 43. Multiply Strings&#xA;│   └── 67. Add Binary&#xA;│&#xA;└── 6. 高级类（KMP、Rabin-Karp、Trie）&#xA;    ├── 28. Implement strStr()&#xA;    ├── 686. Repeated String Match&#xA;    └── 336. Palindrome Pairs&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-每类代表题目详解&#34;&gt;🧩 每类代表题目详解&lt;/h2&gt;&#xA;&lt;h3 id=&#34;-1-基础操作类&#34;&gt;✅ 1. 【基础操作类】&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;58. Length of Last Word&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>动态规划问题</title>
+      <link>http://localhost:1313/algorithm/dynamic-programmnig/</link>
+      <pubDate>Thu, 10 Apr 2025 10:21:50 +0800</pubDate>
+      <guid>http://localhost:1313/algorithm/dynamic-programmnig/</guid>
+      <description>&lt;h3 id=&#34;动态规划几个场景问题和理解&#34;&gt;动态规划几个场景问题和理解&lt;/h3&gt;&#xA;&lt;h4 id=&#34;动态规划问题的本质&#34;&gt;动态规划问题的本质&lt;/h4&gt;&#xA;&lt;p&gt;动态规划（Dynamic Programming, DP）是一种通过将复杂问题分解为更小的子问题来解决优化问题的算法策略。它在计算机科学中应用广泛，尤其是在需要寻找最优解的场景中。动态规划的核心思想是通过存储子问题的解来避免重复计算，从而提高效率。以下将详细讲解动态规划的本质、在计算机体系架构中的运行方式、状态转移的本质，并通过具体例子帮助理解，最后从底层原理彻底阐释。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
