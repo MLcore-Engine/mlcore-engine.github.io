@@ -1,4 +1,1 @@
 User-agent: *
-Allow: /
-
-Sitemap: https://mlcore-engine.github.io/sitemap.xml 
