@@ -1,4 +1,261 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>golang on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/golang/</link><description>Recent content in golang on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 14 May 2025 15:17:04 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>Go 语言基础知识</title><link>https://mlcore-engine.github.io/golang/foundation/</link><pubDate>Fri, 04 Apr 2025 19:24:42 +0800</pubDate><guid>https://mlcore-engine.github.io/golang/foundation/</guid><description>&lt;h1 id="go-语言基础知识大全">Go 语言基础知识大全&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>golang on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/golang/</link><description>Recent content in golang on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Fri, 16 May 2025 10:23:03 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/golang/index.xml" rel="self" type="application/rss+xml"/><item><title>matrix-golang</title><link>https://mlcore-engine.github.io/golang/matrix-golang/</link><pubDate>Fri, 16 May 2025 10:23:03 +0800</pubDate><guid>https://mlcore-engine.github.io/golang/matrix-golang/</guid><description>&lt;hr>
+&lt;h2 id="常见的矩阵变形总结-go实现">常见的矩阵变形总结 Go实现：&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>操作名称&lt;/th>
+ &lt;th>说明&lt;/th>
+ &lt;th>示例变化前 -&amp;gt; 后（以 3x3 为例）&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>顺时针旋转 90°&lt;/td>
+ &lt;td>转置 + 每行左右翻转&lt;/td>
+ &lt;td>&lt;code>[1,2,3]&lt;/code> -&amp;gt; &lt;code>[7,4,1]&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>逆时针旋转 90°&lt;/td>
+ &lt;td>转置 + 每列上下翻转&lt;/td>
+ &lt;td>&lt;code>[1,2,3]&lt;/code> -&amp;gt; &lt;code>[3,6,9]&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>顺时针旋转 180°&lt;/td>
+ &lt;td>上下翻转 + 每行左右翻转&lt;/td>
+ &lt;td>&lt;code>[1,2,3]&lt;/code> -&amp;gt; &lt;code>[9,8,7]&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>上下翻转&lt;/td>
+ &lt;td>直接交换上和下的行&lt;/td>
+ &lt;td>&lt;code>[1,2,3]&lt;/code> -&amp;gt; &lt;code>[7,8,9]&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>左右翻转&lt;/td>
+ &lt;td>每一行反转&lt;/td>
+ &lt;td>&lt;code>[1,2,3]&lt;/code> -&amp;gt; &lt;code>[3,2,1]&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>主对角线转置&lt;/td>
+ &lt;td>matrix[i][j] ↔ matrix[j][i]&lt;/td>
+ &lt;td>&lt;code>[1,2,3]&lt;/code> -&amp;gt; &lt;code>[1,4,7]&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>副对角线转置（反转置）&lt;/td>
+ &lt;td>matrix[i][j] ↔ matrix[n-1-j][n-1-i]&lt;/td>
+ &lt;td>&lt;code>[1,2,3]&lt;/code> -&amp;gt; &lt;code>[9,6,3]&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="1-主对角线转置matrixij--matrixji">1. 主对角线转置（matrix[i][j] ↔ matrix[j][i]）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">transpose&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="2-上下翻转交换行">2. 上下翻转（交换行）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">flipUpDown&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="3-左右翻转每行逆序">3. 左右翻转（每行逆序）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">flipLeftRight&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="4-逆时针旋转-90-度转置--上下翻转">4. 逆时针旋转 90 度（转置 + 上下翻转）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">rotateCounterClockwise&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">transpose&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipUpDown&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="5-顺时针旋转-180-度上下翻转--左右翻转">5. 顺时针旋转 180 度（上下翻转 + 左右翻转）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">rotate180&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipUpDown&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipLeftRight&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="6-副对角线转置matrixij--matrixn-1-jn-1-i">6. 副对角线转置（matrix[i][j] ↔ matrix[n-1-j][n-1-i]）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">antiDiagonalTranspose&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="总结">总结：&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>操作&lt;/th>
+ &lt;th>调用组合&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>顺时针旋转 90°&lt;/td>
+ &lt;td>&lt;code>transpose + flipLeftRight&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>逆时针旋转 90°&lt;/td>
+ &lt;td>&lt;code>transpose + flipUpDown&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>顺时针旋转 180°&lt;/td>
+ &lt;td>&lt;code>flipUpDown + flipLeftRight&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>上下翻转&lt;/td>
+ &lt;td>&lt;code>flipUpDown&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>左右翻转&lt;/td>
+ &lt;td>&lt;code>flipLeftRight&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>主对角线转置&lt;/td>
+ &lt;td>&lt;code>transpose&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>副对角线转置&lt;/td>
+ &lt;td>&lt;code>antiDiagonalTranspose&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="go-demo">Go-Demo：&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">row&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">range&lt;/span> &lt;span style="color:#a6e22e">matrix&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">row&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) [][]&lt;span style="color:#66d9ef">int&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">newMatrix&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([][]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#a6e22e">n&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">range&lt;/span> &lt;span style="color:#a6e22e">matrix&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">newMatrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>] = make([]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#a6e22e">n&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> copy(&lt;span style="color:#a6e22e">newMatrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">newMatrix&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">transpose&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">flipUpDown&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">flipLeftRight&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">antiDiagonalTranspose&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">j&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>; &lt;span style="color:#a6e22e">j&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>] = &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">j&lt;/span>][&lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#a6e22e">i&lt;/span>], &lt;span style="color:#a6e22e">matrix&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>][&lt;span style="color:#a6e22e">j&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">rotate90Clockwise&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">transpose&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipLeftRight&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">rotate90CounterClockwise&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">transpose&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipUpDown&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">rotate180&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipUpDown&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipLeftRight&lt;/span>(&lt;span style="color:#a6e22e">matrix&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">original&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> [][]&lt;span style="color:#66d9ef">int&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {&lt;span style="color:#ae81ff">4&lt;/span>, &lt;span style="color:#ae81ff">5&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {&lt;span style="color:#ae81ff">7&lt;/span>, &lt;span style="color:#ae81ff">8&lt;/span>, &lt;span style="color:#ae81ff">9&lt;/span>},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Original:&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m1&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">rotate90Clockwise&lt;/span>(&lt;span style="color:#a6e22e">m1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Rotate 90° Clockwise:&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">m1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m2&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">rotate90CounterClockwise&lt;/span>(&lt;span style="color:#a6e22e">m2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Rotate 90° Counter-Clockwise:&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">m2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m3&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">rotate180&lt;/span>(&lt;span style="color:#a6e22e">m3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Rotate 180°:&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">m3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m4&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipUpDown&lt;/span>(&lt;span style="color:#a6e22e">m4&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Flip Up-Down:&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">m4&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m5&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">flipLeftRight&lt;/span>(&lt;span style="color:#a6e22e">m5&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Flip Left-Right:&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">m5&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m6&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">transpose&lt;/span>(&lt;span style="color:#a6e22e">m6&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Transpose (Main Diagonal):&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">m6&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m7&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cloneMatrix&lt;/span>(&lt;span style="color:#a6e22e">original&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">antiDiagonalTranspose&lt;/span>(&lt;span style="color:#a6e22e">m7&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Anti-Diagonal Transpose:&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printMatrix&lt;/span>(&lt;span style="color:#a6e22e">m7&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr></description></item><item><title>Go 语言基础知识</title><link>https://mlcore-engine.github.io/golang/foundation/</link><pubDate>Fri, 04 Apr 2025 19:24:42 +0800</pubDate><guid>https://mlcore-engine.github.io/golang/foundation/</guid><description>&lt;h1 id="go-语言基础知识大全">Go 语言基础知识大全&lt;/h1>
 &lt;h2 id="目录">目录&lt;/h2>
 &lt;ol>
 &lt;li>&lt;a href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">环境配置&lt;/a>&lt;/li>
