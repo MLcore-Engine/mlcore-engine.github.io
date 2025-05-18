@@ -407,7 +407,7 @@ table {
 <li><strong>接口 vs 函数式</strong>：在代码简洁性和性能之间权衡：小切片可优先用 <code>sort.Slice</code>，大规模、多次排序则自定义 <code>Interface</code> 并内联 <code>Less</code>，更易编译器优化。</li>
 <li><strong>并行排序</strong>（Go 1.21+）：可考虑第三方库（如 <code>golang.org/x/exp/slices</code>），或自行分块并发排序后归并，但需注意内存和锁开销。</li>
 </ol>
-<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/golang/matrix-golang/" title="Matrix-Golang"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - Matrix-Golang</a>
+<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/golang/matrix-golang/" title="matrix-golang"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - matrix-golang</a>
 <a class="nav nav-next" href="http://localhost:1313/golang/foundation/" title="Go 语言基础知识">Next - Go 语言基础知识 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </nav><footer> </footer>
 </main>
@@ -417,7 +417,11 @@ table {
 <ul>
 <li class=""><a href="http://localhost:1313/">about me</a></li>
 
-<li class=""><a href="http://localhost:1313/learn_cs/">cs基础</a>
+<li class=" has-sub-menu"><a href="http://localhost:1313/learn_cs/">cs基础<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/learn_cs/react-electron/ipc/">ipc基础</a></li>
+</ul>
   
 </li>
 
@@ -466,7 +470,7 @@ table {
 <li class="parent has-sub-menu"><a href="http://localhost:1313/golang/">golang<span class="mark opened">-</span></a>
   
 <ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/golang/matrix-golang/">Matrix-Golang</a></li>
+<li class=""><a href="http://localhost:1313/golang/matrix-golang/">matrix-golang</a></li>
 <li class="active"><a href="http://localhost:1313/golang/sort/">sort包用法</a></li>
 <li class=""><a href="http://localhost:1313/golang/foundation/">Go 语言基础知识</a></li>
 <li class=""><a href="http://localhost:1313/golang/base/">Base</a></li>
