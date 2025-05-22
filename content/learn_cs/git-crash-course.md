@@ -33,8 +33,7 @@ title = 'git-crash-course'
    - [合并分支（merge）](#4-合并分支merge)
    - [git restore](#5-git-restore)
    - [其他命令](#6-其他命令我不太熟)
-
-5. [什么是 HEAD？](#7-什么是-head)
+   - [什么是 HEAD？](#7-什么是-head)
 
 ---
 
