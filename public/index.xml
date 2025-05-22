@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>高新 | AI平台开发 on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/</link><description>Recent content in 高新 | AI平台开发 on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sun, 18 May 2025 14:15:44 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>50个常用Linux命令</title><link>https://mlcore-engine.github.io/linux_foundation/linux-commands/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://mlcore-engine.github.io/linux_foundation/linux-commands/</guid><description>&lt;h2 id="50-userful-linux-command">50-userful-linux-command&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>高新 | AI平台开发 on 高新 | AI平台开发工程师</title><link>https://mlcore-engine.github.io/</link><description>Recent content in 高新 | AI平台开发 on 高新 | AI平台开发工程师</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Thu, 22 May 2025 09:15:13 +0800</lastBuildDate><atom:link href="https://mlcore-engine.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>50个常用Linux命令</title><link>https://mlcore-engine.github.io/linux_foundation/linux-commands/</link><pubDate>Wed, 03 Apr 2024 00:00:00 +0000</pubDate><guid>https://mlcore-engine.github.io/linux_foundation/linux-commands/</guid><description>&lt;h2 id="50-userful-linux-command">50-userful-linux-command&lt;/h2>
 &lt;table>
  &lt;thead>
  &lt;tr>
@@ -95,7 +95,57 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#dst port !22: 不抓目标端口22&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#src net 192.168.1.0/24: 数据包源ip范围 &lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#-w: 保存成文件 方便wireshark分析&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>tcpdump -D 列出所有网卡&lt;/p></description></item><item><title>ts-foundation</title><link>https://mlcore-engine.github.io/learn_cs/react-electron/ts-foundation/</link><pubDate>Sun, 18 May 2025 11:30:19 +0800</pubDate><guid>https://mlcore-engine.github.io/learn_cs/react-electron/ts-foundation/</guid><description>&lt;h1 id="typescript-基础教程">TypeScript 基础教程&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>tcpdump -D 列出所有网卡&lt;/p></description></item><item><title>git-crash-course</title><link>https://mlcore-engine.github.io/learn_cs/git-crash-course/</link><pubDate>Thu, 22 May 2025 09:15:13 +0800</pubDate><guid>https://mlcore-engine.github.io/learn_cs/git-crash-course/</guid><description>&lt;h1 id="目录">目录&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;a href="#1-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%88%B7%E6%96%B0%E7%BC%93%E5%AD%98">忽略文件与刷新缓存&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#%E6%B7%BB%E5%8A%A0%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99">添加忽略规则&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%BC%BA%E5%88%B6%E5%88%B7%E6%96%B0-git-%E7%BC%93%E5%AD%98%E8%AE%A9-gitignore-%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88">强制刷新 Git 缓存&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#2-%E5%B8%B8%E7%94%A8-git-%E5%91%BD%E4%BB%A4">常用 Git 命令&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93">初始化仓库&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">克隆远程仓库&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81">查看当前状态&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA">添加文件到暂存区&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%94%B9">提交更改&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2">查看提交历史&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">推送到远程仓库&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%9B%B4%E6%96%B0">拉取远程更新&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#3-%E5%85%B6%E4%BB%96%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7">其他实用技巧&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF">查看分支&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF">创建新分支&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF">切换分支&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF">合并分支&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#4-%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4">进阶操作命令&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#1-%E6%92%A4%E9%94%80%E4%B8%8E%E9%87%8D%E7%BD%AEreset">撤销与重置（reset）&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#2-%E5%8F%98%E5%9F%BArebase">变基（rebase）&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#3-%E6%8B%A3%E9%80%89%E6%8F%90%E4%BA%A4cherry-pick">拣选提交（cherry-pick）&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#4-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AFmerge">合并分支（merge）&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#5-git-restore">git restore&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#6-%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4%E6%88%91%E4%B8%8D%E5%A4%AA%E7%86%9F">其他命令&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="#7-%E4%BB%80%E4%B9%88%E6%98%AF-head">什么是 HEAD？&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h1 id="git-crash-course">git-crash-course&lt;/h1>
+&lt;h2 id="1-忽略文件与刷新缓存">1. 忽略文件与刷新缓存&lt;/h2>
+&lt;h3 id="添加忽略规则">添加忽略规则&lt;/h3>
+&lt;p>在项目根目录创建一个 &lt;code>.gitignore&lt;/code> 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：&lt;/p></description></item><item><title>ts-foundation</title><link>https://mlcore-engine.github.io/learn_cs/react-electron/ts-foundation/</link><pubDate>Sun, 18 May 2025 11:30:19 +0800</pubDate><guid>https://mlcore-engine.github.io/learn_cs/react-electron/ts-foundation/</guid><description>&lt;h1 id="typescript-基础教程">TypeScript 基础教程&lt;/h1>
 &lt;h2 id="目录">目录&lt;/h2>
 &lt;ol>
 &lt;li>&lt;a href="#typescript-%E7%AE%80%E4%BB%8B">TypeScript 简介&lt;/a>&lt;/li>
