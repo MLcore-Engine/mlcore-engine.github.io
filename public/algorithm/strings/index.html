@@ -1,8 +1,209 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>string类题目 - 高新 | AI平台开发工程师</title>
-<meta name=description content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验"><meta name=generator content="Hugo 0.145.0"><link href=https://mlcore-engine.github.io//index.xml rel=alternate type=application/rss+xml><link rel=canonical href=https://mlcore-engine.github.io/algorithm/strings/><link rel=stylesheet href=https://mlcore-engine.github.io/css/theme.min.css><link rel=stylesheet href=https://mlcore-engine.github.io/css/chroma.min.css><script defer src=https://mlcore-engine.github.io//js/fontawesome6/all.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script><script src=https://mlcore-engine.github.io/js/bundle.js></script><style>@media screen and (min-width:480px){.sidebar{flex:0 0 20%!important;max-width:20%!important}main{flex:0 0 80%!important;max-width:80%!important}}body{background-color:#f8f5e6!important;font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,sans-serif!important;font-size:20px!important;line-height:1.8!important}.container,.content-container,main{background-color:#f8f5e6!important}.sidebar{background-color:inherit;font-size:16px!important}h1,h2,h3,h4,h5,h6{font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,noto serif,Georgia,serif!important;font-weight:600!important;line-height:1.5!important}h1{font-size:2.4em!important}h2{font-size:2em!important}h3{font-size:1.7em!important}h4{font-size:1.5em!important}h5{font-size:1.3em!important}h6{font-size:1.2em!important}p{font-size:20px!important;margin-bottom:1.2em!important}li{font-size:20px!important;margin-bottom:.5em!important}article,.content,.post-content,main p,main li,main td,main th,blockquote,.markdown{font-size:20px!important}pre,code{font-family:jetbrains mono,Consolas,Monaco,andale mono,ubuntu mono,monospace!important;font-size:1.1em!important}a{color:#06c!important;text-decoration:none!important}a:hover{text-decoration:underline!important}table{font-size:20px!important}</style><meta property="og:url" content="https://mlcore-engine.github.io/algorithm/strings/"><meta property="og:site_name" content="高新 | AI平台开发工程师"><meta property="og:title" content="string类题目"><meta property="og:description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="algorithm"><meta property="article:published_time" content="2025-04-19T12:00:43+08:00"><meta property="article:modified_time" content="2025-04-19T12:15:25+08:00"><meta property="og:image" content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:title content="string类题目"><meta name=twitter:description content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word"><meta itemprop=name content="string类题目"><meta itemprop=description content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word"><meta itemprop=datePublished content="2025-04-19T12:00:43+08:00"><meta itemprop=dateModified content="2025-04-19T12:15:25+08:00"><meta itemprop=wordCount content="1414"><meta itemprop=image content="https://mlcore-engine.github.io/home/me.png"><link rel=apple-touch-icon sizes=180x180 href=/favicon/favicon.png><link rel=icon type=image/png sizes=32x32 href=/favicon/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png><link rel=manifest href=/favicon/site.webmanifest><link rel=mask-icon href=/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/favicon.ico><meta name=msapplication-TileColor content="#da532c"><meta name=msapplication-config content="/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=description content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word
-"><meta name=keywords content="AI,机器学习,golang,kubernetes,技术博客"><meta name=author content="高新"><meta property="og:type" content="article"><meta property="og:url" content="https://mlcore-engine.github.io/algorithm/strings/"><meta property="og:title" content="string类题目 | 高新 | AI平台开发工程师"><meta property="og:description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word
-"><meta property="og:image" content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:url content="https://mlcore-engine.github.io/algorithm/strings/"><meta name=twitter:title content="string类题目 | 高新 | AI平台开发工程师"><meta name=twitter:description content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word
-"><meta name=twitter:image content="https://mlcore-engine.github.io/home/me.png"><link rel=canonical href=https://mlcore-engine.github.io/algorithm/strings/><link rel=stylesheet href=/css/math.css><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},svg:{fontCache:"global"}}</script><script id=MathJax-script async src=/js/mathjax/tex-svg.js></script></head><body><div class=container><header><h1>高新 | AI平台开发工程师</h1><a href=https://github.com/mlcore-engine/mlcore-engine class=github><i class="fab fa-github"></i></a><p class=description>AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p></header><div class=content-container><main><h1>string类题目</h1><h2 id=-go语言实现字符串题目的知识点图谱>🧠 Go语言实现字符串题目的「知识点图谱」</h2><pre tabindex=0><code>字符串处理
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>string类题目 - 高新 | AI平台开发工程师</title>
+<meta name="description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
+<meta name="generator" content="Hugo 0.145.0">
+<link href="http://localhost:1313//index.xml" rel="alternate" type="application/rss+xml">
+<link rel="canonical" href="http://localhost:1313/algorithm/strings/">
+<link rel="stylesheet" href="http://localhost:1313/css/theme.min.css">
+<link rel="stylesheet" href="http://localhost:1313/css/chroma.min.css">
+<script defer src="http://localhost:1313//js/fontawesome6/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
+<script src="http://localhost:1313/js/bundle.js"></script><style>
+ 
+@media screen and (min-width: 480px) {
+  .sidebar {
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+  }
+  
+  main {
+    flex: 0 0 80% !important;
+    max-width: 80% !important;
+  }
+}
+
+ 
+body {
+  background-color: #f8f5e6 !important;  
+  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;  
+  font-size: 20px !important;  
+  line-height: 1.8 !important;  
+}
+
+ 
+.container, .content-container, main {
+  background-color: #f8f5e6 !important;
+}
+
+ 
+.sidebar {
+  background-color: inherit;
+  font-size: 16px !important;  
+}
+
+ 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, 'Noto Serif', Georgia, serif !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+}
+
+ 
+h1 {
+  font-size: 2.4em !important;
+}
+
+h2 {
+  font-size: 2em !important;
+}
+
+h3 {
+  font-size: 1.7em !important;
+}
+
+h4 {
+  font-size: 1.5em !important;
+}
+
+h5 {
+  font-size: 1.3em !important;
+}
+
+h6 {
+  font-size: 1.2em !important;
+}
+
+ 
+p {
+  font-size: 20px !important;
+  margin-bottom: 1.2em !important;
+}
+
+ 
+li {
+  font-size: 20px !important;
+  margin-bottom: 0.5em !important;
+}
+
+ 
+article, .content, .post-content, main p, main li, main td, main th, blockquote, .markdown {
+  font-size: 20px !important;
+}
+
+ 
+pre, code {
+  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+  font-size: 1.1em !important;  
+}
+
+ 
+a {
+  color: #0066cc !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+ 
+table {
+  font-size: 20px !important;
+}
+</style> <meta property="og:url" content="http://localhost:1313/algorithm/strings/">
+  <meta property="og:site_name" content="高新 | AI平台开发工程师">
+  <meta property="og:title" content="string类题目">
+  <meta property="og:description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="algorithm">
+    <meta property="article:published_time" content="2025-04-19T12:00:43+08:00">
+    <meta property="article:modified_time" content="2025-04-19T12:15:25+08:00">
+    <meta property="og:image" content="http://localhost:1313/home/me.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/home/me.png">
+  <meta name="twitter:title" content="string类题目">
+  <meta name="twitter:description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word">
+
+  <meta itemprop="name" content="string类题目">
+  <meta itemprop="description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word">
+  <meta itemprop="datePublished" content="2025-04-19T12:00:43+08:00">
+  <meta itemprop="dateModified" content="2025-04-19T12:15:25+08:00">
+  <meta itemprop="wordCount" content="1414">
+  <meta itemprop="image" content="http://localhost:1313/home/me.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff"> 
+
+
+<meta name="description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word
+">
+<meta name="keywords" content="AI, 机器学习, golang, kubernetes, 技术博客">
+<meta name="author" content="高新">
+
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://localhost:1313/algorithm/strings/">
+<meta property="og:title" content="string类题目 | 高新 | AI平台开发工程师">
+<meta property="og:description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word
+">
+<meta property="og:image" content="http://localhost:1313/home/me.png">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="http://localhost:1313/algorithm/strings/">
+<meta name="twitter:title" content="string类题目 | 高新 | AI平台开发工程师">
+<meta name="twitter:description" content="🧠 Go语言实现字符串题目的「知识点图谱」 字符串处理 │ ├── 1. 基础操作类 │ ├── 去空格 / 提取单词 │ │ ├── 58. Length of Last Word ✔️ │ │ └── 151. Reverse Words in a String ✔️ │ ├── 字符串比较 / 判断 │ │ └── 125. Valid Palindrome ✔️ │ └── 前缀/后缀处理 │ └── 14. Longest Common Prefix ✔️ │ ├── 2. 字符统计类 │ ├── 242. Valid Anagram │ ├── 387. First Unique Character in a String │ └── 3. Longest Substring Without Repeating Characters │ ├── 3. 反转与重构类 │ ├── 344. Reverse String │ ├── 541. Reverse String II │ ├── 151. Reverse Words in a String ✔️ │ └── 917. Reverse Only Letters │ ├── 4. 双指针应用类 │ ├── 680. Valid Palindrome II │ ├── 11. Container With Most Water (类比) │ └── 876. Middle of the Linked List (思路相似) │ ├── 5. 模拟类 / 字符串构造 │ ├── 6. ZigZag Conversion │ ├── 43. Multiply Strings │ └── 67. Add Binary │ └── 6. 高级类（KMP、Rabin-Karp、Trie） ├── 28. Implement strStr() ├── 686. Repeated String Match └── 336. Palindrome Pairs 🧩 每类代表题目详解 ✅ 1. 【基础操作类】 58. Length of Last Word
+">
+<meta name="twitter:image" content="http://localhost:1313/home/me.png">
+
+
+<link rel="canonical" href="http://localhost:1313/algorithm/strings/">
+
+
+<link rel="stylesheet" href="/css/math.css">
+
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script id="MathJax-script" async src="/js/mathjax/tex-svg.js"></script> </head>
+<body>
+
+<div class="container"><header>
+<h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
+<p class="description">AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p>
+
+</header>
+
+
+<div class="content-container">
+<main><h1>string类题目</h1>
+<h2 id="-go语言实现字符串题目的知识点图谱">🧠 Go语言实现字符串题目的「知识点图谱」</h2>
+<pre tabindex="0"><code>字符串处理
 │
 ├── 1. 基础操作类
 │   ├── 去空格 / 提取单词
@@ -38,6 +239,406 @@
     ├── 28. Implement strStr()
     ├── 686. Repeated String Match
     └── 336. Palindrome Pairs
-</code></pre><hr><h2 id=-每类代表题目详解>🧩 每类代表题目详解</h2><h3 id=-1-基础操作类>✅ 1. 【基础操作类】</h3><p><strong>58. Length of Last Word</strong></p><ul><li>遍历尾部开始，跳过空格，数出最后一个单词长度。</li><li>技巧：反向遍历 + 字符判断</li></ul><p><strong>151. Reverse Words in a String</strong></p><ul><li>用 <code>strings.Fields()</code> 处理多空格，然后反转。</li><li>技巧：字符串切割 + 数组反转 + Join</li></ul><hr><h3 id=-2-字符统计类>✅ 2. 【字符统计类】</h3><p><strong>242. Valid Anagram</strong></p><ul><li>判断两个字符串是否是字母重排。</li><li>技巧：map 或数组统计字母出现次数。</li></ul><hr><h3 id=-3-反转与重构类>✅ 3. 【反转与重构类】</h3><p><strong>344. Reverse String</strong></p><ul><li>双指针前后交换字符。</li></ul><p><strong>541. Reverse String II</strong></p><ul><li>每隔 2k 反转前 k 个字符。</li></ul><hr><h3 id=-4-双指针应用类>✅ 4. 【双指针应用类】</h3><p><strong>125. Valid Palindrome</strong></p><ul><li>左右双指针跳过非字母数字，比较大小写。</li></ul><p><strong>680. Valid Palindrome II</strong></p><ul><li>允许删一个字符，判断是否仍为回文。</li></ul><hr><h3 id=-5-模拟类>✅ 5. 【模拟类】</h3><p><strong>67. Add Binary</strong></p><ul><li>二进制字符串模拟加法，处理进位。</li></ul><p><strong>43. Multiply Strings</strong></p><ul><li>字符串模拟乘法，用数组保存每位结果。</li></ul><hr><h3 id=-6-高级类算法类>✅ 6. 【高级类（算法类）】</h3><p><strong>28. strStr() 实现 KMP</strong></p><ul><li>找字符串中子串第一次出现的位置。</li></ul><p><strong>686. Repeated String Match</strong></p><ul><li>最少重复次数使得目标字符串是子串。</li></ul><hr><h2 id=-常用技巧总结>📌 常用技巧总结</h2><table><thead><tr><th>技巧</th><th>说明</th><th>示例题目</th></tr></thead><tbody><tr><td>双指针</td><td>从两边向中间缩进或左右扫描</td><td>125, 680</td></tr><tr><td>字符串切割</td><td>使用 <code>strings.Fields</code>, <code>split</code></td><td>151</td></tr><tr><td>字符串拼接</td><td><code>strings.Join</code>, <code>+</code>, <code>bytes.Buffer</code></td><td>多数构造类题目</td></tr><tr><td>字符统计/比较</td><td>使用数组或哈希表统计字符出现次数</td><td>242</td></tr><tr><td>反转数组/字符串</td><td>前后指针交换元素</td><td>344, 541</td></tr><tr><td>模拟人工计算</td><td>模拟加法乘法处理每一位</td><td>43, 67</td></tr><tr><td>KMP 字符匹配算法</td><td>高效搜索子串位置</td><td>28</td></tr></tbody></table><hr><h3 id=更详细的题目总结>更详细的题目总结</h3><h4 id=一基础操作类>一、基础操作类</h4><ul><li><strong>58. Length of Last Word</strong><ul><li>从后向前遍历，跳过空格，计数最后一个单词长度。</li></ul></li><li><strong>151. Reverse Words in a String</strong><ul><li>分割去多余空格，反转数组，拼接成字符串。</li></ul></li><li><strong>125. Valid Palindrome</strong><ul><li>忽略非字母数字，忽略大小写，双指针判断回文。</li></ul></li><li><strong>14. Longest Common Prefix</strong><ul><li>遍历第一个字符串，逐字符与其它字符串对比。</li></ul></li></ul><hr><h4 id=二字符统计类>二、字符统计类</h4><ul><li><strong>242. Valid Anagram</strong><ul><li>判断两个字符串是否是字母异位词，使用哈希表或数组计数。</li></ul></li><li><strong>387. First Unique Character in a String</strong><ul><li>统计每个字符出现次数，再找第一个出现一次的字符。</li></ul></li><li><strong>3. Longest Substring Without Repeating Characters</strong><ul><li>滑动窗口，记录字符是否出现，维护最大子串。</li></ul></li></ul><hr><h4 id=三反转与重构类>三、反转与重构类</h4><ul><li><strong>344. Reverse String</strong><ul><li>双指针反转字符数组。</li></ul></li><li><strong>541. Reverse String II</strong><ul><li>每隔 2k 反转前 k 个字符。</li></ul></li><li><strong>917. Reverse Only Letters</strong><ul><li>双指针跳过非字母，只交换字母。</li></ul></li></ul><hr><h4 id=四双指针应用类>四、双指针应用类</h4><ul><li><strong>125. Valid Palindrome</strong><ul><li>左右指针跳过无效字符，比较大小写。</li></ul></li><li><strong>680. Valid Palindrome II</strong><ul><li>可以删除一个字符后成为回文，尝试跳过左右字符判断。</li></ul></li><li><strong>11. Container With Most Water（类比）</strong><ul><li>不是字符串题，但双指针策略类似。</li></ul></li><li><strong>876. Middle of the Linked List（思路相似）</strong><ul><li>快慢指针找中间节点。</li></ul></li></ul><hr><h4 id=五模拟--构造类>五、模拟 / 构造类</h4><ul><li><strong>6. ZigZag Conversion</strong><ul><li>模拟字符写入不同行。</li></ul></li><li><strong>43. Multiply Strings</strong><ul><li>模拟乘法每一位，进位处理。</li></ul></li><li><strong>67. Add Binary</strong><ul><li>模拟二进制加法，处理进位。</li></ul></li></ul><hr><h4 id=六高级匹配类kmp--rabin-karp--trie>六、高级匹配类（KMP / Rabin-Karp / Trie）</h4><ul><li><strong>28. Implement strStr()</strong><ul><li>实现子串查找（KMP可选）。</li></ul></li><li><strong>686. Repeated String Match</strong><ul><li>最少重复使得目标成为子串。</li></ul></li><li><strong>336. Palindrome Pairs</strong><ul><li>字典构造 + 判断拼接是否为回文。</li></ul></li></ul><hr><h4 id=常用技巧总结>常用技巧总结</h4><table><thead><tr><th>技巧</th><th>示例题目</th><th>描述</th></tr></thead><tbody><tr><td>双指针</td><td>125, 680</td><td>左右向中间夹逼</td></tr><tr><td>切割 + Join</td><td>151</td><td>去多余空格并反转</td></tr><tr><td>Hash 计数</td><td>242, 387</td><td>判断异位词/统计出现次数</td></tr><tr><td>滑动窗口</td><td>3</td><td>无重复最长子串</td></tr><tr><td>模拟人工加法/乘法</td><td>67, 43</td><td>字符串数学模拟题</td></tr><tr><td>正则或 KMP</td><td>28, 686</td><td>子串查找/重复匹配</td></tr></tbody></table><hr><p>注：本文由chatgpt总结</p><div class=edit-meta><br></div><nav class=pagination><a class="nav nav-prev" href=https://mlcore-engine.github.io/algorithm/ title=算法题><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - 算法题</a>
-<a class="nav nav-next" href=https://mlcore-engine.github.io/algorithm/dynamic-programmnig/ title=动态规划问题>Next - 动态规划问题 <i class="fas fa-arrow-right" aria-hidden=true></i></a></nav><footer></footer></main><div class=sidebar><nav class=slide-menu><ul><li><a href=https://mlcore-engine.github.io/>about me</a></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/learn_cs/>cs基础<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/learn_cs/git-crash-course/>git-crash-course</a></li><li><a href=https://mlcore-engine.github.io/learn_cs/react-electron/ts-foundation/>ts-foundation</a></li><li><a href=https://mlcore-engine.github.io/learn_cs/react-electron/ipc/>ipc基础</a></li></ul></li><li class="parent has-sub-menu"><a href=https://mlcore-engine.github.io/algorithm/>算法题<span class="mark opened">-</span></a><ul class=sub-menu><li class=active><a href=https://mlcore-engine.github.io/algorithm/strings/>string类题目</a></li><li><a href=https://mlcore-engine.github.io/algorithm/dynamic-programmnig/>动态规划问题</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/math_foundation/>ML中的数学<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/math_foundation/information/>信息量</a></li><li><a href=https://mlcore-engine.github.io/math_foundation/likelihood_entropy/>似然函数_交叉熵</a></li><li><a href=https://mlcore-engine.github.io/math_foundation/kl_dpo/>Kl散度与dpo算法</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/transformer/>ML基础<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/transformer/do_sample_para/>Do_sample_para</a></li><li><a href=https://mlcore-engine.github.io/transformer/entropy/>Entropy</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/kubernetes/>kubernetes<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/kubernetes/installation/>Installation</a></li></ul></li><li><a href=https://mlcore-engine.github.io/learn_english/>英语学习</a></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/golang/>golang<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/golang/matrix-golang/>matrix-golang</a></li><li><a href=https://mlcore-engine.github.io/golang/foundation/>Go 语言基础知识</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/linux_foundation/>Linux基础<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-commands/>50个常用Linux命令</a></li><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-common/>Linux Common</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/exercise/>workout<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/exercise/workout/>Workout</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/others/>others<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/others/create-hugo-gitpage/>使用 Hugo 和 GitHub Pages 创建个人网站</a></li></ul></li></ul></nav><div class=sidebar-footer></div></div></div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20><span class="fa-layers fa-fw"><i class="fas fa-circle"></i>
-<i class="fas fa-arrow-circle-up"></i></span></a></div></body></html>
+</code></pre><hr>
+<h2 id="-每类代表题目详解">🧩 每类代表题目详解</h2>
+<h3 id="-1-基础操作类">✅ 1. 【基础操作类】</h3>
+<p><strong>58. Length of Last Word</strong></p>
+<ul>
+<li>遍历尾部开始，跳过空格，数出最后一个单词长度。</li>
+<li>技巧：反向遍历 + 字符判断</li>
+</ul>
+<p><strong>151. Reverse Words in a String</strong></p>
+<ul>
+<li>用 <code>strings.Fields()</code> 处理多空格，然后反转。</li>
+<li>技巧：字符串切割 + 数组反转 + Join</li>
+</ul>
+<hr>
+<h3 id="-2-字符统计类">✅ 2. 【字符统计类】</h3>
+<p><strong>242. Valid Anagram</strong></p>
+<ul>
+<li>判断两个字符串是否是字母重排。</li>
+<li>技巧：map 或数组统计字母出现次数。</li>
+</ul>
+<hr>
+<h3 id="-3-反转与重构类">✅ 3. 【反转与重构类】</h3>
+<p><strong>344. Reverse String</strong></p>
+<ul>
+<li>双指针前后交换字符。</li>
+</ul>
+<p><strong>541. Reverse String II</strong></p>
+<ul>
+<li>每隔 2k 反转前 k 个字符。</li>
+</ul>
+<hr>
+<h3 id="-4-双指针应用类">✅ 4. 【双指针应用类】</h3>
+<p><strong>125. Valid Palindrome</strong></p>
+<ul>
+<li>左右双指针跳过非字母数字，比较大小写。</li>
+</ul>
+<p><strong>680. Valid Palindrome II</strong></p>
+<ul>
+<li>允许删一个字符，判断是否仍为回文。</li>
+</ul>
+<hr>
+<h3 id="-5-模拟类">✅ 5. 【模拟类】</h3>
+<p><strong>67. Add Binary</strong></p>
+<ul>
+<li>二进制字符串模拟加法，处理进位。</li>
+</ul>
+<p><strong>43. Multiply Strings</strong></p>
+<ul>
+<li>字符串模拟乘法，用数组保存每位结果。</li>
+</ul>
+<hr>
+<h3 id="-6-高级类算法类">✅ 6. 【高级类（算法类）】</h3>
+<p><strong>28. strStr() 实现 KMP</strong></p>
+<ul>
+<li>找字符串中子串第一次出现的位置。</li>
+</ul>
+<p><strong>686. Repeated String Match</strong></p>
+<ul>
+<li>最少重复次数使得目标字符串是子串。</li>
+</ul>
+<hr>
+<h2 id="-常用技巧总结">📌 常用技巧总结</h2>
+<table>
+  <thead>
+      <tr>
+          <th>技巧</th>
+          <th>说明</th>
+          <th>示例题目</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>双指针</td>
+          <td>从两边向中间缩进或左右扫描</td>
+          <td>125, 680</td>
+      </tr>
+      <tr>
+          <td>字符串切割</td>
+          <td>使用 <code>strings.Fields</code>, <code>split</code></td>
+          <td>151</td>
+      </tr>
+      <tr>
+          <td>字符串拼接</td>
+          <td><code>strings.Join</code>, <code>+</code>, <code>bytes.Buffer</code></td>
+          <td>多数构造类题目</td>
+      </tr>
+      <tr>
+          <td>字符统计/比较</td>
+          <td>使用数组或哈希表统计字符出现次数</td>
+          <td>242</td>
+      </tr>
+      <tr>
+          <td>反转数组/字符串</td>
+          <td>前后指针交换元素</td>
+          <td>344, 541</td>
+      </tr>
+      <tr>
+          <td>模拟人工计算</td>
+          <td>模拟加法乘法处理每一位</td>
+          <td>43, 67</td>
+      </tr>
+      <tr>
+          <td>KMP 字符匹配算法</td>
+          <td>高效搜索子串位置</td>
+          <td>28</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="更详细的题目总结">更详细的题目总结</h3>
+<h4 id="一基础操作类">一、基础操作类</h4>
+<ul>
+<li><strong>58. Length of Last Word</strong>
+<ul>
+<li>从后向前遍历，跳过空格，计数最后一个单词长度。</li>
+</ul>
+</li>
+<li><strong>151. Reverse Words in a String</strong>
+<ul>
+<li>分割去多余空格，反转数组，拼接成字符串。</li>
+</ul>
+</li>
+<li><strong>125. Valid Palindrome</strong>
+<ul>
+<li>忽略非字母数字，忽略大小写，双指针判断回文。</li>
+</ul>
+</li>
+<li><strong>14. Longest Common Prefix</strong>
+<ul>
+<li>遍历第一个字符串，逐字符与其它字符串对比。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="二字符统计类">二、字符统计类</h4>
+<ul>
+<li><strong>242. Valid Anagram</strong>
+<ul>
+<li>判断两个字符串是否是字母异位词，使用哈希表或数组计数。</li>
+</ul>
+</li>
+<li><strong>387. First Unique Character in a String</strong>
+<ul>
+<li>统计每个字符出现次数，再找第一个出现一次的字符。</li>
+</ul>
+</li>
+<li><strong>3. Longest Substring Without Repeating Characters</strong>
+<ul>
+<li>滑动窗口，记录字符是否出现，维护最大子串。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="三反转与重构类">三、反转与重构类</h4>
+<ul>
+<li><strong>344. Reverse String</strong>
+<ul>
+<li>双指针反转字符数组。</li>
+</ul>
+</li>
+<li><strong>541. Reverse String II</strong>
+<ul>
+<li>每隔 2k 反转前 k 个字符。</li>
+</ul>
+</li>
+<li><strong>917. Reverse Only Letters</strong>
+<ul>
+<li>双指针跳过非字母，只交换字母。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="四双指针应用类">四、双指针应用类</h4>
+<ul>
+<li><strong>125. Valid Palindrome</strong>
+<ul>
+<li>左右指针跳过无效字符，比较大小写。</li>
+</ul>
+</li>
+<li><strong>680. Valid Palindrome II</strong>
+<ul>
+<li>可以删除一个字符后成为回文，尝试跳过左右字符判断。</li>
+</ul>
+</li>
+<li><strong>11. Container With Most Water（类比）</strong>
+<ul>
+<li>不是字符串题，但双指针策略类似。</li>
+</ul>
+</li>
+<li><strong>876. Middle of the Linked List（思路相似）</strong>
+<ul>
+<li>快慢指针找中间节点。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="五模拟--构造类">五、模拟 / 构造类</h4>
+<ul>
+<li><strong>6. ZigZag Conversion</strong>
+<ul>
+<li>模拟字符写入不同行。</li>
+</ul>
+</li>
+<li><strong>43. Multiply Strings</strong>
+<ul>
+<li>模拟乘法每一位，进位处理。</li>
+</ul>
+</li>
+<li><strong>67. Add Binary</strong>
+<ul>
+<li>模拟二进制加法，处理进位。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="六高级匹配类kmp--rabin-karp--trie">六、高级匹配类（KMP / Rabin-Karp / Trie）</h4>
+<ul>
+<li><strong>28. Implement strStr()</strong>
+<ul>
+<li>实现子串查找（KMP可选）。</li>
+</ul>
+</li>
+<li><strong>686. Repeated String Match</strong>
+<ul>
+<li>最少重复使得目标成为子串。</li>
+</ul>
+</li>
+<li><strong>336. Palindrome Pairs</strong>
+<ul>
+<li>字典构造 + 判断拼接是否为回文。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="常用技巧总结">常用技巧总结</h4>
+<table>
+  <thead>
+      <tr>
+          <th>技巧</th>
+          <th>示例题目</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>双指针</td>
+          <td>125, 680</td>
+          <td>左右向中间夹逼</td>
+      </tr>
+      <tr>
+          <td>切割 + Join</td>
+          <td>151</td>
+          <td>去多余空格并反转</td>
+      </tr>
+      <tr>
+          <td>Hash 计数</td>
+          <td>242, 387</td>
+          <td>判断异位词/统计出现次数</td>
+      </tr>
+      <tr>
+          <td>滑动窗口</td>
+          <td>3</td>
+          <td>无重复最长子串</td>
+      </tr>
+      <tr>
+          <td>模拟人工加法/乘法</td>
+          <td>67, 43</td>
+          <td>字符串数学模拟题</td>
+      </tr>
+      <tr>
+          <td>正则或 KMP</td>
+          <td>28, 686</td>
+          <td>子串查找/重复匹配</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p>注：本文由chatgpt总结</p>
+<div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/algorithm/double_point/" title="双指针"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - 双指针</a>
+<a class="nav nav-next" href="http://localhost:1313/algorithm/dynamic-programmnig/" title="动态规划问题">Next - 动态规划问题 <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer> </footer>
+</main>
+<div class="sidebar">
+
+<nav class="slide-menu">
+<ul>
+<li class=""><a href="http://localhost:1313/">about me</a></li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/learn_cs/">cs基础<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/learn_cs/git-crash-course/">git-crash-course</a></li>
+<li class=""><a href="http://localhost:1313/learn_cs/react-electron/ts-foundation/">ts-foundation</a></li>
+<li class=""><a href="http://localhost:1313/learn_cs/react-electron/ipc/">ipc基础</a></li>
+</ul>
+  
+</li>
+
+<li class="parent has-sub-menu"><a href="http://localhost:1313/algorithm/">算法题<span class="mark opened">-</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/algorithm/stock_dp/">股票交易动态规划总结</a></li>
+<li class=""><a href="http://localhost:1313/algorithm/hash_set/">哈希表相关题目</a></li>
+<li class=""><a href="http://localhost:1313/algorithm/double_point/">双指针</a></li>
+<li class="active"><a href="http://localhost:1313/algorithm/strings/">string类题目</a></li>
+<li class=""><a href="http://localhost:1313/algorithm/dynamic-programmnig/">动态规划问题</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/math_foundation/">ML中的数学<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/math_foundation/information/">信息量</a></li>
+<li class=""><a href="http://localhost:1313/math_foundation/likelihood_entropy/">似然函数_交叉熵</a></li>
+<li class=""><a href="http://localhost:1313/math_foundation/kl_dpo/">Kl散度与dpo算法</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/transformer/">ML基础<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/transformer/quantization2/">模型量化基础</a></li>
+<li class=""><a href="http://localhost:1313/transformer/quantization/">模型量化基础代码版</a></li>
+<li class=""><a href="http://localhost:1313/transformer/do_sample_para/">Do_sample_para</a></li>
+<li class=""><a href="http://localhost:1313/transformer/nn_begin/">Nn Begin</a></li>
+<li class=""><a href="http://localhost:1313/transformer/entropy/">Entropy</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/kubernetes/">kubernetes<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/kubernetes/installation/">Installation</a></li>
+</ul>
+  
+</li>
+
+<li class=""><a href="http://localhost:1313/learn_english/">英语学习</a>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/golang/">golang<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/golang/byte-character/">字符编码基础知识详解</a></li>
+<li class=""><a href="http://localhost:1313/golang/matrix-golang/">matrix-golang</a></li>
+<li class=""><a href="http://localhost:1313/golang/sort/">sort包用法</a></li>
+<li class=""><a href="http://localhost:1313/golang/foundation/">Go 语言基础知识</a></li>
+<li class=""><a href="http://localhost:1313/golang/base/">Base</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/linux_foundation/">Linux基础<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/linux_foundation/linux-commands/">50个常用Linux命令</a></li>
+<li class=""><a href="http://localhost:1313/linux_foundation/cs_foundation/">计算机基础知识</a></li>
+<li class=""><a href="http://localhost:1313/linux_foundation/linux-common/">Linux Common</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/exercise/">workout<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/exercise/workout/">Workout</a></li>
+</ul>
+  
+</li>
+
+<li class=" has-sub-menu"><a href="http://localhost:1313/others/">others<span class="mark closed">+</span></a>
+  
+<ul class="sub-menu">
+<li class=""><a href="http://localhost:1313/others/vc-news/">Vc News</a></li>
+<li class=""><a href="http://localhost:1313/others/create-hugo-gitpage/">使用 Hugo 和 GitHub Pages 创建个人网站</a></li>
+</ul>
+  
+</li>
+</ul>
+</nav>
+
+ 
+<div class="sidebar-footer"></div>
+</div>
+
+</div><a href="#" id="backtothetop-fixed" class="backtothetop"
+ data-backtothetop-duration="600"
+ data-backtothetop-easing="easeOutQuart"
+ data-backtothetop-fixed-fadeIn="1000"
+ data-backtothetop-fixed-fadeOut="1000"
+ data-backtothetop-fixed-bottom="10"
+ data-backtothetop-fixed-right="20">
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>
