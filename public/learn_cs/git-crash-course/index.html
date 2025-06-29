@@ -1,1455 +1,393 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>git-crash-course - 高新 | AI平台开发工程师</title>
-<meta name="description" content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验">
-<meta name="generator" content="Hugo 0.145.0">
-<link href="http://localhost:1313//index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="http://localhost:1313/learn_cs/git-crash-course/">
-<link rel="stylesheet" href="http://localhost:1313/css/theme.min.css">
-<link rel="stylesheet" href="http://localhost:1313/css/chroma.min.css">
-<script defer src="http://localhost:1313//js/fontawesome6/all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin="anonymous"></script>
-<script src="http://localhost:1313/js/bundle.js"></script><style>
- 
-@media screen and (min-width: 480px) {
-  .sidebar {
-    flex: 0 0 20% !important;
-    max-width: 20% !important;
-  }
-  
-  main {
-    flex: 0 0 80% !important;
-    max-width: 80% !important;
-  }
-}
-
- 
-body {
-  background-color: #f8f5e6 !important;  
-  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;  
-  font-size: 20px !important;  
-  line-height: 1.8 !important;  
-}
-
- 
-.container, .content-container, main {
-  background-color: #f8f5e6 !important;
-}
-
- 
-.sidebar {
-  background-color: inherit;
-  font-size: 16px !important;  
-}
-
- 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'KaiTi', 'STKaiti', '楷体', '楷体_GB2312', 'SimKai', '华文楷体', Kai, 'Noto Serif', Georgia, serif !important;
-  font-weight: 600 !important;
-  line-height: 1.5 !important;
-}
-
- 
-h1 {
-  font-size: 2.4em !important;
-}
-
-h2 {
-  font-size: 2em !important;
-}
-
-h3 {
-  font-size: 1.7em !important;
-}
-
-h4 {
-  font-size: 1.5em !important;
-}
-
-h5 {
-  font-size: 1.3em !important;
-}
-
-h6 {
-  font-size: 1.2em !important;
-}
-
- 
-p {
-  font-size: 20px !important;
-  margin-bottom: 1.2em !important;
-}
-
- 
-li {
-  font-size: 20px !important;
-  margin-bottom: 0.5em !important;
-}
-
- 
-article, .content, .post-content, main p, main li, main td, main th, blockquote, .markdown {
-  font-size: 20px !important;
-}
-
- 
-pre, code {
-  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
-  font-size: 1.1em !important;  
-}
-
- 
-a {
-  color: #0066cc !important;
-  text-decoration: none !important;
-}
-
-a:hover {
-  text-decoration: underline !important;
-}
-
- 
-table {
-  font-size: 20px !important;
-}
-</style> <meta property="og:url" content="http://localhost:1313/learn_cs/git-crash-course/">
-  <meta property="og:site_name" content="高新 | AI平台开发工程师">
-  <meta property="og:title" content="git-crash-course">
-  <meta property="og:description" content="目录 忽略文件与刷新缓存
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>git-crash-course - 高新 | AI平台开发工程师</title>
+<meta name=description content="AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验"><meta name=generator content="Hugo 0.145.0"><link href=https://mlcore-engine.github.io//index.xml rel=alternate type=application/rss+xml><link rel=canonical href=https://mlcore-engine.github.io/learn_cs/git-crash-course/><link rel=stylesheet href=https://mlcore-engine.github.io/css/theme.min.css><link rel=stylesheet href=https://mlcore-engine.github.io/css/chroma.min.css><script defer src=https://mlcore-engine.github.io//js/fontawesome6/all.min.js></script><script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script><script src=https://mlcore-engine.github.io/js/bundle.js></script><style>@media screen and (min-width:480px){.sidebar{flex:0 0 20%!important;max-width:20%!important}main{flex:0 0 80%!important;max-width:80%!important}}body{background-color:#f8f5e6!important;font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,sans-serif!important;font-size:20px!important;line-height:1.8!important}.container,.content-container,main{background-color:#f8f5e6!important}.sidebar{background-color:inherit;font-size:16px!important}h1,h2,h3,h4,h5,h6{font-family:kaiti,stkaiti,楷体,楷体_gb2312,simkai,华文楷体,Kai,noto serif,Georgia,serif!important;font-weight:600!important;line-height:1.5!important}h1{font-size:2.4em!important}h2{font-size:2em!important}h3{font-size:1.7em!important}h4{font-size:1.5em!important}h5{font-size:1.3em!important}h6{font-size:1.2em!important}p{font-size:20px!important;margin-bottom:1.2em!important}li{font-size:20px!important;margin-bottom:.5em!important}article,.content,.post-content,main p,main li,main td,main th,blockquote,.markdown{font-size:20px!important}pre,code{font-family:jetbrains mono,Consolas,Monaco,andale mono,ubuntu mono,monospace!important;font-size:1.1em!important}a{color:#06c!important;text-decoration:none!important}a:hover{text-decoration:underline!important}table{font-size:20px!important}</style><meta property="og:url" content="https://mlcore-engine.github.io/learn_cs/git-crash-course/"><meta property="og:site_name" content="高新 | AI平台开发工程师"><meta property="og:title" content="git-crash-course"><meta property="og:description" content="目录 忽略文件与刷新缓存
 添加忽略规则 强制刷新 Git 缓存 常用 Git 命令
 初始化仓库 克隆远程仓库 查看当前状态 添加文件到暂存区 提交更改 查看提交历史 推送到远程仓库 拉取远程更新 其他实用技巧
 查看分支 创建新分支 切换分支 合并分支 进阶操作命令
-撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="learn_cs">
-    <meta property="article:published_time" content="2025-05-22T09:15:13+08:00">
-    <meta property="article:modified_time" content="2025-05-22T17:28:35+08:00">
-    <meta property="og:image" content="http://localhost:1313/home/me.png">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/home/me.png">
-  <meta name="twitter:title" content="git-crash-course">
-  <meta name="twitter:description" content="目录 忽略文件与刷新缓存
+撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如："><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="learn_cs"><meta property="article:published_time" content="2025-05-22T09:15:13+08:00"><meta property="article:modified_time" content="2025-05-22T17:28:35+08:00"><meta property="og:image" content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:title content="git-crash-course"><meta name=twitter:description content="目录 忽略文件与刷新缓存
 添加忽略规则 强制刷新 Git 缓存 常用 Git 命令
 初始化仓库 克隆远程仓库 查看当前状态 添加文件到暂存区 提交更改 查看提交历史 推送到远程仓库 拉取远程更新 其他实用技巧
 查看分支 创建新分支 切换分支 合并分支 进阶操作命令
-撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：">
-
-  <meta itemprop="name" content="git-crash-course">
-  <meta itemprop="description" content="目录 忽略文件与刷新缓存
+撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如："><meta itemprop=name content="git-crash-course"><meta itemprop=description content="目录 忽略文件与刷新缓存
 添加忽略规则 强制刷新 Git 缓存 常用 Git 命令
 初始化仓库 克隆远程仓库 查看当前状态 添加文件到暂存区 提交更改 查看提交历史 推送到远程仓库 拉取远程更新 其他实用技巧
 查看分支 创建新分支 切换分支 合并分支 进阶操作命令
-撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：">
-  <meta itemprop="datePublished" content="2025-05-22T09:15:13+08:00">
-  <meta itemprop="dateModified" content="2025-05-22T17:28:35+08:00">
-  <meta itemprop="wordCount" content="10092">
-  <meta itemprop="image" content="http://localhost:1313/home/me.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-<link rel="manifest" href="/favicon/site.webmanifest">
-<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="/favicon.ico">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="/favicon/browserconfig.xml">
-<meta name="theme-color" content="#ffffff"> 
-
-
-<meta name="description" content="目录 忽略文件与刷新缓存
+撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如："><meta itemprop=datePublished content="2025-05-22T09:15:13+08:00"><meta itemprop=dateModified content="2025-05-22T17:28:35+08:00"><meta itemprop=wordCount content="10092"><meta itemprop=image content="https://mlcore-engine.github.io/home/me.png"><link rel=apple-touch-icon sizes=180x180 href=/favicon/favicon.png><link rel=icon type=image/png sizes=32x32 href=/favicon/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png><link rel=manifest href=/favicon/site.webmanifest><link rel=mask-icon href=/favicon/safari-pinned-tab.svg color=#5bbad5><link rel="shortcut icon" href=/favicon.ico><meta name=msapplication-TileColor content="#da532c"><meta name=msapplication-config content="/favicon/browserconfig.xml"><meta name=theme-color content="#ffffff"><meta name=description content="目录 忽略文件与刷新缓存
 添加忽略规则 强制刷新 Git 缓存 常用 Git 命令
 初始化仓库 克隆远程仓库 查看当前状态 添加文件到暂存区 提交更改 查看提交历史 推送到远程仓库 拉取远程更新 其他实用技巧
 查看分支 创建新分支 切换分支 合并分支 进阶操作命令
 撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：
-">
-<meta name="keywords" content="AI, 机器学习, golang, kubernetes, 技术博客">
-<meta name="author" content="高新">
-
-
-<meta property="og:type" content="article">
-<meta property="og:url" content="http://localhost:1313/learn_cs/git-crash-course/">
-<meta property="og:title" content="git-crash-course | 高新 | AI平台开发工程师">
-<meta property="og:description" content="目录 忽略文件与刷新缓存
+"><meta name=keywords content="AI,机器学习,golang,kubernetes,技术博客"><meta name=author content="高新"><meta property="og:type" content="article"><meta property="og:url" content="https://mlcore-engine.github.io/learn_cs/git-crash-course/"><meta property="og:title" content="git-crash-course | 高新 | AI平台开发工程师"><meta property="og:description" content="目录 忽略文件与刷新缓存
 添加忽略规则 强制刷新 Git 缓存 常用 Git 命令
 初始化仓库 克隆远程仓库 查看当前状态 添加文件到暂存区 提交更改 查看提交历史 推送到远程仓库 拉取远程更新 其他实用技巧
 查看分支 创建新分支 切换分支 合并分支 进阶操作命令
 撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：
-">
-<meta property="og:image" content="http://localhost:1313/home/me.png">
-
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="http://localhost:1313/learn_cs/git-crash-course/">
-<meta name="twitter:title" content="git-crash-course | 高新 | AI平台开发工程师">
-<meta name="twitter:description" content="目录 忽略文件与刷新缓存
+"><meta property="og:image" content="https://mlcore-engine.github.io/home/me.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:url content="https://mlcore-engine.github.io/learn_cs/git-crash-course/"><meta name=twitter:title content="git-crash-course | 高新 | AI平台开发工程师"><meta name=twitter:description content="目录 忽略文件与刷新缓存
 添加忽略规则 强制刷新 Git 缓存 常用 Git 命令
 初始化仓库 克隆远程仓库 查看当前状态 添加文件到暂存区 提交更改 查看提交历史 推送到远程仓库 拉取远程更新 其他实用技巧
 查看分支 创建新分支 切换分支 合并分支 进阶操作命令
 撤销与重置（reset） 变基（rebase） 拣选提交（cherry-pick） 合并分支（merge） git restore 其他命令 什么是 HEAD？ git-crash-course 1. 忽略文件与刷新缓存 添加忽略规则 在项目根目录创建一个 .gitignore 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：
-">
-<meta name="twitter:image" content="http://localhost:1313/home/me.png">
-
-
-<link rel="canonical" href="http://localhost:1313/learn_cs/git-crash-course/">
-
-
-<link rel="stylesheet" href="/css/math.css">
-
-
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    svg: {
-      fontCache: 'global'
-    }
-  };
-</script>
-<script id="MathJax-script" async src="/js/mathjax/tex-svg.js"></script> </head>
-<body>
-
-<div class="container"><header>
-<h1>高新 | AI平台开发工程师</h1><a href="https://github.com/mlcore-engine/mlcore-engine" class="github"><i class="fab fa-github"></i></a>
-<p class="description">AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p>
-
-</header>
-
-
-<div class="content-container">
-<main><h1>git-crash-course</h1>
-<h1 id="目录">目录</h1>
-<ol>
-<li>
-<p><a href="#1-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%88%B7%E6%96%B0%E7%BC%93%E5%AD%98">忽略文件与刷新缓存</a></p>
-<ul>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99">添加忽略规则</a></li>
-<li><a href="#%E5%BC%BA%E5%88%B6%E5%88%B7%E6%96%B0-git-%E7%BC%93%E5%AD%98%E8%AE%A9-gitignore-%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88">强制刷新 Git 缓存</a></li>
-</ul>
-</li>
-<li>
-<p><a href="#2-%E5%B8%B8%E7%94%A8-git-%E5%91%BD%E4%BB%A4">常用 Git 命令</a></p>
-<ul>
-<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93">初始化仓库</a></li>
-<li><a href="#%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">克隆远程仓库</a></li>
-<li><a href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81">查看当前状态</a></li>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA">添加文件到暂存区</a></li>
-<li><a href="#%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%94%B9">提交更改</a></li>
-<li><a href="#%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2">查看提交历史</a></li>
-<li><a href="#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">推送到远程仓库</a></li>
-<li><a href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%9B%B4%E6%96%B0">拉取远程更新</a></li>
-</ul>
-</li>
-<li>
-<p><a href="#3-%E5%85%B6%E4%BB%96%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7">其他实用技巧</a></p>
-<ul>
-<li><a href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF">查看分支</a></li>
-<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF">创建新分支</a></li>
-<li><a href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF">切换分支</a></li>
-<li><a href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF">合并分支</a></li>
-</ul>
-</li>
-<li>
-<p><a href="#4-%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4">进阶操作命令</a></p>
-<ul>
-<li><a href="#1-%E6%92%A4%E9%94%80%E4%B8%8E%E9%87%8D%E7%BD%AEreset">撤销与重置（reset）</a></li>
-<li><a href="#2-%E5%8F%98%E5%9F%BArebase">变基（rebase）</a></li>
-<li><a href="#3-%E6%8B%A3%E9%80%89%E6%8F%90%E4%BA%A4cherry-pick">拣选提交（cherry-pick）</a></li>
-<li><a href="#4-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AFmerge">合并分支（merge）</a></li>
-<li><a href="#5-git-restore">git restore</a></li>
-<li><a href="#6-%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4%E6%88%91%E4%B8%8D%E5%A4%AA%E7%86%9F">其他命令</a></li>
-<li><a href="#7-%E4%BB%80%E4%B9%88%E6%98%AF-head">什么是 HEAD？</a></li>
-</ul>
-</li>
-</ol>
-<hr>
-<h1 id="git-crash-course">git-crash-course</h1>
-<h2 id="1-忽略文件与刷新缓存">1. 忽略文件与刷新缓存</h2>
-<h3 id="添加忽略规则">添加忽略规则</h3>
-<p>在项目根目录创建一个 <code>.gitignore</code> 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：</p>
-<pre tabindex="0"><code>docs/test.md
-</code></pre><p>假设你有一个文件 <code>docs/test.md</code>，里面记录了你的私人笔记，你不希望它被 Git 管理。打开 <code>.gitignore</code> 文件，写下 <code>docs/test.md</code>，保存后，Git 就会忽略这个文件。</p>
-<h3 id="强制刷新-git-缓存让-gitignore-立即生效">强制刷新 Git 缓存（让 .gitignore 立即生效）</h3>
-<p>有时候，你已经跟踪了一些文件，后来才加到 <code>.gitignore</code> 里，但 Git 还是会管它们。这时需要&quot;刷新缓存&quot;。</p>
-<ol>
-<li>
-<p><strong>移除已被 Git 跟踪但现在要忽略的文件：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rm --cached docs/test.md
-</span></span></code></pre></div><p>你之前不小心让 Git 跟踪了 <code>docs/test.md</code>，现在加了 <code>.gitignore</code>，但它还是在 Git 的管理下。运行 <code>git rm --cached docs/test.md</code>，Git 就会停止跟踪这个文件，但你的本地文件不会被删除。就像是跟 Git 说：&ldquo;别管它了，但文件我还要用。&rdquo;</p>
-</li>
-<li>
-<p><strong>如果有多项需要刷新，可以批量操作：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rm -r --cached .
-</span></span><span style="display:flex;"><span>git add .
-</span></span></code></pre></div><p>你的项目里有很多文件已经被 Git 跟踪，但 <code>.gitignore</code> 更新后需要全部重新整理。运行 <code>git rm -r --cached .</code> 会清空 Git 的跟踪列表（文件还在本地），然后 <code>git add .</code> 会根据新的 <code>.gitignore</code> 规则重新添加文件。就像是给 Git 一个&quot;大扫除&quot;，让它按新规则重新认识项目。</p>
-</li>
-<li>
-<p><strong>提交更改：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;refresh git cache and update .gitignore&#34;</span>
-</span></span></code></pre></div><p>刷新完缓存后，运行这个命令，把更改记录到 Git 仓库。提交说明可以写得清楚点，比如&quot;刷新缓存并更新忽略规则&quot;，以后看历史就知道这次提交干了啥。</p>
-</li>
-<li>
-<p><strong>推送到远程仓库：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push
-</span></span></code></pre></div></li>
-</ol>
-<hr>
-<h2 id="2-常用-git-命令">2. 常用 Git 命令</h2>
-<h3 id="初始化仓库">初始化仓库</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init
-</span></span></code></pre></div><h3 id="克隆远程仓库">克隆远程仓库</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone &lt;仓库地址&gt;
-</span></span></code></pre></div><h3 id="查看当前状态">查看当前状态</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
-</span></span></code></pre></div><p>在项目里改了 <code>index.html</code> 和 <code>style.css</code>，但不确定 Git 现在知道哪些变化。运行 <code>git status</code>，Git 会告诉你：<code>index.html</code> 已修改但未暂存，<code>style.css</code> 已暂存但未提交。就像是 Git 给你一份&quot;待办清单&quot;
-这个命令会展示两部分内容： 1. 已经修改的未存入暂存区的 2. 刚创建的还没有被git跟踪的文件(Untracked files)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> gx-site % git status    
-</span></span><span style="display:flex;"><span>位于分支 main
-</span></span><span style="display:flex;"><span>您的分支与上游分支 <span style="color:#e6db74">&#39;origin/main&#39;</span> 一致。
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>尚未暂存以备提交的变更：
-</span></span><span style="display:flex;"><span>  （使用 <span style="color:#e6db74">&#34;git add &lt;文件&gt;...&#34;</span> 更新要提交的内容）
-</span></span><span style="display:flex;"><span>  （使用 <span style="color:#e6db74">&#34;git restore &lt;文件&gt;...&#34;</span> 丢弃工作区的改动）
-</span></span><span style="display:flex;"><span>  （提交或丢弃子模组中未跟踪或修改的内容）
-</span></span><span style="display:flex;"><span>        修改：     hugo_stats.json
-</span></span><span style="display:flex;"><span>        修改：     public/404.html
-</span></span><span style="display:flex;"><span>        修改：     themes/techdoc <span style="color:#f92672">(</span>修改的内容<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>未跟踪的文件:
-</span></span><span style="display:flex;"><span>  （使用 <span style="color:#e6db74">&#34;git add &lt;文件&gt;...&#34;</span> 以包含要提交的内容）
-</span></span><span style="display:flex;"><span>        test.md
-</span></span><span style="display:flex;"><span>修改尚未加入提交（使用 <span style="color:#e6db74">&#34;git add&#34;</span> 和/或 <span style="color:#e6db74">&#34;git commit -a&#34;</span>）
-</span></span></code></pre></div><h3 id="添加文件到暂存区">添加文件到暂存区</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add &lt;文件或目录&gt;
-</span></span></code></pre></div><p>你改好了 <code>README.md</code>，想让 Git 准备提交它。运行 <code>git add README.md</code>，这个文件就被放进暂存区。暂存区就像一个购物车，你先把东西放进去，等会儿一起结账（提交）。</p>
-<h3 id="提交更改">提交更改</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;提交说明&#34;</span>
-</span></span></code></pre></div><p>你已经用 <code>git add</code> 把 <code>README.md</code> 加到暂存区，现在想正式提交。运行 <code>git commit -m &quot;更新了 README 文件内容&quot;</code>，Git 就把这些更改存到仓库里，还附上你的说明，方便以后查看。</p>
-<h3 id="查看提交历史">查看提交历史</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log
-</span></span></code></pre></div><p>你想知道项目里都提交过什么。运行 <code>git log</code>，Git 会列出所有提交记录。</p>
-<h3 id="推送到远程仓库">推送到远程仓库</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push
-</span></span></code></pre></div><h3 id="拉取远程更新">拉取远程更新</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git pull
-</span></span></code></pre></div><hr>
-<h2 id="3-其他实用技巧">3. 其他实用技巧</h2>
-<h3 id="查看分支">查看分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch
-</span></span></code></pre></div><p>你在项目里干活，想知道有哪些分支。运行 <code>git branch</code>，Git 会列出所有本地分支，比如 <code>main</code> 和 <code>feature/login</code></p>
-<h3 id="创建新分支">创建新分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b &lt;新分支名&gt;
-</span></span></code></pre></div><p>开发一个新功能，比如登录页面。运行 <code>git checkout -b feature/login</code>，Git 就会创建一个叫 <code>feature/login</code> 的新分支，并自动切换过去。你可以在这个分支上随便折腾，不影响主分支。</p>
-<h3 id="切换分支">切换分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout &lt;分支名&gt;
-</span></span></code></pre></div><p>你在 <code>feature/login</code> 分支干活，领导说先检查下主分支。运行 <code>git checkout main</code>，Git 就切换到 <code>main</code> 分支，项目内容也变成主分支的模样。</p>
-<h3 id="合并分支">合并分支</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge &lt;分支名&gt;
-</span></span></code></pre></div><p>在 <code>feature/login</code> 分支做好了登录功能，想把它加到主分支。切换到 <code>main</code> 分支（<code>git checkout main</code>），然后运行 <code>git merge feature/login</code>，Git 就会把 <code>feature/login</code> 的更改合并到 <code>main</code> 分支。</p>
-<hr>
-<h2 id="4-进阶操作命令">4. 进阶操作命令</h2>
-<h3 id="1-撤销与重置reset">1. 撤销与重置（reset）</h3>
-<ul>
-<li>
-<p><strong>回退到某个提交（保留修改到暂存区）：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset --soft &lt;commit&gt;
-</span></span></code></pre></div><p>回退到了上一次提交，此时，回退的内容是在stage中， 相当于<strong>执行了</strong> git add 命令， 使用 git log 命令可以看到，已经没有了最新一次的提交， 使用 git diff &ndash;cached 可以看到具体的变化，使用 git status 也能看到stage中的内容未被commit。</p>
-</li>
-<li>
-<p><strong>回退到某个提交（保留修改到工作区）：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset --mixed &lt;commit&gt;
-</span></span></code></pre></div><p>回退到了文件修改后的状态， 此时<strong>未执行</strong> git add 命令(只是文件已经修改了)， 使用 git status 可以看到有未暂存(stage)的内容， 使用git diff 可以看到具体的区别</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git status
-</span></span><span style="display:flex;"><span>      位于分支 master
-</span></span><span style="display:flex;"><span>      尚未暂存以备提交的变更：
-</span></span><span style="display:flex;"><span>      （使用 <span style="color:#e6db74">&#34;git add &lt;文件&gt;...&#34;</span> 更新要提交的内容）
-</span></span><span style="display:flex;"><span>      （使用 <span style="color:#e6db74">&#34;git restore &lt;文件&gt;...&#34;</span> 丢弃工作区的改动）
-</span></span><span style="display:flex;"><span>              修改：     src/App.tsx
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      修改尚未加入提交（使用 <span style="color:#e6db74">&#34;git add&#34;</span> 和/或 <span style="color:#e6db74">&#34;git commit -a&#34;</span>）
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git add .              
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git status            
-</span></span><span style="display:flex;"><span>      位于分支 master
-</span></span><span style="display:flex;"><span>      要提交的变更：
-</span></span><span style="display:flex;"><span>      （使用 <span style="color:#e6db74">&#34;git restore --staged &lt;文件&gt;...&#34;</span> 以取消暂存）
-</span></span><span style="display:flex;"><span>              修改：     src/App.tsx
-</span></span></code></pre></div></li>
-<li>
-<p>上面两个命令 执行 git diff 区别</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git reset --mix HEAD~1 
-</span></span><span style="display:flex;"><span>      重置后取消暂存的变更：
-</span></span><span style="display:flex;"><span>      M       src/App.tsx
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git diff
-</span></span><span style="display:flex;"><span>      diff --git a/src/App.tsx b/src/App.tsx
-</span></span><span style="display:flex;"><span>      index 6e1b5a6..82a66cb <span style="color:#ae81ff">100644</span>
-</span></span><span style="display:flex;"><span>      --- a/src/App.tsx
-</span></span><span style="display:flex;"><span>      +++ b/src/App.tsx
-</span></span><span style="display:flex;"><span>      @@ -26,3 +26,4 @@ <span style="color:#66d9ef">function</span> App<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>      export default App;
-</span></span><span style="display:flex;"><span>      // add commit 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      +//add third commit
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git add .              
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git commit -m<span style="color:#e6db74">&#39;3 commit&#39;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">[</span>master 1ed731d<span style="color:#f92672">]</span> <span style="color:#ae81ff">3</span> commit
-</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">1</span> insertion<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git reset --soft HEAD~1
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git diff               
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % 
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>base<span style="color:#f92672">)</span> xg@xdeMacBook-Pro react-ts % git diff --cached
-</span></span><span style="display:flex;"><span>      diff --git a/src/App.tsx b/src/App.tsx
-</span></span><span style="display:flex;"><span>      index 6e1b5a6..82a66cb <span style="color:#ae81ff">100644</span>
-</span></span><span style="display:flex;"><span>      --- a/src/App.tsx
-</span></span><span style="display:flex;"><span>      +++ b/src/App.tsx
-</span></span><span style="display:flex;"><span>      @@ -26,3 +26,4 @@ <span style="color:#66d9ef">function</span> App<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>      export default App;
-</span></span><span style="display:flex;"><span>      // add commit 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      +//add third commit
-</span></span></code></pre></div></li>
-<li>
-<p><strong>回退到某个提交（彻底丢弃修改）：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset --hard &lt;commit&gt;
-</span></span></code></pre></div><p>这个最简单，改了一堆东西，但觉得没救了，想直接放弃。运行 <code>git reset --hard HEAD~1</code>，Git 回退到上个提交，所有改动都被扔掉，像时间倒流一样。</p>
-</li>
-</ul>
-<h3 id="2-变基rebase">2. 变基（rebase）</h3>
-<ul>
-<li>
-<p><strong>将当前分支变基到目标分支最新提交：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase &lt;目标分支&gt;
-</span></span></code></pre></div><p><strong>例子：</strong><br>
-你在 <code>feature/login</code> 分支开发，<code>main</code> 分支有了新提交。你切换到 <code>feature/login</code>，运行 <code>git rebase main</code>，Git 会把你的提交&quot;搬&quot;到 <code>main</code> 的最新提交后面，保持历史整洁。</p>
-</li>
-<li>
-<p><strong>交互式变基（可编辑、合并、重排提交）：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase -i &lt;commit&gt;
+"><meta name=twitter:image content="https://mlcore-engine.github.io/home/me.png"><link rel=canonical href=https://mlcore-engine.github.io/learn_cs/git-crash-course/><link rel=stylesheet href=/css/math.css><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},svg:{fontCache:"global"}}</script><script id=MathJax-script async src=/js/mathjax/tex-svg.js></script></head><body><div class=container><header><h1>高新 | AI平台开发工程师</h1><a href=https://github.com/mlcore-engine/mlcore-engine class=github><i class="fab fa-github"></i></a><p class=description>AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验</p></header><div class=content-container><main><h1>git-crash-course</h1><h1 id=目录>目录</h1><ol><li><p><a href=#1-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%88%B7%E6%96%B0%E7%BC%93%E5%AD%98>忽略文件与刷新缓存</a></p><ul><li><a href=#%E6%B7%BB%E5%8A%A0%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99>添加忽略规则</a></li><li><a href=#%E5%BC%BA%E5%88%B6%E5%88%B7%E6%96%B0-git-%E7%BC%93%E5%AD%98%E8%AE%A9-gitignore-%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88>强制刷新 Git 缓存</a></li></ul></li><li><p><a href=#2-%E5%B8%B8%E7%94%A8-git-%E5%91%BD%E4%BB%A4>常用 Git 命令</a></p><ul><li><a href=#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93>初始化仓库</a></li><li><a href=#%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93>克隆远程仓库</a></li><li><a href=#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81>查看当前状态</a></li><li><a href=#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA>添加文件到暂存区</a></li><li><a href=#%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%94%B9>提交更改</a></li><li><a href=#%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2>查看提交历史</a></li><li><a href=#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93>推送到远程仓库</a></li><li><a href=#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%9B%B4%E6%96%B0>拉取远程更新</a></li></ul></li><li><p><a href=#3-%E5%85%B6%E4%BB%96%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7>其他实用技巧</a></p><ul><li><a href=#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF>查看分支</a></li><li><a href=#%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF>创建新分支</a></li><li><a href=#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF>切换分支</a></li><li><a href=#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF>合并分支</a></li></ul></li><li><p><a href=#4-%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4>进阶操作命令</a></p><ul><li><a href=#1-%E6%92%A4%E9%94%80%E4%B8%8E%E9%87%8D%E7%BD%AEreset>撤销与重置（reset）</a></li><li><a href=#2-%E5%8F%98%E5%9F%BArebase>变基（rebase）</a></li><li><a href=#3-%E6%8B%A3%E9%80%89%E6%8F%90%E4%BA%A4cherry-pick>拣选提交（cherry-pick）</a></li><li><a href=#4-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AFmerge>合并分支（merge）</a></li><li><a href=#5-git-restore>git restore</a></li><li><a href=#6-%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4%E6%88%91%E4%B8%8D%E5%A4%AA%E7%86%9F>其他命令</a></li><li><a href=#7-%E4%BB%80%E4%B9%88%E6%98%AF-head>什么是 HEAD？</a></li></ul></li></ol><hr><h1 id=git-crash-course>git-crash-course</h1><h2 id=1-忽略文件与刷新缓存>1. 忽略文件与刷新缓存</h2><h3 id=添加忽略规则>添加忽略规则</h3><p>在项目根目录创建一个 <code>.gitignore</code> 文件，然后添加你不想让 Git 跟踪的文件或目录。例如：</p><pre tabindex=0><code>docs/test.md
+</code></pre><p>假设你有一个文件 <code>docs/test.md</code>，里面记录了你的私人笔记，你不希望它被 Git 管理。打开 <code>.gitignore</code> 文件，写下 <code>docs/test.md</code>，保存后，Git 就会忽略这个文件。</p><h3 id=强制刷新-git-缓存让-gitignore-立即生效>强制刷新 Git 缓存（让 .gitignore 立即生效）</h3><p>有时候，你已经跟踪了一些文件，后来才加到 <code>.gitignore</code> 里，但 Git 还是会管它们。这时需要"刷新缓存"。</p><ol><li><p><strong>移除已被 Git 跟踪但现在要忽略的文件：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rm --cached docs/test.md
+</span></span></code></pre></div><p>你之前不小心让 Git 跟踪了 <code>docs/test.md</code>，现在加了 <code>.gitignore</code>，但它还是在 Git 的管理下。运行 <code>git rm --cached docs/test.md</code>，Git 就会停止跟踪这个文件，但你的本地文件不会被删除。就像是跟 Git 说：&ldquo;别管它了，但文件我还要用。&rdquo;</p></li><li><p><strong>如果有多项需要刷新，可以批量操作：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rm -r --cached .
+</span></span><span style=display:flex><span>git add .
+</span></span></code></pre></div><p>你的项目里有很多文件已经被 Git 跟踪，但 <code>.gitignore</code> 更新后需要全部重新整理。运行 <code>git rm -r --cached .</code> 会清空 Git 的跟踪列表（文件还在本地），然后 <code>git add .</code> 会根据新的 <code>.gitignore</code> 规则重新添加文件。就像是给 Git 一个"大扫除"，让它按新规则重新认识项目。</p></li><li><p><strong>提交更改：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;refresh git cache and update .gitignore&#34;</span>
+</span></span></code></pre></div><p>刷新完缓存后，运行这个命令，把更改记录到 Git 仓库。提交说明可以写得清楚点，比如"刷新缓存并更新忽略规则"，以后看历史就知道这次提交干了啥。</p></li><li><p><strong>推送到远程仓库：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git push
+</span></span></code></pre></div></li></ol><hr><h2 id=2-常用-git-命令>2. 常用 Git 命令</h2><h3 id=初始化仓库>初始化仓库</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git init
+</span></span></code></pre></div><h3 id=克隆远程仓库>克隆远程仓库</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git clone &lt;仓库地址&gt;
+</span></span></code></pre></div><h3 id=查看当前状态>查看当前状态</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git status
+</span></span></code></pre></div><p>在项目里改了 <code>index.html</code> 和 <code>style.css</code>，但不确定 Git 现在知道哪些变化。运行 <code>git status</code>，Git 会告诉你：<code>index.html</code> 已修改但未暂存，<code>style.css</code> 已暂存但未提交。就像是 Git 给你一份"待办清单"
+这个命令会展示两部分内容： 1. 已经修改的未存入暂存区的 2. 刚创建的还没有被git跟踪的文件(Untracked files)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> gx-site % git status    
+</span></span><span style=display:flex><span>位于分支 main
+</span></span><span style=display:flex><span>您的分支与上游分支 <span style=color:#e6db74>&#39;origin/main&#39;</span> 一致。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>尚未暂存以备提交的变更：
+</span></span><span style=display:flex><span>  （使用 <span style=color:#e6db74>&#34;git add &lt;文件&gt;...&#34;</span> 更新要提交的内容）
+</span></span><span style=display:flex><span>  （使用 <span style=color:#e6db74>&#34;git restore &lt;文件&gt;...&#34;</span> 丢弃工作区的改动）
+</span></span><span style=display:flex><span>  （提交或丢弃子模组中未跟踪或修改的内容）
+</span></span><span style=display:flex><span>        修改：     hugo_stats.json
+</span></span><span style=display:flex><span>        修改：     public/404.html
+</span></span><span style=display:flex><span>        修改：     themes/techdoc <span style=color:#f92672>(</span>修改的内容<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>未跟踪的文件:
+</span></span><span style=display:flex><span>  （使用 <span style=color:#e6db74>&#34;git add &lt;文件&gt;...&#34;</span> 以包含要提交的内容）
+</span></span><span style=display:flex><span>        test.md
+</span></span><span style=display:flex><span>修改尚未加入提交（使用 <span style=color:#e6db74>&#34;git add&#34;</span> 和/或 <span style=color:#e6db74>&#34;git commit -a&#34;</span>）
+</span></span></code></pre></div><h3 id=添加文件到暂存区>添加文件到暂存区</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git add &lt;文件或目录&gt;
+</span></span></code></pre></div><p>你改好了 <code>README.md</code>，想让 Git 准备提交它。运行 <code>git add README.md</code>，这个文件就被放进暂存区。暂存区就像一个购物车，你先把东西放进去，等会儿一起结账（提交）。</p><h3 id=提交更改>提交更改</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;提交说明&#34;</span>
+</span></span></code></pre></div><p>你已经用 <code>git add</code> 把 <code>README.md</code> 加到暂存区，现在想正式提交。运行 <code>git commit -m "更新了 README 文件内容"</code>，Git 就把这些更改存到仓库里，还附上你的说明，方便以后查看。</p><h3 id=查看提交历史>查看提交历史</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git log
+</span></span></code></pre></div><p>你想知道项目里都提交过什么。运行 <code>git log</code>，Git 会列出所有提交记录。</p><h3 id=推送到远程仓库>推送到远程仓库</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git push
+</span></span></code></pre></div><h3 id=拉取远程更新>拉取远程更新</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git pull
+</span></span></code></pre></div><hr><h2 id=3-其他实用技巧>3. 其他实用技巧</h2><h3 id=查看分支>查看分支</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git branch
+</span></span></code></pre></div><p>你在项目里干活，想知道有哪些分支。运行 <code>git branch</code>，Git 会列出所有本地分支，比如 <code>main</code> 和 <code>feature/login</code></p><h3 id=创建新分支>创建新分支</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout -b &lt;新分支名&gt;
+</span></span></code></pre></div><p>开发一个新功能，比如登录页面。运行 <code>git checkout -b feature/login</code>，Git 就会创建一个叫 <code>feature/login</code> 的新分支，并自动切换过去。你可以在这个分支上随便折腾，不影响主分支。</p><h3 id=切换分支>切换分支</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout &lt;分支名&gt;
+</span></span></code></pre></div><p>你在 <code>feature/login</code> 分支干活，领导说先检查下主分支。运行 <code>git checkout main</code>，Git 就切换到 <code>main</code> 分支，项目内容也变成主分支的模样。</p><h3 id=合并分支>合并分支</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git merge &lt;分支名&gt;
+</span></span></code></pre></div><p>在 <code>feature/login</code> 分支做好了登录功能，想把它加到主分支。切换到 <code>main</code> 分支（<code>git checkout main</code>），然后运行 <code>git merge feature/login</code>，Git 就会把 <code>feature/login</code> 的更改合并到 <code>main</code> 分支。</p><hr><h2 id=4-进阶操作命令>4. 进阶操作命令</h2><h3 id=1-撤销与重置reset>1. 撤销与重置（reset）</h3><ul><li><p><strong>回退到某个提交（保留修改到暂存区）：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git reset --soft &lt;commit&gt;
+</span></span></code></pre></div><p>回退到了上一次提交，此时，回退的内容是在stage中， 相当于<strong>执行了</strong> git add 命令， 使用 git log 命令可以看到，已经没有了最新一次的提交， 使用 git diff &ndash;cached 可以看到具体的变化，使用 git status 也能看到stage中的内容未被commit。</p></li><li><p><strong>回退到某个提交（保留修改到工作区）：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git reset --mixed &lt;commit&gt;
+</span></span></code></pre></div><p>回退到了文件修改后的状态， 此时<strong>未执行</strong> git add 命令(只是文件已经修改了)， 使用 git status 可以看到有未暂存(stage)的内容， 使用git diff 可以看到具体的区别</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git status
+</span></span><span style=display:flex><span>      位于分支 master
+</span></span><span style=display:flex><span>      尚未暂存以备提交的变更：
+</span></span><span style=display:flex><span>      （使用 <span style=color:#e6db74>&#34;git add &lt;文件&gt;...&#34;</span> 更新要提交的内容）
+</span></span><span style=display:flex><span>      （使用 <span style=color:#e6db74>&#34;git restore &lt;文件&gt;...&#34;</span> 丢弃工作区的改动）
+</span></span><span style=display:flex><span>              修改：     src/App.tsx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      修改尚未加入提交（使用 <span style=color:#e6db74>&#34;git add&#34;</span> 和/或 <span style=color:#e6db74>&#34;git commit -a&#34;</span>）
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git add .              
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git status            
+</span></span><span style=display:flex><span>      位于分支 master
+</span></span><span style=display:flex><span>      要提交的变更：
+</span></span><span style=display:flex><span>      （使用 <span style=color:#e6db74>&#34;git restore --staged &lt;文件&gt;...&#34;</span> 以取消暂存）
+</span></span><span style=display:flex><span>              修改：     src/App.tsx
+</span></span></code></pre></div></li><li><p>上面两个命令 执行 git diff 区别</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git reset --mix HEAD~1 
+</span></span><span style=display:flex><span>      重置后取消暂存的变更：
+</span></span><span style=display:flex><span>      M       src/App.tsx
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git diff
+</span></span><span style=display:flex><span>      diff --git a/src/App.tsx b/src/App.tsx
+</span></span><span style=display:flex><span>      index 6e1b5a6..82a66cb <span style=color:#ae81ff>100644</span>
+</span></span><span style=display:flex><span>      --- a/src/App.tsx
+</span></span><span style=display:flex><span>      +++ b/src/App.tsx
+</span></span><span style=display:flex><span>      @@ -26,3 +26,4 @@ <span style=color:#66d9ef>function</span> App<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>      export default App;
+</span></span><span style=display:flex><span>      // add commit 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      +//add third commit
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git add .              
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git commit -m<span style=color:#e6db74>&#39;3 commit&#39;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>[</span>master 1ed731d<span style=color:#f92672>]</span> <span style=color:#ae81ff>3</span> commit
+</span></span><span style=display:flex><span>      <span style=color:#ae81ff>1</span> file changed, <span style=color:#ae81ff>1</span> insertion<span style=color:#f92672>(</span>+<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git reset --soft HEAD~1
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git diff               
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % 
+</span></span><span style=display:flex><span>  <span style=color:#f92672>(</span>base<span style=color:#f92672>)</span> xg@xdeMacBook-Pro react-ts % git diff --cached
+</span></span><span style=display:flex><span>      diff --git a/src/App.tsx b/src/App.tsx
+</span></span><span style=display:flex><span>      index 6e1b5a6..82a66cb <span style=color:#ae81ff>100644</span>
+</span></span><span style=display:flex><span>      --- a/src/App.tsx
+</span></span><span style=display:flex><span>      +++ b/src/App.tsx
+</span></span><span style=display:flex><span>      @@ -26,3 +26,4 @@ <span style=color:#66d9ef>function</span> App<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>      export default App;
+</span></span><span style=display:flex><span>      // add commit 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      +//add third commit
+</span></span></code></pre></div></li><li><p><strong>回退到某个提交（彻底丢弃修改）：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git reset --hard &lt;commit&gt;
+</span></span></code></pre></div><p>这个最简单，改了一堆东西，但觉得没救了，想直接放弃。运行 <code>git reset --hard HEAD~1</code>，Git 回退到上个提交，所有改动都被扔掉，像时间倒流一样。</p></li></ul><h3 id=2-变基rebase>2. 变基（rebase）</h3><ul><li><p><strong>将当前分支变基到目标分支最新提交：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rebase &lt;目标分支&gt;
+</span></span></code></pre></div><p><strong>例子：</strong><br>你在 <code>feature/login</code> 分支开发，<code>main</code> 分支有了新提交。你切换到 <code>feature/login</code>，运行 <code>git rebase main</code>，Git 会把你的提交"搬"到 <code>main</code> 的最新提交后面，保持历史整洁。</p></li><li><p><strong>交互式变基（可编辑、合并、重排提交）：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rebase -i &lt;commit&gt;
 </span></span></code></pre></div><p>rebase有两个作用， 1. 不用的branch 变基(相对简单) 2. 同一个分支使用 -i 命令 变基， 常用的功能有三个 pick reword edit squash(其中， reword和edit需要注意区别)，下面我从两个方面介绍rebase用法
 你最近提交了 3 次，想把它们合并成 1 次。运行 <code>git rebase -i HEAD~3</code>，Git 打开一个界面，你可以选择合并（squash）、重排或编辑提交，像整理日记本一样。
-好的，我来详细讲解 <strong>Git 的 <code>rebase</code> 用法</strong> 以及 <strong>应用场景</strong>，用通俗的语言和具体例子帮你理解。</p>
-</li>
-</ul>
-<hr>
-<h4 id="基本原理">基本原理</h4>
-<p>假设你有一个分支 <code>feature</code>，是从 <code>main</code> 分支的某个点分出来的。在你开发 <code>feature</code> 的过程中，<code>main</code> 分支可能有了新的提交。使用 <code>git rebase</code>，你可以把 <code>feature</code> 的更改应用到 <code>main</code> 的最新提交上。</p>
-<h4 id="基础用法git-rebase-branch">基础用法：<code>git rebase &lt;branch&gt;</code></h4>
-<p><strong>举个例子</strong>：</p>
-<ul>
-<li>初始提交历史：
-<pre tabindex="0"><code>A -- B -- C (main)
+好的，我来详细讲解 <strong>Git 的 <code>rebase</code> 用法</strong> 以及 <strong>应用场景</strong>，用通俗的语言和具体例子帮你理解。</p></li></ul><hr><h4 id=基本原理>基本原理</h4><p>假设你有一个分支 <code>feature</code>，是从 <code>main</code> 分支的某个点分出来的。在你开发 <code>feature</code> 的过程中，<code>main</code> 分支可能有了新的提交。使用 <code>git rebase</code>，你可以把 <code>feature</code> 的更改应用到 <code>main</code> 的最新提交上。</p><h4 id=基础用法git-rebase-branch>基础用法：<code>git rebase &lt;branch></code></h4><p><strong>举个例子</strong>：</p><ul><li>初始提交历史：<pre tabindex=0><code>A -- B -- C (main)
      \
       D -- E (feature)
-</code></pre></li>
-<li>执行 <code>git checkout feature &amp;&amp; git rebase main</code> 后：
-<pre tabindex="0"><code>A -- B -- C (main)
+</code></pre></li><li>执行 <code>git checkout feature && git rebase main</code> 后：<pre tabindex=0><code>A -- B -- C (main)
            \
             D&#39; -- E&#39; (feature)
-</code></pre></li>
-<li>这里 <code>D'</code> 和 <code>E'</code> 是 <code>D</code> 和 <code>E</code> 的&quot;新版本&quot;，被重新应用到 <code>C</code> 之上。</li>
-</ul>
-<hr>
-<p>你在 <code>feature</code> 分支开发新功能，同事在 <code>main</code> 分支修复了一个 bug。运行 <code>git rebase main</code> 后，你的 <code>feature</code> 分支会更新到最新的 <code>main</code>，包含 bug 修复。</p>
-<hr>
-<h4 id="交互式变基git-rebase--i-提交">交互式变基：<code>git rebase -i &lt;提交&gt;</code></h4>
-<ul>
-<li><strong>作用</strong>：允许你在变基过程中编辑、合并、重排或删除提交。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase -i HEAD~3  <span style="color:#75715e"># 对最近 3 个提交进行交互式变基</span>
-</span></span></code></pre></div></li>
-<li><strong>操作</strong>：运行后会打开一个编辑器，你可以选择：
-<ul>
-<li><code>pick</code>：保留提交。</li>
-<li><code>squash</code>：合并到前一个提交。</li>
-<li><code>edit</code>：修改提交内容或信息。</li>
-</ul>
-</li>
-</ul>
-<p><strong>示例</strong>：
-你在 <code>feature</code> 分支提交了 3 次小更改，想合并成一个提交。运行 <code>git rebase -i HEAD~3</code>，将后两个提交改为 <code>squash</code>，保存后，3 个提交会合并为 1 个。</p>
-<hr>
-<h4 id="git-rebase-的应用场景"><code>git rebase</code> 的应用场景</h4>
-<h5 id="1-保持提交历史整洁">1. 保持提交历史整洁</h5>
-<ul>
-<li><strong>场景</strong>：你在 <code>feature</code> 分支开发时，<code>main</code> 分支有新提交。使用 <code>rebase</code> 可以让 <code>feature</code> 的历史线性，避免多余的合并提交。</li>
-<li><strong>好处</strong>：提交历史更清晰，易于查看。</li>
-</ul>
-<p><strong>示例</strong>：</p>
-<ul>
-<li>不用 <code>rebase</code>，用 <code>merge</code>：
-<pre tabindex="0"><code>A -- B -- C -- M (main)
+</code></pre></li><li>这里 <code>D'</code> 和 <code>E'</code> 是 <code>D</code> 和 <code>E</code> 的"新版本"，被重新应用到 <code>C</code> 之上。</li></ul><hr><p>你在 <code>feature</code> 分支开发新功能，同事在 <code>main</code> 分支修复了一个 bug。运行 <code>git rebase main</code> 后，你的 <code>feature</code> 分支会更新到最新的 <code>main</code>，包含 bug 修复。</p><hr><h4 id=交互式变基git-rebase--i-提交>交互式变基：<code>git rebase -i &lt;提交></code></h4><ul><li><strong>作用</strong>：允许你在变基过程中编辑、合并、重排或删除提交。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rebase -i HEAD~3  <span style=color:#75715e># 对最近 3 个提交进行交互式变基</span>
+</span></span></code></pre></div></li><li><strong>操作</strong>：运行后会打开一个编辑器，你可以选择：<ul><li><code>pick</code>：保留提交。</li><li><code>squash</code>：合并到前一个提交。</li><li><code>edit</code>：修改提交内容或信息。</li></ul></li></ul><p><strong>示例</strong>：
+你在 <code>feature</code> 分支提交了 3 次小更改，想合并成一个提交。运行 <code>git rebase -i HEAD~3</code>，将后两个提交改为 <code>squash</code>，保存后，3 个提交会合并为 1 个。</p><hr><h4 id=git-rebase-的应用场景><code>git rebase</code> 的应用场景</h4><h5 id=1-保持提交历史整洁>1. 保持提交历史整洁</h5><ul><li><strong>场景</strong>：你在 <code>feature</code> 分支开发时，<code>main</code> 分支有新提交。使用 <code>rebase</code> 可以让 <code>feature</code> 的历史线性，避免多余的合并提交。</li><li><strong>好处</strong>：提交历史更清晰，易于查看。</li></ul><p><strong>示例</strong>：</p><ul><li>不用 <code>rebase</code>，用 <code>merge</code>：<pre tabindex=0><code>A -- B -- C -- M (main)
      \       /
       D -- E (feature)
-</code></pre></li>
-<li>用 <code>rebase</code>：
-<pre tabindex="0"><code>A -- B -- C (main)
+</code></pre></li><li>用 <code>rebase</code>：<pre tabindex=0><code>A -- B -- C (main)
            \
             D&#39; -- E&#39; (feature)
-</code></pre></li>
-</ul>
-<hr>
-<h5 id="2-整理提交历史">2. 整理提交历史</h5>
-<ul>
-<li><strong>场景</strong>：开发过程中提交了很多临时或&quot;WIP&quot;提交，想在合并到 <code>main</code> 前清理。</li>
-<li><strong>好处</strong>：通过交互式变基，可以合并或删除不必要的提交。</li>
-</ul>
-<p><strong>示例</strong>：
-初始历史：</p>
-<pre tabindex="0"><code>A -- B -- C -- D (feature)
-</code></pre><p>运行 <code>git rebase -i HEAD~3</code>，合并 <code>C</code> 和 <code>D</code> 到 <code>B</code>，结果：</p>
-<pre tabindex="0"><code># 编辑器中这样设置
+</code></pre></li></ul><hr><h5 id=2-整理提交历史>2. 整理提交历史</h5><ul><li><strong>场景</strong>：开发过程中提交了很多临时或"WIP"提交，想在合并到 <code>main</code> 前清理。</li><li><strong>好处</strong>：通过交互式变基，可以合并或删除不必要的提交。</li></ul><p><strong>示例</strong>：
+初始历史：</p><pre tabindex=0><code>A -- B -- C -- D (feature)
+</code></pre><p>运行 <code>git rebase -i HEAD~3</code>，合并 <code>C</code> 和 <code>D</code> 到 <code>B</code>，结果：</p><pre tabindex=0><code># 编辑器中这样设置
 pick D
 squash C
 squash B
 
 A -- B&#39; (feature)
-</code></pre><hr>
-<h5 id="3-解决冲突">3. 解决冲突</h5>
-<ul>
-<li><strong>场景</strong>：<code>feature</code> 分支的更改与 <code>main</code> 的新提交有冲突。<code>rebase</code> 让你逐步解决每个冲突。</li>
-<li><strong>好处</strong>：比一次性合并更可控。</li>
-</ul>
-<p><strong>解决步骤</strong>：</p>
-<ol>
-<li>运行 <code>git rebase main</code>，遇到冲突。</li>
-<li>手动解决冲突，运行 <code>git add &lt;文件&gt;</code>。</li>
-<li>继续变基：<code>git rebase --continue</code>。</li>
-<li>如果放弃：<code>git rebase --abort</code>。</li>
-</ol>
-<hr>
-<h5 id="1-不要在公共分支上使用">1. 不要在公共分支上使用</h5>
-<ul>
-<li><strong>原因</strong>：<code>rebase</code> 重写历史，如果多人协作的公共分支被变基，会导致其他人历史不一致。</li>
-<li><strong>建议</strong>：只在本地私有分支使用。</li>
-</ul>
-<h5 id="2-处理冲突">2. 处理冲突</h5>
-<ul>
-<li><strong>方法</strong>：解决冲突后用 <code>git rebase --continue</code>，放弃用 <code>git rebase --abort</code>。</li>
-</ul>
-<h5 id="3-与-git-merge-的区别">3. 与 <code>git merge</code> 的区别</h5>
-<ul>
-<li><strong><code>rebase</code></strong>：历史线性，但重写提交。</li>
-<li><strong><code>merge</code></strong>：保留历史，生成合并提交。</li>
-</ul>
-<hr>
-<h5 id="示例1基本-rebase">示例1：基本 <code>rebase</code></h5>
-<ul>
-<li><strong>初始状态</strong>：
-<pre tabindex="0"><code>A -- B -- C (main)
+</code></pre><hr><h5 id=3-解决冲突>3. 解决冲突</h5><ul><li><strong>场景</strong>：<code>feature</code> 分支的更改与 <code>main</code> 的新提交有冲突。<code>rebase</code> 让你逐步解决每个冲突。</li><li><strong>好处</strong>：比一次性合并更可控。</li></ul><p><strong>解决步骤</strong>：</p><ol><li>运行 <code>git rebase main</code>，遇到冲突。</li><li>手动解决冲突，运行 <code>git add &lt;文件></code>。</li><li>继续变基：<code>git rebase --continue</code>。</li><li>如果放弃：<code>git rebase --abort</code>。</li></ol><hr><h5 id=1-不要在公共分支上使用>1. 不要在公共分支上使用</h5><ul><li><strong>原因</strong>：<code>rebase</code> 重写历史，如果多人协作的公共分支被变基，会导致其他人历史不一致。</li><li><strong>建议</strong>：只在本地私有分支使用。</li></ul><h5 id=2-处理冲突>2. 处理冲突</h5><ul><li><strong>方法</strong>：解决冲突后用 <code>git rebase --continue</code>，放弃用 <code>git rebase --abort</code>。</li></ul><h5 id=3-与-git-merge-的区别>3. 与 <code>git merge</code> 的区别</h5><ul><li><strong><code>rebase</code></strong>：历史线性，但重写提交。</li><li><strong><code>merge</code></strong>：保留历史，生成合并提交。</li></ul><hr><h5 id=示例1基本-rebase>示例1：基本 <code>rebase</code></h5><ul><li><strong>初始状态</strong>：<pre tabindex=0><code>A -- B -- C (main)
      \
       D -- E (feature)
-</code></pre></li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout feature
-</span></span><span style="display:flex;"><span>git rebase main
-</span></span></code></pre></div></li>
-<li><strong>结果</strong>：
-<pre tabindex="0"><code>A -- B -- C (main)
+</code></pre></li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout feature
+</span></span><span style=display:flex><span>git rebase main
+</span></span></code></pre></div></li><li><strong>结果</strong>：<pre tabindex=0><code>A -- B -- C (main)
            \
             D&#39; -- E&#39; (feature)
-</code></pre></li>
-</ul>
-<h5 id="示例2交互式变基合并提交">示例2：交互式变基合并提交</h5>
-<ul>
-<li><strong>初始状态</strong>：
-<pre tabindex="0"><code>A -- B -- C -- D (feature)
-</code></pre></li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase -i HEAD~3
-</span></span></code></pre></div></li>
-<li><strong>编辑器中</strong>：
-<pre tabindex="0"><code>pick B
+</code></pre></li></ul><h5 id=示例2交互式变基合并提交>示例2：交互式变基合并提交</h5><ul><li><strong>初始状态</strong>：<pre tabindex=0><code>A -- B -- C -- D (feature)
+</code></pre></li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rebase -i HEAD~3
+</span></span></code></pre></div></li><li><strong>编辑器中</strong>：<pre tabindex=0><code>pick B
 squash C
 squash D
-</code></pre></li>
-<li><strong>结果</strong>：
-<pre tabindex="0"><code>A -- B&#39;(这是一个新的commit id都不一样) (feature)  # B&#39; 包含 B、C、D 的更改
-</code></pre></li>
-</ul>
-<h5 id="示例3--git-rebase--i-head4">示例3:  git rebase -i HEAD～4</h5>
-<ul>
-<li><strong>我现在的需求是把最近一次提交合并到它的上一次提交， 并且要修改倒数第三次的commit信息， 我会分别使用 squash(合并两次提交) reword or edit(修改commit或者文件) 以及 pick</strong></li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    <span style="color:#75715e"># 当我使用git rebase -i HEAD～4 命令的时候，会进入下面的页面</span>
-</span></span><span style="display:flex;"><span>    pick 6bef283 testrebase
-</span></span><span style="display:flex;"><span>    pick ce44812 update test.ts
-</span></span><span style="display:flex;"><span>    pick 7f8c7b9 second commit   <span style="color:#ae81ff">4</span> commit
-</span></span><span style="display:flex;"><span>    pick 25a3b6b hahahah woxuehuile new fif commit testrebase <span style="color:#ae81ff">1</span> new six commit
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 变基 26a2f8c..25a3b6b 到 26a2f8c（4 个提交）</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 命令:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># p, pick &lt;提交&gt; = 使用提交</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># r, reword &lt;提交&gt; = 使用提交，但编辑提交说明</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># e, edit &lt;提交&gt; = 使用提交，但停止以便修补提交</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># s, squash &lt;提交&gt; = 使用提交，但挤压到前一个提交</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 根据上面的需求我要进行修改 </span>
-</span></span><span style="display:flex;"><span>    pick 6bef283 testrebase <span style="color:#f92672">(</span>HEAD 4<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>    reword ce44812 update test.ts <span style="color:#f92672">(</span>HEAD 2<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>    pick 7f8c7b9 second commit   <span style="color:#ae81ff">4</span> commit <span style="color:#f92672">(</span>HEAD 1<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>    squash 25a3b6b hahahah woxuehuile new fif commit testrebase <span style="color:#ae81ff">1</span> new six commit <span style="color:#f92672">(</span>这是最新的一次提交,向上依次为父HEAD<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 变基 26a2f8c..25a3b6b 到 26a2f8c（4 个提交）</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 命令:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># p, pick &lt;提交&gt; = 使用提交</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># r, reword &lt;提交&gt; = 使用提交，但编辑提交说明</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># e, edit &lt;提交&gt; = 使用提交，但停止以便修补提交</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># s, squash &lt;提交&gt; = 使用提交，但挤压到前一个提交</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    当我使用 wq保存上面的内容后， 会出现新的页面， 依次为编辑 ce44812 的 commit， 以及合并 7f8c7b9 和 25a3b6b 需要重新写的commit信息
-</span></span><span style="display:flex;"><span>    另外说一下edit和reword区别： 
-</span></span><span style="display:flex;"><span>    1. reword：只修改提交说明
-</span></span><span style="display:flex;"><span>        作用：保留提交的内容（文件更改）不变，仅允许你修改该提交的提交说明（commit message）。
-</span></span><span style="display:flex;"><span>        过程：
-</span></span><span style="display:flex;"><span>        在交互式变基的编辑器中，将 pick 改为 reword。
-</span></span><span style="display:flex;"><span>        保存退出后，Git 会打开一个新的编辑器，让你修改提交说明。
-</span></span><span style="display:flex;"><span>        修改完成后，提交的内容保持不变，只有提交说明更新。
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    2. edit：修改提交内容或提交说明
-</span></span><span style="display:flex;"><span>        作用：暂停变基过程，允许你修改提交的文件内容和/或提交说明。
-</span></span><span style="display:flex;"><span>        过程：
-</span></span><span style="display:flex;"><span>        在交互式变基的编辑器中，将 pick 改为 edit。
-</span></span><span style="display:flex;"><span>        保存退出后，Git 会暂停在该提交，让你可以：
-</span></span><span style="display:flex;"><span>        修改文件内容（比如修复代码或添加新文件）。
-</span></span><span style="display:flex;"><span>        用 git add 暂存更改。
-</span></span><span style="display:flex;"><span>        用 git commit --amend 更新提交（可以同时修改提交说明）。
-</span></span><span style="display:flex;"><span>        完成后，运行 git rebase --continue 继续变基。
-</span></span></code></pre></div><hr>
-<h3 id="3-拣选提交cherry-pick">3. 拣选提交（cherry-pick）</h3>
-<p><code>git cherry-pick</code> 的作用是<strong>从其他分支或提交历史中选择一个或多个特定的提交</strong>，并将其应用到当前分支。它会复制指定提交的更改（比如文件修改），然后在当前分支创建一个新的提交。</p>
-<hr>
-<h4 id="1-基本用法git-cherry-pick-提交哈希">1 基本用法：<code>git cherry-pick &lt;提交哈希&gt;</code></h4>
-<ul>
-<li><strong>作用</strong>：将指定提交的更改复制到当前分支，并创建一个新提交。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cherry-pick &lt;提交哈希&gt;
-</span></span></code></pre></div></li>
-<li><strong>效果</strong>：目标提交的更改会被应用到当前分支，生成一个新提交（哈希值不同，但更改内容相同）。</li>
-</ul>
-<p>假设你有两个分支：<code>main</code> 和 <code>feature</code>。提交历史如下：</p>
-<pre tabindex="0"><code>A -- B -- C (main)
+</code></pre></li><li><strong>结果</strong>：<pre tabindex=0><code>A -- B&#39;(这是一个新的commit id都不一样) (feature)  # B&#39; 包含 B、C、D 的更改
+</code></pre></li></ul><h5 id=示例3--git-rebase--i-head4>示例3: git rebase -i HEAD～4</h5><ul><li><strong>我现在的需求是把最近一次提交合并到它的上一次提交， 并且要修改倒数第三次的commit信息， 我会分别使用 squash(合并两次提交) reword or edit(修改commit或者文件) 以及 pick</strong></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>    <span style=color:#75715e># 当我使用git rebase -i HEAD～4 命令的时候，会进入下面的页面</span>
+</span></span><span style=display:flex><span>    pick 6bef283 testrebase
+</span></span><span style=display:flex><span>    pick ce44812 update test.ts
+</span></span><span style=display:flex><span>    pick 7f8c7b9 second commit   <span style=color:#ae81ff>4</span> commit
+</span></span><span style=display:flex><span>    pick 25a3b6b hahahah woxuehuile new fif commit testrebase <span style=color:#ae81ff>1</span> new six commit
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 变基 26a2f8c..25a3b6b 到 26a2f8c（4 个提交）</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 命令:</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># p, pick &lt;提交&gt; = 使用提交</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># r, reword &lt;提交&gt; = 使用提交，但编辑提交说明</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># e, edit &lt;提交&gt; = 使用提交，但停止以便修补提交</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># s, squash &lt;提交&gt; = 使用提交，但挤压到前一个提交</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 根据上面的需求我要进行修改 </span>
+</span></span><span style=display:flex><span>    pick 6bef283 testrebase <span style=color:#f92672>(</span>HEAD 4<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    reword ce44812 update test.ts <span style=color:#f92672>(</span>HEAD 2<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    pick 7f8c7b9 second commit   <span style=color:#ae81ff>4</span> commit <span style=color:#f92672>(</span>HEAD 1<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    squash 25a3b6b hahahah woxuehuile new fif commit testrebase <span style=color:#ae81ff>1</span> new six commit <span style=color:#f92672>(</span>这是最新的一次提交,向上依次为父HEAD<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 变基 26a2f8c..25a3b6b 到 26a2f8c（4 个提交）</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 命令:</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># p, pick &lt;提交&gt; = 使用提交</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># r, reword &lt;提交&gt; = 使用提交，但编辑提交说明</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># e, edit &lt;提交&gt; = 使用提交，但停止以便修补提交</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># s, squash &lt;提交&gt; = 使用提交，但挤压到前一个提交</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    当我使用 wq保存上面的内容后， 会出现新的页面， 依次为编辑 ce44812 的 commit， 以及合并 7f8c7b9 和 25a3b6b 需要重新写的commit信息
+</span></span><span style=display:flex><span>    另外说一下edit和reword区别： 
+</span></span><span style=display:flex><span>    1. reword：只修改提交说明
+</span></span><span style=display:flex><span>        作用：保留提交的内容（文件更改）不变，仅允许你修改该提交的提交说明（commit message）。
+</span></span><span style=display:flex><span>        过程：
+</span></span><span style=display:flex><span>        在交互式变基的编辑器中，将 pick 改为 reword。
+</span></span><span style=display:flex><span>        保存退出后，Git 会打开一个新的编辑器，让你修改提交说明。
+</span></span><span style=display:flex><span>        修改完成后，提交的内容保持不变，只有提交说明更新。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    2. edit：修改提交内容或提交说明
+</span></span><span style=display:flex><span>        作用：暂停变基过程，允许你修改提交的文件内容和/或提交说明。
+</span></span><span style=display:flex><span>        过程：
+</span></span><span style=display:flex><span>        在交互式变基的编辑器中，将 pick 改为 edit。
+</span></span><span style=display:flex><span>        保存退出后，Git 会暂停在该提交，让你可以：
+</span></span><span style=display:flex><span>        修改文件内容（比如修复代码或添加新文件）。
+</span></span><span style=display:flex><span>        用 git add 暂存更改。
+</span></span><span style=display:flex><span>        用 git commit --amend 更新提交（可以同时修改提交说明）。
+</span></span><span style=display:flex><span>        完成后，运行 git rebase --continue 继续变基。
+</span></span></code></pre></div><hr><h3 id=3-拣选提交cherry-pick>3. 拣选提交（cherry-pick）</h3><p><code>git cherry-pick</code> 的作用是<strong>从其他分支或提交历史中选择一个或多个特定的提交</strong>，并将其应用到当前分支。它会复制指定提交的更改（比如文件修改），然后在当前分支创建一个新的提交。</p><hr><h4 id=1-基本用法git-cherry-pick-提交哈希>1 基本用法：<code>git cherry-pick &lt;提交哈希></code></h4><ul><li><strong>作用</strong>：将指定提交的更改复制到当前分支，并创建一个新提交。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git cherry-pick &lt;提交哈希&gt;
+</span></span></code></pre></div></li><li><strong>效果</strong>：目标提交的更改会被应用到当前分支，生成一个新提交（哈希值不同，但更改内容相同）。</li></ul><p>假设你有两个分支：<code>main</code> 和 <code>feature</code>。提交历史如下：</p><pre tabindex=0><code>A -- B -- C (main)
       \
        D -- E (feature)
-</code></pre><ul>
-<li>提交 <code>E</code> 在 <code>feature</code> 分支修复了一个 bug（修改了 <code>bugfix.txt</code>），你想把这个修复应用到 <code>main</code> 分支。</li>
-<li>找到 <code>E</code> 的提交哈希（通过 <code>git log --oneline</code>）：
-<pre tabindex="0"><code>e123456 (feature) Fix bug in bugfix.txt
-</code></pre></li>
-<li>在 <code>main</code> 分支运行：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git cherry-pick e123456
-</span></span></code></pre></div></li>
-<li><strong>结果</strong>：
-<pre tabindex="0"><code>A -- B -- C -- E&#39; (main)
+</code></pre><ul><li>提交 <code>E</code> 在 <code>feature</code> 分支修复了一个 bug（修改了 <code>bugfix.txt</code>），你想把这个修复应用到 <code>main</code> 分支。</li><li>找到 <code>E</code> 的提交哈希（通过 <code>git log --oneline</code>）：<pre tabindex=0><code>e123456 (feature) Fix bug in bugfix.txt
+</code></pre></li><li>在 <code>main</code> 分支运行：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout main
+</span></span><span style=display:flex><span>git cherry-pick e123456
+</span></span></code></pre></div></li><li><strong>结果</strong>：<pre tabindex=0><code>A -- B -- C -- E&#39; (main)
     \
      D -- E (feature)
-</code></pre><ul>
-<li><code>E'</code> 是一个新提交，包含 <code>E</code> 的更改（<code>bugfix.txt</code> 的修复），但哈希值不同。</li>
-<li><code>main</code> 分支现在有了 bug 修复。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h4 id="2-摘取多个提交git-cherry-pick-提交1-提交2-">2. 摘取多个提交：<code>git cherry-pick &lt;提交1&gt; &lt;提交2&gt; ...</code></h4>
-<ul>
-<li><strong>作用</strong>：按顺序将多个提交应用到当前分支。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cherry-pick &lt;提交1&gt; &lt;提交2&gt;
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h4 id="3-处理冲突">3. 处理冲突</h4>
-<ul>
-<li><strong>场景</strong>：如果 <code>cherry-pick</code> 的提交与当前分支有冲突，Git 会暂停并提示解决。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cherry-pick &lt;提交哈希&gt;
-</span></span><span style="display:flex;"><span>git add &lt;冲突文件&gt;  <span style="color:#75715e"># 解决冲突后</span>
-</span></span><span style="display:flex;"><span>git cherry-pick --continue  <span style="color:#75715e"># 继续</span>
-</span></span><span style="display:flex;"><span>git cherry-pick --abort  <span style="color:#75715e"># 放弃</span>
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h4 id="4-其他选项">4. 其他选项</h4>
-<ul>
-<li><strong><code>--no-commit</code></strong>：应用提交的更改，但不立即创建新提交：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cherry-pick --no-commit &lt;提交哈希&gt;
-</span></span></code></pre></div><ul>
-<li>适合想手动调整更改后再提交。</li>
-</ul>
-</li>
-<li><strong><code>--edit</code></strong>：允许编辑新提交的提交说明：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cherry-pick -e &lt;提交哈希&gt;
-</span></span></code></pre></div></li>
-<li><strong>范围摘取</strong>：摘取连续的提交：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cherry-pick &lt;起始提交&gt;..&lt;结束提交&gt;
-</span></span></code></pre></div><ul>
-<li>示例：<code>git cherry-pick d789012..e123456</code> 摘取 <code>d789012</code> 到 <code>e123456</code> 的所有提交。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="4-合并分支merge">4. 合并分支（merge）</h3>
-<p><code>git merge</code> 的作用是将一个分支的更改合并到当前分支。它会把目标分支的提交历史引入当前分支，生成一个新的合并提交（merge commit）或直接快进（fast-forward）合并，具体取决于分支的状态。</p>
-<hr>
-<h4 id="1-基本用法git-merge-目标分支">1. 基本用法：<code>git merge &lt;目标分支&gt;</code></h4>
-<ul>
-<li>
-<p><strong>作用</strong>：将指定的 <code>&lt;目标分支&gt;</code> 的更改合并到当前分支。</p>
-</li>
-<li>
-<p><strong>命令</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git merge feature
-</span></span></code></pre></div></li>
-<li>
-<p><strong>效果</strong>：将 <code>feature</code> 分支的更改合并到 <code>main</code> 分支。</p>
-</li>
-<li>
-<p><strong>快进合并（Fast-forward）</strong>：</p>
-<ul>
-<li>如果当前分支（比如 <code>main</code>）没有新的提交，而目标分支（比如 <code>feature</code>）有新的提交，Git 会直接将 <code>main</code> 的 HEAD 移动到 <code>feature</code> 的最新提交。</li>
-<li>历史呈线性，无额外合并提交。</li>
-<li>示例历史：
-<pre tabindex="0"><code>A -- B -- C (main)
+</code></pre><ul><li><code>E'</code> 是一个新提交，包含 <code>E</code> 的更改（<code>bugfix.txt</code> 的修复），但哈希值不同。</li><li><code>main</code> 分支现在有了 bug 修复。</li></ul></li></ul><hr><h4 id=2-摘取多个提交git-cherry-pick-提交1-提交2->2. 摘取多个提交：<code>git cherry-pick &lt;提交1> &lt;提交2> ...</code></h4><ul><li><strong>作用</strong>：按顺序将多个提交应用到当前分支。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git cherry-pick &lt;提交1&gt; &lt;提交2&gt;
+</span></span></code></pre></div></li></ul><hr><h4 id=3-处理冲突>3. 处理冲突</h4><ul><li><strong>场景</strong>：如果 <code>cherry-pick</code> 的提交与当前分支有冲突，Git 会暂停并提示解决。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git cherry-pick &lt;提交哈希&gt;
+</span></span><span style=display:flex><span>git add &lt;冲突文件&gt;  <span style=color:#75715e># 解决冲突后</span>
+</span></span><span style=display:flex><span>git cherry-pick --continue  <span style=color:#75715e># 继续</span>
+</span></span><span style=display:flex><span>git cherry-pick --abort  <span style=color:#75715e># 放弃</span>
+</span></span></code></pre></div></li></ul><hr><h4 id=4-其他选项>4. 其他选项</h4><ul><li><strong><code>--no-commit</code></strong>：应用提交的更改，但不立即创建新提交：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git cherry-pick --no-commit &lt;提交哈希&gt;
+</span></span></code></pre></div><ul><li>适合想手动调整更改后再提交。</li></ul></li><li><strong><code>--edit</code></strong>：允许编辑新提交的提交说明：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git cherry-pick -e &lt;提交哈希&gt;
+</span></span></code></pre></div></li><li><strong>范围摘取</strong>：摘取连续的提交：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git cherry-pick &lt;起始提交&gt;..&lt;结束提交&gt;
+</span></span></code></pre></div><ul><li>示例：<code>git cherry-pick d789012..e123456</code> 摘取 <code>d789012</code> 到 <code>e123456</code> 的所有提交。</li></ul></li></ul><hr><h3 id=4-合并分支merge>4. 合并分支（merge）</h3><p><code>git merge</code> 的作用是将一个分支的更改合并到当前分支。它会把目标分支的提交历史引入当前分支，生成一个新的合并提交（merge commit）或直接快进（fast-forward）合并，具体取决于分支的状态。</p><hr><h4 id=1-基本用法git-merge-目标分支>1. 基本用法：<code>git merge &lt;目标分支></code></h4><ul><li><p><strong>作用</strong>：将指定的 <code>&lt;目标分支></code> 的更改合并到当前分支。</p></li><li><p><strong>命令</strong>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout main
+</span></span><span style=display:flex><span>git merge feature
+</span></span></code></pre></div></li><li><p><strong>效果</strong>：将 <code>feature</code> 分支的更改合并到 <code>main</code> 分支。</p></li><li><p><strong>快进合并（Fast-forward）</strong>：</p><ul><li>如果当前分支（比如 <code>main</code>）没有新的提交，而目标分支（比如 <code>feature</code>）有新的提交，Git 会直接将 <code>main</code> 的 HEAD 移动到 <code>feature</code> 的最新提交。</li><li>历史呈线性，无额外合并提交。</li><li>示例历史：<pre tabindex=0><code>A -- B -- C (main)
       \
        D -- E (feature)
-</code></pre>合并后：
-<pre tabindex="0"><code>A -- B -- C -- D -- E (main, feature)
-</code></pre></li>
-</ul>
-</li>
-<li>
-<p><strong>合并提交（Merge commit）</strong>：</p>
-<ul>
-<li>如果当前分支和目标分支都有新提交，Git 会创建一个新的合并提交，结合两者的更改。</li>
-<li>示例历史：
-<pre tabindex="0"><code>A -- B -- C (main)
+</code></pre>合并后：<pre tabindex=0><code>A -- B -- C -- D -- E (main, feature)
+</code></pre></li></ul></li><li><p><strong>合并提交（Merge commit）</strong>：</p><ul><li>如果当前分支和目标分支都有新提交，Git 会创建一个新的合并提交，结合两者的更改。</li><li>示例历史：<pre tabindex=0><code>A -- B -- C (main)
       \
        D -- E (feature)
-</code></pre>合并后：
-<pre tabindex="0"><code>A -- B -- C -- M (main)
+</code></pre>合并后：<pre tabindex=0><code>A -- B -- C -- M (main)
       \     /
        D -- E (feature)
-</code></pre>其中 <code>M</code> 是合并提交。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h4 id="2-合并时处理冲突">2. 合并时处理冲突</h4>
-<ul>
-<li><strong>场景</strong>：如果两个分支修改了同一文件的同一部分，Git 无法自动合并，会产生冲突。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge &lt;目标分支&gt;
-</span></span><span style="display:flex;"><span>git status  <span style="color:#75715e"># 查看冲突文件</span>
-</span></span><span style="display:flex;"><span>git add &lt;冲突文件&gt;  <span style="color:#75715e"># 解决冲突后标记</span>
-</span></span><span style="display:flex;"><span>git commit  <span style="color:#75715e"># 完成合并</span>
-</span></span></code></pre></div></li>
-</ul>
-<h5 id="处理冲突">处理冲突</h5>
-<ol>
-<li>你在 <code>main</code> 分支修改了 <code>index.html</code>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;Main Title&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span></code></pre></div></li>
-<li>在 <code>feature</code> 分支也修改了 <code>index.html</code>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;Feature Title&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span></code></pre></div></li>
-<li>运行：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git merge feature
-</span></span></code></pre></div></li>
-<li>Git 报冲突：
-<pre tabindex="0"><code>CONFLICT (content): Merge conflict in index.html
+</code></pre>其中 <code>M</code> 是合并提交。</li></ul></li></ul><hr><h4 id=2-合并时处理冲突>2. 合并时处理冲突</h4><ul><li><strong>场景</strong>：如果两个分支修改了同一文件的同一部分，Git 无法自动合并，会产生冲突。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git merge &lt;目标分支&gt;
+</span></span><span style=display:flex><span>git status  <span style=color:#75715e># 查看冲突文件</span>
+</span></span><span style=display:flex><span>git add &lt;冲突文件&gt;  <span style=color:#75715e># 解决冲突后标记</span>
+</span></span><span style=display:flex><span>git commit  <span style=color:#75715e># 完成合并</span>
+</span></span></code></pre></div></li></ul><h5 id=处理冲突>处理冲突</h5><ol><li>你在 <code>main</code> 分支修改了 <code>index.html</code>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;Main Title&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span></code></pre></div></li><li>在 <code>feature</code> 分支也修改了 <code>index.html</code>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;Feature Title&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span></code></pre></div></li><li>运行：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout main
+</span></span><span style=display:flex><span>git merge feature
+</span></span></code></pre></div></li><li>Git 报冲突：<pre tabindex=0><code>CONFLICT (content): Merge conflict in index.html
 Automatic merge failed; fix conflicts and then commit the result.
-</code></pre></li>
-<li>打开 <code>index.html</code>，Git 会标记冲突：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; <span style="color:#f92672">HEAD</span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">h1</span>&gt;Main Title&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>=======
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;Feature Title&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature
-</span></span></code></pre></div></li>
-<li>手动解决冲突，改为：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;Combined Title&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span></code></pre></div></li>
-<li>标记解决并提交：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add index.html
-</span></span><span style="display:flex;"><span>git commit
-</span></span></code></pre></div></li>
-</ol>
-<hr>
-<h4 id="3-强制快进合并git-merge---ff-only">3. 强制快进合并：<code>git merge --ff-only</code></h4>
-<ul>
-<li><strong>作用</strong>：强制执行快进合并，如果无法快进（即当前分支有新提交），会报错。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --ff-only feature
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>：确保历史线性，适合没有分叉的情况。</li>
-</ul>
-<hr>
-<h4 id="4-禁用快进合并git-merge---no-ff">4. 禁用快进合并：<code>git merge --no-ff</code></h4>
-<ul>
-<li><strong>作用</strong>：即使可以快进，也强制创建合并提交。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --no-ff feature
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>：想保留分支历史，明确记录合并点。</li>
-</ul>
-<hr>
-<h4 id="5-取消合并git-merge---abort">5. 取消合并：<code>git merge --abort</code></h4>
-<ul>
-<li><strong>作用</strong>：如果合并遇到冲突且不想继续，取消合并。</li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --abort
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>：合并冲突太多，或误操作想恢复原状。</li>
-</ul>
-<hr>
-<h4 id="应用场景">应用场景</h4>
-<ol>
-<li>
-<p><strong>整合功能分支</strong>：</p>
-<ul>
-<li>你在 <code>feature-login</code> 分支开发登录功能，完成后合并到 <code>main</code>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git merge feature-login
-</span></span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p><strong>同步分支</strong>：</p>
-<ul>
-<li><code>main</code> 分支有新更新，想合并到你的开发分支：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout feature
-</span></span><span style="display:flex;"><span>git merge main
-</span></span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p><strong>保持历史清晰</strong>：</p>
-<ul>
-<li>使用 <code>--no-ff</code> 保留合并记录：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --no-ff feature
-</span></span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p><strong>避免复杂合并</strong>：</p>
-<ul>
-<li>使用 <code>--ff-only</code> 确保线性历史。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h4 id="示例1快进合并">示例1：快进合并</h4>
-<ul>
-<li><strong>初始状态</strong>：
-<pre tabindex="0"><code>A -- B (main)
+</code></pre></li><li>打开 <code>index.html</code>，Git 会标记冲突：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; <span style=color:#f92672>HEAD</span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>&lt;</span><span style=color:#a6e22e>h1</span>&gt;Main Title&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>=======
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;Feature Title&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature
+</span></span></code></pre></div></li><li>手动解决冲突，改为：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;Combined Title&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span></code></pre></div></li><li>标记解决并提交：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git add index.html
+</span></span><span style=display:flex><span>git commit
+</span></span></code></pre></div></li></ol><hr><h4 id=3-强制快进合并git-merge---ff-only>3. 强制快进合并：<code>git merge --ff-only</code></h4><ul><li><strong>作用</strong>：强制执行快进合并，如果无法快进（即当前分支有新提交），会报错。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git merge --ff-only feature
+</span></span></code></pre></div></li><li><strong>场景</strong>：确保历史线性，适合没有分叉的情况。</li></ul><hr><h4 id=4-禁用快进合并git-merge---no-ff>4. 禁用快进合并：<code>git merge --no-ff</code></h4><ul><li><strong>作用</strong>：即使可以快进，也强制创建合并提交。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git merge --no-ff feature
+</span></span></code></pre></div></li><li><strong>场景</strong>：想保留分支历史，明确记录合并点。</li></ul><hr><h4 id=5-取消合并git-merge---abort>5. 取消合并：<code>git merge --abort</code></h4><ul><li><strong>作用</strong>：如果合并遇到冲突且不想继续，取消合并。</li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git merge --abort
+</span></span></code></pre></div></li><li><strong>场景</strong>：合并冲突太多，或误操作想恢复原状。</li></ul><hr><h4 id=应用场景>应用场景</h4><ol><li><p><strong>整合功能分支</strong>：</p><ul><li>你在 <code>feature-login</code> 分支开发登录功能，完成后合并到 <code>main</code>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout main
+</span></span><span style=display:flex><span>git merge feature-login
+</span></span></code></pre></div></li></ul></li><li><p><strong>同步分支</strong>：</p><ul><li><code>main</code> 分支有新更新，想合并到你的开发分支：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout feature
+</span></span><span style=display:flex><span>git merge main
+</span></span></code></pre></div></li></ul></li><li><p><strong>保持历史清晰</strong>：</p><ul><li>使用 <code>--no-ff</code> 保留合并记录：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git merge --no-ff feature
+</span></span></code></pre></div></li></ul></li><li><p><strong>避免复杂合并</strong>：</p><ul><li>使用 <code>--ff-only</code> 确保线性历史。</li></ul></li></ol><hr><h4 id=示例1快进合并>示例1：快进合并</h4><ul><li><strong>初始状态</strong>：<pre tabindex=0><code>A -- B (main)
       \
        C -- D (feature)
-</code></pre></li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git merge feature
-</span></span></code></pre></div></li>
-<li><strong>结果</strong>：
-<pre tabindex="0"><code>A -- B -- C -- D (main, feature)
-</code></pre></li>
-</ul>
-<h4 id="示例2合并提交">示例2：合并提交</h4>
-<ul>
-<li><strong>初始状态</strong>：
-<pre tabindex="0"><code>A -- B -- E (main)
+</code></pre></li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout main
+</span></span><span style=display:flex><span>git merge feature
+</span></span></code></pre></div></li><li><strong>结果</strong>：<pre tabindex=0><code>A -- B -- C -- D (main, feature)
+</code></pre></li></ul><h4 id=示例2合并提交>示例2：合并提交</h4><ul><li><strong>初始状态</strong>：<pre tabindex=0><code>A -- B -- E (main)
       \
        C -- D (feature)
-</code></pre></li>
-<li><strong>命令</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git merge feature
-</span></span></code></pre></div></li>
-<li><strong>结果</strong>：
-<pre tabindex="0"><code>A -- B -- E -- M (main)
+</code></pre></li><li><strong>命令</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout main
+</span></span><span style=display:flex><span>git merge feature
+</span></span></code></pre></div></li><li><strong>结果</strong>：<pre tabindex=0><code>A -- B -- E -- M (main)
       \     /
        C -- D (feature)
-</code></pre></li>
-</ul>
-<h4 id="git-merge-vs-git-rebase"><code>git merge</code> vs. <code>git rebase</code></h4>
-<ul>
-<li><strong>合并历史</strong>：
-<ul>
-<li><code>merge</code>：保留分支历史，可能产生合并提交。</li>
-<li><code>rebase</code>：重写历史，线性但改变提交哈希。</li>
-</ul>
-</li>
-<li><strong>选择</strong>：
-<ul>
-<li>用 <code>merge</code> 保留完整历史，适合团队协作。</li>
-<li>用 <code>rebase</code> 追求简洁历史，适合本地开发。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="5-git-restore">5. git restore</h3>
-<hr>
-<p><code>git restore</code> 是 Git 2.23（2019年8月）引入的命令，用于将**工作区（Working Directory）<strong>和/或</strong>暂存区（Staging Area）**中的文件恢复到特定状态，通常是最后一次提交（HEAD）或指定的提交。它是早期 <code>git checkout</code> 部分功能的替代品，设计上更直观，专注于撤销更改。</p>
-<p><code>git restore</code> 的主要用途包括：</p>
-<ol>
-<li><strong>丢弃工作区的改动</strong>（撤销未提交的文件更改）。</li>
-<li><strong>取消暂存区的更改</strong>（将已暂存的文件移出暂存区）。</li>
-<li><strong>将文件恢复到特定提交的状态</strong>。</li>
-</ol>
-<hr>
-<h4 id="1-丢弃工作区的改动git-restore-文件">1. 丢弃工作区的改动：<code>git restore &lt;文件&gt;...</code></h4>
-<ul>
-<li><strong>目的</strong>：将指定的文件恢复到最后一次提交（HEAD）的状态。</li>
-<li><strong>效果</strong>：工作区中文件的未提交更改会被<strong>永久丢弃</strong>，文件内容恢复为最后一次提交的版本。</li>
-<li><strong>注意</strong>：只影响工作区，不影响暂存区或提交历史。</li>
-</ul>
-<p>假设你的项目有一个文件 <code>index.html</code>，最后提交的版本（HEAD）内容是：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;你好，世界！&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span></code></pre></div><p>你在工作区修改了 <code>index.html</code>，变成：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;你好，Git！&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span>&gt;测试更改&lt;/<span style="color:#f92672">p</span>&gt;
-</span></span></code></pre></div><p>这些更改还未用 <code>git add</code> 暂存或提交。现在你决定放弃这些更改，恢复到最后提交的状态。</p>
-<ol>
-<li>
-<p>检查状态，确认更改：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
-</span></span></code></pre></div><p>输出：</p>
-<pre tabindex="0"><code>On branch main
+</code></pre></li></ul><h4 id=git-merge-vs-git-rebase><code>git merge</code> vs. <code>git rebase</code></h4><ul><li><strong>合并历史</strong>：<ul><li><code>merge</code>：保留分支历史，可能产生合并提交。</li><li><code>rebase</code>：重写历史，线性但改变提交哈希。</li></ul></li><li><strong>选择</strong>：<ul><li>用 <code>merge</code> 保留完整历史，适合团队协作。</li><li>用 <code>rebase</code> 追求简洁历史，适合本地开发。</li></ul></li></ul><hr><h3 id=5-git-restore>5. git restore</h3><hr><p><code>git restore</code> 是 Git 2.23（2019年8月）引入的命令，用于将**工作区（Working Directory）<strong>和/或</strong>暂存区（Staging Area）**中的文件恢复到特定状态，通常是最后一次提交（HEAD）或指定的提交。它是早期 <code>git checkout</code> 部分功能的替代品，设计上更直观，专注于撤销更改。</p><p><code>git restore</code> 的主要用途包括：</p><ol><li><strong>丢弃工作区的改动</strong>（撤销未提交的文件更改）。</li><li><strong>取消暂存区的更改</strong>（将已暂存的文件移出暂存区）。</li><li><strong>将文件恢复到特定提交的状态</strong>。</li></ol><hr><h4 id=1-丢弃工作区的改动git-restore-文件>1. 丢弃工作区的改动：<code>git restore &lt;文件>...</code></h4><ul><li><strong>目的</strong>：将指定的文件恢复到最后一次提交（HEAD）的状态。</li><li><strong>效果</strong>：工作区中文件的未提交更改会被<strong>永久丢弃</strong>，文件内容恢复为最后一次提交的版本。</li><li><strong>注意</strong>：只影响工作区，不影响暂存区或提交历史。</li></ul><p>假设你的项目有一个文件 <code>index.html</code>，最后提交的版本（HEAD）内容是：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;你好，世界！&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span></code></pre></div><p>你在工作区修改了 <code>index.html</code>，变成：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;你好，Git！&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>p</span>&gt;测试更改&lt;/<span style=color:#f92672>p</span>&gt;
+</span></span></code></pre></div><p>这些更改还未用 <code>git add</code> 暂存或提交。现在你决定放弃这些更改，恢复到最后提交的状态。</p><ol><li><p>检查状态，确认更改：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git status
+</span></span></code></pre></div><p>输出：</p><pre tabindex=0><code>On branch main
 Changes not staged for commit:
   modified:   index.html
-</code></pre></li>
-<li>
-<p>丢弃 <code>index.html</code> 的更改：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git restore index.html
-</span></span></code></pre></div></li>
-<li>
-<p>验证文件：</p>
-<ul>
-<li>打开 <code>index.html</code>，内容恢复为：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;你好，世界！&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span></code></pre></div></li>
-<li>再次运行 <code>git status</code>：
-<pre tabindex="0"><code>On branch main
+</code></pre></li><li><p>丢弃 <code>index.html</code> 的更改：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git restore index.html
+</span></span></code></pre></div></li><li><p>验证文件：</p><ul><li>打开 <code>index.html</code>，内容恢复为：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;你好，世界！&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span></code></pre></div></li><li>再次运行 <code>git status</code>：<pre tabindex=0><code>On branch main
 nothing to commit, working tree clean
-</code></pre></li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><code>git restore index.html</code> 将工作区的 <code>index.html</code> 恢复到最后提交（HEAD）的状态。</li>
-<li>更改（<code>&lt;h1&gt;你好，Git！&lt;/h1&gt;</code> 和 <code>&lt;p&gt;测试更改&lt;/p&gt;</code>）被丢弃，无法恢复，除非你有备份。</li>
-</ul>
-<p><strong>多个文件</strong>
-可以同时恢复多个文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git restore file1.txt file2.txt
-</span></span></code></pre></div><p>或丢弃工作区所有更改：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git restore .
-</span></span></code></pre></div><hr>
-<h4 id="2-取消暂存区的更改git-restore---staged-文件">2. 取消暂存区的更改：<code>git restore --staged &lt;文件&gt;...</code></h4>
-<p>这个用法用于将已暂存的文件（通过 <code>git add</code> 添加到暂存区的文件）移出暂存区。</p>
-<ul>
-<li><strong>目的</strong>：将暂存区的更改&quot;取消暂存&quot;，移回到工作区。</li>
-<li><strong>效果</strong>：暂存区恢复到最后提交的状态，但工作区的更改保留。</li>
-<li><strong>使用场景</strong>：你不小心用 <code>git add</code> 暂存了文件，想取消暂存。</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git restore --staged &lt;文件&gt;...
-</span></span></code></pre></div><p>假设你修改了 <code>index.html</code> 并已暂存：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;你好，Git！&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span>&gt;测试更改&lt;/<span style="color:#f92672">p</span>&gt;
-</span></span></code></pre></div><ol>
-<li>
-<p>暂存更改：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add index.html
-</span></span><span style="display:flex;"><span>git status
-</span></span></code></pre></div><p>输出：</p>
-<pre tabindex="0"><code>On branch main
+</code></pre></li></ul></li></ol><ul><li><code>git restore index.html</code> 将工作区的 <code>index.html</code> 恢复到最后提交（HEAD）的状态。</li><li>更改（<code>&lt;h1>你好，Git！&lt;/h1></code> 和 <code>&lt;p>测试更改&lt;/p></code>）被丢弃，无法恢复，除非你有备份。</li></ul><p><strong>多个文件</strong>
+可以同时恢复多个文件：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git restore file1.txt file2.txt
+</span></span></code></pre></div><p>或丢弃工作区所有更改：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git restore .
+</span></span></code></pre></div><hr><h4 id=2-取消暂存区的更改git-restore---staged-文件>2. 取消暂存区的更改：<code>git restore --staged &lt;文件>...</code></h4><p>这个用法用于将已暂存的文件（通过 <code>git add</code> 添加到暂存区的文件）移出暂存区。</p><ul><li><strong>目的</strong>：将暂存区的更改"取消暂存"，移回到工作区。</li><li><strong>效果</strong>：暂存区恢复到最后提交的状态，但工作区的更改保留。</li><li><strong>使用场景</strong>：你不小心用 <code>git add</code> 暂存了文件，想取消暂存。</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git restore --staged &lt;文件&gt;...
+</span></span></code></pre></div><p>假设你修改了 <code>index.html</code> 并已暂存：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;你好，Git！&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>p</span>&gt;测试更改&lt;/<span style=color:#f92672>p</span>&gt;
+</span></span></code></pre></div><ol><li><p>暂存更改：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git add index.html
+</span></span><span style=display:flex><span>git status
+</span></span></code></pre></div><p>输出：</p><pre tabindex=0><code>On branch main
 Changes to be committed:
   modified:   index.html
-</code></pre></li>
-<li>
-<p>取消暂存：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git restore --staged index.html
-</span></span></code></pre></div></li>
-<li>
-<p>验证状态：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
-</span></span></code></pre></div><p>输出：</p>
-<pre tabindex="0"><code>On branch main
+</code></pre></li><li><p>取消暂存：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git restore --staged index.html
+</span></span></code></pre></div></li><li><p>验证状态：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git status
+</span></span></code></pre></div><p>输出：</p><pre tabindex=0><code>On branch main
 Changes not staged for commit:
   modified:   index.html
-</code></pre></li>
-<li>
-<p>检查文件：</p>
-<ul>
-<li>工作区的 <code>index.html</code> 仍包含：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;你好，Git！&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span>&gt;测试更改&lt;/<span style="color:#f92672">p</span>&gt;
-</span></span></code></pre></div></li>
-</ul>
-</li>
-</ol>
-<hr>
-<h4 id="3-恢复文件到特定提交git-restore---source提交-文件">3. 恢复文件到特定提交：<code>git restore --source=&lt;提交&gt; &lt;文件&gt;...</code></h4>
-<p>这个用法可以将文件恢复到特定提交的状态，而不仅仅是最后提交。</p>
-<ul>
-<li><strong>目的</strong>：将工作区的指定文件恢复到某个提交的状态。</li>
-<li><strong>效果</strong>：工作区的文件被覆盖为指定提交的版本，未暂存的更改会被丢弃。</li>
-<li><strong>注意</strong>：除非使用 <code>--staged</code>，暂存区不会受影响。</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git restore --source<span style="color:#f92672">=</span>&lt;提交&gt; &lt;文件&gt;...
-</span></span></code></pre></div><p>假设你的提交历史如下：</p>
-<pre tabindex="0"><code>提交 A: index.html = &#34;&lt;h1&gt;版本一&lt;/h1&gt;&#34;
+</code></pre></li><li><p>检查文件：</p><ul><li>工作区的 <code>index.html</code> 仍包含：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;你好，Git！&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>p</span>&gt;测试更改&lt;/<span style=color:#f92672>p</span>&gt;
+</span></span></code></pre></div></li></ul></li></ol><hr><h4 id=3-恢复文件到特定提交git-restore---source提交-文件>3. 恢复文件到特定提交：<code>git restore --source=&lt;提交> &lt;文件>...</code></h4><p>这个用法可以将文件恢复到特定提交的状态，而不仅仅是最后提交。</p><ul><li><strong>目的</strong>：将工作区的指定文件恢复到某个提交的状态。</li><li><strong>效果</strong>：工作区的文件被覆盖为指定提交的版本，未暂存的更改会被丢弃。</li><li><strong>注意</strong>：除非使用 <code>--staged</code>，暂存区不会受影响。</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git restore --source<span style=color:#f92672>=</span>&lt;提交&gt; &lt;文件&gt;...
+</span></span></code></pre></div><p>假设你的提交历史如下：</p><pre tabindex=0><code>提交 A: index.html = &#34;&lt;h1&gt;版本一&lt;/h1&gt;&#34;
 提交 B: index.html = &#34;&lt;h1&gt;版本二&lt;/h1&gt;&#34;
 提交 C: index.html = &#34;&lt;h1&gt;版本三&lt;/h1&gt;&#34; (HEAD)
-</code></pre><p>工作区的 <code>index.html</code> 有未提交更改：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;版本三&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span>&gt;新内容&lt;/<span style="color:#f92672">p</span>&gt;
-</span></span></code></pre></div><p>你想将 <code>index.html</code> 恢复到提交 B 的状态。</p>
-<ol>
-<li>
-<p>查看提交历史，找到提交 B 的哈希：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --oneline
-</span></span></code></pre></div><p>输出：</p>
-<pre tabindex="0"><code>c123456 (HEAD -&gt; main) 版本三
+</code></pre><p>工作区的 <code>index.html</code> 有未提交更改：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;版本三&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>p</span>&gt;新内容&lt;/<span style=color:#f92672>p</span>&gt;
+</span></span></code></pre></div><p>你想将 <code>index.html</code> 恢复到提交 B 的状态。</p><ol><li><p>查看提交历史，找到提交 B 的哈希：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git log --oneline
+</span></span></code></pre></div><p>输出：</p><pre tabindex=0><code>c123456 (HEAD -&gt; main) 版本三
 b789012 版本二
 a456789 版本一
-</code></pre></li>
-<li>
-<p>恢复 <code>index.html</code> 到提交 B：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git restore --source<span style="color:#f92672">=</span>b789012 index.html
-</span></span></code></pre></div></li>
-<li>
-<p>检查文件：</p>
-<ul>
-<li><code>index.html</code> 现在是：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">h1</span>&gt;版本二&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span></code></pre></div></li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><code>git restore --source=b789012 index.html</code> 将工作区的 <code>index.html</code> 恢复到提交 <code>b789012</code> 的状态。</li>
-<li>工作区中的未提交更改（即 <p>新内容</p>）以及提交 C（c123456）中对 index.html 的更改（即 <h1>版本三</h1>）在工作区中会被覆盖并丢弃，而且这些更改无法直接恢复</li>
-</ul>
-<hr>
-<h5 id="关键注意事项">关键注意事项</h5>
-<ul>
-<li><strong>不可逆操作</strong>：<br>
-使用 <code>git restore &lt;文件&gt;</code> 或 <code>git restore --source=&lt;提交&gt; &lt;文件&gt;</code> 丢弃的更改无法恢复，除非有备份或更改仍在暂存区/其他提交中。</li>
-<li><strong>与 <code>git reset</code> 的区别</strong>：
-<ul>
-<li><code>git restore</code> 针对<strong>文件</strong>，只影响工作区或暂存区，不改变提交历史。</li>
-<li><code>git reset</code> 移动分支指针，影响提交历史（参考你之前的提问）。</li>
-</ul>
-</li>
-<li><strong>多个文件或目录</strong>：<br>
-使用 <code>git restore .</code> 丢弃工作区所有更改，或 <code>git restore --staged .</code> 取消所有暂存。</li>
-<li><strong>安全检查</strong>：<br>
-在丢弃更改前，用 <code>git status</code> 查看更改，用 <code>git diff</code> 查看具体差异：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h3 id="6-其他命令我不太熟">6 其他命令(我不太熟)</h3>
-<h4 id="1-git-diff">1. <code>git diff</code></h4>
-<ul>
-<li><strong>作用</strong>: 显示工作区、暂存区或提交之间的差异。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff                    <span style="color:#75715e"># 工作区与暂存区的差异</span>
-</span></span><span style="display:flex;"><span>git diff --cached           <span style="color:#75715e"># 暂存区与最后提交的差异</span>
-</span></span><span style="display:flex;"><span>git diff HEAD               <span style="color:#75715e"># 工作区+暂存区与最后提交的差异</span>
-</span></span><span style="display:flex;"><span>git diff &lt;commit1&gt; &lt;commit2&gt; <span style="color:#75715e"># 两个提交之间的差异</span>
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>检查修改了哪些内容，避免提交错误。</li>
-<li>比较不同版本的代码。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-你修改了 <code>index.html</code>，想看看改了什么：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff index.html
-</span></span></code></pre></div>输出：
-<pre tabindex="0"><code>- &lt;h1&gt;Hello&lt;/h1&gt;
+</code></pre></li><li><p>恢复 <code>index.html</code> 到提交 B：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git restore --source<span style=color:#f92672>=</span>b789012 index.html
+</span></span></code></pre></div></li><li><p>检查文件：</p><ul><li><code>index.html</code> 现在是：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt;版本二&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span></code></pre></div></li></ul></li></ol><ul><li><code>git restore --source=b789012 index.html</code> 将工作区的 <code>index.html</code> 恢复到提交 <code>b789012</code> 的状态。</li><li>工作区中的未提交更改（即<p>新内容</p>）以及提交 C（c123456）中对 index.html 的更改（即<h1>版本三</h1>）在工作区中会被覆盖并丢弃，而且这些更改无法直接恢复</li></ul><hr><h5 id=关键注意事项>关键注意事项</h5><ul><li><strong>不可逆操作</strong>：<br>使用 <code>git restore &lt;文件></code> 或 <code>git restore --source=&lt;提交> &lt;文件></code> 丢弃的更改无法恢复，除非有备份或更改仍在暂存区/其他提交中。</li><li><strong>与 <code>git reset</code> 的区别</strong>：<ul><li><code>git restore</code> 针对<strong>文件</strong>，只影响工作区或暂存区，不改变提交历史。</li><li><code>git reset</code> 移动分支指针，影响提交历史（参考你之前的提问）。</li></ul></li><li><strong>多个文件或目录</strong>：<br>使用 <code>git restore .</code> 丢弃工作区所有更改，或 <code>git restore --staged .</code> 取消所有暂存。</li><li><strong>安全检查</strong>：<br>在丢弃更改前，用 <code>git status</code> 查看更改，用 <code>git diff</code> 查看具体差异：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git diff
+</span></span></code></pre></div></li></ul><hr><h3 id=6-其他命令我不太熟>6 其他命令(我不太熟)</h3><h4 id=1-git-diff>1. <code>git diff</code></h4><ul><li><strong>作用</strong>: 显示工作区、暂存区或提交之间的差异。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git diff                    <span style=color:#75715e># 工作区与暂存区的差异</span>
+</span></span><span style=display:flex><span>git diff --cached           <span style=color:#75715e># 暂存区与最后提交的差异</span>
+</span></span><span style=display:flex><span>git diff HEAD               <span style=color:#75715e># 工作区+暂存区与最后提交的差异</span>
+</span></span><span style=display:flex><span>git diff &lt;commit1&gt; &lt;commit2&gt; <span style=color:#75715e># 两个提交之间的差异</span>
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>检查修改了哪些内容，避免提交错误。</li><li>比较不同版本的代码。</li></ul></li><li><strong>示例</strong>:
+你修改了 <code>index.html</code>，想看看改了什么：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git diff index.html
+</span></span></code></pre></div>输出：<pre tabindex=0><code>- &lt;h1&gt;Hello&lt;/h1&gt;
 + &lt;h1&gt;Hello, Git!&lt;/h1&gt;
-</code></pre></li>
-</ul>
-<hr>
-<h4 id="2-git-stash">2. <code>git stash</code></h4>
-<ul>
-<li><strong>作用</strong>: 临时保存工作区和暂存区的更改，并恢复到干净状态。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git stash push -m <span style="color:#e6db74">&#34;描述&#34;</span>    <span style="color:#75715e"># 保存更改到 stash</span>
-</span></span><span style="display:flex;"><span>git stash list              <span style="color:#75715e"># 查看所有 stash</span>
-</span></span><span style="display:flex;"><span>git stash apply             <span style="color:#75715e"># 恢复最新 stash（不删除）</span>
-</span></span><span style="display:flex;"><span>git stash pop               <span style="color:#75715e"># 恢复最新 stash 并删除</span>
-</span></span><span style="display:flex;"><span>git stash drop &lt;stash&gt;      <span style="color:#75715e"># 删除指定 stash</span>
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>在切换分支前，临时保存未完成的工作。</li>
-<li>想清理工作区但不丢弃更改。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-你在 <code>feature</code> 分支修改了 <code>style.css</code>，但需要切换到 <code>main</code> 处理紧急 bug：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git stash push -m <span style="color:#e6db74">&#34;WIP: 样式调整&#34;</span>
-</span></span><span style="display:flex;"><span>git checkout main
-</span></span></code></pre></div>修复完 bug 后，恢复：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout feature
-</span></span><span style="display:flex;"><span>git stash pop
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h4 id="3-git-fetch">3. <code>git fetch</code></h4>
-<ul>
-<li><strong>作用</strong>: 从远程仓库获取最新数据，但不自动合并到本地分支。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch &lt;远程&gt;            <span style="color:#75715e"># 获取远程仓库所有更新</span>
-</span></span><span style="display:flex;"><span>git fetch &lt;远程&gt; &lt;分支&gt;     <span style="color:#75715e"># 获取特定分支</span>
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>检查远程分支的更新但不想立即合并。</li>
-<li>与 <code>git pull</code>（获取+合并）相比更安全。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-你想查看 <code>origin/main</code> 的最新状态：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch origin main
-</span></span><span style="display:flex;"><span>git log --oneline main..origin/main
-</span></span></code></pre></div></li>
-</ul>
-<p>。</p>
-<hr>
-<h4 id="4-git-revert">4. <code>git revert</code></h4>
-<ul>
-<li><strong>作用</strong>: 创建一个新提交，撤销指定提交的更改。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git revert &lt;提交哈希&gt;
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>想撤销某次提交但保留历史（尤其在公共分支）。</li>
-<li>比 <code>git reset</code> 更安全，不会重写历史。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-提交 <code>abc123</code> 引入了 bug，想撤销：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git revert abc123
-</span></span></code></pre></div>这会创建一个新提交，抵消 <code>abc123</code> 的更改。</li>
-</ul>
-<hr>
-<h4 id="5-git-blame">5. <code>git blame</code></h4>
-<ul>
-<li><strong>作用</strong>: 显示文件的每一行由谁、在何时修改。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git blame &lt;文件&gt;
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>排查代码问题，找到修改人。</li>
-<li>了解某行代码的提交历史。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-你想知道 <code>index.html</code> 每行是谁改的：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git blame index.html
-</span></span></code></pre></div>输出：
-<pre tabindex="0"><code>abc123 (Alice 2025-05-01) &lt;h1&gt;Hello&lt;/h1&gt;
+</code></pre></li></ul><hr><h4 id=2-git-stash>2. <code>git stash</code></h4><ul><li><strong>作用</strong>: 临时保存工作区和暂存区的更改，并恢复到干净状态。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git stash push -m <span style=color:#e6db74>&#34;描述&#34;</span>    <span style=color:#75715e># 保存更改到 stash</span>
+</span></span><span style=display:flex><span>git stash list              <span style=color:#75715e># 查看所有 stash</span>
+</span></span><span style=display:flex><span>git stash apply             <span style=color:#75715e># 恢复最新 stash（不删除）</span>
+</span></span><span style=display:flex><span>git stash pop               <span style=color:#75715e># 恢复最新 stash 并删除</span>
+</span></span><span style=display:flex><span>git stash drop &lt;stash&gt;      <span style=color:#75715e># 删除指定 stash</span>
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>在切换分支前，临时保存未完成的工作。</li><li>想清理工作区但不丢弃更改。</li></ul></li><li><strong>示例</strong>:
+你在 <code>feature</code> 分支修改了 <code>style.css</code>，但需要切换到 <code>main</code> 处理紧急 bug：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git stash push -m <span style=color:#e6db74>&#34;WIP: 样式调整&#34;</span>
+</span></span><span style=display:flex><span>git checkout main
+</span></span></code></pre></div>修复完 bug 后，恢复：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git checkout feature
+</span></span><span style=display:flex><span>git stash pop
+</span></span></code></pre></div></li></ul><hr><h4 id=3-git-fetch>3. <code>git fetch</code></h4><ul><li><strong>作用</strong>: 从远程仓库获取最新数据，但不自动合并到本地分支。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git fetch &lt;远程&gt;            <span style=color:#75715e># 获取远程仓库所有更新</span>
+</span></span><span style=display:flex><span>git fetch &lt;远程&gt; &lt;分支&gt;     <span style=color:#75715e># 获取特定分支</span>
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>检查远程分支的更新但不想立即合并。</li><li>与 <code>git pull</code>（获取+合并）相比更安全。</li></ul></li><li><strong>示例</strong>:
+你想查看 <code>origin/main</code> 的最新状态：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git fetch origin main
+</span></span><span style=display:flex><span>git log --oneline main..origin/main
+</span></span></code></pre></div></li></ul><p>。</p><hr><h4 id=4-git-revert>4. <code>git revert</code></h4><ul><li><strong>作用</strong>: 创建一个新提交，撤销指定提交的更改。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git revert &lt;提交哈希&gt;
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>想撤销某次提交但保留历史（尤其在公共分支）。</li><li>比 <code>git reset</code> 更安全，不会重写历史。</li></ul></li><li><strong>示例</strong>:
+提交 <code>abc123</code> 引入了 bug，想撤销：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git revert abc123
+</span></span></code></pre></div>这会创建一个新提交，抵消 <code>abc123</code> 的更改。</li></ul><hr><h4 id=5-git-blame>5. <code>git blame</code></h4><ul><li><strong>作用</strong>: 显示文件的每一行由谁、在何时修改。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git blame &lt;文件&gt;
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>排查代码问题，找到修改人。</li><li>了解某行代码的提交历史。</li></ul></li><li><strong>示例</strong>:
+你想知道 <code>index.html</code> 每行是谁改的：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git blame index.html
+</span></span></code></pre></div>输出：<pre tabindex=0><code>abc123 (Alice 2025-05-01) &lt;h1&gt;Hello&lt;/h1&gt;
 def456 (Bob   2025-05-02) &lt;p&gt;Welcome&lt;/p&gt;
-</code></pre></li>
-</ul>
-<hr>
-<h4 id="6-git-tag">6. <code>git tag</code></h4>
-<ul>
-<li><strong>作用</strong>: 为特定提交打标签，通常用于标记版本号。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git tag &lt;标签名&gt;            <span style="color:#75715e"># 创建轻量标签</span>
-</span></span><span style="display:flex;"><span>git tag -a &lt;标签名&gt; -m <span style="color:#e6db74">&#34;描述&#34;</span> <span style="color:#75715e"># 创建带注释的标签</span>
-</span></span><span style="display:flex;"><span>git push origin &lt;标签名&gt;     <span style="color:#75715e"># 推送标签到远程</span>
-</span></span><span style="display:flex;"><span>git tag                      <span style="color:#75715e"># 查看所有标签</span>
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>标记发布版本（例如 <code>v1.0.0</code>）。</li>
-<li>记录重要的里程碑提交。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-发布版本 1.0：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git tag -a v1.0 -m <span style="color:#e6db74">&#34;Release v1.0&#34;</span>
-</span></span><span style="display:flex;"><span>git push origin v1.0
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h4 id="7-git-clean">7. <code>git clean</code></h4>
-<ul>
-<li><strong>作用</strong>: 删除工作区中未跟踪的文件和目录。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clean -f                <span style="color:#75715e"># 强制删除未跟踪文件</span>
-</span></span><span style="display:flex;"><span>git clean -fd               <span style="color:#75715e"># 删除未跟踪文件和目录</span>
-</span></span><span style="display:flex;"><span>git clean -n                <span style="color:#75715e"># 预览将删除的内容</span>
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>清理临时文件（如 <code>.log</code> 文件或构建产物）。</li>
-<li>恢复干净的工作区。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-项目中有未跟踪的 <code>temp.log</code> 文件：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clean -n  <span style="color:#75715e"># 预览</span>
-</span></span><span style="display:flex;"><span>git clean -f  <span style="color:#75715e"># 删除</span>
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h4 id="8-git-reflog">8. <code>git reflog</code></h4>
-<ul>
-<li><strong>作用</strong>: 显示 Git 引用日志，记录 HEAD 和分支的所有操作。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reflog
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>找回被误删的提交或分支。</li>
-<li>查看历史操作（比如 reset 或 rebase）。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-你不小心用 <code>git reset --hard</code> 删了提交，想找回：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reflog
-</span></span></code></pre></div>输出：
-<pre tabindex="0"><code>abc123 HEAD@{0}: reset: moving to HEAD~1
+</code></pre></li></ul><hr><h4 id=6-git-tag>6. <code>git tag</code></h4><ul><li><strong>作用</strong>: 为特定提交打标签，通常用于标记版本号。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git tag &lt;标签名&gt;            <span style=color:#75715e># 创建轻量标签</span>
+</span></span><span style=display:flex><span>git tag -a &lt;标签名&gt; -m <span style=color:#e6db74>&#34;描述&#34;</span> <span style=color:#75715e># 创建带注释的标签</span>
+</span></span><span style=display:flex><span>git push origin &lt;标签名&gt;     <span style=color:#75715e># 推送标签到远程</span>
+</span></span><span style=display:flex><span>git tag                      <span style=color:#75715e># 查看所有标签</span>
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>标记发布版本（例如 <code>v1.0.0</code>）。</li><li>记录重要的里程碑提交。</li></ul></li><li><strong>示例</strong>:
+发布版本 1.0：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git tag -a v1.0 -m <span style=color:#e6db74>&#34;Release v1.0&#34;</span>
+</span></span><span style=display:flex><span>git push origin v1.0
+</span></span></code></pre></div></li></ul><hr><h4 id=7-git-clean>7. <code>git clean</code></h4><ul><li><strong>作用</strong>: 删除工作区中未跟踪的文件和目录。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git clean -f                <span style=color:#75715e># 强制删除未跟踪文件</span>
+</span></span><span style=display:flex><span>git clean -fd               <span style=color:#75715e># 删除未跟踪文件和目录</span>
+</span></span><span style=display:flex><span>git clean -n                <span style=color:#75715e># 预览将删除的内容</span>
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>清理临时文件（如 <code>.log</code> 文件或构建产物）。</li><li>恢复干净的工作区。</li></ul></li><li><strong>示例</strong>:
+项目中有未跟踪的 <code>temp.log</code> 文件：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git clean -n  <span style=color:#75715e># 预览</span>
+</span></span><span style=display:flex><span>git clean -f  <span style=color:#75715e># 删除</span>
+</span></span></code></pre></div></li></ul><hr><h4 id=8-git-reflog>8. <code>git reflog</code></h4><ul><li><strong>作用</strong>: 显示 Git 引用日志，记录 HEAD 和分支的所有操作。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git reflog
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>找回被误删的提交或分支。</li><li>查看历史操作（比如 reset 或 rebase）。</li></ul></li><li><strong>示例</strong>:
+你不小心用 <code>git reset --hard</code> 删了提交，想找回：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git reflog
+</span></span></code></pre></div>输出：<pre tabindex=0><code>abc123 HEAD@{0}: reset: moving to HEAD~1
 def456 HEAD@{1}: commit: Add feature
-</code></pre>恢复到 <code>def456</code>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset --hard def456
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h4 id="9-git-remote">9. <code>git remote</code></h4>
-<ul>
-<li><strong>作用</strong>: 管理远程仓库的配置。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote -v               <span style="color:#75715e"># 查看远程仓库信息</span>
-</span></span><span style="display:flex;"><span>git remote add &lt;名称&gt; &lt;URL&gt; <span style="color:#75715e"># 添加远程仓库</span>
-</span></span><span style="display:flex;"><span>git remote remove &lt;名称&gt;    <span style="color:#75715e"># 删除远程仓库</span>
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>检查或更新远程仓库地址。</li>
-<li>添加新的远程仓库（如协作仓库）。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-添加一个新的远程仓库：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote add upstream https://github.com/other/repo.git
-</span></span><span style="display:flex;"><span>git remote -v
-</span></span></code></pre></div></li>
-</ul>
-<hr>
-<h4 id="10-git-show">10. <code>git show</code></h4>
-<ul>
-<li><strong>作用</strong>: 显示某个提交的详细信息和更改内容。</li>
-<li><strong>用法</strong>:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git show &lt;提交哈希&gt;
-</span></span></code></pre></div></li>
-<li><strong>场景</strong>:
-<ul>
-<li>查看某个提交的具体改动。</li>
-<li>检查提交的元数据（如作者、时间）。</li>
-</ul>
-</li>
-<li><strong>示例</strong>:
-查看提交 <code>abc123</code> 的详情：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git show abc123
-</span></span></code></pre></div>输出：提交信息、作者和文件差异。</li>
-</ul>
-<hr>
-<h4 id="综合示例">综合示例</h4>
-<p>假设你在开发项目，当前状态：</p>
-<ul>
-<li>修改了 <code>index.html</code> 和 <code>style.css</code>。</li>
-<li>想保存进度但不提交。</li>
-<li>检查远程更新并合并。</li>
-</ul>
-<p>操作：</p>
-<ol>
-<li>保存临时更改：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git stash push -m <span style="color:#e6db74">&#34;WIP: 样式调整&#34;</span>
-</span></span></code></pre></div></li>
-<li>获取远程更新：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch origin
-</span></span><span style="display:flex;"><span>git merge origin/main
-</span></span></code></pre></div></li>
-<li>恢复工作：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git stash pop
-</span></span></code></pre></div></li>
-<li>检查改动：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff
-</span></span></code></pre></div></li>
-<li>提交并打标签：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add .
-</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;完成样式调整&#34;</span>
-</span></span><span style="display:flex;"><span>git tag -a v1.1 -m <span style="color:#e6db74">&#34;Release v1.1&#34;</span>
-</span></span></code></pre></div></li>
-</ol>
-<hr>
-<h3 id="7-什么是-head">7 什么是 <code>HEAD</code>？</h3>
-<p><code>HEAD</code> 是一个指针，<strong>指向你当前所在分支的最新提交</strong>。</p>
-<pre tabindex="0"><code>A ← B ← C ← D  （HEAD 当前指向 D）
-</code></pre><ul>
-<li><code>D</code> 就是你当前的最新提交，也就是 <code>HEAD</code> 所在的位置。</li>
-<li><code>HEAD</code> 的值本质上是个引用，指向这个 D 提交。</li>
-</ul>
-<hr>
-<p><code>HEAD~1</code> 是 &ldquo;HEAD 的第一个父提交&rdquo;，即：</p>
-<pre tabindex="0"><code>HEAD~1  = D 的父 = C
+</code></pre>恢复到 <code>def456</code>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git reset --hard def456
+</span></span></code></pre></div></li></ul><hr><h4 id=9-git-remote>9. <code>git remote</code></h4><ul><li><strong>作用</strong>: 管理远程仓库的配置。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git remote -v               <span style=color:#75715e># 查看远程仓库信息</span>
+</span></span><span style=display:flex><span>git remote add &lt;名称&gt; &lt;URL&gt; <span style=color:#75715e># 添加远程仓库</span>
+</span></span><span style=display:flex><span>git remote remove &lt;名称&gt;    <span style=color:#75715e># 删除远程仓库</span>
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>检查或更新远程仓库地址。</li><li>添加新的远程仓库（如协作仓库）。</li></ul></li><li><strong>示例</strong>:
+添加一个新的远程仓库：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git remote add upstream https://github.com/other/repo.git
+</span></span><span style=display:flex><span>git remote -v
+</span></span></code></pre></div></li></ul><hr><h4 id=10-git-show>10. <code>git show</code></h4><ul><li><strong>作用</strong>: 显示某个提交的详细信息和更改内容。</li><li><strong>用法</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git show &lt;提交哈希&gt;
+</span></span></code></pre></div></li><li><strong>场景</strong>:<ul><li>查看某个提交的具体改动。</li><li>检查提交的元数据（如作者、时间）。</li></ul></li><li><strong>示例</strong>:
+查看提交 <code>abc123</code> 的详情：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git show abc123
+</span></span></code></pre></div>输出：提交信息、作者和文件差异。</li></ul><hr><h4 id=综合示例>综合示例</h4><p>假设你在开发项目，当前状态：</p><ul><li>修改了 <code>index.html</code> 和 <code>style.css</code>。</li><li>想保存进度但不提交。</li><li>检查远程更新并合并。</li></ul><p>操作：</p><ol><li>保存临时更改：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git stash push -m <span style=color:#e6db74>&#34;WIP: 样式调整&#34;</span>
+</span></span></code></pre></div></li><li>获取远程更新：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git fetch origin
+</span></span><span style=display:flex><span>git merge origin/main
+</span></span></code></pre></div></li><li>恢复工作：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git stash pop
+</span></span></code></pre></div></li><li>检查改动：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git diff
+</span></span></code></pre></div></li><li>提交并打标签：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git add .
+</span></span><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;完成样式调整&#34;</span>
+</span></span><span style=display:flex><span>git tag -a v1.1 -m <span style=color:#e6db74>&#34;Release v1.1&#34;</span>
+</span></span></code></pre></div></li></ol><hr><h3 id=7-什么是-head>7 什么是 <code>HEAD</code>？</h3><p><code>HEAD</code> 是一个指针，<strong>指向你当前所在分支的最新提交</strong>。</p><pre tabindex=0><code>A ← B ← C ← D  （HEAD 当前指向 D）
+</code></pre><ul><li><code>D</code> 就是你当前的最新提交，也就是 <code>HEAD</code> 所在的位置。</li><li><code>HEAD</code> 的值本质上是个引用，指向这个 D 提交。</li></ul><hr><p><code>HEAD~1</code> 是 &ldquo;HEAD 的第一个父提交&rdquo;，即：</p><pre tabindex=0><code>HEAD~1  = D 的父 = C
 HEAD~2  = C 的父 = B
 HEAD~3  = B 的父 = A
-</code></pre><pre tabindex="0"><code>A ← B ← C ← D（HEAD）
+</code></pre><pre tabindex=0><code>A ← B ← C ← D（HEAD）
 
 HEAD     = D
 HEAD~1   = C
 HEAD~2   = B
 HEAD~3   = A
-</code></pre><div class="edit-meta"> <br></div><nav class="pagination"><a class="nav nav-prev" href="http://localhost:1313/learn_cs/" title="cs基础"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - cs基础</a>
-<a class="nav nav-next" href="http://localhost:1313/learn_cs/react-electron/ts-foundation/" title="ts-foundation">Next - ts-foundation <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-</nav><footer> </footer>
-</main>
-<div class="sidebar">
-
-<nav class="slide-menu">
-<ul>
-<li class=""><a href="http://localhost:1313/">about me</a></li>
-
-<li class="parent has-sub-menu"><a href="http://localhost:1313/learn_cs/">cs基础<span class="mark opened">-</span></a>
-  
-<ul class="sub-menu">
-<li class="active"><a href="http://localhost:1313/learn_cs/git-crash-course/">git-crash-course</a></li>
-<li class=""><a href="http://localhost:1313/learn_cs/react-electron/ts-foundation/">ts-foundation</a></li>
-<li class=""><a href="http://localhost:1313/learn_cs/react-electron/ipc/">ipc基础</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/algorithm/">算法题<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/algorithm/stock_dp/">股票交易动态规划总结</a></li>
-<li class=""><a href="http://localhost:1313/algorithm/hash_set/">哈希表相关题目</a></li>
-<li class=""><a href="http://localhost:1313/algorithm/double_point/">双指针</a></li>
-<li class=""><a href="http://localhost:1313/algorithm/strings/">string类题目</a></li>
-<li class=""><a href="http://localhost:1313/algorithm/dynamic-programmnig/">动态规划问题</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/math_foundation/">ML中的数学<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/math_foundation/information/">信息量</a></li>
-<li class=""><a href="http://localhost:1313/math_foundation/likelihood_entropy/">似然函数_交叉熵</a></li>
-<li class=""><a href="http://localhost:1313/math_foundation/kl_dpo/">Kl散度与dpo算法</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/transformer/">ML基础<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/transformer/quantization2/">模型量化基础</a></li>
-<li class=""><a href="http://localhost:1313/transformer/quantization/">模型量化基础代码版</a></li>
-<li class=""><a href="http://localhost:1313/transformer/do_sample_para/">Do_sample_para</a></li>
-<li class=""><a href="http://localhost:1313/transformer/nn_begin/">Nn Begin</a></li>
-<li class=""><a href="http://localhost:1313/transformer/entropy/">Entropy</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/kubernetes/">kubernetes<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/kubernetes/installation/">Installation</a></li>
-</ul>
-  
-</li>
-
-<li class=""><a href="http://localhost:1313/learn_english/">英语学习</a>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/golang/">golang<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/golang/byte-character/">字符编码基础知识详解</a></li>
-<li class=""><a href="http://localhost:1313/golang/matrix-golang/">matrix-golang</a></li>
-<li class=""><a href="http://localhost:1313/golang/sort/">sort包用法</a></li>
-<li class=""><a href="http://localhost:1313/golang/foundation/">Go 语言基础知识</a></li>
-<li class=""><a href="http://localhost:1313/golang/base/">Base</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/linux_foundation/">Linux基础<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/linux_foundation/linux-commands/">50个常用Linux命令</a></li>
-<li class=""><a href="http://localhost:1313/linux_foundation/cs_foundation/">计算机基础知识</a></li>
-<li class=""><a href="http://localhost:1313/linux_foundation/linux-common/">Linux Common</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/exercise/">workout<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/exercise/workout/">Workout</a></li>
-</ul>
-  
-</li>
-
-<li class=" has-sub-menu"><a href="http://localhost:1313/others/">others<span class="mark closed">+</span></a>
-  
-<ul class="sub-menu">
-<li class=""><a href="http://localhost:1313/others/vc-news/">Vc News</a></li>
-<li class=""><a href="http://localhost:1313/others/create-hugo-gitpage/">使用 Hugo 和 GitHub Pages 创建个人网站</a></li>
-</ul>
-  
-</li>
-</ul>
-</nav>
-
- 
-<div class="sidebar-footer"></div>
-</div>
-
-</div><a href="#" id="backtothetop-fixed" class="backtothetop"
- data-backtothetop-duration="600"
- data-backtothetop-easing="easeOutQuart"
- data-backtothetop-fixed-fadeIn="1000"
- data-backtothetop-fixed-fadeOut="1000"
- data-backtothetop-fixed-bottom="10"
- data-backtothetop-fixed-right="20">
-<span class="fa-layers fa-fw">
-<i class="fas fa-circle"></i>
-<i class="fas fa-arrow-circle-up"></i>
-</span></a>
-</div>
-</body>
-</html>
+</code></pre><div class=edit-meta><br></div><nav class=pagination><a class="nav nav-prev" href=https://mlcore-engine.github.io/learn_cs/ title=cs基础><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - cs基础</a>
+<a class="nav nav-next" href=https://mlcore-engine.github.io/learn_cs/react-electron/ts-foundation/ title=ts-foundation>Next - ts-foundation <i class="fas fa-arrow-right" aria-hidden=true></i></a></nav><footer></footer></main><div class=sidebar><nav class=slide-menu><ul><li><a href=https://mlcore-engine.github.io/>about me</a></li><li class="parent has-sub-menu"><a href=https://mlcore-engine.github.io/learn_cs/>cs基础<span class="mark opened">-</span></a><ul class=sub-menu><li class=active><a href=https://mlcore-engine.github.io/learn_cs/git-crash-course/>git-crash-course</a></li><li><a href=https://mlcore-engine.github.io/learn_cs/react-electron/ts-foundation/>ts-foundation</a></li><li><a href=https://mlcore-engine.github.io/learn_cs/react-electron/ipc/>ipc基础</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/algorithm/>算法题<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/algorithm/stock_dp/>股票交易动态规划总结</a></li><li><a href=https://mlcore-engine.github.io/algorithm/strings/>string类题目</a></li><li><a href=https://mlcore-engine.github.io/algorithm/dynamic-programmnig/>动态规划问题</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/math_foundation/>ML中的数学<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/math_foundation/information/>信息量</a></li><li><a href=https://mlcore-engine.github.io/math_foundation/likelihood_entropy/>似然函数_交叉熵</a></li><li><a href=https://mlcore-engine.github.io/math_foundation/kl_dpo/>Kl散度与dpo算法</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/transformer/>ML基础<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/transformer/do_sample_para/>Do_sample_para</a></li><li><a href=https://mlcore-engine.github.io/transformer/entropy/>Entropy</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/kubernetes/>kubernetes<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/kubernetes/installation/>Installation</a></li></ul></li><li><a href=https://mlcore-engine.github.io/learn_english/>英语学习</a></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/golang/>golang<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/golang/matrix-golang/>matrix-golang</a></li><li><a href=https://mlcore-engine.github.io/golang/foundation/>Go 语言基础知识</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/linux_foundation/>Linux基础<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-commands/>50个常用Linux命令</a></li><li><a href=https://mlcore-engine.github.io/linux_foundation/linux-common/>Linux Common</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/exercise/>workout<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/exercise/workout/>Workout</a></li></ul></li><li class=has-sub-menu><a href=https://mlcore-engine.github.io/others/>others<span class="mark closed">+</span></a><ul class=sub-menu><li><a href=https://mlcore-engine.github.io/others/create-hugo-gitpage/>使用 Hugo 和 GitHub Pages 创建个人网站</a></li></ul></li></ul></nav><div class=sidebar-footer></div></div></div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20><span class="fa-layers fa-fw"><i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i></span></a></div></body></html>
