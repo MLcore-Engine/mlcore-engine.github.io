@@ -10,7 +10,7 @@ description: "个人简介 - AI平台开发工程师"
   <img src="/home/me.png" alt="高新" style="max-width:200px; border-radius:50%;">
 </div>
 
-<div style="text-align:center;"> 一名AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU资源优化和AI服务部署经验。</div>
+<div style="text-align:center;"> 一名AI平台开发工程师，专注于AI平台工程和Kubernetes云原生技术。拥有AI平台开发、GPU调度、分布式训练和AI服务部署经验。</div>
 
 #### 专业领域
 
@@ -36,7 +36,7 @@ description: "个人简介 - AI平台开发工程师"
     <h3>京东集团（2020.11 - 2022.12）</h3>
     <p><strong>AI平台开发工程师</strong></p>
     <ul>
-      <li>设计并实现GPU资源分配和监控系统</li>
+      <li>设计并实现GPU资源分配和调度</li>
       <li>分布式训练中的网络优化加速</li>
     </ul>
   </div>
@@ -45,8 +45,8 @@ description: "个人简介 - AI平台开发工程师"
     <h3>格力大数据中心（2018.08 - 2020.10）</h3>
     <p><strong>Go开发工程师</strong></p>
     <ul>
-      <li>Kubernetes集群部署和日常运维</li>
-      <li>开发云管理平台和自动化运维工具</li>
+      <li>Kubernetes集群部署</li>
+      <li>开发云平台管理平台工具</li>
     </ul>
   </div>
 </div>
@@ -56,7 +56,7 @@ description: "个人简介 - AI平台开发工程师"
 <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;">
   <div style="flex:1; min-width:300px; background:#f8f9fa; border-radius:6px; padding:15px; margin-bottom:15px;">
     <h4 style="margin-top:0; color:#3498db;">cube-studio contributor</h4>
-    <p>cube studio是开源一站式云原生机器学习平台，功能极其丰富。作为contributor，主要贡献了cube-studio在k3s上的适配，模型仓库的部分模型等。</p>
+    <p>cube studio是开源一站式云原生机器学习平台。作为contributor，主要贡献了cube-studio在k3s上的适配，模型仓库的部分模型等。</p>
     <p><strong>GitHub:</strong> <a href="https://github.com/tencentmusic/cube-studio/commits?author=gxin0426" target="_blank">查看提交记录</a></p>
   </div>
   
@@ -92,4 +92,4 @@ description: "个人简介 - AI平台开发工程师"
 - [**Learn English**](/learn_english/) - 一直坚持但没有做好
 - [**Kubenetes**](/kubernetes/) - 职业起点
 - [**transformer**](/transformer/) - 跟随时代变化
-- [**exercise**](/exercise/) - 保持身体健康是一切的前提
+- [**exercise**](/exercise/) - 保持身体健康 
